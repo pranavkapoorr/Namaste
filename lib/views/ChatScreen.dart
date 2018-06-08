@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/chat_model.dart';
+import 'package:flutter_app/models/chat_model.dart';
 
 
 class ChatScreen extends StatefulWidget {
@@ -13,7 +13,7 @@ class ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return new ListView.builder(
-      itemCount: dummyData.length,
+      itemCount: dummyData_chat.length,
       itemBuilder: (context, i) => new Column(
         children: <Widget>[
           new Divider(
@@ -23,17 +23,17 @@ class ChatScreenState extends State<ChatScreen> {
             leading: new CircleAvatar(
               foregroundColor: Theme.of(context).primaryColor,
               backgroundColor: Colors.grey,
-              backgroundImage: new NetworkImage(dummyData[i].avatarUrl),
+              backgroundImage: new NetworkImage(dummyData_chat[i].avatarUrl),
             ),
             title: new Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 new Text(
-                  dummyData[i].name,
+                  dummyData_chat[i].name,
                   style: new TextStyle(fontWeight: FontWeight.bold),
                 ),
                 new Text(
-                  dummyData[i].time,
+                  dummyData_chat[i].time,
                   style: new TextStyle(color: Colors.grey, fontSize: 14.0),
                 ),
               ],
@@ -41,7 +41,7 @@ class ChatScreenState extends State<ChatScreen> {
             subtitle: new Container(
               padding: const EdgeInsets.only(top: 5.0),
               child: new Text(
-                dummyData[i].message,
+                dummyData_chat[i].message,
                 style: new TextStyle(color: Colors.grey, fontSize: 15.0),
               ),
             ),
