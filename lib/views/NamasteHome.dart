@@ -52,14 +52,10 @@ class _NamasteHomeState extends State<NamasteHome> with SingleTickerProviderStat
           indicatorColor: Colors.grey,
           labelColor: new Color(0xff939696),//999C9C),
           tabs: <Widget>[
-            new Tab(icon: new Icon(Icons.photo_camera)),
+            new Tab(icon: new Icon(Icons.photo_camera,size: 22.0,)),
             new Tab(text: "CHATS"),
-            new Tab(
-              text: "STATUS",
-            ),
-            new Tab(
-              text: "CALLS",
-            ),
+            new Tab(text: "STATUS"),
+            new Tab(text: "CALLS"),
           ],
         ),
         actions: <Widget>[
