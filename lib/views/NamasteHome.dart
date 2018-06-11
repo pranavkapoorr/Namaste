@@ -65,6 +65,7 @@ class _NamasteHomeState extends State<NamasteHome> with SingleTickerProviderStat
           ),
           new PopupMenuButton(
               elevation: 10.0,
+              padding: EdgeInsets.zero,
               tooltip:"Settings",
               icon: new Icon(Icons.more_vert,color: new Color(0xff939696)) ,
               itemBuilder: (BuildContext context){
