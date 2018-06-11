@@ -13,7 +13,7 @@ class NotificationScreenState extends State<NotificationScreen>{
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: new AppBar(title: new Text("Account"),),
+        appBar: new AppBar(title: new Text("Notifications"),),
         body: new Scaffold(
 
           body: new ListView(
