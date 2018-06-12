@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "479879833313",
+    "firebase_url": "https://testfirebase-d40b1.firebaseio.com",
+    "project_id": "testfirebase-d40b1",
+    "storage_bucket": "testfirebase-d40b1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:479879833313:android:904cf32aa0ad975a",
+        "android_client_info": {
+          "package_name": "com.pranavkapoorr.namaste"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "479879833313-9mt01o3n8a6j3jureh5hgib4phidepup.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "479879833313-9mt01o3n8a6j3jureh5hgib4phidepup.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDESiafGQdCFZZLULBh1MHIyGwlRvKvaSA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

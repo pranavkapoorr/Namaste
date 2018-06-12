@@ -4,15 +4,14 @@ import 'package:flutter_app/views/CallScreen.dart';
 import 'package:flutter_app/views/StatusScreen.dart';
 import 'package:flutter_app/views/ChatScreen.dart';
 import 'package:flutter_app/views/Settings_Screen.dart';
+import 'package:camera/camera.dart';
 
 class NamasteHome extends StatefulWidget {
+  //var camera;
 
-  var camera;
-  NamasteHome(this.camera);
-
+  NamasteHome(/*this.camera*/);
   @override
   _NamasteHomeState createState()=> new _NamasteHomeState();
-
 }
 
 class _NamasteHomeState extends State<NamasteHome> with SingleTickerProviderStateMixin{
@@ -59,7 +58,7 @@ class _NamasteHomeState extends State<NamasteHome> with SingleTickerProviderStat
           ],
         ),
         actions: <Widget>[
-          new Icon(Icons.search,color: new Color(0xff939696),),
+          new IconButton(icon:new Icon(Icons.search,color: new Color(0xff939696)),onPressed: null,),
           new Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5.0),
           ),
@@ -71,26 +70,18 @@ class _NamasteHomeState extends State<NamasteHome> with SingleTickerProviderStat
               itemBuilder: (BuildContext context){
                 return _options;
               })
-              //Button(icon: new Icon(Icons.more_vert,color: new Color(0xff939696)), onPressed: options())
         ],
       ),
       body: new TabBarView(
         controller: _tabController,
         children: <Widget>[
-          new CameraScreen(widget.camera),
+          new CameraScreen(),
           new ChatScreen(),
           new StatusScreen(),
           new CallsScreen(),
         ],
       ),
-      floatingActionButton: new FloatingActionButton(
-        backgroundColor: Theme.of(context).accentColor,
-        child: new Icon(
-          Icons.message,
-          color: Colors.white,
-        ),
-        onPressed: () => print("open chats"),
-      ),
+
     );
   }
 

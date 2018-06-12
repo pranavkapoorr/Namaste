@@ -2,18 +2,17 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/views/NamasteHome.dart';
-import 'package:camera/camera.dart';
+import 'package:flutter_app/views/LoginScreen.dart';
 import 'package:flutter/cupertino.dart';
 
-List<CameraDescription> cameras;
 
-Future<Null> main() async {
-  cameras = await availableCameras();
+ void main(){
   runApp(new MyApp());
 }
 
 
 class MyApp extends StatelessWidget {
+  static bool loggedIn = false;
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -23,7 +22,7 @@ class MyApp extends StatelessWidget {
         accentColor: new Color(0xffA1A9A9),
       ),
       debugShowCheckedModeBanner: false,
-      home: new NamasteHome(cameras),
+      home: loggedIn==true?new NamasteHome():new LoginPage(),//new NamasteHome(cameras),
     );
   }
 }

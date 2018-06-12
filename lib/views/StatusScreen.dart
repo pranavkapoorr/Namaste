@@ -10,23 +10,33 @@ class StatusScreen extends StatefulWidget {
 class StatusScreenState extends State<StatusScreen>{
   @override
   Widget build(BuildContext context) {
-    return new ListView.builder(
-        itemCount: dummyData_chat.length,
-        itemBuilder: (context,index) => new Column(
-          children: <Widget>[
-            new Divider(height: 10.0),
-            new ListTile(
-              leading: new CircleAvatar(backgroundImage:new NetworkImage(dummyData_chat[index].avatarUrl),backgroundColor: Colors.grey,radius: 25.0,),
-              title: new Row(
-                  mainAxisAlignment:MainAxisAlignment.spaceBetween ,
-                  children: <Widget>[
-                    new Text(dummyData_chat[index].name,style: new TextStyle(fontWeight: FontWeight.bold),)]
-              ),
-              subtitle: new Text(dummyData_chat[index].time,style: new TextStyle(color: Colors.grey, fontSize: 14.0)),
-            )
-            
-          ],
-        ));
+    return new Scaffold(
+      body: ListView.builder(
+          itemCount: dummyData_chat.length,
+          itemBuilder: (context,index) => new Column(
+            children: <Widget>[
+              new Divider(height: 10.0),
+              new ListTile(
+                leading: new CircleAvatar(backgroundImage:new NetworkImage(dummyData_chat[index].avatarUrl),backgroundColor: Colors.grey,radius: 25.0,),
+                title: new Row(
+                    mainAxisAlignment:MainAxisAlignment.spaceBetween ,
+                    children: <Widget>[
+                      new Text(dummyData_chat[index].name,style: new TextStyle(fontWeight: FontWeight.bold),)]
+                ),
+                subtitle: new Text(dummyData_chat[index].time,style: new TextStyle(color: Colors.grey, fontSize: 14.0)),
+              )
+
+            ],
+          )),
+      floatingActionButton: new FloatingActionButton(
+        backgroundColor: Theme.of(context).accentColor,
+        child: new Icon(
+          Icons.camera,
+          color: Colors.white,
+        ),
+        onPressed: () => print("open chats"),
+      ),
+    );
   }
 
 }

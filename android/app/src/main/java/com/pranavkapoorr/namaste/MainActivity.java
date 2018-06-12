@@ -1,4 +1,4 @@
-package com.pranavkapoorr.flutterapp;
+package com.pranavkapoorr.namaste;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

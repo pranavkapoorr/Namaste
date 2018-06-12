@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'dart:async';
 
 class CameraScreen extends StatefulWidget {
   List<CameraDescription> cameras;
 
-  CameraScreen(this.cameras);
+  Future<Null> main() async {
+    cameras = await availableCameras();
+  }
+
+  CameraScreen() {
+    main();
+  }
 
   @override
   CameraScreenState createState() {
