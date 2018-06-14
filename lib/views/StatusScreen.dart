@@ -28,14 +28,6 @@ class StatusScreenState extends State<StatusScreen>{
 
             ],
           )),
-      floatingActionButton: new FloatingActionButton(
-        backgroundColor: Theme.of(context).accentColor,
-        child: new Icon(
-          Icons.camera,
-          color: Colors.white,
-        ),
-        onPressed: () => print("open chats"),
-      ),
     );
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/chat_model.dart';
+import 'package:flutter_app/views/ChatThreadScreen.dart';
 
 
 class ChatScreen extends StatefulWidget {
@@ -46,17 +47,18 @@ class ChatScreenState extends State<ChatScreen> {
                   style: new TextStyle(color: Colors.grey, fontSize: 15.0),
                 ),
               ),
+              onTap:() {
+                Navigator.push(
+                  context,
+                  new MaterialPageRoute(
+                    builder: (context) => new ChatThreadScreen(chatThread: new ChatThread(name:dummyData_chat[i].name,image: dummyData_chat[i].avatarUrl)),
+                  ),
+                );
+              },
+            //chat(new ChatThread(name:dummyData_chat[i].name,image:dummyData_chat[i].avatarUrl)),
             )
           ],
         ),
-      ),
-      floatingActionButton: new FloatingActionButton(
-        backgroundColor: Theme.of(context).accentColor,
-        child: new Icon(
-          Icons.message,
-          color: Colors.white,
-        ),
-        onPressed: () => print("open chats"),
       ),
     );
   }

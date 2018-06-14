@@ -1,17 +1,35 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'package:flutter_app/views/CameraScreen.dart';
 import 'package:flutter_app/views/CallScreen.dart';
 import 'package:flutter_app/views/StatusScreen.dart';
 import 'package:flutter_app/views/ChatScreen.dart';
 import 'package:flutter_app/views/Settings_Screen.dart';
-import 'package:camera/camera.dart';
 
 class NamasteHome extends StatefulWidget {
-  //var camera;
-
-  NamasteHome(/*this.camera*/);
   @override
   _NamasteHomeState createState()=> new _NamasteHomeState();
+
+  static Future<bool> exitApp(BuildContext context) {
+    return showDialog(
+      context: context,
+      // ignore: deprecated_member_use
+      child: new AlertDialog(
+        title: new Text('Do you want to exit this application?'),
+        content: new Text('We hate to see you leave...'),
+        actions: <Widget>[
+          new FlatButton(
+            onPressed: () => (){return new Future<bool>.value(false);},
+            child: new Text('No'),
+          ),
+          new FlatButton(
+            onPressed: () =>(){return new Future<bool>.value(true);},
+            child: new Text('Yes'),
+          ),
+        ],
+      ),
+    ) ;
+  }
 }
 
 class _NamasteHomeState extends State<NamasteHome> with SingleTickerProviderStateMixin{
@@ -42,46 +60,56 @@ class _NamasteHomeState extends State<NamasteHome> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Namaste"),
-        elevation: 0.7,
-        bottom: new TabBar(
-          controller: _tabController,
-          indicatorColor: Colors.grey,
-          labelColor: new Color(0xff939696),//999C9C),
-          tabs: <Widget>[
-            new Tab(icon: new Icon(Icons.photo_camera,size: 22.0,)),
-            new Tab(text: "CHATS"),
-            new Tab(text: "STATUS"),
-            new Tab(text: "CALLS"),
+    return new WillPopScope(
+      child: new Scaffold(
+        appBar: new AppBar(
+          title: new Text("Namaste"),
+          elevation: 0.7,
+          bottom: new TabBar(
+            controller: _tabController,
+            indicatorColor: Colors.grey,
+            labelColor: new Color(0xff939696),//999C9C),
+            tabs: <Widget>[
+              new Tab(icon: new Icon(Icons.photo_camera,size: 22.0,)),
+              new Tab(text: "CHATS"),
+              new Tab(text: "STATUS"),
+              new Tab(text: "CALLS"),
+            ],
+          ),
+          actions: <Widget>[
+            new IconButton(icon:new Icon(Icons.search,color: new Color(0xff939696)),onPressed: null,),
+            new Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5.0),
+            ),
+            new PopupMenuButton(
+                elevation: 10.0,
+                padding: EdgeInsets.zero,
+                tooltip:"Settings",
+                icon: new Icon(Icons.more_vert,color: new Color(0xff939696)) ,
+                itemBuilder: (BuildContext context){
+                  return _options;
+                })
           ],
         ),
-        actions: <Widget>[
-          new IconButton(icon:new Icon(Icons.search,color: new Color(0xff939696)),onPressed: null,),
-          new Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5.0),
+        body: new TabBarView(
+          controller: _tabController,
+          children: <Widget>[
+            new CameraScreen(),
+            new ChatScreen(),
+            new StatusScreen(),
+            new CallsScreen(),
+          ],
+        ),
+        floatingActionButton: new FloatingActionButton(
+          backgroundColor: Theme.of(context).accentColor,
+          child: new Icon(
+            Icons.message,
+            color: Colors.white,
           ),
-          new PopupMenuButton(
-              elevation: 10.0,
-              padding: EdgeInsets.zero,
-              tooltip:"Settings",
-              icon: new Icon(Icons.more_vert,color: new Color(0xff939696)) ,
-              itemBuilder: (BuildContext context){
-                return _options;
-              })
-        ],
+          onPressed: () => print("open chats"),
+        ),
       ),
-      body: new TabBarView(
-        controller: _tabController,
-        children: <Widget>[
-          new CameraScreen(),
-          new ChatScreen(),
-          new StatusScreen(),
-          new CallsScreen(),
-        ],
-      ),
-
+      onWillPop: (){return new Future<bool>.value(false);},
     );
   }
 

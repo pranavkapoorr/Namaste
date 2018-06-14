@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/views/AccountScreen.dart';
 import 'package:flutter_app/views/NotificationScreen.dart';
+import 'package:flutter_app/views/DBtest.dart';
 import 'dart:async';
 
 class SettingsScreen extends StatefulWidget {
@@ -35,20 +36,24 @@ class SettingsScreenState extends State<SettingsScreen>{
                   isThreeLine: true,
                 ),
                 new Divider(height: 1.0,color: Colors.black,),
-                new ListTile(title: new Text("Account"),leading: new Icon(Icons.vpn_key,color:Colors.black),onTap: _AccountPage,),
-                new ListTile(title: new Text("Notifications"),leading: new Icon(Icons.notifications,color:Colors.black),onTap: _NotificationsPage,),
-                new ListTile(title: new Text("Help"),leading: new Icon(Icons.help,color:Colors.black),)
+                new ListTile(title: new Text("Account"),leading: new Icon(Icons.vpn_key,color:Colors.black),onTap: _accountPage,),
+                new ListTile(title: new Text("Notifications"),leading: new Icon(Icons.notifications,color:Colors.black),onTap: _notificationsPage,),
+                new ListTile(title: new Text("Help"),leading: new Icon(Icons.help,color:Colors.black),onTap: _testDbPage,)
 
               ],
             ) ]),
         )
     );
   }
-  Future _AccountPage(){
+  Future _accountPage(){
     return Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new AccountScreen()));
   }
-  Future _NotificationsPage(){
+  Future _notificationsPage(){
     return Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new NotificationScreen()));
   }
+  Future _testDbPage(){
+    return Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new DBtest()));
+  }
+
 }
 

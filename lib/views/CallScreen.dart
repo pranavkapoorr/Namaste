@@ -31,14 +31,6 @@ class CallsScreenState extends State<CallsScreen>{
 
         ],),
       ),
-      floatingActionButton: new FloatingActionButton(
-        backgroundColor: Theme.of(context).accentColor,
-        child: new Icon(
-          Icons.call,
-          color: Colors.white,
-        ),
-        onPressed: () => print("open chats"),
-      ),
     );
   }
 

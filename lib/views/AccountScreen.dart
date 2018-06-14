@@ -27,7 +27,7 @@ class AccountScreenState extends State<AccountScreen>{
                     onTap: (){
                       MyApp.loggedIn = false;
                       print("logged out");
-                      _HomePage();
+                      _Login();
 
                     },),
                   new ListTile(title: new Text("Delete Your Account"),leading: new Icon(Icons.delete_outline,color:Colors.black),),
@@ -38,7 +38,7 @@ class AccountScreenState extends State<AccountScreen>{
         )
     );
   }
-  Future _HomePage(){
+  Future _Login(){
     return Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new LoginPage()));
   }
 }

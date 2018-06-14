@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app/views/NamasteHome.dart';
 import 'package:flutter_app/views/LoginScreen.dart';
