@@ -13,7 +13,7 @@ class CallsScreenState extends State<CallsScreen>{
   Widget build(BuildContext context) {
     return new Scaffold(
       body: new ListView.builder(
-        itemCount: dummyData_chat.length,
+        itemCount: dummyDataChat.length,
         itemBuilder:(context, index) => new Column(children: <Widget>[
           new Divider(height: 10.0),
           new ListTile(
@@ -22,9 +22,9 @@ class CallsScreenState extends State<CallsScreen>{
             title: new Row(
                 mainAxisAlignment:MainAxisAlignment.spaceBetween ,
                 children: <Widget>[
-                  new Text(dummyData_chat[index].name,style: new TextStyle(fontWeight: FontWeight.bold),)]
+                  new Text(dummyDataChat[index].name,style: new TextStyle(fontWeight: FontWeight.bold),)]
             ),
-            subtitle: new Text(dummyData_chat[index].time,style: new TextStyle(color: Colors.grey, fontSize: 14.0)),
+            subtitle: new Text(dummyDataChat[index].time,style: new TextStyle(color: Colors.grey, fontSize: 14.0)),
             trailing: new Icon(Icons.phone),
           )
 

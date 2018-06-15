@@ -3,10 +3,10 @@ import 'package:camera/camera.dart';
 import 'dart:async';
 
 class CameraScreen extends StatefulWidget {
-  List<CameraDescription> cameras;
+   List<CameraDescription> cameras;
 
   Future<Null> main() async {
-    cameras = await availableCameras();
+    this.cameras = await availableCameras();
   }
 
   CameraScreen() {

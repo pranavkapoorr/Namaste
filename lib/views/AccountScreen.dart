@@ -4,11 +4,9 @@ import 'package:flutter_app/main.dart';
 import 'package:flutter_app/views/LoginScreen.dart';
 
 class AccountScreen extends StatefulWidget {
-  @override
-  AccountScreenState createState() {
-    return new AccountScreenState();
-  }
 
+  @override
+  AccountScreenState createState()=>new AccountScreenState();
 }
 
 class AccountScreenState extends State<AccountScreen>{
@@ -25,9 +23,11 @@ class AccountScreenState extends State<AccountScreen>{
 
                   new ListTile(title: new Text("Change Your Number"),leading: new Icon(Icons.phone_android,color:Colors.black),
                     onTap: (){
+                    setState(() {
                       MyApp.loggedIn = false;
+                    });
                       print("logged out");
-                      _Login();
+                      _login();
 
                     },),
                   new ListTile(title: new Text("Delete Your Account"),leading: new Icon(Icons.delete_outline,color:Colors.black),),
@@ -38,7 +38,7 @@ class AccountScreenState extends State<AccountScreen>{
         )
     );
   }
-  Future _Login(){
+  Future _login(){
     return Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new LoginPage()));
   }
 }

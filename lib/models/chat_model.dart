@@ -7,7 +7,7 @@ class ChatModel {
   ChatModel({this.name, this.message, this.time, this.avatarUrl});
 }
 
-List<ChatModel> dummyData_chat = [
+List<ChatModel> dummyDataChat = [
   new ChatModel(
       name: "Pranav Kapoor",
       message: "Hey there, You are so amazing !",

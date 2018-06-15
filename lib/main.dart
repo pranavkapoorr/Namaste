@@ -3,14 +3,14 @@ import 'package:flutter_app/views/NamasteHome.dart';
 import 'package:flutter_app/views/LoginScreen.dart';
 import 'package:flutter/cupertino.dart';
 
-
- void main(){
-  runApp(new MyApp());
-}
-
+void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
-  static bool loggedIn = false;
+    static bool loggedIn = false;
+ MyApp(){
+ // loggedIn = new FireBaseDB("App-Data").authenticateUser("+447488706094");
+ }
+
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         accentColor: new Color(0xffA1A9A9),
       ),
       debugShowCheckedModeBanner: false,
-      home: loggedIn==true?new NamasteHome():new LoginPage(),//new NamasteHome(cameras),
+      home: loggedIn == true? new NamasteHome() : new LoginPage(),
     );
   }
 }

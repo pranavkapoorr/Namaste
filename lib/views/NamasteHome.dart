@@ -6,6 +6,7 @@ import 'package:flutter_app/views/StatusScreen.dart';
 import 'package:flutter_app/views/ChatScreen.dart';
 import 'package:flutter_app/views/Settings_Screen.dart';
 
+
 class NamasteHome extends StatefulWidget {
   @override
   _NamasteHomeState createState()=> new _NamasteHomeState();
@@ -39,6 +40,7 @@ class _NamasteHomeState extends State<NamasteHome> with SingleTickerProviderStat
   @override
   void initState() {
     super.initState();
+
     _options.addAll([
       new PopupMenuItem(
           child: new ListTile(

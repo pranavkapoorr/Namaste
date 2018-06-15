@@ -15,7 +15,7 @@ class ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return new Scaffold(
       body: ListView.builder(
-        itemCount: dummyData_chat.length,
+        itemCount: dummyDataChat.length,
         itemBuilder: (context, i) => new Column(
           children: <Widget>[
             new Divider(
@@ -25,17 +25,17 @@ class ChatScreenState extends State<ChatScreen> {
               leading: new CircleAvatar(
                 foregroundColor: Theme.of(context).primaryColor,
                 backgroundColor: Colors.grey,
-                backgroundImage: new NetworkImage(dummyData_chat[i].avatarUrl),
+                backgroundImage: new NetworkImage(dummyDataChat[i].avatarUrl),
               ),
               title: new Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   new Text(
-                    dummyData_chat[i].name,
+                    dummyDataChat[i].name,
                     style: new TextStyle(fontWeight: FontWeight.bold),
                   ),
                   new Text(
-                    dummyData_chat[i].time,
+                    dummyDataChat[i].time,
                     style: new TextStyle(color: Colors.grey, fontSize: 14.0),
                   ),
                 ],
@@ -43,7 +43,7 @@ class ChatScreenState extends State<ChatScreen> {
               subtitle: new Container(
                 padding: const EdgeInsets.only(top: 5.0),
                 child: new Text(
-                  dummyData_chat[i].message,
+                  dummyDataChat[i].message,
                   style: new TextStyle(color: Colors.grey, fontSize: 15.0),
                 ),
               ),
@@ -51,7 +51,7 @@ class ChatScreenState extends State<ChatScreen> {
                 Navigator.push(
                   context,
                   new MaterialPageRoute(
-                    builder: (context) => new ChatThreadScreen(chatThread: new ChatThread(name:dummyData_chat[i].name,image: dummyData_chat[i].avatarUrl)),
+                    builder: (context) => new ChatThreadScreen(chatThread: new ChatThread(name:dummyDataChat[i].name,image: dummyDataChat[i].avatarUrl)),
                   ),
                 );
               },

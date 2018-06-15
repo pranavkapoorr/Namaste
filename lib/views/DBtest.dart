@@ -53,9 +53,19 @@ class DBtestState extends State<DBtest>{
             ),
             new RaisedButton(
               onPressed: (){
-                  myText = new FireBaseDB("dbtest/1").fetch(myText);
-                  print(myText);
+                print(new FireBaseDB("App-Data").authenticateUser(controller.value.text));
+
                 },
+              child: new Text("Fetch"),
+              color: Colors.lime,
+            ),
+            new Padding(
+              padding: const EdgeInsets.all(10.0),
+            ),
+            new RaisedButton(
+              onPressed: (){
+                new FireBaseDB("dbtest").getCollections();
+              },
               child: new Text("Fetch"),
               color: Colors.lime,
             ),

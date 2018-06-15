@@ -88,7 +88,9 @@ class LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixi
                             child: new Icon(Icons.adjust),
                             onPressed: () {
                               if(uname.text=="pk" && pass.text=="pass"){
-                                MyApp.loggedIn = true;
+                                setState(() {
+                                  MyApp.loggedIn = true;
+                                });
                                 _homePage();
                               }
                             },
@@ -104,6 +106,8 @@ class LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixi
         )
     );
   }
+
+
   Future _homePage(){
     return Navigator.of(context).push(new MaterialPageRoute(
         builder: (context)=> new NamasteHome()
