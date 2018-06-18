@@ -2,22 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/main.dart';
 import 'dart:async';
 import 'package:flutter_app/views/NamasteHome.dart';
+import 'package:flutter_app/views/StartUpLoader.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class LoginPage extends StatefulWidget {
   @override
-  State createState() => new LoginPageState();
+  _LoginPageState createState() => new _LoginPageState();
 }
 
-class LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixin {
+class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixin {
   Animation<double> _iconAnimation;
   AnimationController _iconAnimationController;
   TextEditingController uname = new TextEditingController();
   TextEditingController pass = new TextEditingController();
 
+  SharedPreferences sharedPreferences;
+  bool _loggedIn;
+
   @override
   void initState() {
     super.initState();
+    SharedPreferences.getInstance().then((SharedPreferences sp) {
+      sharedPreferences = sp;
+      _loggedIn = sharedPreferences.getBool("LoggedIn");
+    });
     _iconAnimationController = new AnimationController(
         vsync: this, duration: new Duration(milliseconds: 500));
     _iconAnimation = new CurvedAnimation(
@@ -26,6 +35,13 @@ class LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixi
     );
     _iconAnimation.addListener(() => this.setState(() {}));
     _iconAnimationController.forward();
+  }
+
+  void persist(bool value) {
+    setState(() {
+      _loggedIn = value;
+    });
+    sharedPreferences?.setBool("LoggedIn", value);
   }
 
   @override
@@ -89,9 +105,10 @@ class LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixi
                             onPressed: () {
                               if(uname.text=="pk" && pass.text=="pass"){
                                 setState(() {
-                                  MyApp.loggedIn = true;
+                                  _loggedIn = true;
+                                  persist(_loggedIn);
                                 });
-                                _homePage();
+                                _rootPage();
                               }
                             },
                           )
@@ -108,9 +125,9 @@ class LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixi
   }
 
 
-  Future _homePage(){
+  Future _rootPage(){
     return Navigator.of(context).push(new MaterialPageRoute(
-        builder: (context)=> new NamasteHome()
+        builder: (context)=> new StartUpLoader()
         )
     );
   }

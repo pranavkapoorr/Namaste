@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:async';
 
 class FireBaseDB{
   CollectionReference documentReference;
@@ -28,9 +29,9 @@ class FireBaseDB{
     //}).catchError((e) => print(e));
   }
 
-  bool authenticateUser(String number) {
+  Future<bool> authenticateUser(String number) {
     bool result = false;
-    documentReference.getDocuments().then(
+    return documentReference.getDocuments().then(
             (querySnapshot) {
               for(int i = 0; i < querySnapshot.documents.length; i++){
                 print(querySnapshot.documents[i]['number']);
@@ -40,7 +41,6 @@ class FireBaseDB{
               }
             }
     ).whenComplete((){ return result;}).catchError((e)=>print(e));
-    return result;
   }
   void getCollections() {
     //Map<String,String> datax = {"name":data};

@@ -2,15 +2,35 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter_app/main.dart';
 import 'package:flutter_app/views/LoginScreen.dart';
+import 'package:flutter_app/views/StartUpLoader.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AccountScreen extends StatefulWidget {
 
   @override
-  AccountScreenState createState()=>new AccountScreenState();
+  _AccountScreenState createState()=>new _AccountScreenState();
 }
 
-class AccountScreenState extends State<AccountScreen>{
+class _AccountScreenState extends State<AccountScreen>{
+  SharedPreferences sharedPreferences;
+  bool _loggedIn;
 
+  @override
+  void initState() {
+    super.initState();
+
+    SharedPreferences.getInstance().then((SharedPreferences sp) {
+      sharedPreferences = sp;
+      _loggedIn = sharedPreferences.getBool("LoggedIn");
+    });
+  }
+
+  void persist(bool value) {
+    setState(() {
+      _loggedIn = value;
+    });
+    sharedPreferences?.setBool("LoggedIn", value);
+  }
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -24,10 +44,11 @@ class AccountScreenState extends State<AccountScreen>{
                   new ListTile(title: new Text("Change Your Number"),leading: new Icon(Icons.phone_android,color:Colors.black),
                     onTap: (){
                     setState(() {
-                      MyApp.loggedIn = false;
+                      _loggedIn = false;
+                      persist(_loggedIn);
                     });
                       print("logged out");
-                      _login();
+                      _rootPage();
 
                     },),
                   new ListTile(title: new Text("Delete Your Account"),leading: new Icon(Icons.delete_outline,color:Colors.black),),
@@ -38,8 +59,8 @@ class AccountScreenState extends State<AccountScreen>{
         )
     );
   }
-  Future _login(){
-    return Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new LoginPage()));
+  Future _rootPage(){
+    return Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new StartUpLoader()));
   }
 }
 
