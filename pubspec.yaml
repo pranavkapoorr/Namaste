@@ -12,6 +12,7 @@ dependencies:
   cloud_firestore:
   shared_preferences: "^0.4.2"
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

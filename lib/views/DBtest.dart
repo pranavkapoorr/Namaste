@@ -64,7 +64,7 @@ class DBtestState extends State<DBtest>{
             ),
             new RaisedButton(
               onPressed: (){
-                new FireBaseDB("dbtest").getCollections();
+
               },
               child: new Text("Fetch"),
               color: Colors.lime,

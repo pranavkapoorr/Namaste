@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:flutter_app/main.dart';
-import 'package:flutter_app/views/LoginScreen.dart';
 import 'package:flutter_app/views/StartUpLoader.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

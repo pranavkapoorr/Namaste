@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/resources/FireBaseDBResources.dart';
 import 'package:flutter_app/views/LoginScreen.dart';
 import 'package:flutter_app/views/NamasteHome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,6 +15,7 @@ class _StartUpLoaderState extends State<StartUpLoader>{
   bool _loggedIn;
   StatefulWidget _startScreen;
   bool _loading;
+  FireBaseDB db;
 
   @override
   void initState() {

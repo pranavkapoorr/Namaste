@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/main.dart';
-import 'dart:async';
 import 'package:flutter_app/views/NamasteHome.dart';
 import 'package:flutter_app/views/StartUpLoader.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
+import 'dart:async';
+import 'dart:math';
+import 'package:http/http.dart' as http;
 
 
 class LoginPage extends StatefulWidget {
@@ -14,11 +16,40 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixin {
   Animation<double> _iconAnimation;
   AnimationController _iconAnimationController;
-  TextEditingController uname = new TextEditingController();
+  TextEditingController number = new TextEditingController();
   TextEditingController pass = new TextEditingController();
 
   SharedPreferences sharedPreferences;
   bool _loggedIn;
+
+  String generateRandomAuthCode() {
+    var rng = new Random();
+    String authCode = rng.nextInt(10000).toString();
+    print("created auth code:");
+    print(authCode);
+    return authCode;
+  }
+
+  void sendOTP(String number) {
+    String otp = generateRandomAuthCode();
+    Map<String,String> to = {"phoneNumber":"$number"};
+    OtpData data =
+    new OtpData(rules:["sms"], body:"This is your OTP to login to Namaste: $otp", to:to);
+    var  response =  http.post("https://api.comapi.com/apispaces/a18af796-03b7-4189-959b-193f0622e905/messages",
+      headers: {
+        "Content-Type":"application/json",
+        "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlNTg5OGFhNy1mOTc4LTQ4NGUtYTQyYy1mZGVmMDEwMmFjY2UiLCJpc3MiOiJodHRwczovL2FwaS5jb21hcGkuY29tL2FjY2Vzc3Rva2VucyIsImF1ZCI6Imh0dHBzOi8vYXBpLmNvbWFwaS5jb20iLCJhY2NvdW50SWQiOjM3MTQ0LCJhcGlTcGFjZUlkIjoiYTE4YWY3OTYtMDNiNy00MTg5LTk1OWItMTkzZjA2MjJlOTA1IiwicGVybWlzc2lvbnMiOlsiY29udGVudDp3IiwiY2hhbjpyIiwibXNnOmFueTpzIiwibXNnOnIiLCJwcm9mOnJhIiwiYXBpczpybyJdLCJzdWIiOiJlNTg5OGFhNy1mOTc4LTQ4NGUtYTQyYy1mZGVmMDEwMmFjY2UiLCJwcm9maWxlSWQiOiJOYW1hc3RlLUF1dGgiLCJuYW1lIjoiTmFtYXN0ZUF1dGhYIiwiaWF0IjoxNTI5NDAyMjY3fQ.M7XHQH23dw4qze4UQRZsjGZSNAVs2touYqeyrHz8a8E",
+        "Accept":"application/json"
+      },
+      body: json.encode(data),
+    ).then((response) {
+      print("Response status: ${response.statusCode}");
+      print("Response body: ${response.body}");
+    }).whenComplete((){
+  print("sent OTP: $otp to $number ");
+  }).catchError((e)=>print(e));
+  }
+
 
   @override
   void initState() {
@@ -82,9 +113,9 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           new TextFormField(
-                            decoration: new InputDecoration(labelText: "Enter Email", fillColor: Colors.white),
+                            decoration: new InputDecoration(labelText: "Enter Number", fillColor: Colors.white),
                             keyboardType: TextInputType.emailAddress,
-                            controller:  uname,
+                            controller:  number,
                           ),
                           new TextFormField(
                             decoration: new InputDecoration(labelText: "Enter Password",),
@@ -103,8 +134,9 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                             textColor: Colors.white,
                             child: new Icon(Icons.adjust),
                             onPressed: () {
-                              if(uname.text=="pk" && pass.text=="pass"){
+                              if(number.text=="447488706094" && pass.text=="pass"){
                                 setState(() {
+                                  //sendOTP(number.text );
                                   _loggedIn = true;
                                   persist(_loggedIn);
                                 });
@@ -131,4 +163,15 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
         )
     );
   }
+}
+class OtpData{
+  final List<String> rules;
+  final String body;
+  final Map<String,String> to;
+  OtpData({this.rules,this.body,this.to});
+  Map<String, dynamic> toJson() => {
+    'rules': rules,
+    'body': body,
+    'to': to
+  };
 }
