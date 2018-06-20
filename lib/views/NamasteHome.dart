@@ -5,6 +5,7 @@ import 'package:flutter_app/views/CallScreen.dart';
 import 'package:flutter_app/views/StatusScreen.dart';
 import 'package:flutter_app/views/ChatScreen.dart';
 import 'package:flutter_app/views/Settings_Screen.dart';
+import 'package:flutter_app/views/ContactsUsingScreen.dart';
 
 
 class NamasteHome extends StatefulWidget {
@@ -108,7 +109,7 @@ class _NamasteHomeState extends State<NamasteHome> with SingleTickerProviderStat
             Icons.message,
             color: Colors.white,
           ),
-          onPressed: () => print("open chats"),
+          onPressed: () => Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new ContactsUsingScreen())),
         ),
       ),
       onWillPop: (){return new Future<bool>.value(false);},

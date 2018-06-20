@@ -11,7 +11,9 @@ dependencies:
   camera:
   cloud_firestore:
   shared_preferences: "^0.4.2"
-
+  #contacts_service: "^0.0.6"
+  contact_picker: "^0.0.2"
+  #flutter_search_bar: "^2.0.4"
 
 dev_dependencies:
   flutter_test:

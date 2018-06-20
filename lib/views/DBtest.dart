@@ -28,7 +28,7 @@ class DBtestState extends State<DBtest>{
               padding: const EdgeInsets.all(10.0),
             ),
             new RaisedButton(
-              onPressed: (){new FireBaseDB("dbtest").addName(controller.value.text);},
+              onPressed: (){new FireBaseDB().addName(controller.value.text);},
               child: new Text("Add"),
               color: Colors.cyan,
             ),
@@ -36,7 +36,7 @@ class DBtestState extends State<DBtest>{
               padding: const EdgeInsets.all(10.0),
             ),
             new RaisedButton(
-              onPressed: (){new FireBaseDB("dbtest").update(controller.value.text);},
+              onPressed: (){new FireBaseDB().update(controller.value.text);},
               child: new Text("Update"),
               color: Colors.lightBlue,
             ),
@@ -44,7 +44,7 @@ class DBtestState extends State<DBtest>{
               padding: const EdgeInsets.all(10.0),
             ),
             new RaisedButton(
-              onPressed: (){new FireBaseDB("dbtest").delete();},
+              onPressed: (){new FireBaseDB().delete();},
               child: new Text("Delete"),
               color: Colors.orange,
             ),
@@ -53,7 +53,7 @@ class DBtestState extends State<DBtest>{
             ),
             new RaisedButton(
               onPressed: (){
-                print(new FireBaseDB("App-Data").authenticateUser(controller.value.text));
+                print(new FireBaseDB().authenticateUser("App-Data",controller.value.text));
 
                 },
               child: new Text("Fetch"),

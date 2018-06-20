@@ -2,16 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
 
 class FireBaseDB{
-  CollectionReference documentReference;
-
-  FireBaseDB(String addressDB){
-    this.documentReference = Firestore.instance.collection(addressDB);
-  }
-
+  CollectionReference _documentReference;
 
   void addName(String data) {
     Map<String,String> datax = {"name":data};
-    documentReference.add(datax).whenComplete(() {
+    _documentReference.add(datax).whenComplete(() {
       print("Document Added");
     }).catchError((e) => print(e));
   }
@@ -29,9 +24,10 @@ class FireBaseDB{
     //}).catchError((e) => print(e));
   }
 
-  Future<bool> authenticateUser(String number) {
+  Future<bool> authenticateUser(String addressDB,String number) {
     bool result = false;
-    return documentReference.getDocuments().then(
+    _documentReference = Firestore.instance.collection(addressDB);
+    return _documentReference.getDocuments().then(
             (querySnapshot) {
               for(int i = 0; i < querySnapshot.documents.length; i++){
                 print(querySnapshot.documents[i]['number']);
@@ -42,9 +38,35 @@ class FireBaseDB{
             }
     ).whenComplete((){ return result;}).catchError((e)=>print(e));
   }
-  void getCollections() {
-    //Map<String,String> datax = {"name":data};
-    print(documentReference.buildArguments());
+  Future<List<DocumentSnapshot>> getAllNumbers(String addressDB) async{
+    _documentReference = Firestore.instance.collection(addressDB);
+     var dox = await _documentReference.getDocuments();
+     print("loaded numbers:");
+     dox.documents.forEach((d)=>print(d.data));
+   return dox.documents;
+  }
+
+  Future<Map<String,String>> getUserData(String addressDB) async {
+    Map<String,String> map = new Map();
+    _documentReference = Firestore.instance.collection(addressDB);
+    var dox = await _documentReference.getDocuments();
+    print("loaded numbers:");
+    dox.documents.forEach((d){
+      map[d.data['number']]= d.data['dp'];
+    });
+    print(map);
+    return map;
+  }
+
+  Future<List<DocumentSnapshot>> getChats(String addressDB) async{
+    _documentReference = Firestore.instance.collection(addressDB);
+    var dox = await _documentReference.getDocuments();
+    print("loaded chats:");
+    dox.documents.forEach((d)=>print(d.data));
+    dox.documents.removeWhere((d)=>!d.data.containsValue("447488706094"));
+    print("chats with me:");
+    dox.documents.forEach((d)=>print(d.data));
+    return dox.documents;
   }
 
 

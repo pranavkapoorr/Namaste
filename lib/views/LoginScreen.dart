@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/views/NamasteHome.dart';
-import 'package:flutter_app/views/StartUpLoader.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_app/views/OtpScreen.dart';
 import 'dart:convert';
 import 'dart:async';
 import 'dart:math';
@@ -17,10 +16,6 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
   Animation<double> _iconAnimation;
   AnimationController _iconAnimationController;
   TextEditingController number = new TextEditingController();
-  TextEditingController pass = new TextEditingController();
-
-  SharedPreferences sharedPreferences;
-  bool _loggedIn;
 
   String generateRandomAuthCode() {
     var rng = new Random();
@@ -30,12 +25,12 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
     return authCode;
   }
 
-  void sendOTP(String number) {
+  String sendOTP(String number) {
     String otp = generateRandomAuthCode();
     Map<String,String> to = {"phoneNumber":"$number"};
     OtpData data =
     new OtpData(rules:["sms"], body:"This is your OTP to login to Namaste: $otp", to:to);
-    var  response =  http.post("https://api.comapi.com/apispaces/a18af796-03b7-4189-959b-193f0622e905/messages",
+    http.post("https://api.comapi.com/apispaces/a18af796-03b7-4189-959b-193f0622e905/messages",
       headers: {
         "Content-Type":"application/json",
         "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlNTg5OGFhNy1mOTc4LTQ4NGUtYTQyYy1mZGVmMDEwMmFjY2UiLCJpc3MiOiJodHRwczovL2FwaS5jb21hcGkuY29tL2FjY2Vzc3Rva2VucyIsImF1ZCI6Imh0dHBzOi8vYXBpLmNvbWFwaS5jb20iLCJhY2NvdW50SWQiOjM3MTQ0LCJhcGlTcGFjZUlkIjoiYTE4YWY3OTYtMDNiNy00MTg5LTk1OWItMTkzZjA2MjJlOTA1IiwicGVybWlzc2lvbnMiOlsiY29udGVudDp3IiwiY2hhbjpyIiwibXNnOmFueTpzIiwibXNnOnIiLCJwcm9mOnJhIiwiYXBpczpybyJdLCJzdWIiOiJlNTg5OGFhNy1mOTc4LTQ4NGUtYTQyYy1mZGVmMDEwMmFjY2UiLCJwcm9maWxlSWQiOiJOYW1hc3RlLUF1dGgiLCJuYW1lIjoiTmFtYXN0ZUF1dGhYIiwiaWF0IjoxNTI5NDAyMjY3fQ.M7XHQH23dw4qze4UQRZsjGZSNAVs2touYqeyrHz8a8E",
@@ -48,16 +43,13 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
     }).whenComplete((){
   print("sent OTP: $otp to $number ");
   }).catchError((e)=>print(e));
+    return otp;
   }
 
 
   @override
   void initState() {
     super.initState();
-    SharedPreferences.getInstance().then((SharedPreferences sp) {
-      sharedPreferences = sp;
-      _loggedIn = sharedPreferences.getBool("LoggedIn");
-    });
     _iconAnimationController = new AnimationController(
         vsync: this, duration: new Duration(milliseconds: 500));
     _iconAnimation = new CurvedAnimation(
@@ -68,12 +60,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
     _iconAnimationController.forward();
   }
 
-  void persist(bool value) {
-    setState(() {
-      _loggedIn = value;
-    });
-    sharedPreferences?.setBool("LoggedIn", value);
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -114,14 +101,8 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                         children: <Widget>[
                           new TextFormField(
                             decoration: new InputDecoration(labelText: "Enter Number", fillColor: Colors.white),
-                            keyboardType: TextInputType.emailAddress,
+                            keyboardType: TextInputType.phone,
                             controller:  number,
-                          ),
-                          new TextFormField(
-                            decoration: new InputDecoration(labelText: "Enter Password",),
-                            obscureText: true,
-                            keyboardType: TextInputType.text,
-                            controller: pass,
                           ),
                           new Padding(
                             padding: const EdgeInsets.only(top: 60.0),
@@ -134,13 +115,9 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                             textColor: Colors.white,
                             child: new Icon(Icons.adjust),
                             onPressed: () {
-                              if(number.text=="447488706094" && pass.text=="pass"){
-                                setState(() {
-                                  //sendOTP(number.text );
-                                  _loggedIn = true;
-                                  persist(_loggedIn);
-                                });
-                                _rootPage();
+                              if(number.text.length>11){
+                                String generatedOtp = sendOTP(number.text);
+                                _otpPage(generatedOtp,number.text);
                               }
                             },
                           )
@@ -157,9 +134,9 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
   }
 
 
-  Future _rootPage(){
+  Future _otpPage(String generatedOtp,String myNumber){
     return Navigator.of(context).push(new MaterialPageRoute(
-        builder: (context)=> new StartUpLoader()
+        builder: (context)=> new OtpScreen(generatedOtp:generatedOtp,myNumber: myNumber,)
         )
     );
   }
