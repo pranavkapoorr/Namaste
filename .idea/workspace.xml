@@ -5,20 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af31b5df-b2e0-4a65-9af3-7d12a46f2dad" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/lib/views/ContactsUsingScreen.dart" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/lib/views/OtpScreen.dart" />
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins" afterPath="$PROJECT_DIR$/.flutter-plugins" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/Info.plist" afterPath="$PROJECT_DIR$/ios/Runner/Info.plist" />
       <change beforePath="$PROJECT_DIR$/lib/resources/FireBaseDBResources.dart" afterPath="$PROJECT_DIR$/lib/resources/FireBaseDBResources.dart" />
       <change beforePath="$PROJECT_DIR$/lib/views/ChatScreen.dart" afterPath="$PROJECT_DIR$/lib/views/ChatScreen.dart" />
+      <change beforePath="$PROJECT_DIR$/lib/views/ChatThreadScreen.dart" afterPath="$PROJECT_DIR$/lib/views/ChatThreadScreen.dart" />
       <change beforePath="$PROJECT_DIR$/lib/views/DBtest.dart" afterPath="$PROJECT_DIR$/lib/views/DBtest.dart" />
-      <change beforePath="$PROJECT_DIR$/lib/views/LoginScreen.dart" afterPath="$PROJECT_DIR$/lib/views/LoginScreen.dart" />
-      <change beforePath="$PROJECT_DIR$/lib/views/NamasteHome.dart" afterPath="$PROJECT_DIR$/lib/views/NamasteHome.dart" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" afterPath="$PROJECT_DIR$/pubspec.yaml" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -32,7 +23,52 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file leaf-file-name="ChatScreen.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/views/ChatScreen.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1721">
+              <caret line="108" column="45" lean-forward="false" selection-start-line="108" selection-start-column="45" selection-end-line="108" selection-end-column="45" />
+              <folding>
+                <element signature="e#0#54#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ChatThreadScreen.dart" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/views/ChatThreadScreen.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="237">
+              <caret line="32" column="26" lean-forward="false" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
+              <folding>
+                <element signature="e#0#20#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FireBaseDBResources.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/resources/FireBaseDBResources.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="250">
+              <caret line="77" column="44" lean-forward="false" selection-start-line="77" selection-start-column="4" selection-end-line="77" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DBtest.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/views/DBtest.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="77" column="21" lean-forward="false" selection-start-line="77" selection-start-column="21" selection-end-line="77" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -82,7 +118,6 @@
         <option value="$PROJECT_DIR$/android/build.gradle" />
         <option value="$PROJECT_DIR$/android/app/build.gradle" />
         <option value="$PROJECT_DIR$/lib/views/Settings_Screen.dart" />
-        <option value="$PROJECT_DIR$/lib/views/ChatThreadScreen.dart" />
         <option value="$PROJECT_DIR$/lib/views/CameraScreen.dart" />
         <option value="$PROJECT_DIR$/lib/views/CallScreen.dart" />
         <option value="$PROJECT_DIR$/lib/views/StatusScreen.dart" />
@@ -95,17 +130,18 @@
         <option value="$PROJECT_DIR$/lib/views/ContactsUsing.dart" />
         <option value="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" />
         <option value="$PROJECT_DIR$/lib/views/ContactsUsingScreen.dart" />
-        <option value="$PROJECT_DIR$/lib/views/DBtest.dart" />
-        <option value="$PROJECT_DIR$/lib/resources/FireBaseDBResources.dart" />
         <option value="$PROJECT_DIR$/lib/views/LoginScreen.dart" />
         <option value="$PROJECT_DIR$/lib/views/OtpScreen.dart" />
-        <option value="$PROJECT_DIR$/lib/views/ChatScreen.dart" />
         <option value="$PROJECT_DIR$/lib/views/NamasteHome.dart" />
         <option value="$PROJECT_DIR$/pubspec.yaml" />
+        <option value="$PROJECT_DIR$/lib/resources/FireBaseDBResources.dart" />
+        <option value="$PROJECT_DIR$/lib/views/DBtest.dart" />
+        <option value="$PROJECT_DIR$/lib/views/ChatScreen.dart" />
+        <option value="$PROJECT_DIR$/lib/views/ChatThreadScreen.dart" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="8" />
     <option name="y" value="23" />
     <option name="width" value="1745" />
@@ -138,37 +174,6 @@
             <path>
               <item name="Namaste_App" type="b2602c69:ProjectViewProjectNode" />
               <item name="Namaste" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Namaste_App" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Namaste" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Namaste_App" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Namaste" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Namaste_App" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Namaste" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Namaste_App" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Namaste" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Namaste_App" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Namaste" type="462c0819:PsiDirectoryNode" />
-              <item name="ios" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Namaste_App" type="b2602c69:ProjectViewProjectNode" />
@@ -459,7 +464,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529442082169</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="firebase chatthreads,contacts">
+      <created>1529509314933</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1529509314933</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TodoView">
@@ -472,7 +484,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="8" y="23" width="1745" height="901" extended-state="0" />
+    <frame x="0" y="23" width="1280" height="777" extended-state="6" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991204" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -482,8 +494,8 @@
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28726968" sideWeight="0.505" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Dart Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4540943" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1923077" sideWeight="0.49353796" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Dart Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45307916" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4516129" sideWeight="0.49353796" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32844576" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32844576" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Flutter Outline" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296328" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -491,13 +503,13 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15678215" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21567044" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3995381" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Flutter Inspector" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.007046389" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Flutter Inspector" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.009693054" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -552,7 +564,8 @@
     <MESSAGE value="fixed stuff" />
     <MESSAGE value="added SharedPref 4 login" />
     <MESSAGE value="added OTP support" />
-    <option name="LAST_COMMIT_MESSAGE" value="added OTP support" />
+    <MESSAGE value="firebase chatthreads,contacts" />
+    <option name="LAST_COMMIT_MESSAGE" value="firebase chatthreads,contacts" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -729,14 +742,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/views/ChatThreadScreen.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1010">
-          <caret line="175" column="3" lean-forward="false" selection-start-line="175" selection-start-column="3" selection-end-line="175" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/widget_test.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -846,16 +851,8 @@
         <state relative-caret-position="-23">
           <caret line="22" column="3" lean-forward="false" selection-start-line="22" selection-start-column="3" selection-end-line="22" selection-end-column="3" />
           <folding>
-            <element signature="e#0#54#0" expanded="true" />
+            <element signature="e#0#54#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/views/DBtest.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="13" column="11" lean-forward="false" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -864,7 +861,7 @@
         <state relative-caret-position="107">
           <caret line="15" column="11" lean-forward="false" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -874,7 +871,7 @@
         <state relative-caret-position="186">
           <caret line="119" column="65" lean-forward="false" selection-start-line="119" selection-start-column="65" selection-end-line="119" selection-end-column="65" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -887,32 +884,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/resources/FireBaseDBResources.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#54#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/views/ChatScreen.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="38" column="6" lean-forward="false" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#54#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/views/StartUpLoader.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1115">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -922,7 +899,7 @@
         <state relative-caret-position="464">
           <caret line="62" column="0" lean-forward="false" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -932,6 +909,42 @@
         <state relative-caret-position="270">
           <caret line="15" column="3" lean-forward="false" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/views/DBtest.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="77" column="21" lean-forward="false" selection-start-line="77" selection-start-column="21" selection-end-line="77" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/views/ChatScreen.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1721">
+          <caret line="108" column="45" lean-forward="false" selection-start-line="108" selection-start-column="45" selection-end-line="108" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/resources/FireBaseDBResources.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="77" column="44" lean-forward="false" selection-start-line="77" selection-start-column="4" selection-end-line="77" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/views/ChatThreadScreen.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="32" column="26" lean-forward="false" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

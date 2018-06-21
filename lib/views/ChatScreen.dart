@@ -16,7 +16,7 @@ class _ChatScreenState extends State<ChatScreen> {
   String _myNumber;
   FireBaseDB db =  new FireBaseDB();
   bool loading = false;
-  List<DocumentSnapshot> _chats;
+  List<String> _chatters;
   Map<String,String> userMap;
   @override
   void initState() {
@@ -32,8 +32,15 @@ class _ChatScreenState extends State<ChatScreen> {
   void loadChatHeads()async{
     var data = await db.getChats("Namaste-Conversations").whenComplete((){print("loaded chatdata...");}).catchError((e)=>print(e));
     var map = await db.getUserData("App-Data").whenComplete((){print("loaded userdata");}).catchError((e)=>print(e));
+    Set<String> chatters = new Set();
+    data.forEach((d){
+      chatters.add(d.data['to']);
+      chatters.add(d.data['from']);
+    });
+    chatters.remove(_myNumber);
     setState(() {
-      _chats = data;
+      _chatters = chatters.toList();
+      print("chats: $_chatters");
       userMap = map;
       loading = false;
     });
@@ -56,7 +63,7 @@ class _ChatScreenState extends State<ChatScreen> {
     }else {
       return new Scaffold(
         body: ListView.builder(
-          itemCount: _chats.length!=null?_chats.length:0,
+          itemCount: _chatters.length!=null?_chatters.length:0,
           itemBuilder: (context, i) =>
           new Column(
             children: <Widget>[
@@ -69,17 +76,17 @@ class _ChatScreenState extends State<ChatScreen> {
                       .of(context)
                       .primaryColor,
                   backgroundColor: Colors.grey,
-                  backgroundImage: new NetworkImage(userMap[_chats[i].data['to']==_myNumber?_chats[i].data['from']:_chats[i].data['to']]),
+                  backgroundImage: new NetworkImage(userMap[_chatters[i]]),
                 ),
                 title: new Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     new Text(
-                      _chats[i].data['to']==_myNumber?_chats[i].data['from']:_chats[i].data['to'],
+                      _chatters[i],
                       style: new TextStyle(fontWeight: FontWeight.bold),
                     ),
                     new Text(
-                      _chats[i].data['time'],
+                      _chatters[i],
                       style: new TextStyle(color: Colors.grey, fontSize: 14.0),
                     ),
                   ],
@@ -97,8 +104,10 @@ class _ChatScreenState extends State<ChatScreen> {
                     new MaterialPageRoute(
                       builder: (context) => new ChatThreadScreen(
                           chatThread: new ChatThread(
-                              name: _chats[i].data['to']==_myNumber?_chats[i].data['from']:_chats[i].data['to'],
-                              image: userMap[_chats[i].data['to']==_myNumber?_chats[i].data['from']:_chats[i].data['to']])),
+                              name: _chatters[i],
+                              image: userMap[_chatters[i]]),
+                          myNumber: _myNumber,
+                      ),
                     ),
                   );
                 },
