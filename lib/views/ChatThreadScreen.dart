@@ -1,14 +1,17 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+
+var myNum;
 class ChatThreadScreen extends StatefulWidget {
   final ChatThread chatThread;
   final List<DocumentSnapshot> chats;
   final String myNumber;
 
-  ChatThreadScreen({Key key, @required this.chatThread, this.chats, this.myNumber}) : super(key: key);
+  ChatThreadScreen({Key key, @required this.chatThread, this.chats, this.myNumber}) : super(key: key){
+    myNum = myNumber;
+  }
 
   @override
   _ChatThreadScreenState createState() => new _ChatThreadScreenState();
@@ -19,20 +22,19 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> with TickerProvider
   final CollectionReference reference = Firestore.instance.collection("Namaste-Conversations");
   StreamSubscription<QuerySnapshot> subscriber;
   final TextEditingController _textController = new TextEditingController();
-  List<ChatMessage> _messages = new List();
-  List _chat = new List();
+  //List<ChatMessage> _messages = new List();
+  List<Map<String,dynamic>> _chat = new List();
   bool _isComposing = false;
-
   @override
   void initState(){
     super.initState();
     subscriber = reference.snapshots().listen((datasnapshot) {
       datasnapshot.documents.forEach((d){
-        if((d.data.containsValue(widget.myNumber) && d.data==widget.chatThread.name)||(d.data['to']==widget.chatThread.name && d.data['from']==widget.myNumber)){
-          if(d.exists){
+        if(d.exists){
+          if((d.data['to']==widget.myNumber && d.data['from']==widget.chatThread.name)||(d.data['to']==widget.chatThread.name && d.data['from']==widget.myNumber)){
             print(d.data);
             setState(() {
-              _chat.add(d.data);
+                _chat.add(d.data);
             });
           }
         }
@@ -43,7 +45,16 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> with TickerProvider
 
   @override
   Widget build(BuildContext context) {
+    _chat.sort((a,b){
+      var t1 = int.parse(a['time'].replaceAll(":",""));
+      var t2 = int.parse(b['time'].replaceAll(":",""));
+    return t2.compareTo(t1);
+    }
+      );
+    print("List-> $_chat");
+    print(_chat.length);
     return new Scaffold(
+      backgroundColor: Colors.grey[200],
       appBar: new AppBar(
         titleSpacing:1.0,
         title: new Row(
@@ -70,11 +81,12 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> with TickerProvider
                   child: new ListView.builder(
                     padding: new EdgeInsets.all(8.0),
                     reverse: true,
-                      itemCount: _messages.length!=null?_messages.length:0,
+                      itemCount: _chat.length!=null?_chat.length:0,
                     itemBuilder: (context, index){
-                      return  new ListTile(leading: new Text(_chat[index]['from']),title: new Text(_chat[index]['message']),);
+                      return new ChatMessage(from:_chat[index]['from'],message:_chat[index]['message'],time: _chat[index]['time'],);//ListTile(leading: new Text(_chat.keys.toList()[index]),title: new Text(_chat.values.toList()[index]),);
                     }
-                  )),
+                  )
+              ),
               new Divider(height: 1.0),
               new Container(
                   decoration: new BoxDecoration(
@@ -117,47 +129,54 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> with TickerProvider
                 ),
                 new Container(
                   margin: new EdgeInsets.symmetric(horizontal: 4.0),
-                  child: /*Theme.of(context).platform == TargetPlatform.iOS ?
-                  new CupertinoButton(
-                    child: new Text("Send"),
-                    onPressed:  null,) :
-*/
-                  new IconButton(
+                  child: new IconButton(
                       icon: new Icon(Icons.send),
                       onPressed: _isComposing
                           ? () => _handleSubmitted(_textController.text)
                           : null,),
                 ),
-
               ]
           ),
         )
     );
   }
 
-  void _handleSubmitted(String text) {
-    _textController.clear();
+  void _handleSubmitted(String message) {
     setState(() {
+      _chat.clear();
       _isComposing = false;
     });
-    ChatMessage message = new ChatMessage(
+    DateTime time = new DateTime.now();
+    String hrs = time.hour.toString().length<2?"0"+time.hour.toString():time.hour.toString();
+    String mins = time.minute.toString().length<2?"0"+time.minute.toString():time.minute.toString();
+    String timeX = hrs + ":" + mins;
+    Map<String, String> datax = {"to":widget.chatThread.name,"from":widget.myNumber,"message":message,"time":timeX};
+    reference.add(datax).whenComplete(() {
+      print("message sent : $message at $time");
+    }).catchError((e) => print(e));
+    _textController.clear();
+
+
+   /* ChatMessage message = new ChatMessage(
       from: widget.myNumber,
-      text: text,
-      animationController: new AnimationController(
+      message: text,
+      /*animationController: new AnimationController(
         duration: new Duration(milliseconds: 700),
         vsync: this,
-      ),
-    );
-    setState(() {
-      _messages.insert(0, message);
-    });
-    message.animationController.forward();
+      ),*/
+    );*/
+    //setState(() {
+     //_chat.add({"to":widget.chatThread.name,"from":widget.myNumber,"message":message,"time":time.hour.toString()+":"+time.minute.toString()});
+      // _messages.insert(0, message);
+    //});
+    //message.animationController.forward();
   }
 
   @override
   void dispose() {
-    for (ChatMessage message in _messages)
-      message.animationController.dispose();
+    //for (ChatMessage message in _messages)
+      //message.animationController.dispose();
+    _chat.clear();
     subscriber.cancel();
     super.dispose();
   }
@@ -168,40 +187,53 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> with TickerProvider
 @override
 class ChatMessage extends StatelessWidget {
   final String from;
-  final String text;
-  final AnimationController animationController;
-  ChatMessage({this.from, this.text, this.animationController});
+  final String message;
+  final String time;
+  //final AnimationController animationController;
+  ChatMessage({this.from, this.message, this.time/*this.animationController*/});
 
   Widget build(BuildContext context) {
-    return new SizeTransition(
+    return /*new SizeTransition(
       sizeFactor: new CurvedAnimation(
           parent: animationController, curve: Curves.easeOut),
       axisAlignment: 0.0,
-      child: new Container(
+      child: */new Container(
         margin: const EdgeInsets.symmetric(vertical: 10.0),
         child: new Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            new Container(
+            /*new Container(
               margin: const EdgeInsets.only(right: 16.0),
               child: new CircleAvatar(child: new Text(from[0])),
-            ),
+            ),*/
             new Expanded(
               child: new Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: from==myNum?CrossAxisAlignment.end:CrossAxisAlignment.start,
                 children: <Widget>[
-                  new Text(from, style: Theme.of(context).textTheme.subhead),
                   new Container(
+                    padding:new EdgeInsets.all(4.0),
+                    decoration: new BoxDecoration(
+                      borderRadius: new BorderRadius.all(const Radius.circular(10.0)),
+                      color: from==myNum?Colors.lightGreen[300]:Colors.white,
+                      border: new Border(bottom: new BorderSide(),top: new BorderSide(),left: new BorderSide(),right: new BorderSide()),
+                    ),
                     margin: const EdgeInsets.only(top: 5.0),
-                    child: new Text(text),
+                    child: new Container(
+                      child: new Column(
+                        children: <Widget>[
+                          new Text(message),
+                          new Text(time,style: new TextStyle(fontSize: 10.0),)
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),
             ),
           ],
         ),
-      ),
-    );
+      );
+   // );
   }
 }
 

@@ -6,6 +6,7 @@ import 'package:flutter_app/views/StatusScreen.dart';
 import 'package:flutter_app/views/ChatScreen.dart';
 import 'package:flutter_app/views/Settings_Screen.dart';
 import 'package:flutter_app/views/ContactsUsingScreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class NamasteHome extends StatefulWidget {
@@ -37,11 +38,14 @@ class NamasteHome extends StatefulWidget {
 class _NamasteHomeState extends State<NamasteHome> with SingleTickerProviderStateMixin{
   TabController _tabController;
   List<PopupMenuItem> _options = new List<PopupMenuItem>();
+  String _myNumber;
 
   @override
   void initState() {
     super.initState();
-
+    SharedPreferences.getInstance().then((SharedPreferences sp) {
+      _myNumber = sp.getString("myNumber");
+    });
     _options.addAll([
       new PopupMenuItem(
           child: new ListTile(
@@ -66,7 +70,7 @@ class _NamasteHomeState extends State<NamasteHome> with SingleTickerProviderStat
     return new WillPopScope(
       child: new Scaffold(
         appBar: new AppBar(
-          title: new Text("Namaste"),
+          title: new Text("Namaste",style: new TextStyle(color: Theme.of(context).accentColor),),
           elevation: 0.7,
           bottom: new TabBar(
             controller: _tabController,
@@ -109,7 +113,7 @@ class _NamasteHomeState extends State<NamasteHome> with SingleTickerProviderStat
             Icons.message,
             color: Colors.white,
           ),
-          onPressed: () => Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new ContactsUsingScreen())),
+          onPressed: () => Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new ContactsUsingScreen(myNumber: _myNumber,))),
         ),
       ),
       onWillPop: (){return new Future<bool>.value(false);},

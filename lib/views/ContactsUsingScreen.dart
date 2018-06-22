@@ -1,9 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/resources/FireBaseDBResources.dart';
+import 'package:flutter_app/views/ChatThreadScreen.dart';
 //import 'package:contacts_service/contacts_service.dart';
 
 class ContactsUsingScreen extends StatefulWidget{
+  final String myNumber;
+  ContactsUsingScreen({this.myNumber});
+
   @override
   _ContactsUsingScreenState createState() => new _ContactsUsingScreenState();
 
@@ -49,6 +53,19 @@ class _ContactsUsingScreenState extends State<ContactsUsingScreen> {
               new ListTile(
                 leading: new CircleAvatar(backgroundImage: new NetworkImage(_numbers[index].data['dp']),),
                 title: new Text(_numbers[index].data['number']),
+                onTap:() {
+                    Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                    builder: (context) => new ChatThreadScreen(
+                      chatThread: new ChatThread(
+                      name: _numbers[index].data['number'],
+                      image: _numbers[index].data['dp'],),
+                      myNumber: widget.myNumber,
+                    ),
+                    ),
+                    );
+                },
               ),
             ],
           ),

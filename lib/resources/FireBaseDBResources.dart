@@ -4,6 +4,30 @@ import 'dart:async';
 class FireBaseDB {
   CollectionReference _documentReference;
 
+  void addToDb(String number) {
+    bool result = false;
+    _documentReference = Firestore.instance.collection("App-Data");
+    _documentReference.getDocuments().then(
+            (querySnapshot) {
+          for (int i = 0; i < querySnapshot.documents.length; i++) {
+            print(querySnapshot.documents[i]['number']);
+            if (querySnapshot.documents[i]['number'].toString() == number) {
+              result = true;
+            }}}).whenComplete((){
+              if(result!=true){
+                Map<String, String> datax = {"number": number};
+                _documentReference.add(datax).whenComplete(() {
+                  print("Number Added");
+                }).catchError((e) => print(e));
+              }else{
+                print("User already exists");
+              }
+    });
+
+  }
+  void fetch() {
+    _documentReference = Firestore.instance.collection("App-Data");
+  }
 
   void addName(String data) {
     Map<String, String> datax = {"name": data};
@@ -25,7 +49,7 @@ class FireBaseDB {
     //}).catchError((e) => print(e));
   }
 
-  Future<bool> authenticateUser(String addressDB, String number) {
+  authenticateUser(String addressDB, String number) {
     bool result = false;
     _documentReference = Firestore.instance.collection(addressDB);
     return _documentReference.getDocuments().then(
@@ -79,5 +103,6 @@ class FireBaseDB {
         .snapshots().listen((datasnapshot) {
           datasnapshot.documents.forEach((d)=>print(d.data));
     });
+    subscription.cancel();
   }
 }

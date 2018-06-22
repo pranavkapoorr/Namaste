@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/resources/FireBaseDBResources.dart';
 import 'package:flutter_app/views/StartUpLoader.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -87,6 +88,7 @@ class _OtpScreenState extends State<OtpScreen>{
                              if(otp.text == widget.generatedOtp){
                                setState(() {
                                  String myNum = widget.myNumber;
+                                 new FireBaseDB().addToDb(myNum);
                                  print("mynumber $myNum");
                                  sharedPreferences.setString("myNumber", myNum);
                                  _loggedIn = true;
