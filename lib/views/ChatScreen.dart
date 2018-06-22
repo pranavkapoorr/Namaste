@@ -138,7 +138,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   style: new TextStyle(fontWeight: FontWeight.bold),
                 ),
                 new Text(
-                    _lastMessage[_chatters[i]].keys.toList()[0],
+                    _lastMessage[_chatters[i]].keys.toList()[0].substring(0,_lastMessage[_chatters[i]].keys.toList()[0].length-3),
                   style: new TextStyle(color: Colors.grey, fontSize: 14.0),
                 ),
               ],

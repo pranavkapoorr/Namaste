@@ -78,7 +78,7 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> with TickerProvider
           child: new Column(
             children: <Widget>[
               new Flexible(
-                  child: new ListView.builder(
+                child:  new ListView.builder(
                     padding: new EdgeInsets.all(8.0),
                     reverse: true,
                       itemCount: _chat.length!=null?_chat.length:0,
@@ -143,13 +143,13 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> with TickerProvider
 
   void _handleSubmitted(String message) {
     setState(() {
-      _chat.clear();
       _isComposing = false;
     });
     DateTime time = new DateTime.now();
     String hrs = time.hour.toString().length<2?"0"+time.hour.toString():time.hour.toString();
     String mins = time.minute.toString().length<2?"0"+time.minute.toString():time.minute.toString();
-    String timeX = hrs + ":" + mins;
+    String secs = time.second.toString().length<2?"0"+time.second.toString():time.second.toString();
+    String timeX = hrs + ":" + mins + ":" + secs;
     Map<String, String> datax = {"to":widget.chatThread.name,"from":widget.myNumber,"message":message,"time":timeX};
     reference.add(datax).whenComplete(() {
       print("message sent : $message at $time");
@@ -222,7 +222,7 @@ class ChatMessage extends StatelessWidget {
                       child: new Column(
                         children: <Widget>[
                           new Text(message),
-                          new Text(time,style: new TextStyle(fontSize: 10.0),)
+                          new Text(time.substring(0,time.length-3),style: new TextStyle(fontSize: 10.0),)
                         ],
                       ),
                     ),
