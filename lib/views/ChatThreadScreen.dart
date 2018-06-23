@@ -17,7 +17,7 @@ class ChatThreadScreen extends StatefulWidget {
 
 }
 
-class _ChatThreadScreenState extends State<ChatThreadScreen> with TickerProviderStateMixin {
+class _ChatThreadScreenState extends State<ChatThreadScreen> {
   final CollectionReference _reference = Firestore.instance.collection(
       "Namaste-Conversations");
   final TextEditingController _textController = new TextEditingController();
@@ -66,11 +66,11 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> with TickerProvider
                       for (int i = snapshot.data.documents.length - 1; i > 0;
                       i--) {
                         DocumentSnapshot ds = snapshot.data.documents[i];
-                        if (ds.data['message'] != null) {
-                          dataList.add(new ChatMessage(from: ds.data['from'],
-                            message: ds.data['message'],
-                            time: ds.data['time'],));
-                        }
+                        if((ds.data['message'] != null)&&(ds.data['to']==widget.myNumber && ds.data['from']==widget.chatThread.name)||(ds.data['to']==widget.chatThread.name && ds.data['from']==widget.myNumber)){
+                            dataList.add(new ChatMessage(from: ds.data['from'],
+                              message: ds.data['message'],
+                              time: ds.data['time'],));
+                          }
                       }
                       return new ListView(
                         reverse: true,
@@ -167,21 +167,6 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> with TickerProvider
       print("message sent : $message at $time");
     }).catchError((e) => print(e));
     _textController.clear();
-
-
-    /* ChatMessage message = new ChatMessage(
-      from: widget.myNumber,
-      message: text,
-      /*animationController: new AnimationController(
-        duration: new Duration(milliseconds: 700),
-        vsync: this,
-      ),*/
-    );*/
-    //setState(() {
-    //_chat.add({"to":widget.chatThread.name,"from":widget.myNumber,"message":message,"time":time.hour.toString()+":"+time.minute.toString()});
-    // _messages.insert(0, message);
-    //});
-    //message.animationController.forward();
   }
 
 }
@@ -191,15 +176,10 @@ class ChatMessage extends StatelessWidget {
   final String from;
   final String message;
   final String time;
-  //final AnimationController animationController;
-  ChatMessage({this.from, this.message, this.time/*this.animationController*/});
+  ChatMessage({this.from, this.message, this.time});
 
   Widget build(BuildContext context) {
-    return /*new SizeTransition(
-      sizeFactor: new CurvedAnimation(
-          parent: animationController, curve: Curves.easeOut),
-      axisAlignment: 0.0,
-      child: */new Container(
+    return new Container(
         margin: const EdgeInsets.symmetric(vertical: 10.0),
         child: new Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -235,7 +215,6 @@ class ChatMessage extends StatelessWidget {
           ],
         ),
       );
-   // );
   }
 }
 
