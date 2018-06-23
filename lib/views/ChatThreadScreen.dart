@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -18,54 +17,35 @@ class ChatThreadScreen extends StatefulWidget {
 
 }
 
-class _ChatThreadScreenState extends State<ChatThreadScreen> with TickerProviderStateMixin{
-  final CollectionReference reference = Firestore.instance.collection("Namaste-Conversations");
-  StreamSubscription<QuerySnapshot> subscriber;
+class _ChatThreadScreenState extends State<ChatThreadScreen> with TickerProviderStateMixin {
+  final CollectionReference _reference = Firestore.instance.collection(
+      "Namaste-Conversations");
   final TextEditingController _textController = new TextEditingController();
-  //List<ChatMessage> _messages = new List();
-  List<Map<String,dynamic>> _chat = new List();
   bool _isComposing = false;
-  @override
-  void initState(){
-    super.initState();
-    subscriber = reference.snapshots().listen((datasnapshot) {
-      datasnapshot.documents.forEach((d){
-        if(d.exists){
-          if((d.data['to']==widget.myNumber && d.data['from']==widget.chatThread.name)||(d.data['to']==widget.chatThread.name && d.data['from']==widget.myNumber)){
-            print(d.data);
-            setState(() {
-                _chat.add(d.data);
-            });
-          }
-        }
 
-      });
-    });
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    _chat.sort((a,b){
-      var t1 = int.parse(a['time'].replaceAll(":",""));
-      var t2 = int.parse(b['time'].replaceAll(":",""));
-    return t2.compareTo(t1);
-    }
-      );
-    print("List-> $_chat");
-    print(_chat.length);
     return new Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: new AppBar(
-        titleSpacing:1.0,
+        titleSpacing: 1.0,
         title: new Row(
           children: <Widget>[
-            new IconButton(icon: new CircleAvatar(backgroundImage: new NetworkImage('${widget.chatThread.image}'),radius: 15.0,),onPressed: null,),
+            new IconButton(icon: new CircleAvatar(
+              backgroundImage: new NetworkImage('${widget.chatThread.image}'),
+              radius: 15.0,), onPressed: null,),
             new Padding(padding: new EdgeInsetsDirectional.only(end: 10.0)),
             new GestureDetector(
-              child: new Text('${widget.chatThread.name}',style: new TextStyle(color: new Color(0xffA1A9A9))),
+              child: new Text('${widget.chatThread.name}',
+                  style: new TextStyle(color: new Color(0xffA1A9A9))),
               onTap: null,
             ),
-            ],
+          ],
         ),
         centerTitle: true,
         actions: <Widget>[
@@ -78,30 +58,51 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> with TickerProvider
           child: new Column(
             children: <Widget>[
               new Flexible(
-                child:  new ListView.builder(
-                    padding: new EdgeInsets.all(8.0),
-                    reverse: true,
-                      itemCount: _chat.length!=null?_chat.length:0,
-                    itemBuilder: (context, index){
-                      return new ChatMessage(from:_chat[index]['from'],message:_chat[index]['message'],time: _chat[index]['time'],);//ListTile(leading: new Text(_chat.keys.toList()[index]),title: new Text(_chat.values.toList()[index]),);
+                child: new StreamBuilder(
+                    stream: _reference.snapshots(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) return const Text('Loading...');
+                      List<Widget> dataList = new List();
+                      for (int i = snapshot.data.documents.length - 1; i > 0;
+                      i--) {
+                        DocumentSnapshot ds = snapshot.data.documents[i];
+                        if (ds.data['message'] != null) {
+                          dataList.add(new ChatMessage(from: ds.data['from'],
+                            message: ds.data['message'],
+                            time: ds.data['time'],));
+                        }
+                      }
+                      return new ListView(
+                        reverse: true,
+                        children: dataList,
+                      );
                     }
-                  )
+                ),
               ),
               new Divider(height: 1.0),
               new Container(
                   decoration: new BoxDecoration(
-                      color: Theme.of(context).cardColor),
+                      color: Theme
+                          .of(context)
+                          .cardColor),
                   child: _buildTestComposer()
               ),
             ],
           ),
-          decoration: Theme.of(context).platform == TargetPlatform.iOS ? new BoxDecoration(border: new Border(top: new BorderSide(color: Colors.grey[200]))) : null),//new
+          decoration: Theme
+              .of(context)
+              .platform == TargetPlatform.iOS
+              ? new BoxDecoration(
+              border: new Border(top: new BorderSide(color: Colors.grey[200])))
+              : null), //new
     );
   }
 
   Widget _buildTestComposer() {
     return new IconTheme(
-        data: new IconThemeData(color: Theme.of(context).accentColor),
+        data: new IconThemeData(color: Theme
+            .of(context)
+            .accentColor),
         child: new Container(
           margin: const EdgeInsets.symmetric(horizontal: 8.0),
           child: new Row(
@@ -110,7 +111,7 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> with TickerProvider
                   margin: new EdgeInsets.symmetric(horizontal: 4.0),
                   child: new IconButton(
                       icon: new Icon(Icons.photo_camera),
-                      onPressed:null),
+                      onPressed: null),
                 ),
                 new Flexible(
                   child: new TextField(
@@ -121,8 +122,8 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> with TickerProvider
                       });
                     },
                     onSubmitted: _isComposing
-                        ?_handleSubmitted
-                        :null,
+                        ? _handleSubmitted
+                        : null,
                     decoration:
                     new InputDecoration.collapsed(hintText: "Send a message"),
                   ),
@@ -130,10 +131,10 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> with TickerProvider
                 new Container(
                   margin: new EdgeInsets.symmetric(horizontal: 4.0),
                   child: new IconButton(
-                      icon: new Icon(Icons.send),
-                      onPressed: _isComposing
-                          ? () => _handleSubmitted(_textController.text)
-                          : null,),
+                    icon: new Icon(Icons.send),
+                    onPressed: _isComposing
+                        ? () => _handleSubmitted(_textController.text)
+                        : null,),
                 ),
               ]
           ),
@@ -146,18 +147,29 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> with TickerProvider
       _isComposing = false;
     });
     DateTime time = new DateTime.now();
-    String hrs = time.hour.toString().length<2?"0"+time.hour.toString():time.hour.toString();
-    String mins = time.minute.toString().length<2?"0"+time.minute.toString():time.minute.toString();
-    String secs = time.second.toString().length<2?"0"+time.second.toString():time.second.toString();
+    String hrs = time.hour
+        .toString()
+        .length < 2 ? "0" + time.hour.toString() : time.hour.toString();
+    String mins = time.minute
+        .toString()
+        .length < 2 ? "0" + time.minute.toString() : time.minute.toString();
+    String secs = time.second
+        .toString()
+        .length < 2 ? "0" + time.second.toString() : time.second.toString();
     String timeX = hrs + ":" + mins + ":" + secs;
-    Map<String, String> datax = {"to":widget.chatThread.name,"from":widget.myNumber,"message":message,"time":timeX};
-    reference.add(datax).whenComplete(() {
+    Map<String, String> datax = {
+      "to": widget.chatThread.name,
+      "from": widget.myNumber,
+      "message": message,
+      "time": timeX
+    };
+    _reference.add(datax).whenComplete(() {
       print("message sent : $message at $time");
     }).catchError((e) => print(e));
     _textController.clear();
 
 
-   /* ChatMessage message = new ChatMessage(
+    /* ChatMessage message = new ChatMessage(
       from: widget.myNumber,
       message: text,
       /*animationController: new AnimationController(
@@ -166,23 +178,13 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> with TickerProvider
       ),*/
     );*/
     //setState(() {
-     //_chat.add({"to":widget.chatThread.name,"from":widget.myNumber,"message":message,"time":time.hour.toString()+":"+time.minute.toString()});
-      // _messages.insert(0, message);
+    //_chat.add({"to":widget.chatThread.name,"from":widget.myNumber,"message":message,"time":time.hour.toString()+":"+time.minute.toString()});
+    // _messages.insert(0, message);
     //});
     //message.animationController.forward();
   }
 
-  @override
-  void dispose() {
-    //for (ChatMessage message in _messages)
-      //message.animationController.dispose();
-    _chat.clear();
-    subscriber.cancel();
-    super.dispose();
-  }
 }
-
-
 
 @override
 class ChatMessage extends StatelessWidget {
