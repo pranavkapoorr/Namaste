@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/views/AccountScreen.dart';
+import 'package:flutter_app/views/Contacts.dart';
 import 'package:flutter_app/views/NotificationScreen.dart';
 import 'package:flutter_app/views/DBtest.dart';
 import 'dart:async';
@@ -52,7 +53,7 @@ class SettingsScreenState extends State<SettingsScreen>{
     return Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new NotificationScreen()));
   }
   Future _testDbPage(){
-    return Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new DBtest()));
+    return Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new ContactsDemo()));
   }
 
 }

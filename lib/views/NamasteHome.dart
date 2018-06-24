@@ -37,7 +37,6 @@ class NamasteHome extends StatefulWidget {
 
 class _NamasteHomeState extends State<NamasteHome> with SingleTickerProviderStateMixin{
   TabController _tabController;
-  List<PopupMenuItem> _options = new List<PopupMenuItem>();
   String _myNumber;
 
   @override
@@ -46,18 +45,6 @@ class _NamasteHomeState extends State<NamasteHome> with SingleTickerProviderStat
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       _myNumber = sp.getString("myNumber");
     });
-    _options.addAll([
-      new PopupMenuItem(
-          child: new ListTile(
-            title:Text("Settings",style: new TextStyle(color: Colors.black, fontSize: 18.0)),
-            onTap: _settingPage
-          )
-      ),
-      new PopupMenuItem(
-          child: new ListTile(
-              title:Text("About",style: new TextStyle(color: Colors.black, fontSize: 18.0)),
-              onTap:null)),
-    ]);
     _tabController = new TabController(vsync: this, initialIndex: 1, length: 4);
   }
 
@@ -89,13 +76,24 @@ class _NamasteHomeState extends State<NamasteHome> with SingleTickerProviderStat
               padding: const EdgeInsets.symmetric(horizontal: 5.0),
             ),
             new PopupMenuButton(
-                elevation: 10.0,
-                padding: EdgeInsets.zero,
-                tooltip:"Settings",
-                icon: new Icon(Icons.more_vert,color: new Color(0xff939696)) ,
-                itemBuilder: (BuildContext context){
-                  return _options;
-                })
+              elevation: 10.0,
+              padding: new EdgeInsets.all(0.0),
+              tooltip:"Settings",
+              icon: new Icon(Icons.more_vert,color: new Color(0xff939696)) ,
+              onSelected: (dynamic value){
+                Navigator.push(context, new MaterialPageRoute(builder: (context)=>value));
+              },
+              itemBuilder: (BuildContext context) => <PopupMenuItem>[
+                new PopupMenuItem(
+                    value: new SettingsScreen(),
+                    child: new Text('Settings')
+                ),
+                new PopupMenuItem(
+                    value: null,
+                    child: new Text('About')
+                ),
+              ],
+            ),
           ],
         ),
         body: new TabBarView(
