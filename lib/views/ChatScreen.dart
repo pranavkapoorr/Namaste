@@ -41,12 +41,16 @@ class _ChatScreenState extends State<ChatScreen> {
               setState(() {
                 _loadedChats = true;
                 _chat.add(d.data);
-                if(d.data['to'] == _myNumber) {
-                  _chatters.add(d.data['from']);
-                  _lastMessage[d.data['from']] = {d.data['time']:d.data['message']};
-                }else {
-                  _chatters.add(d.data['to']);
-                  _lastMessage[d.data['to']] = {d.data['time']:d.data['message']};
+                if(d.data['message']!=null) {
+                  if (d.data['to'] == _myNumber) {
+                    _chatters.add(d.data['from']);
+                    _lastMessage[d.data['from']] =
+                    {d.data['time']: d.data['message']};
+                  } else {
+                    _chatters.add(d.data['to']);
+                    _lastMessage[d.data['to']] =
+                    {d.data['time']: d.data['message']};
+                  }
                 }
               });
             }
@@ -59,10 +63,13 @@ class _ChatScreenState extends State<ChatScreen> {
         if (d.exists) {
           setState(() {
             _loadedNumbers = true;
-            if(d.data['dp']!=null) {
-              userMap[d.data['number']] = d.data['dp'];
-            }else{
-              userMap[d.data['number']] = "https://i.pinimg.com/736x/34/77/c3/3477c3b54457ef50c2e03bdaa7b3fdc5.jpg";
+            if(d.data['number']!=null) {
+              if (d.data['dp'] != null) {
+                userMap[d.data['number']] = d.data['dp'];
+              } else {
+                userMap[d.data['number']] =
+                "https://i.pinimg.com/736x/34/77/c3/3477c3b54457ef50c2e03bdaa7b3fdc5.jpg";
+              }
             }
           });
         }
@@ -128,7 +135,8 @@ class _ChatScreenState extends State<ChatScreen> {
                   .of(context)
                   .primaryColor,
               backgroundColor: Colors.grey,
-              backgroundImage: new NetworkImage(userMap[_chatters[i]]),
+              backgroundImage: new NetworkImage(
+                  userMap[_chatters[i]]==null?"https://i.pinimg.com/736x/34/77/c3/3477c3b54457ef50c2e03bdaa7b3fdc5.jpg":userMap[_chatters[i]]),
             ),
             title: new Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
