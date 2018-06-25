@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 
 class NotificationScreen extends StatefulWidget {
   @override
-  NotificationScreenState createState() {
-    return new NotificationScreenState();
-  }
+  _NotificationScreenState createState() => new _NotificationScreenState();
 
 }
 
-class NotificationScreenState extends State<NotificationScreen>{
+class _NotificationScreenState extends State<NotificationScreen>{
   bool _notifications = false;
   @override
   Widget build(BuildContext context) {

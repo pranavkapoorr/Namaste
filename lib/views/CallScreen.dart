@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/chat_model.dart';
 class CallsScreen extends StatefulWidget {
+
   @override
-  CallsScreenState createState() {
-    return new CallsScreenState();
-  }
+  _CallsScreenState createState() => new _CallsScreenState();
 
 }
-class CallsScreenState extends State<CallsScreen>{
+class _CallsScreenState extends State<CallsScreen>{
   String _defaultImage = "https://i.pinimg.com/736x/34/77/c3/3477c3b54457ef50c2e03bdaa7b3fdc5.jpg";
   @override
   Widget build(BuildContext context) {

@@ -4,9 +4,6 @@ import 'package:flutter_app/views/StartUpLoader.dart';
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
- MyApp(){
- // loggedIn = new FireBaseDB("App-Data").authenticateUser("+447488706094");
- }
 
   @override
   Widget build(BuildContext context) {

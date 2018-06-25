@@ -48,10 +48,6 @@ class _NamasteHomeState extends State<NamasteHome> with SingleTickerProviderStat
     _tabController = new TabController(vsync: this, initialIndex: 1, length: 4);
   }
 
-  void _settingPage(){
-    Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new SettingsScreen()));
-  }
-
   @override
   Widget build(BuildContext context) {
     return new WillPopScope(

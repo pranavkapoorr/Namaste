@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/models/chat_model.dart';
 class StatusScreen extends StatefulWidget {
   @override
-  StatusScreenState createState() {
-    return new StatusScreenState();
-  }
+  _StatusScreenState createState() => new _StatusScreenState();
 
 }
-class StatusScreenState extends State<StatusScreen>{
+class _StatusScreenState extends State<StatusScreen>{
   @override
   Widget build(BuildContext context) {
     return new Scaffold(

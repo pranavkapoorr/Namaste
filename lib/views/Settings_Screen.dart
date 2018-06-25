@@ -7,13 +7,11 @@ import 'dart:async';
 
 class SettingsScreen extends StatefulWidget {
   @override
-  SettingsScreenState createState() {
-    return new SettingsScreenState();
-  }
+  _SettingsScreenState createState() => new _SettingsScreenState();
 
 }
 
-class SettingsScreenState extends State<SettingsScreen>{
+class _SettingsScreenState extends State<SettingsScreen>{
 
   @override
   Widget build(BuildContext context) {
