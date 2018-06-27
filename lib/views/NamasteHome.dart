@@ -81,7 +81,7 @@ class _NamasteHomeState extends State<NamasteHome> with SingleTickerProviderStat
       leading: new IconButton(icon: new Icon(Icons.arrow_back), onPressed: (){setState(() {
         searchClicked = false;
       });}),
-      title:  new TextField(decoration: new InputDecoration(hintText: "         search here",suffixIcon: new Icon(Icons.search),),),
+      title:  new TextField(decoration: new InputDecoration(hintText: "         search here",suffixIcon: new Icon(Icons.search),border: InputBorder.none),),
       elevation: 0.7,
       bottom: new TabBar(
         controller: _tabController,

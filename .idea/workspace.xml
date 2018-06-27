@@ -27,8 +27,8 @@
       <file leaf-file-name="NamasteHome.dart" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/views/NamasteHome.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="85" column="25" lean-forward="true" selection-start-line="85" selection-start-column="25" selection-end-line="85" selection-end-column="25" />
+            <state relative-caret-position="183">
+              <caret line="83" column="152" lean-forward="true" selection-start-line="83" selection-start-column="128" selection-end-line="83" selection-end-column="152" />
               <folding />
             </state>
           </provider>
@@ -528,7 +528,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530138148731</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="added searchbar icon">
+      <created>1530138633282</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1530138633282</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TodoView">
@@ -633,7 +640,8 @@
     <MESSAGE value="enhanced cam" />
     <MESSAGE value="Nothing much" />
     <MESSAGE value="added searchbar" />
-    <option name="LAST_COMMIT_MESSAGE" value="added searchbar" />
+    <MESSAGE value="added searchbar icon" />
+    <option name="LAST_COMMIT_MESSAGE" value="added searchbar icon" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1001,8 +1009,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/views/NamasteHome.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="85" column="25" lean-forward="true" selection-start-line="85" selection-start-column="25" selection-end-line="85" selection-end-column="25" />
+        <state relative-caret-position="183">
+          <caret line="83" column="152" lean-forward="true" selection-start-line="83" selection-start-column="128" selection-end-line="83" selection-end-column="152" />
           <folding />
         </state>
       </provider>
