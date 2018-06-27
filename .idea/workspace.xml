@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="af31b5df-b2e0-4a65-9af3-7d12a46f2dad" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/lib/views/DBtest.dart" afterPath="$PROJECT_DIR$/lib/views/DBtest.dart" />
-      <change beforePath="$PROJECT_DIR$/lib/views/StatusScreen.dart" afterPath="$PROJECT_DIR$/lib/views/StatusScreen.dart" />
+      <change beforePath="$PROJECT_DIR$/lib/views/NamasteHome.dart" afterPath="$PROJECT_DIR$/lib/views/NamasteHome.dart" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -25,21 +24,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="StatusScreen.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/views/StatusScreen.dart">
+      <file leaf-file-name="NamasteHome.dart" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/views/NamasteHome.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DBtest.dart" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/views/DBtest.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="31" column="35" lean-forward="false" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
+            <state relative-caret-position="1350">
+              <caret line="83" column="87" lean-forward="false" selection-start-line="83" selection-start-column="87" selection-end-line="83" selection-end-column="87" />
               <folding />
             </state>
           </provider>
@@ -107,7 +96,6 @@
         <option value="$PROJECT_DIR$/lib/resources/FireBaseDBResources.dart" />
         <option value="$PROJECT_DIR$/lib/views/ChatThreadScreen.dart" />
         <option value="$PROJECT_DIR$/lib/views/Contacts.dart" />
-        <option value="$PROJECT_DIR$/lib/views/NamasteHome.dart" />
         <option value="$PROJECT_DIR$/lib/main.dart" />
         <option value="$PROJECT_DIR$/lib/views/CallScreen.dart" />
         <option value="$PROJECT_DIR$/lib/views/NotificationScreen.dart" />
@@ -116,6 +104,7 @@
         <option value="$PROJECT_DIR$/lib/views/CameraScreen.dart" />
         <option value="$PROJECT_DIR$/lib/views/StatusScreen.dart" />
         <option value="$PROJECT_DIR$/lib/views/DBtest.dart" />
+        <option value="$PROJECT_DIR$/lib/views/NamasteHome.dart" />
       </list>
     </option>
   </component>
@@ -525,7 +514,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530021476637</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Nothing much">
+      <created>1530136575618</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1530136575618</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TodoView">
@@ -628,7 +624,8 @@
     <MESSAGE value="refactored" />
     <MESSAGE value="fixed exception chatScreen" />
     <MESSAGE value="enhanced cam" />
-    <option name="LAST_COMMIT_MESSAGE" value="enhanced cam" />
+    <MESSAGE value="Nothing much" />
+    <option name="LAST_COMMIT_MESSAGE" value="Nothing much" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -912,14 +909,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/views/NamasteHome.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1000">
-          <caret line="86" column="34" lean-forward="false" selection-start-line="86" selection-start-column="34" selection-end-line="86" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/views/NotificationScreen.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
@@ -986,6 +975,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/views/DBtest.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="31" column="35" lean-forward="false" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/views/StatusScreen.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
@@ -994,10 +991,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/views/DBtest.dart">
+    <entry file="file://$PROJECT_DIR$/lib/views/NamasteHome.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="31" column="35" lean-forward="false" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
+        <state relative-caret-position="1350">
+          <caret line="83" column="87" lean-forward="false" selection-start-line="83" selection-start-column="87" selection-end-line="83" selection-end-column="87" />
           <folding />
         </state>
       </provider>
