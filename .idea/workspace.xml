@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af31b5df-b2e0-4a65-9af3-7d12a46f2dad" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/lib/views/CameraScreen.dart" afterPath="$PROJECT_DIR$/lib/views/CameraScreen.dart" />
+      <change beforePath="$PROJECT_DIR$/lib/views/DBtest.dart" afterPath="$PROJECT_DIR$/lib/views/DBtest.dart" />
+      <change beforePath="$PROJECT_DIR$/lib/views/StatusScreen.dart" afterPath="$PROJECT_DIR$/lib/views/StatusScreen.dart" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -25,11 +25,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="CameraScreen.dart" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/views/CameraScreen.dart">
+      <file leaf-file-name="StatusScreen.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/views/StatusScreen.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="56">
-              <caret line="87" column="48" lean-forward="false" selection-start-line="87" selection-start-column="48" selection-end-line="87" selection-end-column="48" />
+            <state relative-caret-position="36">
+              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DBtest.dart" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/views/DBtest.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="162">
+              <caret line="31" column="35" lean-forward="false" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -92,7 +102,6 @@
         <option value="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" />
         <option value="$PROJECT_DIR$/lib/views/LoginScreen.dart" />
         <option value="$PROJECT_DIR$/pubspec.yaml" />
-        <option value="$PROJECT_DIR$/lib/views/DBtest.dart" />
         <option value="$PROJECT_DIR$/lib/views/OtpScreen.dart" />
         <option value="$PROJECT_DIR$/lib/views/ContactsUsingScreen.dart" />
         <option value="$PROJECT_DIR$/lib/resources/FireBaseDBResources.dart" />
@@ -103,17 +112,18 @@
         <option value="$PROJECT_DIR$/lib/views/CallScreen.dart" />
         <option value="$PROJECT_DIR$/lib/views/NotificationScreen.dart" />
         <option value="$PROJECT_DIR$/lib/views/Settings_Screen.dart" />
-        <option value="$PROJECT_DIR$/lib/views/StatusScreen.dart" />
         <option value="$PROJECT_DIR$/lib/views/ChatScreen.dart" />
         <option value="$PROJECT_DIR$/lib/views/CameraScreen.dart" />
+        <option value="$PROJECT_DIR$/lib/views/StatusScreen.dart" />
+        <option value="$PROJECT_DIR$/lib/views/DBtest.dart" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="339" />
-    <option name="y" value="103" />
-    <option name="width" value="1280" />
-    <option name="height" value="777" />
+    <option name="x" value="56" />
+    <option name="y" value="25" />
+    <option name="width" value="1802" />
+    <option name="height" value="959" />
   </component>
   <component name="ProjectReloadState">
     <option name="STATE" value="1" />
@@ -508,7 +518,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529962239682</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="enhanced cam">
+      <created>1530021476637</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1530021476637</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TodoView">
@@ -521,7 +538,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="339" y="103" width="1280" height="777" extended-state="0" />
+    <frame x="56" y="25" width="1802" height="959" extended-state="0" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991204" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -532,7 +549,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26099706" sideWeight="0.5088853" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Dart Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4516129" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4457478" sideWeight="0.4911147" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35185185" sideWeight="0.4911147" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32697946" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32844576" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Flutter Outline" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296328" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -540,13 +557,13 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20840065" sideWeight="0.49156117" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1465909" sideWeight="0.49156117" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3995037" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20859376" sideWeight="0.5084388" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Flutter Inspector" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.008885299" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Flutter Inspector" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.00625" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -610,7 +627,8 @@
     <MESSAGE value="changed settings popup" />
     <MESSAGE value="refactored" />
     <MESSAGE value="fixed exception chatScreen" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed exception chatScreen" />
+    <MESSAGE value="enhanced cam" />
+    <option name="LAST_COMMIT_MESSAGE" value="enhanced cam" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -834,14 +852,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/views/DBtest.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="26">
-          <caret line="66" column="59" lean-forward="false" selection-start-line="66" selection-start-column="59" selection-end-line="66" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/models/chat_model.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -942,14 +952,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/views/StatusScreen.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="4" column="26" lean-forward="true" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/resources/FireBaseDBResources.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-302">
@@ -978,8 +980,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/views/CameraScreen.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="87" column="48" lean-forward="false" selection-start-line="87" selection-start-column="48" selection-end-line="87" selection-end-column="48" />
+        <state relative-caret-position="1507">
+          <caret line="99" column="5" lean-forward="false" selection-start-line="99" selection-start-column="5" selection-end-line="99" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/views/StatusScreen.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/views/DBtest.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="31" column="35" lean-forward="false" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
           <folding />
         </state>
       </provider>

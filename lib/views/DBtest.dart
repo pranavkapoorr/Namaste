@@ -29,7 +29,7 @@ class DBtestState extends State<DBtest>{
             ),
             new RaisedButton(
               onPressed: (){new FireBaseDB().addName(controller.value.text);},
-              child: new Text("Add"),
+              child: new Text("AddX"),
               color: Colors.cyan,
             ),
             new Padding(
@@ -37,7 +37,7 @@ class DBtestState extends State<DBtest>{
             ),
             new RaisedButton(
               onPressed: (){new FireBaseDB().update(controller.value.text);},
-              child: new Text("Update"),
+              child: new Text("UpdateX"),
               color: Colors.lightBlue,
             ),
             new Padding(
@@ -45,7 +45,7 @@ class DBtestState extends State<DBtest>{
             ),
             new RaisedButton(
               onPressed: (){new FireBaseDB().delete();},
-              child: new Text("Delete"),
+              child: new Text("DeleteX"),
               color: Colors.orange,
             ),
             new Padding(
