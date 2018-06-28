@@ -42,6 +42,14 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
   TabController _tabController;
   String _myNumber;
   bool _searchClicked = false;
+  int _currentTab = 1;
+
+
+  void _updateCurrentTab(){
+    setState(() {
+      _currentTab = _tabController.index;
+    });
+  }
 
   @override
   void initState() {
@@ -51,6 +59,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
     });
     _scrollViewController = new ScrollController();
     _tabController = new TabController(vsync: this, initialIndex: 1, length: 4);
+    _tabController.addListener(_updateCurrentTab);
     _iconAnimationController = new AnimationController(
         vsync: this, duration: new Duration(seconds: 1));
     _iconAnimation = new CurvedAnimation(
@@ -61,11 +70,11 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
 
   }
 
+
   @override
   Widget build(BuildContext context) {
     return new WillPopScope(
       child: new Scaffold(
-        //appBar: _searchClicked?_searchAppBar():_normalAppBar(),
         body: new NestedScrollView(
             controller: _scrollViewController,
             headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -83,14 +92,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
             ],
           ),
         ),
-        floatingActionButton: new FloatingActionButton(
-          backgroundColor: Theme.of(context).accentColor,
-          child: new Icon(
-            Icons.message,
-            color: Colors.white,
-          ),
-          onPressed: () => Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new ContactsUsingScreen(myNumber: _myNumber,))),
-        ),
+        floatingActionButton: _floatingButton(_currentTab),
       ),
       onWillPop: (){return new Future<bool>.value(false);},
     );
@@ -168,9 +170,47 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
       ],
     );
   }
+
+  FloatingActionButton _floatingButton(int tabCount){
+    if(tabCount==1){
+      return new FloatingActionButton(
+        backgroundColor: Theme.of(context).accentColor,
+        child: new Icon(
+          Icons.message,
+          color: Colors.white,
+        ),
+        onPressed: () => Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new ContactsUsingScreen(myNumber: _myNumber,))),
+      );
+    }else if(tabCount==2){
+      return new FloatingActionButton(
+        backgroundColor: Theme.of(context).accentColor,
+        child: new Icon(
+          Icons.photo,
+          color: Colors.white,
+        ),
+        onPressed: () => Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new ContactsUsingScreen(myNumber: _myNumber,))),
+      );
+    }else if(tabCount==3){
+      return new FloatingActionButton(
+        backgroundColor: Theme.of(context).accentColor,
+        child: new Icon(
+          Icons.call,
+          color: Colors.white,
+        ),
+        onPressed: () => Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new ContactsUsingScreen(myNumber: _myNumber,))),
+      );
+    }else{
+      return null;
+    }
+
+  }
+
+
 @override
   void dispose() {
     super.dispose();
+    _tabController.dispose();
+    _tabController.removeListener(_updateCurrentTab);
     _iconAnimationController.dispose();
   }
 }

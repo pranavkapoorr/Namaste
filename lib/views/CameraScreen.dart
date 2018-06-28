@@ -59,7 +59,23 @@ class _CameraScreenState extends State<CameraScreen> {
             new Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                _cameraTogglesRowWidget(),
+                 new SizedBox(
+                    width: 90.0,
+                    child: new IconButton(icon:new Icon(Icons.camera_alt,color: Colors.white,), onPressed: (){
+                      print("controllername:");
+                      print(_controller.description.name);
+                      if(_controller.description.name=="1"){
+                        setState(() {
+                        setCamController(0);
+                        });
+                      }else if(_controller.description.name=="0"){
+                        setState(() {
+                        setCamController(1);
+                        });
+                      }
+                      }
+                      ),
+                ),
               ],
             ),
           ]
@@ -75,30 +91,7 @@ class _CameraScreenState extends State<CameraScreen> {
 
     );
   }
-  Widget _cameraTogglesRowWidget() {
 
-    if (widget.cameras.isEmpty) {
-      return const Text('No camera found');
-    } else {
-      return new SizedBox(
-          width: 90.0,
-          child: new IconButton(icon:new Icon(Icons.camera_alt,color: Colors.white,), onPressed: (){
-            print("controllername:");
-            print(_controller.description.name);
-            if(_controller.description.name=="1"){
-              setState(() {
-                setCamController(0);
-              });
-            }else if(_controller.description.name=="0"){
-              setState(() {
-                setCamController(1);
-              });
-            }
-
-          })
-      );
-    }
-  }
 
 
 }
