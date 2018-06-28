@@ -35,10 +35,12 @@ class NamasteHome extends StatefulWidget {
   }
 }
 
-class _NamasteHomeState extends State<NamasteHome> with SingleTickerProviderStateMixin{
+class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin{
+  Animation<double> _iconAnimation;
+  AnimationController _iconAnimationController;
   TabController _tabController;
   String _myNumber;
-  bool searchClicked = false;
+  bool _searchClicked = false;
 
   @override
   void initState() {
@@ -47,13 +49,21 @@ class _NamasteHomeState extends State<NamasteHome> with SingleTickerProviderStat
       _myNumber = sp.getString("myNumber");
     });
     _tabController = new TabController(vsync: this, initialIndex: 1, length: 4);
+    _iconAnimationController = new AnimationController(
+        vsync: this, duration: new Duration(seconds: 1));
+    _iconAnimation = new CurvedAnimation(
+      parent: _iconAnimationController,
+      curve: Curves.easeIn,
+    );
+    _iconAnimation.addListener(() => this.setState(() {}));
+
   }
 
   @override
   Widget build(BuildContext context) {
     return new WillPopScope(
       child: new Scaffold(
-        appBar: searchClicked?_searchAppBar():_normalAppBar(),
+        appBar: _searchClicked?_searchAppBar():_normalAppBar(),
         body: new TabBarView(
           controller: _tabController,
           children: <Widget>[
@@ -77,11 +87,13 @@ class _NamasteHomeState extends State<NamasteHome> with SingleTickerProviderStat
   }
 
   AppBar _searchAppBar(){
+    _iconAnimationController.forward();
     return new AppBar(
       leading: new IconButton(icon: new Icon(Icons.arrow_back), onPressed: (){setState(() {
-        searchClicked = false;
+        _searchClicked = false;
+        _iconAnimationController.reset();
       });}),
-      title:  new TextField(decoration: new InputDecoration(hintText: "         search here",suffixIcon: new Icon(Icons.search),border: InputBorder.none),),
+      title:  new Container(width: _iconAnimation.value * 1400.0,child: new TextField(decoration: new InputDecoration(hintText: "         search here",suffixIcon: new Icon(Icons.search),border: InputBorder.none),)),
       elevation: 0.7,
       bottom: new TabBar(
         controller: _tabController,
@@ -113,7 +125,7 @@ class _NamasteHomeState extends State<NamasteHome> with SingleTickerProviderStat
       ),
       actions: <Widget>[
         new IconButton(icon:new Icon(Icons.search,color: new Color(0xff939696)),onPressed: (){setState(() {
-          searchClicked = true;
+          _searchClicked = true;
         });},),
         new Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5.0),
@@ -140,5 +152,9 @@ class _NamasteHomeState extends State<NamasteHome> with SingleTickerProviderStat
       ],
     );
   }
-
+@override
+  void dispose() {
+    super.dispose();
+    _iconAnimationController.dispose();
+  }
 }
