@@ -10,8 +10,7 @@ class _CallsScreenState extends State<CallsScreen>{
   String _defaultImage = "https://i.pinimg.com/736x/34/77/c3/3477c3b54457ef50c2e03bdaa7b3fdc5.jpg";
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: new ListView.builder(
+    return new ListView.builder(
         itemCount: dummyDataChat.length,
         itemBuilder:(context, index) => new Column(children: <Widget>[
           new Divider(height: 10.0),
@@ -29,8 +28,7 @@ class _CallsScreenState extends State<CallsScreen>{
 
 
         ],),
-      ),
-    );
+      );
   }
 
 }

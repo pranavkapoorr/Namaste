@@ -9,8 +9,7 @@ class StatusScreen extends StatefulWidget {
 class _StatusScreenState extends State<StatusScreen>{
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: ListView.builder(
+    return new ListView.builder(
           itemCount: dummyDataChat.length,
           itemBuilder: (context,index) => new Column(
             children: <Widget>[
@@ -26,7 +25,7 @@ class _StatusScreenState extends State<StatusScreen>{
               )
 
             ],
-          )),
+          )
     );
   }
 

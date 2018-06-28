@@ -44,4 +44,16 @@ List<ChatModel> dummyDataChat = [
       time: "15:30",
       avatarUrl:
       "http://www.usanetwork.com/sites/usanetwork/files/styles/629x720/public/suits_cast_harvey.jpg?itok=fpTOeeBb"),
+  new ChatModel(
+      name: "Barny len",
+      message: "I'm the alive!",
+      time: "12:32",
+      avatarUrl:
+      "http://www.usanetwork.com/sites/usanetwork/files/styles/629x720/public/suits_cast_harvey.jpg?itok=fpTOeeBb"),
+  new ChatModel(
+      name: "Jimmy West",
+      message: "Hey cool !",
+      time: "15:31",
+      avatarUrl:
+      "http://www.usanetwork.com/sites/usanetwork/files/styles/629x720/public/suits_cast_harvey.jpg?itok=fpTOeeBb"),
 ];

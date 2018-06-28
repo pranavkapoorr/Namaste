@@ -95,8 +95,7 @@ class _ChatScreenState extends State<ChatScreen> {
       ],
     );
   }else{
-      return new Scaffold(
-        body: _chatters.length==0?new Center(
+      return _chatters.length==0?new Center(
             child: new Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -105,8 +104,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   color: Colors.grey,child: new Text("Start New Conversation"),
                   splashColor: Colors.amber,)
               ],)
-        ):chats(),
-      );
+        ):chats();
     }
   }
 

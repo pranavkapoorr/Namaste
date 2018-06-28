@@ -36,6 +36,7 @@ class NamasteHome extends StatefulWidget {
 }
 
 class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin{
+  ScrollController _scrollViewController;
   Animation<double> _iconAnimation;
   AnimationController _iconAnimationController;
   TabController _tabController;
@@ -48,6 +49,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       _myNumber = sp.getString("myNumber");
     });
+    _scrollViewController = new ScrollController();
     _tabController = new TabController(vsync: this, initialIndex: 1, length: 4);
     _iconAnimationController = new AnimationController(
         vsync: this, duration: new Duration(seconds: 1));
@@ -63,15 +65,23 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
   Widget build(BuildContext context) {
     return new WillPopScope(
       child: new Scaffold(
-        appBar: _searchClicked?_searchAppBar():_normalAppBar(),
-        body: new TabBarView(
-          controller: _tabController,
-          children: <Widget>[
-            new CameraScreen(),
-            new ChatScreen(),
-            new StatusScreen(),
-            new CallsScreen(),
-          ],
+        //appBar: _searchClicked?_searchAppBar():_normalAppBar(),
+        body: new NestedScrollView(
+            controller: _scrollViewController,
+            headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+              return <Widget>[
+              _searchClicked?_searchAppBar(innerBoxIsScrolled):_normalAppBar(innerBoxIsScrolled),
+            ];
+            },
+          body: new TabBarView(
+            controller: _tabController,
+            children: <Widget>[
+              new CameraScreen(),
+              new ChatScreen(),
+              new StatusScreen(),
+              new CallsScreen(),
+            ],
+          ),
         ),
         floatingActionButton: new FloatingActionButton(
           backgroundColor: Theme.of(context).accentColor,
@@ -86,15 +96,18 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
     );
   }
 
-  AppBar _searchAppBar(){
+  SliverAppBar _searchAppBar(bool innerBoxIsScrolled){
     _iconAnimationController.forward();
-    return new AppBar(
+    return new SliverAppBar(
       leading: new IconButton(icon: new Icon(Icons.arrow_back), onPressed: (){setState(() {
         _searchClicked = false;
-        _iconAnimationController.reset();
+        _iconAnimationController.dispose();
       });}),
       title:  new Container(width: _iconAnimation.value * 1400.0,child: new TextField(decoration: new InputDecoration(hintText: "         search here",suffixIcon: new Icon(Icons.search),border: InputBorder.none),)),
       elevation: 0.7,
+      pinned: true,
+      floating: true,
+      forceElevated: innerBoxIsScrolled,
       bottom: new TabBar(
         controller: _tabController,
         indicatorColor: Colors.grey,
@@ -108,10 +121,13 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
       ),
     );
   }
-  AppBar _normalAppBar(){
-    return new AppBar(
+  SliverAppBar _normalAppBar(bool innerBoxIsScrolled){
+    return new SliverAppBar(
       title: new Text("Namaste",style: new TextStyle(color: Theme.of(context).accentColor),),
       elevation: 0.7,
+      pinned: true,
+      floating: true,
+      forceElevated: innerBoxIsScrolled,
       bottom: new TabBar(
         controller: _tabController,
         indicatorColor: Colors.grey,
