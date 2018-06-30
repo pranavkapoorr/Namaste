@@ -103,7 +103,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
     return new SliverAppBar(
       leading: new IconButton(icon: new Icon(Icons.arrow_back), onPressed: (){setState(() {
         _searchClicked = false;
-        _iconAnimationController.dispose();
+        _iconAnimationController.reset();
       });}),
       title:  new Container(width: _iconAnimation.value * 1400.0,child: new TextField(decoration: new InputDecoration(hintText: "         search here",suffixIcon: new Icon(Icons.search),border: InputBorder.none),)),
       elevation: 0.7,
