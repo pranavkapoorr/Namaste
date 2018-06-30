@@ -33,20 +33,23 @@ class _CameraScreenState extends State<CameraScreen> {
     super.dispose();
   }
   void setCamController(int num){
-    print("setting cam to $num");
-    _controller = new CameraController(widget.cameras[num], ResolutionPreset.high);
-    _controller.initialize().then((_) {
-      if (!mounted) {
-        return;
-      }
-      setState(() {});
-    });
+    if(widget.cameras!=null && !widget.cameras.isEmpty) {
+      print("setting cam to $num");
+      _controller =
+      new CameraController(widget.cameras[num], ResolutionPreset.high);
+      _controller.initialize().then((_) {
+        if (!mounted) {
+          return;
+        }
+        setState(() {});
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (!_controller.value.isInitialized) {
-      return new Container(child: new CircularProgressIndicator(),);
+    if (_controller==null || !_controller.value.isInitialized) {
+      return new Scaffold(body: new Center(child: new Column(children: <Widget>[new CircularProgressIndicator()],),) );
     }
     return new Stack(
         fit: StackFit.expand,
