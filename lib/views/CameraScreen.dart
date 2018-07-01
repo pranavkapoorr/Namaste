@@ -67,11 +67,11 @@ class _CameraScreenState extends State<CameraScreen> {
                     child: new IconButton(icon:new Icon(Icons.camera_alt,color: Colors.white,), onPressed: (){
                       print("controllername:");
                       print(_controller.description.name);
-                      if(_controller.description.name=="1"){
+                      if(_controller.description.name.endsWith("1")){
                         setState(() {
                         setCamController(0);
                         });
-                      }else if(_controller.description.name=="0"){
+                      }else if(_controller.description.name.endsWith("0")){
                         setState(() {
                         setCamController(1);
                         });
