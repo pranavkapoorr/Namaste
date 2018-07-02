@@ -9,7 +9,6 @@
   <component name="ChangeListManager">
     <list default="true" id="af31b5df-b2e0-4a65-9af3-7d12a46f2dad" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/lib/views/CameraScreen.dart" afterPath="$PROJECT_DIR$/lib/views/CameraScreen.dart" />
       <change beforePath="$PROJECT_DIR$/lib/views/NamasteHome.dart" afterPath="$PROJECT_DIR$/lib/views/NamasteHome.dart" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
@@ -53,8 +52,8 @@
       <file leaf-file-name="NamasteHome.dart" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/views/NamasteHome.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="79" column="40" lean-forward="true" selection-start-line="79" selection-start-column="40" selection-end-line="79" selection-end-column="40" />
+            <state relative-caret-position="58">
+              <caret line="77" column="80" lean-forward="false" selection-start-line="77" selection-start-column="80" selection-end-line="77" selection-end-column="80" />
               <folding />
             </state>
           </provider>
@@ -603,7 +602,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530477958074</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="appbar transition and campage">
+      <created>1530568646533</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1530568646533</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TodoView">
@@ -656,7 +662,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed cam issues" />
     <MESSAGE value="added chatthreads" />
     <MESSAGE value="fixed stuff" />
     <MESSAGE value="added SharedPref 4 login" />
@@ -681,7 +686,8 @@
     <MESSAGE value="fixed simulator camcrash" />
     <MESSAGE value="fixed frontcam ios" />
     <MESSAGE value="changed appname for ios" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed appname for ios" />
+    <MESSAGE value="appbar transition and campage" />
+    <option name="LAST_COMMIT_MESSAGE" value="appbar transition and campage" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1043,8 +1049,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/views/NamasteHome.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="79" column="40" lean-forward="true" selection-start-line="79" selection-start-column="40" selection-end-line="79" selection-end-column="40" />
+        <state relative-caret-position="58">
+          <caret line="77" column="80" lean-forward="false" selection-start-line="77" selection-start-column="80" selection-end-line="77" selection-end-column="80" />
           <folding />
         </state>
       </provider>
