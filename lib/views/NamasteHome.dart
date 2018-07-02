@@ -75,9 +75,9 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
     if(_currentTab==0) {
       _scrollViewController.animateTo(
           170.0, duration: const Duration(milliseconds: 250), curve: Curves.easeOut);
-    }else if(_tabController.previousIndex==0 || _currentTab==2||_currentTab==3||_tabController.previousIndex==2|| _tabController.previousIndex==3 ){
+    }else if(_tabController.previousIndex==0){
       _scrollViewController.animateTo(
-          0.0, duration: const Duration(milliseconds: 250), curve: Curves.easeIn);
+          0.0, duration: const Duration(milliseconds: 200), curve: Curves.easeIn);
     }
   }
   @override
