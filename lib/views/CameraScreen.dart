@@ -70,7 +70,7 @@ class _CameraScreenState extends State<CameraScreen> {
           fit: StackFit.expand,
           children:[
             new Padding(
-              padding: new EdgeInsetsDirectional.only(top: 40.0,bottom: 35.0),
+              padding: new EdgeInsetsDirectional.only(top: 60.0,bottom: 50.0),
               child: new AspectRatio(
                 aspectRatio: _controller.value.aspectRatio,
                 child: new CameraPreview(_controller),
@@ -78,7 +78,7 @@ class _CameraScreenState extends State<CameraScreen> {
             ),
             new Column(mainAxisAlignment: MainAxisAlignment.end,children: <Widget>[
               new Padding(
-                padding: const EdgeInsetsDirectional.only(bottom: 20.0),
+                padding: const EdgeInsetsDirectional.only(bottom: 30.0),
                 child: new Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -97,12 +97,13 @@ class _CameraScreenState extends State<CameraScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         new Container(
-                            decoration: new BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.transparent,
-                              border: new Border.all(width: 2.0,color: Colors.white),
-                            ),
-                            child: new SizedBox(width: 50.0,child: new FlatButton(onPressed: (){}, child: null,)),
+                          height:100.0,
+                          decoration: new BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.transparent,
+                            border: new Border.all(width: 2.0,color: Colors.white),
+                          ),
+                          child: new SizedBox(child: new FlatButton(onPressed: (){}, child: null,)),
                         ),
                       ],
                     ),
@@ -132,7 +133,8 @@ class _CameraScreenState extends State<CameraScreen> {
                   ],
                 ),
               ),
-            ]),
+            ]
+            ),
           ]
 
 
