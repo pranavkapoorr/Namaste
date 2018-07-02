@@ -57,7 +57,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       _myNumber = sp.getString("myNumber");
     });
-    _scrollViewController = new ScrollController();
+    _scrollViewController = new ScrollController(keepScrollOffset: true);
     _tabController = new TabController(vsync: this, initialIndex: 1, length: 4);
     _tabController.addListener(_updateCurrentTab);
     _iconAnimationController = new AnimationController(
@@ -68,11 +68,21 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
     );
     _iconAnimation.addListener(() => this.setState(() {}));
 
+
   }
 
-
+  void _easeInOutAppbar(){
+    if(_currentTab==0) {
+      _scrollViewController.animateTo(
+          170.0, duration: const Duration(milliseconds: 250), curve: Curves.easeOut);
+    }else if(_tabController.previousIndex==0 || _tabController.previousIndex==1 || _tabController.previousIndex==2|| _tabController.previousIndex==3 ){
+      _scrollViewController.animateTo(
+          0.0, duration: const Duration(milliseconds: 250), curve: Curves.easeIn);
+    }
+  }
   @override
   Widget build(BuildContext context) {
+    _easeInOutAppbar();
     return new WillPopScope(
       child: new Scaffold(
         body: new NestedScrollView(
@@ -127,7 +137,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
     return new SliverAppBar(
       title: new Text("Namaste",style: new TextStyle(color: Theme.of(context).accentColor),),
       elevation: 0.7,
-      pinned: true,
+      pinned: false,
       floating: true,
       forceElevated: innerBoxIsScrolled,
       bottom: new TabBar(
@@ -209,6 +219,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
 @override
   void dispose() {
     super.dispose();
+    _scrollViewController.dispose();
     _tabController.dispose();
     _tabController.removeListener(_updateCurrentTab);
     _iconAnimationController.dispose();
