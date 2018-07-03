@@ -28,8 +28,12 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
   String sendOTP(String number) {
     String otp = generateRandomAuthCode();
     Map<String,String> to = {"phoneNumber":"$number"};
-    OtpData data =
-    new OtpData(rules:["sms"], body:"This is your OTP to login to Namaste: $otp", to:to);
+    Map data = {
+      "rules":["sms"],
+      "to":{"phoneNumber":to},
+      "body":"This is your OTP to login to Namaste: $otp",
+      "channelOptions": { "sms":{"from" : "NAMASTE","allowUnicode":true}}
+    };
     http.post("https://api.comapi.com/apispaces/a18af796-03b7-4189-959b-193f0622e905/messages",
       headers: {
         "Content-Type":"application/json",
@@ -140,15 +144,4 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
         )
     );
   }
-}
-class OtpData{
-  final List<String> rules;
-  final String body;
-  final Map<String,String> to;
-  OtpData({this.rules,this.body,this.to});
-  Map<String, dynamic> toJson() => {
-    'rules': rules,
-    'body': body,
-    'to': to
-  };
 }
