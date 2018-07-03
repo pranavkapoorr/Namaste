@@ -28,19 +28,17 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
   String sendOTP(String number) {
     String otp = generateRandomAuthCode();
     Map<String,String> to = {"phoneNumber":"$number"};
-    Map data = {
-      "rules":["sms"],
-      "to":{"phoneNumber":to},
-      "body":"This is your OTP to login to Namaste: $otp",
-      "channelOptions": { "sms":{"from" : "NAMASTE","allowUnicode":true}}
-    };
+    Map<String,dynamic> sms = {"from":"NAMASTE","allowUnicode":true};
+    OtpData data =
+    new OtpData(rules:["sms"], body:"This is your OTP to login to Namaste: $otp", to:to, channelOptions: new ChannelOptions(sms: sms));
+    print(data);
     http.post("https://api.comapi.com/apispaces/a18af796-03b7-4189-959b-193f0622e905/messages",
       headers: {
         "Content-Type":"application/json",
         "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlNTg5OGFhNy1mOTc4LTQ4NGUtYTQyYy1mZGVmMDEwMmFjY2UiLCJpc3MiOiJodHRwczovL2FwaS5jb21hcGkuY29tL2FjY2Vzc3Rva2VucyIsImF1ZCI6Imh0dHBzOi8vYXBpLmNvbWFwaS5jb20iLCJhY2NvdW50SWQiOjM3MTQ0LCJhcGlTcGFjZUlkIjoiYTE4YWY3OTYtMDNiNy00MTg5LTk1OWItMTkzZjA2MjJlOTA1IiwicGVybWlzc2lvbnMiOlsiY29udGVudDp3IiwiY2hhbjpyIiwibXNnOmFueTpzIiwibXNnOnIiLCJwcm9mOnJhIiwiYXBpczpybyJdLCJzdWIiOiJlNTg5OGFhNy1mOTc4LTQ4NGUtYTQyYy1mZGVmMDEwMmFjY2UiLCJwcm9maWxlSWQiOiJOYW1hc3RlLUF1dGgiLCJuYW1lIjoiTmFtYXN0ZUF1dGhYIiwiaWF0IjoxNTI5NDAyMjY3fQ.M7XHQH23dw4qze4UQRZsjGZSNAVs2touYqeyrHz8a8E",
         "Accept":"application/json"
       },
-      body: json.encode(data),
+      body: JSON.encode(data),
     ).then((response) {
       print("Response status: ${response.statusCode}");
       print("Response body: ${response.body}");
@@ -144,4 +142,24 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
         )
     );
   }
+}
+class ChannelOptions{
+  final Map<String,dynamic> sms;
+  ChannelOptions({this.sms});
+  Map<String, dynamic> toJson() => {
+    'sms':sms
+  };
+}
+class OtpData{
+  final List<String> rules;
+  final String body;
+  final ChannelOptions channelOptions;
+  final Map<String,String> to;
+  OtpData({this.rules,this.body,this.to,this.channelOptions});
+  Map<String, dynamic> toJson() => {
+    'rules': rules,
+    'body': body,
+    'to': to,
+    'channelOptions':channelOptions
+  };
 }
