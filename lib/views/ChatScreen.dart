@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/views/ChatThreadScreen.dart';
 import 'package:flutter_app/views/ContactsUsingScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 
 class ChatScreen extends StatefulWidget {
@@ -12,6 +15,7 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  final FirebaseMessaging _firebaseMessaging = new FirebaseMessaging();
   final CollectionReference _reference1 = Firestore.instance.collection("Namaste-Conversations");
   final CollectionReference _reference2 = Firestore.instance.collection("App-Data");
   StreamSubscription<QuerySnapshot> _subscriber1;
@@ -24,6 +28,32 @@ class _ChatScreenState extends State<ChatScreen> {
   bool _loadedNumbers = false;
   List<Map<String,dynamic>> _chat = new List();
   Map<String,Map<String,String>> _lastMessage = new Map();
+
+  void _generateNotification(String number) {
+    Map data = {
+      "to" : "dbf5X4ICAfo:APA91bGP9JkI_QdXk46SVU_InveiOkLAhaGSKCKC8Yj2kb8hr7REb42Ds7i3MK1jvhhjTKMoXow5Xc49GVo5tyjamf7_xsHkPchs9JsW0Pzs8av3aapoBDhBcqlZVmVScgK3v2HaZu2fyf-mAg_8xO3ybuKEt-FMLw",
+      "content-available": true,
+      "notification" : {
+        "body" : "New Message received from $number",
+        "title" : "Namaste",
+      }
+
+    };
+    http.post("https://fcm.googleapis.com/fcm/send",
+      headers: {
+        "Content-Type":"application/json",
+        "Authorization":"key=AIzaSyACX7BJ8RtL68ez84mKCJbHQsVa0gydExM",
+        "Accept":"application/json"
+      },
+      body: json.encode(data),
+    ).then((response) {
+      print("Response status: ${response.statusCode}");
+      print("Response body: ${response.body}");
+    }).whenComplete((){
+      print("sent notification to $number ");
+    }).catchError((e)=>print(e));
+  }
+
   @override
   void initState() {
     super.initState();
@@ -33,6 +63,7 @@ class _ChatScreenState extends State<ChatScreen> {
       sharedPreferences = sp;
       _myNumber = sharedPreferences.getString("myNumber");
     });
+    int count = 0;
     _subscriber1 = _reference1.snapshots().listen((datasnapshot) {
       datasnapshot.documents.forEach((d) {
         print(d.data);
@@ -75,6 +106,29 @@ class _ChatScreenState extends State<ChatScreen> {
         }
       });
     });
+    _firebaseMessaging.configure(
+      onMessage: (Map<String, dynamic> message) {
+        print("onMessage: $message");
+      },
+      onLaunch: (Map<String, dynamic> message) {
+        print("onLaunch: $message");
+      },
+      onResume: (Map<String, dynamic> message) {
+        print("onResume: $message");
+      },
+    );
+    _firebaseMessaging.requestNotificationPermissions(
+        const IosNotificationSettings(sound: true, badge: true, alert: true));
+    _firebaseMessaging.onIosSettingsRegistered
+        .listen((IosNotificationSettings settings) {
+      print("Settings registered: $settings");
+    });
+    _firebaseMessaging.getToken().then((String token) {
+      assert(token != null);
+      print("Push Messaging token: $token");
+    });
+
+
   }
 
   @override
@@ -113,7 +167,7 @@ class _ChatScreenState extends State<ChatScreen> {
     _lastMessage.clear();
     _chat.clear();
     _chatters.clear();
-    _subscriber1.cancel();
+    //_subscriber1.cancel();
     _subscriber2.cancel();
     super.dispose();
   }

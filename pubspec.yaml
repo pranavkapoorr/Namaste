@@ -10,6 +10,7 @@ dependencies:
   cupertino_icons: ^0.1.0
   camera:
   cloud_firestore:
+  firebase_messaging:
   shared_preferences: "^0.4.2"
   #contacts_service: "^0.0.6"
   #contact_picker: "^0.0.2"
