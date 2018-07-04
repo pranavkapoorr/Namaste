@@ -10,7 +10,6 @@
     <list default="true" id="af31b5df-b2e0-4a65-9af3-7d12a46f2dad" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/lib/views/ChatThreadScreen.dart" afterPath="$PROJECT_DIR$/lib/views/ChatThreadScreen.dart" />
-      <change beforePath="$PROJECT_DIR$/lib/views/DBtest.dart" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -53,8 +52,8 @@
       <file leaf-file-name="ChatThreadScreen.dart" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/views/ChatThreadScreen.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="192" column="33" lean-forward="true" selection-start-line="192" selection-start-column="33" selection-end-line="192" selection-end-column="33" />
+            <state relative-caret-position="141">
+              <caret line="220" column="54" lean-forward="false" selection-start-line="220" selection-start-column="54" selection-end-line="220" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -757,7 +756,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530719118207</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="changed chatthread ui">
+      <created>1530740426232</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1530740426233</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TodoView">
@@ -810,7 +816,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed settings popup" />
     <MESSAGE value="refactored" />
     <MESSAGE value="fixed exception chatScreen" />
     <MESSAGE value="enhanced cam" />
@@ -835,7 +840,8 @@
     <MESSAGE value="chatscreen sorted" />
     <MESSAGE value="chatThread messages sorted" />
     <MESSAGE value="chatThread margin reduced font inc" />
-    <option name="LAST_COMMIT_MESSAGE" value="chatThread margin reduced font inc" />
+    <MESSAGE value="changed chatthread ui" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed chatthread ui" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1202,8 +1208,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/views/ChatThreadScreen.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="192" column="33" lean-forward="true" selection-start-line="192" selection-start-column="33" selection-end-line="192" selection-end-column="33" />
+        <state relative-caret-position="141">
+          <caret line="220" column="54" lean-forward="false" selection-start-line="220" selection-start-column="54" selection-end-line="220" selection-end-column="54" />
           <folding />
         </state>
       </provider>

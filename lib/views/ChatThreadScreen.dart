@@ -232,11 +232,11 @@ class ChatMsg extends StatelessWidget {
                             fontSize: 10.0,
                           )),
                       SizedBox(width: 3.0),
-                      Icon(
+                      sender==myNum?Icon(
                         Icons.done,
                         size: 12.0,
                         color: Colors.black38,
-                      )
+                      ):SizedBox(width: 0.1,)
                     ],
                   ),
                 )
