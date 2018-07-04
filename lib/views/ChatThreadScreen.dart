@@ -185,7 +185,7 @@ class ChatMsg extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return new Container(
-        margin: const EdgeInsets.symmetric(vertical: 10.0),
+        margin: const EdgeInsets.symmetric(vertical: 5.0),
         child: new Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -198,7 +198,7 @@ class ChatMsg extends StatelessWidget {
                 crossAxisAlignment: sender==myNum?CrossAxisAlignment.end:CrossAxisAlignment.start,
                 children: <Widget>[
                   new Container(
-                    padding:new EdgeInsets.all(4.0),
+                    padding:new EdgeInsets.all(5.0),
                     decoration: new BoxDecoration(
                       borderRadius: new BorderRadius.all(const Radius.circular(10.0)),
                       color: sender==myNum?Colors.lightGreen[300]:Colors.white,
@@ -208,7 +208,7 @@ class ChatMsg extends StatelessWidget {
                     child: new Container(
                       child: new Column(
                         children: <Widget>[
-                          new Text(message),
+                          new Text(message,style: new TextStyle(fontSize: 16.0),),
                           new Text(_chatMsgDate(time),style: new TextStyle(fontSize: 10.0),)
                         ],
                       ),
