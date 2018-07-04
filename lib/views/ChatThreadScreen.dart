@@ -63,13 +63,10 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> {
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) return const Text('Loading...');
                       List<Widget> dataList = new List();
-                      for (int i = snapshot.data.documents.length - 1; i > 0;
-                      i--) {
-                        DocumentSnapshot ds = snapshot.data.documents[i];
-                        if((ds.data['message'] != null)&&(ds.data['to']==widget.myNumber && ds.data['from']==widget.chatThread.name)||(ds.data['to']==widget.chatThread.name && ds.data['from']==widget.myNumber)){
-                            dataList.add(new ChatMessage(from: ds.data['from'],
-                              message: ds.data['message'],
-                              time: ds.data['time'],));
+                      for (int i = snapshot.data.documents.length; i > 0; i--) {
+                        DocumentSnapshot ds = snapshot.data.documents[i-1];
+                        if((ds.data['message'] != null)&&(ds.data['receiver']==widget.myNumber && ds.data['sender']==widget.chatThread.name)||(ds.data['receiver']==widget.chatThread.name && ds.data['sender']==widget.myNumber)){
+                          dataList.add(new ChatMsg(sender: ds.data['sender'], message: ds.data['message'], time: ds.data['time'],));
                           }
                       }
                       return new ListView(
@@ -147,6 +144,13 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> {
       _isComposing = false;
     });
     DateTime time = new DateTime.now();
+    String day = time.day
+        .toString()
+        .length < 2 ? "0" + time.day.toString() : time.day.toString();
+    String mnth = time.month
+        .toString()
+        .length < 2 ? "0" + time.month.toString() : time.month.toString();
+    String yr = time.year.toString();
     String hrs = time.hour
         .toString()
         .length < 2 ? "0" + time.hour.toString() : time.hour.toString();
@@ -156,10 +160,10 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> {
     String secs = time.second
         .toString()
         .length < 2 ? "0" + time.second.toString() : time.second.toString();
-    String timeX = hrs + ":" + mins + ":" + secs;
+    String timeX = day +":"+ mnth +":"+ yr+ ":" +hrs + ":" + mins + ":" + secs;
     Map<String, String> datax = {
-      "to": widget.chatThread.name,
-      "from": widget.myNumber,
+      "receiver": widget.chatThread.name,
+      "sender": widget.myNumber,
       "message": message,
       "time": timeX
     };
@@ -172,11 +176,11 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> {
 }
 
 @override
-class ChatMessage extends StatelessWidget {
-  final String from;
+class ChatMsg extends StatelessWidget {
+  final String sender;
   final String message;
   final String time;
-  ChatMessage({this.from, this.message, this.time});
+  ChatMsg({this.sender, this.message, this.time});
 
   Widget build(BuildContext context) {
     return new Container(
@@ -190,13 +194,13 @@ class ChatMessage extends StatelessWidget {
             ),*/
             new Expanded(
               child: new Column(
-                crossAxisAlignment: from==myNum?CrossAxisAlignment.end:CrossAxisAlignment.start,
+                crossAxisAlignment: sender==myNum?CrossAxisAlignment.end:CrossAxisAlignment.start,
                 children: <Widget>[
                   new Container(
                     padding:new EdgeInsets.all(4.0),
                     decoration: new BoxDecoration(
                       borderRadius: new BorderRadius.all(const Radius.circular(10.0)),
-                      color: from==myNum?Colors.lightGreen[300]:Colors.white,
+                      color: sender==myNum?Colors.lightGreen[300]:Colors.white,
                       border: new Border(bottom: new BorderSide(),top: new BorderSide(),left: new BorderSide(),right: new BorderSide()),
                     ),
                     margin: const EdgeInsets.only(top: 5.0),
