@@ -69,6 +69,7 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> {
                           dataList.add(new ChatMsg(sender: ds.data['sender'], message: ds.data['message'], time: ds.data['time'],));
                           }
                       }
+                      dataList.sort((a,b)=>a.toString().compareTo(b.toString()));
                       return new ListView(
                         reverse: true,
                         children: dataList,
@@ -160,7 +161,7 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> {
     String secs = time.second
         .toString()
         .length < 2 ? "0" + time.second.toString() : time.second.toString();
-    String timeX = day +":"+ mnth +":"+ yr+ ":" +hrs + ":" + mins + ":" + secs;
+    String timeX = day +"/"+ mnth +"/"+ yr+ ":" +hrs + ":" + mins + ":" + secs;
     Map<String, String> datax = {
       "receiver": widget.chatThread.name,
       "sender": widget.myNumber,
@@ -208,7 +209,7 @@ class ChatMsg extends StatelessWidget {
                       child: new Column(
                         children: <Widget>[
                           new Text(message),
-                          new Text(time.substring(0,time.length-3),style: new TextStyle(fontSize: 10.0),)
+                          new Text(time,style: new TextStyle(fontSize: 10.0),)
                         ],
                       ),
                     ),
@@ -220,6 +221,7 @@ class ChatMsg extends StatelessWidget {
         ),
       );
   }
+
 }
 
 

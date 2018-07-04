@@ -42,16 +42,17 @@ class _ChatScreenState extends State<ChatScreen> {
     _loadedNumbers = false;
     _loadedChats = false;
     _loadDbAndStartStream();
-    SharedPreferences.getInstance().then((SharedPreferences sp) {
-      sharedPreferences = sp;
-      _myNumber = sharedPreferences.getString("myNumber");
-    });
+    _loadNumberFromPreferences();
+    _startChatStream();
+    _startContactsStream();
+    _configureFireBasepushNotifications();
+  }
+  void _startChatStream(){
     _subscriber1 = _reference1.snapshots().listen((datasnapshot) {
       datasnapshot.documents.forEach((d) {
         print(d.data);
         if (d.exists) {
           if(d.data.containsValue(_myNumber)){
-           // addMessage(d.data);
             setState(() {
               _loadedChats = true;
               _chat.add(d.data);
@@ -71,6 +72,8 @@ class _ChatScreenState extends State<ChatScreen> {
         }
       });
     });
+  }
+  void _startContactsStream(){
     _subscriber2 = _reference2.snapshots().listen((datasnapshot) {
       datasnapshot.documents.forEach((d) {
         print(d.data);
@@ -89,6 +92,8 @@ class _ChatScreenState extends State<ChatScreen> {
         }
       });
     });
+  }
+  void _configureFireBasepushNotifications(){
     _fireBaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) {
         print("onMessage: $message");
@@ -112,24 +117,28 @@ class _ChatScreenState extends State<ChatScreen> {
     });
 
   }
-  
-  
+  void _loadNumberFromPreferences(){
+    SharedPreferences.getInstance().then((SharedPreferences sp) {
+      sharedPreferences = sp;
+      _myNumber = sharedPreferences.getString("myNumber");
+    });
+  }
   
   void _loadDbAndStartStream(){
     db = NamasteDatabase();
     db.initDB();
   }
   
-  void resetMessages() {
+  void _resetMessages() {
     setState(() => messages.clear());
   }
-  void onError(dynamic d) {
+  void _onError(dynamic d) {
     setState(() {
       hasLoaded = true;
     });
   }
 
-  void addMessage(item) {
+  void _addMessage(item) {
     setState(() {
       //db.addMsg(msg)
       messages.add(ChatMessage.fromJson(item));
@@ -163,11 +172,9 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
 
-
   @override
   Widget build(BuildContext context) {
-    _chatters = _chatters.toSet().toList();
-  if(!_loadedChats && !_loadedNumbers) {
+    if(!_loadedChats && !_loadedNumbers) {
     return new Stack(
       children: <Widget>[
         new Row(
@@ -195,17 +202,9 @@ class _ChatScreenState extends State<ChatScreen> {
     }
   }
 
-  @override
-  void dispose() {
-    _lastMessage.clear();
-    _chat.clear();
-    _chatters.clear();
-    _subscriber1.cancel();
-    _subscriber2.cancel();
-    super.dispose();
-  }
-
   Widget chats(){
+    _chatters = _chatters.toSet().toList();
+    _chatters.sort((a,b)=>_lastMessage[b].keys.toList()[0].compareTo(_lastMessage[a].keys.toList()[0]));
     //messages.forEach((e)=>print("message -> ${e.message} from-> ${e.sender} to-> ${e.receiver}"));
     return ListView.builder(
       itemCount: _chatters.length,
@@ -232,7 +231,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   style: new TextStyle(fontWeight: FontWeight.bold),
                 ),
                 new Text(
-                    _lastMessage[_chatters[i]].keys.toList()[0].substring(0,_lastMessage[_chatters[i]].keys.toList()[0].length-3),
+                  _chatHeadDate(_lastMessage[_chatters[i]].keys.toList()[0]),
                   style: new TextStyle(color: Colors.grey, fontSize: 14.0),
                 ),
               ],
@@ -261,5 +260,28 @@ class _ChatScreenState extends State<ChatScreen> {
         ],
       ),
     );
+  }
+
+  String _todaysDate(){
+    DateTime time = new DateTime.now();
+    return time.day.toString().length<2?"0"+time.day.toString():time.day.toString();
+  }
+  String _chatHeadDate(String time){
+    if(int.parse(time.substring(0,2))+1==int.parse(_todaysDate())){
+      return "Yesterday";
+    }else if(int.parse(time.substring(0,2))==int.parse(_todaysDate())){
+      return time.substring(11,time.length-3);
+    }else{
+      return time.substring(0,10);
+    }
+  }
+  @override
+  void dispose() {
+    _lastMessage.clear();
+    _chat.clear();
+    _chatters.clear();
+    _subscriber1.cancel();
+    _subscriber2.cancel();
+    super.dispose();
   }
 }
