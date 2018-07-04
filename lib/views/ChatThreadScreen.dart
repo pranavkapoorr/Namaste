@@ -209,7 +209,7 @@ class ChatMsg extends StatelessWidget {
                       child: new Column(
                         children: <Widget>[
                           new Text(message),
-                          new Text(time,style: new TextStyle(fontSize: 10.0),)
+                          new Text(_chatMsgDate(time),style: new TextStyle(fontSize: 10.0),)
                         ],
                       ),
                     ),
@@ -221,7 +221,19 @@ class ChatMsg extends StatelessWidget {
         ),
       );
   }
-
+  String _todaysDate(){
+    DateTime time = new DateTime.now();
+    return time.day.toString().length<2?"0"+time.day.toString():time.day.toString();
+  }
+  String _chatMsgDate(String time){
+    if(int.parse(time.substring(0,2))+1==int.parse(_todaysDate())){
+      return "Yesterday";
+    }else if(int.parse(time.substring(0,2))==int.parse(_todaysDate())){
+      return time.substring(11,time.length-3);
+    }else{
+      return time.substring(0,10);
+    }
+  }
 }
 
 
