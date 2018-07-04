@@ -184,42 +184,68 @@ class ChatMsg extends StatelessWidget {
   ChatMsg({this.sender, this.message, this.time});
 
   Widget build(BuildContext context) {
-    return new Container(
-        margin: const EdgeInsets.symmetric(vertical: 5.0),
-        child: new Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            /*new Container(
-              margin: const EdgeInsets.only(right: 16.0),
-              child: new CircleAvatar(child: new Text(from[0])),
-            ),*/
-            new Expanded(
-              child: new Column(
-                crossAxisAlignment: sender==myNum?CrossAxisAlignment.end:CrossAxisAlignment.start,
-                children: <Widget>[
-                  new Container(
-                    padding:new EdgeInsets.all(5.0),
-                    decoration: new BoxDecoration(
-                      borderRadius: new BorderRadius.all(const Radius.circular(10.0)),
-                      color: sender==myNum?Colors.lightGreen[300]:Colors.white,
-                      border: new Border(bottom: new BorderSide(),top: new BorderSide(),left: new BorderSide(),right: new BorderSide()),
-                    ),
-                    margin: const EdgeInsets.only(top: 5.0),
-                    child: new Container(
-                      child: new Column(
-                        children: <Widget>[
-                          new Text(message,style: new TextStyle(fontSize: 16.0),),
-                          new Text(_chatMsgDate(time),style: new TextStyle(fontSize: 10.0),)
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+      final bg = sender!=myNum? Colors.white : Colors.greenAccent.shade100;
+      final align = sender!=myNum ? CrossAxisAlignment.start : CrossAxisAlignment.end;
+      final radius = sender!=myNum
+          ? BorderRadius.only(
+        topRight: Radius.circular(5.0),
+        bottomLeft: Radius.circular(10.0),
+        bottomRight: Radius.circular(5.0),
+      )
+          : BorderRadius.only(
+        topLeft: Radius.circular(5.0),
+        bottomLeft: Radius.circular(5.0),
+        bottomRight: Radius.circular(10.0),
       );
+     return Padding(
+       padding: const EdgeInsetsDirectional.only(start: 2.0,end: 2.0),
+       child: Column(
+        crossAxisAlignment: align,
+        children: <Widget>[
+          Container(
+            margin: const EdgeInsets.all(3.0),
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                    blurRadius: .5,
+                    spreadRadius: 1.0,
+                    color: Colors.black.withOpacity(.12))
+              ],
+              color: bg,
+              borderRadius: radius,
+            ),
+            child: Stack(
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(right: 48.0),
+                  child: Text(message),
+                ),
+                Positioned(
+                  bottom: 0.0,
+                  right: 0.0,
+                  child: Row(
+                    children: <Widget>[
+                      Text(_chatMsgDate(time),
+                          style: TextStyle(
+                            color: Colors.black38,
+                            fontSize: 10.0,
+                          )),
+                      SizedBox(width: 3.0),
+                      Icon(
+                        Icons.done,
+                        size: 12.0,
+                        color: Colors.black38,
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
+    ),
+     );
   }
   String _todaysDate(){
     DateTime time = new DateTime.now();
