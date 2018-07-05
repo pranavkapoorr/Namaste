@@ -61,35 +61,21 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> {
                 child: new StreamBuilder(
                     stream: _reference.snapshots(),
                     builder: (context, snapshot) {
-                      var decoration = BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                              blurRadius: .5,
-                              spreadRadius: 1.0,
-                              color: Colors.black.withOpacity(.12))
-                        ],
-                        color: Colors.grey.shade300,
-                        borderRadius: BorderRadius.all(Radius.circular(2.0)),
-                      );
-                      var yesterday = Column(children:[Container(padding:EdgeInsets.all(1.0),decoration:decoration,child: Text("Yesterday"))]);
-                      var today = Column(children:[Container(padding:EdgeInsets.all(1.0),decoration:decoration,child: Text("Today"))]);
-                      if (!snapshot.hasData) return const Text('Loading...');
+                     if (!snapshot.hasData) return const Text('Loading...');
                       List<Widget> dataList = new List();
                       for (int i = snapshot.data.documents.length; i > 0; i--) {
                         DocumentSnapshot ds = snapshot.data.documents[i-1];
                         if((ds.data['message'] != null)&&(ds.data['receiver']==widget.myNumber && ds.data['sender']==widget.chatThread.name)||(ds.data['receiver']==widget.chatThread.name && ds.data['sender']==widget.myNumber)){
                           dataList.add(new ChatMsg(sender: ds.data['sender'], message: ds.data['message'], time: ds.data['time'],));
                           if(int.parse(ds.data['time'].substring(0,2))+1==int.parse(ChatMsg._todaysDate())){
-                            dataList.add(yesterday);
+                            dataList.add(_dateBox("Yesterday"));
                           }else if(int.parse(ds.data['time'].substring(0,2))==int.parse(ChatMsg._todaysDate())){
-                            dataList.add(today);
+                            dataList.add(_dateBox("Today"));
                           }else{
-                            dataList.add(new Text(ds.data['time'].substring(0,10)));
+                            dataList.add(_dateBox(ds.data['time'].substring(0,10)));
                           }
                         }
                       }
-                      dataList = dataList.toSet().toList();
-                      //dataList.sort((a,b)=>a.toString().compareTo(b.toString()));
                       return new ListView(
                         reverse: true,
                         children: dataList,
@@ -115,7 +101,19 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> {
               : null), //new
     );
   }
-
+  Widget _dateBox(String text){
+    var decoration = BoxDecoration(
+      boxShadow: [
+        BoxShadow(
+            blurRadius: .5,
+            spreadRadius: 1.0,
+            color: Colors.black.withOpacity(.12))
+      ],
+      color: Colors.grey.shade300,
+      borderRadius: BorderRadius.all(Radius.circular(2.0)),
+    );
+    return Column(children:[Container(padding:EdgeInsets.all(1.0),decoration:decoration,child: Text(text))]);
+  }
   Widget _buildTestComposer() {
     return new IconTheme(
         data: new IconThemeData(color: Theme
