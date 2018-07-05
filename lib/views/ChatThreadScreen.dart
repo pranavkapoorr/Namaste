@@ -61,15 +61,35 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> {
                 child: new StreamBuilder(
                     stream: _reference.snapshots(),
                     builder: (context, snapshot) {
+                      var decoration = BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                              blurRadius: .5,
+                              spreadRadius: 1.0,
+                              color: Colors.black.withOpacity(.12))
+                        ],
+                        color: Colors.grey.shade300,
+                        borderRadius: BorderRadius.all(Radius.circular(2.0)),
+                      );
+                      var yesterday = Column(children:[Container(padding:EdgeInsets.all(1.0),decoration:decoration,child: Text("Yesterday"))]);
+                      var today = Column(children:[Container(padding:EdgeInsets.all(1.0),decoration:decoration,child: Text("Today"))]);
                       if (!snapshot.hasData) return const Text('Loading...');
                       List<Widget> dataList = new List();
                       for (int i = snapshot.data.documents.length; i > 0; i--) {
                         DocumentSnapshot ds = snapshot.data.documents[i-1];
                         if((ds.data['message'] != null)&&(ds.data['receiver']==widget.myNumber && ds.data['sender']==widget.chatThread.name)||(ds.data['receiver']==widget.chatThread.name && ds.data['sender']==widget.myNumber)){
                           dataList.add(new ChatMsg(sender: ds.data['sender'], message: ds.data['message'], time: ds.data['time'],));
+                          if(int.parse(ds.data['time'].substring(0,2))+1==int.parse(ChatMsg._todaysDate())){
+                            dataList.add(yesterday);
+                          }else if(int.parse(ds.data['time'].substring(0,2))==int.parse(ChatMsg._todaysDate())){
+                            dataList.add(today);
+                          }else{
+                            dataList.add(new Text(ds.data['time'].substring(0,10)));
                           }
+                        }
                       }
-                      dataList.sort((a,b)=>a.toString().compareTo(b.toString()));
+                      dataList = dataList.toSet().toList();
+                      //dataList.sort((a,b)=>a.toString().compareTo(b.toString()));
                       return new ListView(
                         reverse: true,
                         children: dataList,
@@ -183,6 +203,9 @@ class ChatMsg extends StatelessWidget {
   final String time;
   ChatMsg({this.sender, this.message, this.time});
 
+  String getTime(){
+    return this.time;
+  }
   Widget build(BuildContext context) {
       final bg = sender!=myNum? Colors.white : Colors.greenAccent.shade100;
       final align = sender!=myNum ? CrossAxisAlignment.start : CrossAxisAlignment.end;
@@ -226,7 +249,7 @@ class ChatMsg extends StatelessWidget {
                   right: 0.0,
                   child: Row(
                     children: <Widget>[
-                      Text(_chatMsgDate(time),
+                      Text(time.substring(11,time.length-3),
                           style: TextStyle(
                             color: Colors.black38,
                             fontSize: 10.0,
@@ -247,7 +270,7 @@ class ChatMsg extends StatelessWidget {
     ),
      );
   }
-  String _todaysDate(){
+  static String _todaysDate(){
     DateTime time = new DateTime.now();
     return time.day.toString().length<2?"0"+time.day.toString():time.day.toString();
   }
