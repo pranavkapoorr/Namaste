@@ -46,7 +46,7 @@ class _logoPageState extends State<LogoPage> {
                                           height: 50.0,
                                           width: 170.0,
                                           color: Colors.grey.shade400,
-                                          child: new Icon(Icons.public,size: 50.0,),
+                                          child: Image(image: new AssetImage("images/earth_loader.gif")),
                                       ),
                                     ])
                             )
