@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/views/LogoPage.dart';
 import 'package:flutter_app/views/StartUpLoader.dart';
 
 void main() => runApp(new MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       debugShowMaterialGrid: false,
-      home: new StartUpLoader(),
+      home: new LogoPage(),
     );
   }
 }
