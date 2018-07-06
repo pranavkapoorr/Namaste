@@ -63,6 +63,7 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> {
                     builder: (context, snapshot) {
                      if (!snapshot.hasData) return const Text('Loading...');
                       List<Widget> dataList = new List();
+                      Map<String,List<Widget>> map = new Map();
                       for (int i = snapshot.data.documents.length; i > 0; i--) {
                         DocumentSnapshot ds = snapshot.data.documents[i-1];
                         if((ds.data['message'] != null)&&(ds.data['receiver']==widget.myNumber && ds.data['sender']==widget.chatThread.name)||(ds.data['receiver']==widget.chatThread.name && ds.data['sender']==widget.myNumber)){
