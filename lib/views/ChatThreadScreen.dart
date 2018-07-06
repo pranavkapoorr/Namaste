@@ -63,14 +63,13 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> {
                     builder: (context, snapshot) {
                      if (!snapshot.hasData) return const Text('Loading...');
                       List<Widget> dataList = new List();
-                      Map<String,List<Widget>> map = new Map();
                       for (int i = snapshot.data.documents.length; i > 0; i--) {
                         DocumentSnapshot ds = snapshot.data.documents[i-1];
                         if((ds.data['message'] != null)&&(ds.data['receiver']==widget.myNumber && ds.data['sender']==widget.chatThread.name)||(ds.data['receiver']==widget.chatThread.name && ds.data['sender']==widget.myNumber)){
-                          dataList.add(new ChatMsg(sender: ds.data['sender'], message: ds.data['message'], time: ds.data['time'],));
-                          if(int.parse(ds.data['time'].substring(0,2))+1==int.parse(ChatMsg._todaysDate())){
+                          dataList.add(new ChatMessageBubble(sender: ds.data['sender'], message: ds.data['message'], time: ds.data['time'],));
+                          if(int.parse(ds.data['time'].substring(0,2))+1==int.parse(ChatMessageBubble._todaysDate())){
                             dataList.add(_dateBox("Yesterday"));
-                          }else if(int.parse(ds.data['time'].substring(0,2))==int.parse(ChatMsg._todaysDate())){
+                          }else if(int.parse(ds.data['time'].substring(0,2))==int.parse(ChatMessageBubble._todaysDate())){
                             dataList.add(_dateBox("Today"));
                           }else{
                             dataList.add(_dateBox(ds.data['time'].substring(0,10)));
@@ -196,11 +195,11 @@ class _ChatThreadScreenState extends State<ChatThreadScreen> {
 }
 
 @override
-class ChatMsg extends StatelessWidget {
+class ChatMessageBubble extends StatelessWidget {
   final String sender;
   final String message;
   final String time;
-  ChatMsg({this.sender, this.message, this.time});
+  ChatMessageBubble({this.sender, this.message, this.time});
 
   String getTime(){
     return this.time;
@@ -272,15 +271,6 @@ class ChatMsg extends StatelessWidget {
   static String _todaysDate(){
     DateTime time = new DateTime.now();
     return time.day.toString().length<2?"0"+time.day.toString():time.day.toString();
-  }
-  String _chatMsgDate(String time){
-    if(int.parse(time.substring(0,2))+1==int.parse(_todaysDate())){
-      return "Yesterday";
-    }else if(int.parse(time.substring(0,2))==int.parse(_todaysDate())){
-      return time.substring(11,time.length-3);
-    }else{
-      return time.substring(0,10);
-    }
   }
 }
 

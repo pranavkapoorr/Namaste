@@ -9,7 +9,7 @@ import 'package:flutter_app/views/ChatThreadScreen.dart';
 import 'package:flutter_app/views/ContactsUsingScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'package:rxdart/rxdart.dart';
+//import 'package:rxdart/rxdart.dart';
 
 
 class ChatScreen extends StatefulWidget {
@@ -18,10 +18,10 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  List<ChatMessage> messages = List();
+  List<ChatMessageModel> messages = List();
   bool hasLoaded = true;
   NamasteDatabase db;
-  final PublishSubject subject = PublishSubject<String>();
+  //final PublishSubject subject = PublishSubject<String>();
   final FirebaseMessaging _fireBaseMessaging = new FirebaseMessaging();
   final CollectionReference _reference1 = Firestore.instance.collection("Namaste-Conversations");
   final CollectionReference _reference2 = Firestore.instance.collection("App-Data");
@@ -41,7 +41,7 @@ class _ChatScreenState extends State<ChatScreen> {
     super.initState();
     _loadedNumbers = false;
     _loadedChats = false;
-    _loadDbAndStartStream();
+    //_loadDbAndStartStream();
     _loadNumberFromPreferences();
     _startChatStream();
     _startContactsStream();
@@ -56,6 +56,7 @@ class _ChatScreenState extends State<ChatScreen> {
             setState(() {
               _loadedChats = true;
               _chat.add(d.data);
+              //db.addMessage(new ChatMessageModel(id:d.documentID.toString(),sender: d.data['sender'], receiver: d.data['receiver'], message: d.data['message'], timeStamp: d.data['time'].toString(),synced: true));
               if(d.data['message']!=null) {
                 if (d.data['receiver'] == _myNumber) {
                   _chatters.add(d.data['sender']);
@@ -127,6 +128,25 @@ class _ChatScreenState extends State<ChatScreen> {
   void _loadDbAndStartStream(){
     db = NamasteDatabase();
     db.initDB();
+    //db.dropTable();
+    //db.deleteAllMessages();
+    db.getMessages().then((l)=>l.forEach((e)=>print(e)));
+    //subject.stream.debounce(Duration(milliseconds: 400)).listen(fetchLocalMessages);
+  }
+  void fetchLocalMessages(query) {
+    if (query.isEmpty) {
+      setState(() {
+        hasLoaded = true;
+      });
+      return; //Forgot to add in the tutorial <- leaves function if there is no query in the box.
+    }
+    setState(() => hasLoaded = false);
+    db.getMessages().then((m)=>m.forEach((e)=>print(e))).catchError((e)=>print(e)).then((e){
+      setState(() {
+        hasLoaded = true;
+      });
+    });
+    
   }
   
   void _resetMessages() {
@@ -141,9 +161,9 @@ class _ChatScreenState extends State<ChatScreen> {
   void _addMessage(item) {
     setState(() {
       //db.addMsg(msg)
-      messages.add(ChatMessage.fromJson(item));
+      messages.add(ChatMessageModel.fromJson(item));
     });
-    print('$ChatMessage');
+    print('$ChatMessageModel');
   }
 
   void _generateNotification(String number) {

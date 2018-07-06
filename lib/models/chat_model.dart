@@ -1,32 +1,32 @@
 import 'package:meta/meta.dart';
 
-class ChatMessage {
-  ChatMessage({
+class ChatMessageModel {
+  ChatMessageModel({
     @required this.sender,
     @required this.receiver,
     @required this.message,
-    @required this.time,
+    @required this.timeStamp,
+    @required this.id,
     this.synced,
-  }){
-    id = counter.toString();
-    counter++;
-  }
-  static int counter = 0;
-  String sender, id, receiver, message, time;
+  });
+  String sender, id, receiver, message, timeStamp;
   bool synced;
 
-  ChatMessage.fromJson(Map json)
-      : sender = json["title"],
-        receiver = json["poster_path"],
-        message = json["overview"],
-        synced = false;
+  ChatMessageModel.fromJson(Map json)
+      : id = json["id"].toString(),
+        sender = json["sender"],
+        receiver = json["receiver"],
+        message = json["message"],
+        timeStamp = json["timeStamp"],
+        synced = json['synced'];
 
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>();
-    map['id'] = id;
+    //map['id'] = id;
     map['sender'] = sender;
     map['receiver'] = receiver;
     map['message'] = message;
+    map['timeStamp'] = timeStamp;
     map['synced'] = synced;
     return map;
   }

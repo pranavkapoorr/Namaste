@@ -117,7 +117,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
       });}),
       title:  new Container(width: _iconAnimation.value * 1400.0,child: new TextField(decoration: new InputDecoration(hintText: "         search here",suffixIcon: new Icon(Icons.search),border: InputBorder.none),)),
       elevation: 0.7,
-      pinned: true,
+      pinned: false,
       floating: true,
       forceElevated: innerBoxIsScrolled,
       bottom: new TabBar(
@@ -225,3 +225,4 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
     _iconAnimationController.dispose();
   }
 }
+

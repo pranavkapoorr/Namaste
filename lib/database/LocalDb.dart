@@ -31,35 +31,58 @@ class NamasteDatabase {
   }
 
   void _onCreate(Database db, int version) async {
-    await db.execute("CREATE TABLE Chats(id STRING PRIMARY KEY, message TEXT, sender TEXT, receiver TEXT, time TEXT, synced BIT);");
-
+    await db.execute("CREATE TABLE Chats(id STRING PRIMARY KEY, message TEXT, sender TEXT, receiver TEXT, timeStamp TEXT, synced BIT);");
     print("Database was Created!");
   }
 
-  Future<int> addMsg(ChatMessage msg) async {
+  void dropTable() async {
+    Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentsDirectory.path, "main.db");
+    await deleteDatabase(path).catchError((e)=>print(e));
+  }
+
+
+  Future<int> addMessage(ChatMessageModel msg) async {
     var dbClient = await db;
     try {
       int res = await dbClient.insert("Chats", msg.toMap());
-      print("Chat added $res");
       return res;
     } catch (e) {
-      int res = await updateMovie(msg);
+      int res = await updateMessage(msg);
       return res;
     }
   }
 
-  Future<int> updateMovie(ChatMessage msg) async {
+  Future<int> updateMessage(ChatMessageModel msg) async {
     var dbClient = await db;
-    int res = await dbClient.update("Chats", msg.toMap(),
-        where: "id = ?", whereArgs: [msg.id]);
-    print("Chat updated $res");
+    int res;
+    try {
+      res = await dbClient.update("Chats", msg.toMap(),
+          where: "id = ?", whereArgs: [msg.id]);
+      return res;
+    }catch(e){
+      print(e);
+    }
     return res;
   }
 
-  Future<int> deleteMovie(String id) async {
+  Future<int> deleteMessage(String id) async {
     var dbClient = await db;
     var res = await dbClient.delete("Chats", where: "id = ?", whereArgs: [id]);
-    print("Movie deleted $res");
+    print("Message deleted $res");
+    return res;
+  }
+  Future<int> deleteAllMessages() async {
+    var dbClient = await db;
+    var res = await dbClient.execute("DELETE FROM Chats");
+    print("Message deleted $res");
+    return res;
+  }
+
+  Future<List> getMessages() async {
+    var dbClient = await db;
+    var res = await dbClient.query("Chats",columns:["sender, receiver, message, timeStamp, id, synced"]);
+    print("Messages loaded $res");
     return res;
   }
 
