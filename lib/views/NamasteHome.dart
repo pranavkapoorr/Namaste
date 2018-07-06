@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter_app/views/CameraScreen.dart';
 import 'package:flutter_app/views/CallScreen.dart';
+import 'package:flutter_app/views/LogoPage.dart';
 import 'package:flutter_app/views/StatusScreen.dart';
 import 'package:flutter_app/views/ChatScreen.dart';
 import 'package:flutter_app/views/Settings_Screen.dart';
@@ -172,7 +173,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
                 child: new Text('Settings')
             ),
             new PopupMenuItem(
-                value: null,
+                value: new LogoPage(),
                 child: new Text('About')
             ),
           ],
