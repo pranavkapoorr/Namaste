@@ -17,7 +17,7 @@ class _logoPageState extends State<LogoPage> {
                 children: <Widget>[
                   Theme(
                       data: new ThemeData(
-                          brightness: Brightness.dark,
+                          brightness: Brightness.light,
                           inputDecorationTheme: new InputDecorationTheme(
                             // hintStyle: new TextStyle(color: Colors.blue, fontSize: 20.0),
                             labelStyle:
@@ -31,26 +31,24 @@ class _logoPageState extends State<LogoPage> {
                             Padding(
                               padding: const EdgeInsets.all(50.0),
                               child: new Image(
+                                color: Colors.black87,
                                 fit: BoxFit.scaleDown,
                                 image: new AssetImage("images/logo.png"),
                               ),
                             ),
                             new Container(
-                                padding: const EdgeInsets.all(40.0),
-                                child: new Form(
-                                    autovalidate: true,
-                                    child: new Column(
-                                        mainAxisAlignment: MainAxisAlignment
-                                            .start,
-                                        children: <Widget>[
-                                          new Container(
-                                              height: 50.0,
-                                              width: 70.0,
-                                              color: Colors.grey.shade400,
-                                              child: new Icon(Icons.refresh),
-                                          ),
-                                        ])
-                                )
+                                padding: const EdgeInsetsDirectional.only(top: 250.0),
+                                child: new Column(
+                                    mainAxisAlignment: MainAxisAlignment
+                                        .start,
+                                    children: <Widget>[
+                                      new Container(
+                                          height: 50.0,
+                                          width: 170.0,
+                                          color: Colors.grey.shade400,
+                                          child: new Icon(Icons.public,size: 50.0,),
+                                      ),
+                                    ])
                             )
                           ])
                   )
