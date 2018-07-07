@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:Namaste/models/chat_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/database/LocalDb.dart';
-import 'package:flutter_app/models/chat_model.dart';
-import 'package:flutter_app/views/ChatThreadScreen.dart';
-import 'package:flutter_app/views/ContactsUsingScreen.dart';
+import '../database/LocalDb.dart';
+import 'ChatThreadScreen.dart';
+import 'ContactsUsingScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 //import 'package:rxdart/rxdart.dart';

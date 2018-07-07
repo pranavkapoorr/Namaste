@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/resources/FireBaseDBResources.dart';
-import 'package:flutter_app/views/ChatThreadScreen.dart';
+import 'package:Namaste/resources/FireBaseDBResources.dart';
+import 'package:Namaste/views/ChatThreadScreen.dart';
 //import 'package:contacts_service/contacts_service.dart';
 
 class ContactsUsingScreen extends StatefulWidget{

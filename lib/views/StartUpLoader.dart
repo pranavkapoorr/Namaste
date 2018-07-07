@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/resources/FireBaseDBResources.dart';
-import 'package:flutter_app/views/LoginScreen.dart';
-import 'package:flutter_app/views/NamasteHome.dart';
+import 'package:Namaste/resources/FireBaseDBResources.dart';
+import './LoginScreen.dart';
+import './NamasteHome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StartUpLoader extends StatefulWidget{

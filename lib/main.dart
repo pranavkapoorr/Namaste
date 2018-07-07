@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/views/LogoPage.dart';
-import 'package:flutter_app/views/StartUpLoader.dart';
+import './views/LogoPage.dart';
 
 void main() => runApp(new MyApp());
 

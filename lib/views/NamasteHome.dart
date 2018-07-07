@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:flutter_app/views/CameraScreen.dart';
-import 'package:flutter_app/views/CallScreen.dart';
-import 'package:flutter_app/views/LogoPage.dart';
-import 'package:flutter_app/views/StatusScreen.dart';
-import 'package:flutter_app/views/ChatScreen.dart';
-import 'package:flutter_app/views/Settings_Screen.dart';
-import 'package:flutter_app/views/ContactsUsingScreen.dart';
+import 'CameraScreen.dart';
+import 'CallScreen.dart';
+import 'LogoPage.dart';
+import 'StatusScreen.dart';
+import 'ChatScreen.dart';
+import 'Settings_Screen.dart';
+import 'ContactsUsingScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -87,23 +87,31 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
     return new WillPopScope(
       child: new Scaffold(
         backgroundColor: Colors.white,
-        body: new NestedScrollView(
-            controller: _scrollViewController,
-            headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-              return <Widget>[
-              _searchClicked?_searchAppBar(innerBoxIsScrolled):_normalAppBar(innerBoxIsScrolled),
-            ];
-            },
-          body: new TabBarView(
-            controller: _tabController,
-            children: <Widget>[
-              new CameraScreen(),
-              new ChatScreen(),
-              new StatusScreen(),
-              new CallsScreen(),
-            ],
+        body: /*Container(
+          decoration: BoxDecoration(gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Colors.grey.shade700, Colors.grey.withOpacity(0.3), Colors.grey.shade50],
+              tileMode: TileMode.mirror
+          )),
+          child:*/ new NestedScrollView(
+              controller: _scrollViewController,
+              headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+                return <Widget>[
+                _searchClicked?_searchAppBar(innerBoxIsScrolled):_normalAppBar(innerBoxIsScrolled),
+              ];
+              },
+            body: new TabBarView(
+              controller: _tabController,
+              children: <Widget>[
+                new CameraScreen(),
+                new ChatScreen(),
+                new StatusScreen(),
+                new CallsScreen(),
+              ],
+            ),
           ),
-        ),
+        //),
         floatingActionButton: _floatingButton(_currentTab),
       ),
       onWillPop: (){return new Future<bool>.value(false);},
