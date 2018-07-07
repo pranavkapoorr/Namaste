@@ -86,6 +86,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
     _easeInOutAppbar();
     return new WillPopScope(
       child: new Scaffold(
+        backgroundColor: Colors.white,
         body: new NestedScrollView(
             controller: _scrollViewController,
             headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -118,6 +119,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
       });}),
       title:  new Container(width: _iconAnimation.value * 1400.0,child: new TextField(decoration: new InputDecoration(hintText: "         search here",suffixIcon: new Icon(Icons.search),border: InputBorder.none),)),
       elevation: 0.7,
+      backgroundColor: Colors.transparent,
       pinned: false,
       floating: true,
       forceElevated: innerBoxIsScrolled,
@@ -138,6 +140,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
     return new SliverAppBar(
       title: new Text("Namaste",style: new TextStyle(color: Theme.of(context).accentColor),),
       elevation: 0.7,
+      backgroundColor: Colors.transparent,
       pinned: false,
       floating: true,
       forceElevated: innerBoxIsScrolled,

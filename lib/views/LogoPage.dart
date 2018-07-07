@@ -47,7 +47,7 @@ class _logoPageState extends State<LogoPage> {
                               ),
                             ),
                             new Container(
-                                padding: const EdgeInsetsDirectional.only(top: 260.0),
+                                padding: const EdgeInsets.all(20.0),
                                 child: new Column(
                                     mainAxisAlignment: MainAxisAlignment
                                         .start,
