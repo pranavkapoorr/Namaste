@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:Namaste/views/StartUpLoader.dart';
+import 'StartUpLoader.dart';
 
 class LogoPage extends StatefulWidget{
   @override

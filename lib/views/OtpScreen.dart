@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:Namaste/resources/FireBaseDBResources.dart';
-import './StartUpLoader.dart';
+import '../resources/FireBaseDBResources.dart';
+import 'StartUpLoader.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OtpScreen extends StatefulWidget{

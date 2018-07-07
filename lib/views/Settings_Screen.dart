@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import './AccountScreen.dart';
-import './Contacts.dart';
-import './NotificationScreen.dart';
+import 'AccountScreen.dart';
+import 'Contacts.dart';
+import 'NotificationScreen.dart';
 import 'dart:async';
 
 class SettingsScreen extends StatefulWidget {

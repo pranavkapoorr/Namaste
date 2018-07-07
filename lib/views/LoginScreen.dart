@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import './NamasteHome.dart';
-import './OtpScreen.dart';
+import 'NamasteHome.dart';
+import 'OtpScreen.dart';
 import 'dart:convert';
 import 'dart:async';
 import 'dart:math';

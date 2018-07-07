@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:Namaste/models/chat_model.dart';
+import '../models/chat_model.dart';
 class StatusScreen extends StatefulWidget {
 
   @override
