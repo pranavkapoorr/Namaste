@@ -87,6 +87,17 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
     return new WillPopScope(
       child: new Scaffold(
         backgroundColor: Colors.white,
+        bottomNavigationBar: new TabBar(
+          controller: _tabController,
+          indicatorColor: Colors.grey,
+          labelColor: new Color(0xff939696),//999C9C),
+          tabs: <Widget>[
+            new Tab(icon: new Icon(Icons.photo_camera,size: 22.0,)),
+            new Tab(text: "CHATS"),
+            new Tab(text: "STATUS"),
+            new Tab(text: "CALLS"),
+          ],
+        ),
         body: /*Container(
           decoration: BoxDecoration(gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -94,7 +105,8 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
               colors: [Colors.grey.shade700, Colors.grey.withOpacity(0.3), Colors.grey.shade50],
               tileMode: TileMode.mirror
           )),
-          child:*/ new NestedScrollView(
+          child:*/
+          new NestedScrollView(
               controller: _scrollViewController,
               headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
                 return <Widget>[
@@ -131,17 +143,6 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
       pinned: false,
       floating: true,
       forceElevated: innerBoxIsScrolled,
-      bottom: new TabBar(
-        controller: _tabController,
-        indicatorColor: Colors.grey,
-        labelColor: new Color(0xff939696),//999C9C),
-        tabs: <Widget>[
-          new Tab(icon: new Icon(Icons.photo_camera,size: 22.0,)),
-          new Tab(text: "CHATS"),
-          new Tab(text: "STATUS"),
-          new Tab(text: "CALLS"),
-        ],
-      ),
     );
   }
   SliverAppBar _normalAppBar(bool innerBoxIsScrolled){
@@ -152,17 +153,6 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
       pinned: false,
       floating: true,
       forceElevated: innerBoxIsScrolled,
-      bottom: new TabBar(
-        controller: _tabController,
-        indicatorColor: Colors.grey,
-        labelColor: new Color(0xff939696),//999C9C),
-        tabs: <Widget>[
-          new Tab(icon: new Icon(Icons.photo_camera,size: 22.0,)),
-          new Tab(text: "CHATS"),
-          new Tab(text: "STATUS"),
-          new Tab(text: "CALLS"),
-        ],
-      ),
       actions: <Widget>[
         new IconButton(icon:new Icon(Icons.search,color: new Color(0xff939696)),onPressed: (){setState(() {
           _searchClicked = true;
