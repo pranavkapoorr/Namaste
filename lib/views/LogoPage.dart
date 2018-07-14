@@ -12,7 +12,7 @@ class _logoPageState extends State<LogoPage> {
   @override
   void initState() {
     super.initState();
-    new Timer(const Duration(seconds: 5), onClose);
+    new Timer(const Duration(seconds: 3), onClose);
   }
 
   @override

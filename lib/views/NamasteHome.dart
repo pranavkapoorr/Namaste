@@ -1,3 +1,4 @@
+import 'package:Namaste/views/Contacts.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'CameraScreen.dart';
@@ -106,6 +107,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
             children: <Widget>[
               new CameraScreen(),
               new ChatScreen(),
+              new ContactsDemo(),
             ],
           ),
           ),
@@ -148,7 +150,6 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
         ),
         new PopupMenuButton(
           elevation: 10.0,
-          padding: new EdgeInsets.all(0.0),
           tooltip:"Settings",
           icon: new Icon(Icons.more_vert) ,
           onSelected: (dynamic value){
