@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'CameraScreen.dart';
-import 'CallScreen.dart';
 import 'LogoPage.dart';
-import 'StatusScreen.dart';
 import 'ChatScreen.dart';
 import 'Settings_Screen.dart';
-import 'ContactsUsingScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -59,7 +56,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
       _myNumber = sp.getString("myNumber");
     });
     _scrollViewController = new ScrollController(keepScrollOffset: true);
-    _tabController = new TabController(vsync: this, initialIndex: 1, length: 4);
+    _tabController = new TabController(vsync: this, initialIndex: 1, length: 3);
     _tabController.addListener(_updateCurrentTab);
     _iconAnimationController = new AnimationController(
         vsync: this, duration: new Duration(seconds: 1));
@@ -88,43 +85,30 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
       child: new Scaffold(
         backgroundColor: Colors.white,
         bottomNavigationBar: new TabBar(
+          indicator:UnderlineTabIndicator(),
+          unselectedLabelColor: Colors.grey,
           controller: _tabController,
-          indicatorColor: Colors.grey,
-          labelColor: new Color(0xff939696),//999C9C),
           tabs: <Widget>[
             new Tab(icon: new Icon(Icons.photo_camera,size: 22.0,)),
-            new Tab(text: "CHATS"),
-            new Tab(text: "STATUS"),
-            new Tab(text: "CALLS"),
+            new Tab(icon: new Icon(Icons.message,size: 22.0,)),
+            new Tab(icon: new Icon(Icons.person,size: 22.0,)),
           ],
         ),
-        body: /*Container(
-          decoration: BoxDecoration(gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Colors.grey.shade700, Colors.grey.withOpacity(0.3), Colors.grey.shade50],
-              tileMode: TileMode.mirror
-          )),
-          child:*/
-          new NestedScrollView(
-              controller: _scrollViewController,
-              headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-                return <Widget>[
-                _searchClicked?_searchAppBar(innerBoxIsScrolled):_normalAppBar(innerBoxIsScrolled),
-              ];
-              },
-            body: new TabBarView(
-              controller: _tabController,
-              children: <Widget>[
-                new CameraScreen(),
-                new ChatScreen(),
-                new StatusScreen(),
-                new CallsScreen(),
-              ],
-            ),
+        body: new NestedScrollView(
+            controller: _scrollViewController,
+            headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+              return <Widget>[
+              _searchClicked?_searchAppBar(innerBoxIsScrolled):_normalAppBar(innerBoxIsScrolled),
+            ];
+            },
+          body: new TabBarView(
+            controller: _tabController,
+            children: <Widget>[
+              new CameraScreen(),
+              new ChatScreen(),
+            ],
           ),
-        //),
-        floatingActionButton: _floatingButton(_currentTab),
+          ),
       ),
       onWillPop: (){return new Future<bool>.value(false);},
     );
@@ -147,14 +131,16 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
   }
   SliverAppBar _normalAppBar(bool innerBoxIsScrolled){
     return new SliverAppBar(
-      title: new Text("Namaste",style: new TextStyle(color: Theme.of(context).accentColor),),
+      leading: Image(image: AssetImage("images/logo.png"),color:Colors.black,),
+      centerTitle: true,
+      title: new Text("Namaste",style: new TextStyle(fontSize: 25.0,fontWeight: FontWeight.bold,fontFamily: "BeautifulX")),
       elevation: 0.7,
       backgroundColor: Colors.transparent,
       pinned: false,
       floating: true,
       forceElevated: innerBoxIsScrolled,
       actions: <Widget>[
-        new IconButton(icon:new Icon(Icons.search,color: new Color(0xff939696)),onPressed: (){setState(() {
+        new IconButton(icon:new Icon(Icons.search),onPressed: (){setState(() {
           _searchClicked = true;
         });},),
         new Padding(
@@ -164,7 +150,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
           elevation: 10.0,
           padding: new EdgeInsets.all(0.0),
           tooltip:"Settings",
-          icon: new Icon(Icons.more_vert,color: new Color(0xff939696)) ,
+          icon: new Icon(Icons.more_vert) ,
           onSelected: (dynamic value){
             Navigator.push(context, new MaterialPageRoute(builder: (context)=>value));
           },
@@ -183,39 +169,6 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
     );
   }
 
-  FloatingActionButton _floatingButton(int tabCount){
-    if(tabCount==1){
-      return new FloatingActionButton(
-        backgroundColor: Theme.of(context).accentColor,
-        child: new Icon(
-          Icons.message,
-          color: Colors.white,
-        ),
-        onPressed: () => Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new ContactsUsingScreen(myNumber: _myNumber,))),
-      );
-    }else if(tabCount==2){
-      return new FloatingActionButton(
-        backgroundColor: Theme.of(context).accentColor,
-        child: new Icon(
-          Icons.photo,
-          color: Colors.white,
-        ),
-        onPressed: () => Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new ContactsUsingScreen(myNumber: _myNumber,))),
-      );
-    }else if(tabCount==3){
-      return new FloatingActionButton(
-        backgroundColor: Theme.of(context).accentColor,
-        child: new Icon(
-          Icons.call,
-          color: Colors.white,
-        ),
-        onPressed: () => Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new ContactsUsingScreen(myNumber: _myNumber,))),
-      );
-    }else{
-      return null;
-    }
-
-  }
 
 
 @override
