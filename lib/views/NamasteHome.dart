@@ -95,22 +95,35 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
             new Tab(icon: new Icon(Icons.person,size: 22.0,)),
           ],
         ),
-        body: new NestedScrollView(
-            controller: _scrollViewController,
-            headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-              return <Widget>[
-              _searchClicked?_searchAppBar(innerBoxIsScrolled):_normalAppBar(innerBoxIsScrolled),
-            ];
-            },
-          body: new TabBarView(
-            controller: _tabController,
-            children: <Widget>[
-              new CameraScreen(),
-              new ChatScreen(),
-              new ContactsDemo(),
-            ],
+        body: Container(
+          decoration: new BoxDecoration(
+              gradient: new LinearGradient(
+                begin: FractionalOffset.topCenter,
+                end: FractionalOffset.bottomCenter,
+                colors: [
+                  const Color.fromARGB(255, 253, 72, 72),
+                  const Color.fromARGB(255, 87, 97, 249),
+                ],
+                stops: [0.0, 1.0],
+              )
           ),
-          ),
+          child: new NestedScrollView(
+              controller: _scrollViewController,
+              headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+                return <Widget>[
+                _searchClicked?_searchAppBar(innerBoxIsScrolled):_normalAppBar(innerBoxIsScrolled),
+              ];
+              },
+              body: new TabBarView(
+                controller: _tabController,
+                children: <Widget>[
+                  new CameraScreen(),
+                  new ChatScreen(),
+                  new ContactsDemo(),
+                ],
+              ),
+            ),
+        ),
       ),
       onWillPop: (){return new Future<bool>.value(false);},
     );
@@ -123,7 +136,16 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
         _searchClicked = false;
         _iconAnimationController.reset();
       });}),
-      title:  new Container(width: _iconAnimation.value * 1400.0,child: new TextField(decoration: new InputDecoration(hintText: "         search here",suffixIcon: new Icon(Icons.search),border: InputBorder.none),)),
+      title:  new Container(
+          width: _iconAnimation.value * 1400.0,
+          decoration: BoxDecoration(boxShadow: [
+            BoxShadow(
+                blurRadius: .5,
+                spreadRadius: 1.0,
+                color: Colors.black.withOpacity(.12))
+          ],),
+          child: new TextField(decoration: new InputDecoration(hintText: "         search here",suffixIcon: new Icon(Icons.search),border: InputBorder.none),)
+      ),
       elevation: 0.7,
       backgroundColor: Colors.transparent,
       pinned: false,
