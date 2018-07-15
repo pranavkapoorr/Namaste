@@ -11,7 +11,6 @@ class ContactsDemoState extends State<ContactsDemo> {
   static final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final double _appBarHeight = 256.0;
 
-  AppBarBehavior _appBarBehavior = AppBarBehavior.pinned;
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +25,10 @@ class ContactsDemoState extends State<ContactsDemo> {
         body: new CustomScrollView(
           slivers: <Widget>[
             new SliverAppBar(
+              leading: Text(""),
               expandedHeight: _appBarHeight,
-              pinned: _appBarBehavior == AppBarBehavior.pinned,
-              floating: _appBarBehavior == AppBarBehavior.floating || _appBarBehavior == AppBarBehavior.snapping,
-              snap: _appBarBehavior == AppBarBehavior.snapping,
+              pinned: false,
+              floating: true,
               actions: <Widget>[
                 new IconButton(
                   icon: const Icon(Icons.create),
@@ -40,31 +39,7 @@ class ContactsDemoState extends State<ContactsDemo> {
                     ));
                   },
                 ),
-                new PopupMenuButton<AppBarBehavior>(
-                  onSelected: (AppBarBehavior value) {
-                    setState(() {
-                      _appBarBehavior = value;
-                    });
-                  },
-                  itemBuilder: (BuildContext context) => <PopupMenuItem<AppBarBehavior>>[
-                    const PopupMenuItem<AppBarBehavior>(
-                        value: AppBarBehavior.normal,
-                        child: const Text('App bar scrolls away')
-                    ),
-                    const PopupMenuItem<AppBarBehavior>(
-                        value: AppBarBehavior.pinned,
-                        child: const Text('App bar stays put')
-                    ),
-                    const PopupMenuItem<AppBarBehavior>(
-                        value: AppBarBehavior.floating,
-                        child: const Text('App bar floats')
-                    ),
-                    const PopupMenuItem<AppBarBehavior>(
-                        value: AppBarBehavior.snapping,
-                        child: const Text('App bar snaps')
-                    ),
-                  ],
-                ),
+                new IconButton(icon: Icon(Icons.settings), onPressed: (){})
               ],
               flexibleSpace: new FlexibleSpaceBar(
                 title: const Text('Ali Connors'),

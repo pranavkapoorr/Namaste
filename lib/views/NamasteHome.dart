@@ -57,7 +57,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
       _myNumber = sp.getString("myNumber");
     });
     _scrollViewController = new ScrollController(keepScrollOffset: true);
-    _tabController = new TabController(vsync: this, initialIndex: 1, length: 3);
+    _tabController = new TabController(vsync: this, initialIndex: 1, length: 4);
     _tabController.addListener(_updateCurrentTab);
     _iconAnimationController = new AnimationController(
         vsync: this, duration: new Duration(seconds: 1));
@@ -90,9 +90,10 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
           unselectedLabelColor: Colors.grey,
           controller: _tabController,
           tabs: <Widget>[
-            new Tab(icon: new Icon(Icons.photo_camera,size: 22.0,)),
-            new Tab(icon: new Icon(Icons.message,size: 22.0,)),
             new Tab(icon: new Icon(Icons.person,size: 22.0,)),
+            new Tab(icon: new Icon(Icons.message,size: 22.0,)),
+            new Tab(icon: new Icon(Icons.camera_alt,size: 22.0,)),
+            new Tab(icon: new CircleAvatar(backgroundColor: Colors.grey,child: Text("🙏")),),
           ],
         ),
         body: Container(
@@ -117,9 +118,10 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
               body: new TabBarView(
                 controller: _tabController,
                 children: <Widget>[
-                  new CameraScreen(),
+                  new ContactsDemo(),
                   new ChatScreen(),
                   new ContactsDemo(),
+                  new CameraScreen(),
                 ],
               ),
             ),
@@ -131,20 +133,22 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
 
   SliverAppBar _searchAppBar(bool innerBoxIsScrolled){
     _iconAnimationController.forward();
+    var searchTextField = new TextField(decoration: new InputDecoration(hintText: "         search here",suffixIcon: new Icon(Icons.search),border: InputBorder.none),);
+    var searchTile = new ListTile(leading: new IconButton(icon: new Icon(Icons.arrow_back), onPressed: (){setState(() {
+      _searchClicked = false;
+      _iconAnimationController.reset();
+    });}),title: searchTextField);
     return new SliverAppBar(
-      leading: new IconButton(icon: new Icon(Icons.arrow_back), onPressed: (){setState(() {
-        _searchClicked = false;
-        _iconAnimationController.reset();
-      });}),
       title:  new Container(
+          margin: EdgeInsets.all(5.0),
           width: _iconAnimation.value * 1400.0,
           decoration: BoxDecoration(boxShadow: [
             BoxShadow(
                 blurRadius: .5,
-                spreadRadius: 1.0,
+                spreadRadius: 0.0,
                 color: Colors.black.withOpacity(.12))
           ],),
-          child: new TextField(decoration: new InputDecoration(hintText: "         search here",suffixIcon: new Icon(Icons.search),border: InputBorder.none),)
+          child: searchTile,
       ),
       elevation: 0.7,
       backgroundColor: Colors.transparent,
