@@ -60,14 +60,72 @@ class ContactsDemoState extends State<ContactsDemo> {
                         ),
                       ),
                     ),
+                    new Align(
+                      alignment: FractionalOffset.bottomCenter,
+                      heightFactor: 1.4,
+                      child: new Column(
+                        children: <Widget>[
+                          new CircleAvatar(
+                            radius: 50.0,
+                            backgroundImage: NetworkImage("https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/11230099_10206835592669367_2911893136176495642_n.jpg?_nc_cat=0&oh=eb80db39d72968cc4a130d4d075ea24a&oe=5BE80A4C"),
+                          ),
+                          //_buildFollowerInfo(textTheme),
+                          _buildActionButtons(Theme.of(context)),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
-
           ],
         ),
       ),
     );
   }
+  Widget _createPillButton(
+      String text, {
+        Color backgroundColor = Colors.transparent,
+        Color textColor = Colors.white70,
+      }) {
+    return new ClipRRect(
+      borderRadius: new BorderRadius.circular(30.0),
+      child: new MaterialButton(
+        minWidth: 140.0,
+        color: backgroundColor,
+        textColor: textColor,
+        onPressed: () {},
+        child: new Text(text),
+      ),
+    );
+  }
+  Widget _buildActionButtons(ThemeData theme) {
+    return new Padding(
+      padding: const EdgeInsets.only(
+        top: 16.0,
+        left: 16.0,
+        right: 16.0,
+      ),
+      child: new Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          _createPillButton(
+            'HIRE ME',
+            backgroundColor: Colors.transparent,
+          ),
+          new DecoratedBox(
+            decoration: new BoxDecoration(
+              border: new Border.all(color: Colors.white30),
+              borderRadius: new BorderRadius.circular(30.0),
+            ),
+            child: _createPillButton(
+              'FOLLOW',
+              textColor: Colors.white70,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
 }

@@ -443,6 +443,13 @@
             </list>
           </value>
         </entry>
+        <entry key="zoomable_image">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/zoomable_image-1.1.2/lib" />
+            </list>
+          </value>
+        </entry>
       </option>
     </properties>
     <CLASSES>
@@ -506,6 +513,7 @@
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/watcher-0.9.7+7/lib" />
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/web_socket_channel-1.0.7/lib" />
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/yaml-2.1.13/lib" />
+      <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/zoomable_image-1.1.2/lib" />
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/bin/cache/pkg/sky_engine/lib" />
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/packages/flutter/lib" />
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/packages/flutter_test/lib" />
