@@ -1,11 +1,10 @@
+import 'package:Namaste/views/Settings_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 class ContactsDemo extends StatefulWidget {
   @override
   ContactsDemoState createState() => new ContactsDemoState();
 }
-
-enum AppBarBehavior { normal, pinned, floating, snapping }
 
 class ContactsDemoState extends State<ContactsDemo> {
   static final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -39,10 +38,12 @@ class ContactsDemoState extends State<ContactsDemo> {
                     ));
                   },
                 ),
-                new IconButton(icon: Icon(Icons.settings), onPressed: (){})
+                new IconButton(icon: Icon(Icons.settings), onPressed: (){
+                  Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new SettingsScreen()));
+                })
               ],
               flexibleSpace: new FlexibleSpaceBar(
-                title: const Text('Ali Connors'),
+                title: const Text('Pranav Kapoor'),
                 background: new Stack(
                   fit: StackFit.expand,
                   children: <Widget>[
@@ -60,18 +61,21 @@ class ContactsDemoState extends State<ContactsDemo> {
                         ),
                       ),
                     ),
-                    new Align(
-                      alignment: FractionalOffset.bottomCenter,
-                      heightFactor: 1.4,
-                      child: new Column(
-                        children: <Widget>[
-                          new CircleAvatar(
-                            radius: 50.0,
-                            backgroundImage: NetworkImage("https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/11230099_10206835592669367_2911893136176495642_n.jpg?_nc_cat=0&oh=eb80db39d72968cc4a130d4d075ea24a&oe=5BE80A4C"),
-                          ),
-                          //_buildFollowerInfo(textTheme),
-                          _buildActionButtons(Theme.of(context)),
-                        ],
+                    Padding(
+                      padding: const EdgeInsetsDirectional.only(top: 55.0),
+                      child: new Align(
+                        alignment: FractionalOffset.center,
+                        heightFactor: 1.4,
+                        child: new Column(
+                          children: <Widget>[
+                            new CircleAvatar(
+                              radius: 45.0,
+                              backgroundImage: NetworkImage("https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/11230099_10206835592669367_2911893136176495642_n.jpg?_nc_cat=0&oh=eb80db39d72968cc4a130d4d075ea24a&oe=5BE80A4C"),
+                            ),
+                            _buildFollowerInfo(),
+                            _buildActionButtons(Theme.of(context)),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -123,6 +127,19 @@ class ContactsDemoState extends State<ContactsDemo> {
               textColor: Colors.white70,
             ),
           ),
+        ],
+      ),
+    );
+  }
+  Widget _buildFollowerInfo() {
+    return new Padding(
+      padding: const EdgeInsets.only(top: 16.0),
+      child: new Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          new Text('90 Following',style: new TextStyle(color: Colors.white70),),
+          new Text(' | '),
+          new Text('100 Followers',style: new TextStyle(color: Colors.white70)),
         ],
       ),
     );
