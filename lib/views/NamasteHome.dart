@@ -109,22 +109,22 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
               )
           ),
           child: new NestedScrollView(
-              controller: _scrollViewController,
-              headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-                return <Widget>[
+            controller: _scrollViewController,
+            headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+              return <Widget>[
                 _searchClicked?_searchAppBar(innerBoxIsScrolled):_normalAppBar(innerBoxIsScrolled),
               ];
-              },
-              body: new TabBarView(
-                controller: _tabController,
-                children: <Widget>[
-                  new ContactsDemo(),
-                  new ChatScreen(),
-                  new ContactsDemo(),
-                  new CameraScreen(),
-                ],
-              ),
+            },
+            body: new TabBarView(
+              controller: _tabController,
+              children: <Widget>[
+                new ContactsDemo(),
+                new ChatScreen(),
+                new ContactsDemo(),
+                new CameraScreen(),
+              ],
             ),
+          ),
         ),
       ),
       onWillPop: (){return new Future<bool>.value(false);},
@@ -140,15 +140,15 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
     });}),title: searchTextField);
     return new SliverAppBar(
       title:  new Container(
-          margin: EdgeInsets.all(5.0),
-          width: _iconAnimation.value * 1400.0,
-          decoration: BoxDecoration(boxShadow: [
-            BoxShadow(
-                blurRadius: .5,
-                spreadRadius: 0.0,
-                color: Colors.black.withOpacity(.12))
-          ],),
-          child: searchTile,
+        margin: EdgeInsets.all(5.0),
+        width: _iconAnimation.value * 1400.0,
+        decoration: BoxDecoration(boxShadow: [
+          BoxShadow(
+              blurRadius: .5,
+              spreadRadius: 0.0,
+              color: Colors.black.withOpacity(.12))
+        ],),
+        child: searchTile,
       ),
       elevation: 0.7,
       backgroundColor: Colors.transparent,
@@ -198,7 +198,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
 
 
 
-@override
+  @override
   void dispose() {
     super.dispose();
     _scrollViewController.dispose();

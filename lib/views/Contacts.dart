@@ -21,8 +21,9 @@ class ContactsDemoState extends State<ContactsDemo> {
       ),
       child: new Scaffold(
         key: _scaffoldKey,
-        body: new CustomScrollView(
-          slivers: <Widget>[
+        body: new NestedScrollView(
+            headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+              return <Widget>[
             new SliverAppBar(
               leading: Text(""),
               expandedHeight: _appBarHeight,
@@ -82,7 +83,57 @@ class ContactsDemoState extends State<ContactsDemo> {
                 ),
               ),
             ),
-          ],
+          ];},
+          body: Scaffold(
+            backgroundColor: Colors.white,
+            body:Padding(
+              padding: const EdgeInsets.all(22.0),
+              child: new Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                new Padding(
+                  padding: const EdgeInsets.only(top: 4.0),
+                  child: Row(
+                    children: <Widget>[
+                      new Icon(
+                        Icons.place,
+                        color: Colors.red,
+                        size: 16.0,
+                      ),
+                      new Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: new Text(
+                          "location",
+                          style: new TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                new Padding(
+                  padding: const EdgeInsets.only(top: 16.0),
+                  child: new Text(
+                    'Lorem Ipsum is simply dummy text of the printing and typesetting '
+                        'industry. Lorem Ipsum has been the industry\'s standard dummy '
+                        'text ever since the 1500s.',
+                    style:
+                    new TextStyle(color: Colors.black, fontSize: 16.0),
+                  ),
+                ),
+                new Padding(
+                  padding: const EdgeInsets.only(top: 16.0),
+                  child: new Row(
+                    children: <Widget>[
+                      _createCircleBadge(Icons.beach_access, Colors.black12),
+                      _createCircleBadge(Icons.cloud, Colors.black12),
+                      _createCircleBadge(Icons.shop, Colors.black12),
+                    ],
+                  ),
+                ),
+              ],
+          ),
+            ),
+          ),
         ),
       ),
     );
@@ -95,7 +146,7 @@ class ContactsDemoState extends State<ContactsDemo> {
     return new ClipRRect(
       borderRadius: new BorderRadius.circular(30.0),
       child: new MaterialButton(
-        minWidth: 140.0,
+        minWidth: 120.0,
         color: backgroundColor,
         textColor: textColor,
         onPressed: () {},
@@ -113,9 +164,15 @@ class ContactsDemoState extends State<ContactsDemo> {
       child: new Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          _createPillButton(
+          new DecoratedBox(
+            decoration: new BoxDecoration(
+            border: new Border.all(color: Colors.white30),
+            borderRadius: new BorderRadius.circular(30.0),
+            ),
+          child:_createPillButton(
             'HIRE ME',
             backgroundColor: Colors.transparent,
+          ),
           ),
           new DecoratedBox(
             decoration: new BoxDecoration(
@@ -145,4 +202,19 @@ class ContactsDemoState extends State<ContactsDemo> {
     );
   }
 
+
+  Widget _createCircleBadge(IconData iconData, Color color) {
+    return new Padding(
+      padding: const EdgeInsets.only(left: 8.0),
+      child: new CircleAvatar(
+        backgroundColor: color,
+        child: new Icon(
+          iconData,
+          color: Colors.black,
+          size: 16.0,
+        ),
+        radius: 16.0,
+      ),
+    );
+  }
 }
