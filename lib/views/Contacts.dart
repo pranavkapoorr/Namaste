@@ -255,11 +255,8 @@ class ContactsDemoState extends State<ContactsDemo> {
     );
   }
   Widget _albumImage(Image image){
-    return Padding(
-      padding: const EdgeInsets.all(2.0),
-      child: SizedBox(
-        child: IconButton(icon: image, onPressed:(){onImageTap(image);}),
-      ),
+    return Container(
+      child: IconButton(iconSize: 100.0,icon: image, onPressed:(){onImageTap(image);}),
     );
   }
   Widget _album() {
@@ -276,7 +273,6 @@ class ContactsDemoState extends State<ContactsDemo> {
     );
   }
   void onImageTap(Image img){
-    showDialog(context: this.context,child: Container(child: img,));
-
+    showDialog(context: this.context,child: AlertDialog(content: Container(child: img,),));
   }
 }

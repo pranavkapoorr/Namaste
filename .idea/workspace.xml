@@ -8,13 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af31b5df-b2e0-4a65-9af3-7d12a46f2dad" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins" afterPath="$PROJECT_DIR$/.flutter-plugins" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/lib/views/Contacts.dart" afterPath="$PROJECT_DIR$/lib/views/Contacts.dart" />
-      <change beforePath="$PROJECT_DIR$/lib/views/NamasteHome.dart" afterPath="$PROJECT_DIR$/lib/views/NamasteHome.dart" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" afterPath="$PROJECT_DIR$/pubspec.yaml" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -81,8 +76,8 @@
       <file leaf-file-name="Contacts.dart" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/views/Contacts.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="278" column="8" lean-forward="false" selection-start-line="278" selection-start-column="8" selection-end-line="278" selection-end-column="8" />
+            <state relative-caret-position="120">
+              <caret line="254" column="6" lean-forward="true" selection-start-line="254" selection-start-column="6" selection-end-line="254" selection-end-column="6" />
               <folding>
                 <element signature="e#0#52#0" expanded="true" />
               </folding>
@@ -476,13 +471,6 @@
       <option name="presentableId" value="Default" />
       <updated>1526910296971</updated>
     </task>
-    <task id="LOCAL-00012" summary="fixed time-conflict in chat">
-      <created>1529698356893</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1529698356893</updated>
-    </task>
     <task id="LOCAL-00013" summary="fixed chatmessages layout">
       <created>1529785930893</created>
       <option name="number" value="00013" />
@@ -819,7 +807,14 @@
       <option name="project" value="LOCAL" />
       <updated>1531691355300</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="myprof kinda done">
+      <created>1531765295847</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1531765295847</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TodoView">
@@ -872,7 +867,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed chatthread and added local-db" />
     <MESSAGE value="chatscreen sorted" />
     <MESSAGE value="chatThread messages sorted" />
     <MESSAGE value="chatThread margin reduced font inc" />
@@ -897,7 +891,8 @@
     <MESSAGE value="myprofile started" />
     <MESSAGE value="myprof header done" />
     <MESSAGE value="myprof body started" />
-    <option name="LAST_COMMIT_MESSAGE" value="myprof body started" />
+    <MESSAGE value="myprof kinda done" />
+    <option name="LAST_COMMIT_MESSAGE" value="myprof kinda done" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1251,8 +1246,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/views/Contacts.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="278" column="8" lean-forward="false" selection-start-line="278" selection-start-column="8" selection-end-line="278" selection-end-column="8" />
+        <state relative-caret-position="120">
+          <caret line="254" column="6" lean-forward="true" selection-start-line="254" selection-start-column="6" selection-end-line="254" selection-end-column="6" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
           </folding>
