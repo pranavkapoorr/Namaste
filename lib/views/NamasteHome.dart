@@ -57,7 +57,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
       _myNumber = sp.getString("myNumber");
     });
     _scrollViewController = new ScrollController(keepScrollOffset: true);
-    _tabController = new TabController(vsync: this, initialIndex: 1, length: 4);
+    _tabController = new TabController(vsync: this, initialIndex: 2, length: 4);
     _tabController.addListener(_updateCurrentTab);
     _iconAnimationController = new AnimationController(
         vsync: this, duration: new Duration(seconds: 1));

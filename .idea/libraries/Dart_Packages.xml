@@ -37,6 +37,13 @@
             </list>
           </value>
         </entry>
+        <entry key="carousel">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/carousel-0.0.1/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="charcode">
           <value>
             <list>
@@ -355,7 +362,7 @@
         <entry key="sqflite">
           <value>
             <list>
-              <option value="$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-0.11.0/lib" />
+              <option value="$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-0.11.0+1/lib" />
             </list>
           </value>
         </entry>
@@ -443,13 +450,6 @@
             </list>
           </value>
         </entry>
-        <entry key="zoomable_image">
-          <value>
-            <list>
-              <option value="$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/zoomable_image-1.1.2/lib" />
-            </list>
-          </value>
-        </entry>
       </option>
     </properties>
     <CLASSES>
@@ -458,6 +458,7 @@
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.0.7/lib" />
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/boolean_selector-1.0.3/lib" />
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/camera-0.2.1/lib" />
+      <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/carousel-0.0.1/lib" />
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/charcode-1.1.1/lib" />
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore-0.7.3/lib" />
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/collection-1.14.6/lib" />
@@ -500,7 +501,7 @@
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/source_map_stack_trace-1.1.4/lib" />
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/source_maps-0.10.5/lib" />
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/source_span-1.4.0/lib" />
-      <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-0.11.0/lib" />
+      <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-0.11.0+1/lib" />
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/stack_trace-1.9.2/lib" />
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/stream_channel-1.6.6/lib" />
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/string_scanner-1.0.2/lib" />
@@ -513,7 +514,6 @@
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/watcher-0.9.7+7/lib" />
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/web_socket_channel-1.0.7/lib" />
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/yaml-2.1.13/lib" />
-      <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/zoomable_image-1.1.2/lib" />
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/bin/cache/pkg/sky_engine/lib" />
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/packages/flutter/lib" />
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/packages/flutter_test/lib" />

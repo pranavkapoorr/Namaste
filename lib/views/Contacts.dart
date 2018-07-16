@@ -1,18 +1,24 @@
 import 'package:Namaste/views/Settings_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:carousel/carousel.dart';
 class ContactsDemo extends StatefulWidget {
   @override
   ContactsDemoState createState() => new ContactsDemoState();
 }
 
 class ContactsDemoState extends State<ContactsDemo> {
-  static final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  final double _appBarHeight = 256.0;
+  final double _appBarHeight = 300.0;
 
 
   @override
   Widget build(BuildContext context) {
+    var carouselX = new Carousel(
+      children: [
+        new NetworkImage('https://pbs.twimg.com/profile_images/760249570085314560/yCrkrbl3_400x400.jpg'),
+        new NetworkImage('https://webinerds.com/app/uploads/2017/11/d49396_d9c5d967608d4bc1bcf09c9574eb67c9-mv2.png')
+      ].map((netImage) => new Image(image: netImage)).toList(),
+    );
     return new Theme(
       data: new ThemeData(
         brightness: Brightness.light,
@@ -20,23 +26,19 @@ class ContactsDemoState extends State<ContactsDemo> {
         platform: Theme.of(context).platform,
       ),
       child: new Scaffold(
-        key: _scaffoldKey,
         body: new NestedScrollView(
             headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
             new SliverAppBar(
               leading: Text(""),
               expandedHeight: _appBarHeight,
-              pinned: false,
+              pinned: true,
               floating: true,
               actions: <Widget>[
                 new IconButton(
                   icon: const Icon(Icons.create),
                   tooltip: 'Edit',
                   onPressed: () {
-                    _scaffoldKey.currentState.showSnackBar(const SnackBar(
-                        content: const Text("Editing isn't supported in this screen.")
-                    ));
                   },
                 ),
                 new IconButton(icon: Icon(Icons.settings), onPressed: (){
@@ -85,9 +87,9 @@ class ContactsDemoState extends State<ContactsDemo> {
             ),
           ];},
           body: Scaffold(
-            backgroundColor: Colors.white,
-            body:Padding(
-              padding: const EdgeInsets.all(22.0),
+            backgroundColor: Colors.black87.withOpacity(0.08),
+            body:Container(
+              //padding: const EdgeInsets.all(22.0),
               child: new Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -110,14 +112,49 @@ class ContactsDemoState extends State<ContactsDemo> {
                     ],
                   ),
                 ),
-                new Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
-                  child: new Text(
-                    'Lorem Ipsum is simply dummy text of the printing and typesetting '
-                        'industry. Lorem Ipsum has been the industry\'s standard dummy '
-                        'text ever since the 1500s.',
-                    style:
-                    new TextStyle(color: Colors.black, fontSize: 16.0),
+                new Container(
+                  padding: EdgeInsets.all(10.0),
+                  margin: EdgeInsetsDirectional.only(top: 5.0),
+                  decoration: BoxDecoration(color: Colors.white70),
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //mainAxisSize: MainAxisSize.max,
+                        children: <Widget>[
+                          new Text("Personal Info",style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.bold),),
+                          new Icon(Icons.navigate_next)
+                        ],
+                      ),
+                      new Text(
+                        'Lorem Ipsum is simply dummy text of the printing and typesetting '
+                            'industry. Lorem Ipsum has been the industry\'s standard dummy '
+                            'text ever since the 1500s.',
+                        style:
+                        new TextStyle(color: Colors.grey, fontSize: 13.0),
+                      ),
+                    ],
+                  ),
+                ),
+                new Container(
+                  padding: EdgeInsets.all(10.0),
+                  margin: EdgeInsetsDirectional.only(top: 5.0),
+                  decoration: BoxDecoration(color: Colors.white70),
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //mainAxisSize: MainAxisSize.max,
+                        children: <Widget>[
+                          new Text("Album",style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.bold),),
+                          new Icon(Icons.navigate_next)
+                        ],
+                      ),
+                      new Container(
+                        height: 100.0,
+                        child: _album(),
+                      )
+                    ],
                   ),
                 ),
                 new Padding(
@@ -216,5 +253,30 @@ class ContactsDemoState extends State<ContactsDemo> {
         radius: 16.0,
       ),
     );
+  }
+  Widget _albumImage(Image image){
+    return Padding(
+      padding: const EdgeInsets.all(2.0),
+      child: SizedBox(
+        child: IconButton(icon: image, onPressed:(){onImageTap(image);}),
+      ),
+    );
+  }
+  Widget _album() {
+    List<Widget> images = [
+      _albumImage(new Image(image: AssetImage("images/bg.jpg"))),
+      _albumImage(new Image(image: AssetImage("images/bg.jpg"))),
+      _albumImage(new Image(image: AssetImage("images/bg.jpg"))),
+      _albumImage(new Image(image: AssetImage("images/bg.jpg")))
+    ];
+    return new ListView(
+        padding: const EdgeInsets.only(top: 16.0),
+        scrollDirection: Axis.horizontal,
+        children: images
+    );
+  }
+  void onImageTap(Image img){
+    showDialog(context: this.context,child: Container(child: img,));
+
   }
 }
