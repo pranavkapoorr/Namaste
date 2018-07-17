@@ -1,6 +1,8 @@
+import 'package:Namaste/resources/UiResources.dart';
+import 'package:Namaste/views/EditProfile.dart';
 import 'package:flutter/material.dart';
 import 'AccountScreen.dart';
-import 'Contacts.dart';
+import 'Profile.dart';
 import 'NotificationScreen.dart';
 import 'dart:async';
 
@@ -15,15 +17,7 @@ class _SettingsScreenState extends State<SettingsScreen>{
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(gradient: new LinearGradient(
-        begin: FractionalOffset.topCenter,
-        end: FractionalOffset.bottomCenter,
-        colors: [
-          const Color.fromARGB(255, 253, 72, 72),
-          const Color.fromARGB(255, 87, 97, 249),
-        ],
-        stops: [0.0, 1.0],
-      )),
+      decoration: BoxDecoration(gradient:myGradient,),
       child: new Scaffold(
         backgroundColor: Colors.transparent,
         appBar: new AppBar(title: new Text("Settings",style: TextStyle(color: Colors.white),),backgroundColor: Colors.transparent,),
@@ -45,13 +39,13 @@ class _SettingsScreenState extends State<SettingsScreen>{
                children: <Widget>[ new Column(
                   children: <Widget>[
 
-                    new ListTile(leading:Icon(Icons.border_color,color: Colors.blue,),title: Text("Edit Profile"),trailing: Icon(Icons.navigate_next),),
+                    new ListTile(leading:Icon(Icons.border_color,color: Colors.blue,),title: Text("Edit Profile"),onTap: _editProfilePage,trailing: Icon(Icons.navigate_next),),
                     new Divider(height: 1.0,color: Colors.black,),
-                    new ListTile(leading: new Icon(Icons.vpn_key,color:Colors.green),title:Text("Account"),onTap: _accountPage,),
+                    new ListTile(leading: new Icon(Icons.vpn_key,color:Colors.green),title:Text("Account"),onTap: _accountPage,trailing: Icon(Icons.navigate_next)),
                     new Divider(height: 1.0,color: Colors.black,),
-                    new ListTile(leading: new Icon(Icons.notifications,color:Colors.yellowAccent),title: new Text("Notifications"),onTap: _notificationsPage,),
+                    new ListTile(leading: new Icon(Icons.notifications,color:Colors.yellowAccent),title: new Text("Notifications"),onTap: _notificationsPage,trailing: Icon(Icons.navigate_next)),
                     new Divider(height: 1.0,color: Colors.black,),
-                    new ListTile(leading: new Icon(Icons.help,color:Colors.redAccent),title: new Text("Help and FeedBack"),onTap: _testDbPage,)
+                    new ListTile(leading: new Icon(Icons.help,color:Colors.redAccent),title: new Text("Help and FeedBack"),onTap: _testDbPage,trailing: Icon(Icons.navigate_next))
 
                   ],
                 ) ]),
@@ -60,6 +54,9 @@ class _SettingsScreenState extends State<SettingsScreen>{
       ),
     );
   }
+  Future _editProfilePage(){
+    return Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new EditProfile()));
+  }
   Future _accountPage(){
     return Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new AccountScreen()));
   }
@@ -67,7 +64,7 @@ class _SettingsScreenState extends State<SettingsScreen>{
     return Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new NotificationScreen()));
   }
   Future _testDbPage(){
-    return Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new ContactsDemo()));
+    return Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new Profile()));
   }
 
 }

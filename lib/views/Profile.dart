@@ -1,24 +1,30 @@
 import 'package:Namaste/views/Settings_Screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:carousel/carousel.dart';
-class ContactsDemo extends StatefulWidget {
+class Profile extends StatefulWidget {
   @override
-  ContactsDemoState createState() => new ContactsDemoState();
+  _ProfileState createState() => new _ProfileState();
 }
 
-class ContactsDemoState extends State<ContactsDemo> {
+class _ProfileState extends State<Profile> {
   final double _appBarHeight = 300.0;
+  var carouselX;
 
+  @override
+  initState(){
+    super.initState();
+    carouselX = new Carousel(
+      animationDuration: Duration(seconds: 2),
+      displayDuration: Duration(seconds: 5),
+      children: [
+        AssetImage("images/bg.jpg"),
+        AssetImage("images/bg.jpg")
+      ].map((netImage) => new Image(image: netImage,fit: BoxFit.cover,)).toList(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    var carouselX = new Carousel(
-      children: [
-        new NetworkImage('https://pbs.twimg.com/profile_images/760249570085314560/yCrkrbl3_400x400.jpg'),
-        new NetworkImage('https://webinerds.com/app/uploads/2017/11/d49396_d9c5d967608d4bc1bcf09c9574eb67c9-mv2.png')
-      ].map((netImage) => new Image(image: netImage)).toList(),
-    );
     return NestedScrollView(
             headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
@@ -44,11 +50,12 @@ class ContactsDemoState extends State<ContactsDemo> {
               background: new Stack(
                 fit: StackFit.expand,
                 children: <Widget>[
-                  new Image.asset(
+                  carouselX,
+                  /*new Image.asset(
                     'images/bg.jpg',
                     fit: BoxFit.cover,
                     height: _appBarHeight,
-                  ),
+                  ),*/
                   const DecoratedBox(
                     decoration: const BoxDecoration(
                       gradient: const LinearGradient(
@@ -87,21 +94,28 @@ class ContactsDemoState extends State<ContactsDemo> {
              Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                new Padding(
-                  padding: const EdgeInsets.only(top: 4.0),
-                  child: Row(
+                new Container(
+                  padding: EdgeInsets.all(10.0),
+                  decoration: BoxDecoration(color: Colors.white70),
+                  child: Column(
                     children: <Widget>[
-                      new Icon(
-                        Icons.place,
-                        color: Colors.red,
-                        size: 16.0,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //mainAxisSize: MainAxisSize.max,
+                        children: <Widget>[
+                          new Text("Location",style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.bold),),
+                          new Icon(Icons.navigate_next)
+                        ],
                       ),
-                      new Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
-                        child: new Text(
-                          "location",
-                          style: new TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
-                        ),
+                      Row(
+                        children: <Widget>[
+                          Icon(Icons.place,color: Colors.red,),
+                          new Text(
+                            'Britain',
+                            style:
+                            new TextStyle(color: Colors.grey, fontSize: 15.0),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -248,9 +262,7 @@ class ContactsDemoState extends State<ContactsDemo> {
     );
   }
   Widget _albumImage(Image image){
-    return Container(
-      child: IconButton(iconSize: 100.0,icon: image, onPressed:(){onImageTap(image);}),
-    );
+    return  GestureDetector(onTap:(){onImageTap(image);},child: Container(margin: EdgeInsets.all(1.0),child:image));
   }
   Widget _album() {
     List<Widget> images = [
@@ -259,13 +271,20 @@ class ContactsDemoState extends State<ContactsDemo> {
       _albumImage(new Image(image: AssetImage("images/bg.jpg"))),
       _albumImage(new Image(image: AssetImage("images/bg.jpg")))
     ];
-    return new ListView(
-        padding: const EdgeInsets.only(top: 16.0),
-        scrollDirection: Axis.horizontal,
-        children: images
+    return Container(
+      color: Colors.black.withOpacity(0.1),
+      child: new ListView(
+          scrollDirection: Axis.horizontal,
+          children: images
+      ),
     );
   }
   void onImageTap(Image img){
-    showDialog(context: this.context,child: AlertDialog(content: Container(child: img,),));
+    showDialog(context: this.context,child: AlertDialog(content: Container(child: img,),contentPadding: EdgeInsets.all(0.0),));
+  }
+  @override
+  void dispose() {
+    carouselX = null;
+    super.dispose();
   }
 }
