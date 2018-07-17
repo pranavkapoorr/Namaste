@@ -7,7 +7,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  final double _appBarHeight = 300.0;
+  final double _appBarHeight = 267.0;
   var carouselX;
 
   @override
