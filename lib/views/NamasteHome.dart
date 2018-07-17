@@ -34,7 +34,6 @@ class NamasteHome extends StatefulWidget {
 }
 
 class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin{
-  ScrollController _scrollViewController;
   TabController _tabController;
   String _myNumber;
   int _currentTab = 1;
@@ -94,7 +93,6 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
   @override
   void dispose() {
     super.dispose();
-    _scrollViewController.dispose();
     _tabController.dispose();
     _tabController.removeListener(_updateCurrentTab);
   }

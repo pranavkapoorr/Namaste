@@ -6,9 +6,9 @@ class Profile extends StatefulWidget {
   _ProfileState createState() => new _ProfileState();
 }
 
-class _ProfileState extends State<Profile> {
+class _ProfileState extends State<Profile> with TickerProviderStateMixin{
   final double _appBarHeight = 267.0;
-  var carouselX;
+  Carousel carouselX;
 
   @override
   initState(){
