@@ -19,78 +19,72 @@ class ContactsDemoState extends State<ContactsDemo> {
         new NetworkImage('https://webinerds.com/app/uploads/2017/11/d49396_d9c5d967608d4bc1bcf09c9574eb67c9-mv2.png')
       ].map((netImage) => new Image(image: netImage)).toList(),
     );
-    return new Theme(
-      data: new ThemeData(
-        brightness: Brightness.light,
-        primarySwatch: Colors.indigo,
-        platform: Theme.of(context).platform,
-      ),
-      child: new Scaffold(
-        body: new NestedScrollView(
+    return NestedScrollView(
             headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-              return <Widget>[
-            new SliverAppBar(
-              leading: Text(""),
-              expandedHeight: _appBarHeight,
-              pinned: true,
-              floating: true,
-              actions: <Widget>[
-                new IconButton(
-                  icon: const Icon(Icons.create),
-                  tooltip: 'Edit',
-                  onPressed: () {
-                  },
-                ),
-                new IconButton(icon: Icon(Icons.settings), onPressed: (){
-                  Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new SettingsScreen()));
-                })
-              ],
-              flexibleSpace: new FlexibleSpaceBar(
-                title: const Text('Pranav Kapoor'),
-                background: new Stack(
-                  fit: StackFit.expand,
-                  children: <Widget>[
-                    new Image.asset(
-                      'images/bg.jpg',
-                      fit: BoxFit.cover,
-                      height: _appBarHeight,
-                    ),
-                    const DecoratedBox(
-                      decoration: const BoxDecoration(
-                        gradient: const LinearGradient(
-                          begin: const Alignment(0.0, -1.0),
-                          end: const Alignment(0.0, -0.4),
-                          colors: const <Color>[const Color(0x60000000), const Color(0x00000000)],
-                        ),
+            return <Widget>[
+          new SliverAppBar(
+            backgroundColor: Colors.transparent,
+            leading: Text(""),
+            expandedHeight: _appBarHeight,
+            pinned: true,
+            floating: true,
+            actions: <Widget>[
+              new IconButton(
+                icon: const Icon(Icons.create,color: Colors.white,),
+                tooltip: 'Edit',
+                onPressed: () {
+                },
+              ),
+              new IconButton(icon: Icon(Icons.settings,color: Colors.white,), onPressed: (){
+                Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new SettingsScreen()));
+              })
+            ],
+            flexibleSpace: new FlexibleSpaceBar(
+              title: const Text('Pranav Kapoor',style: TextStyle(color: Colors.white),),
+              background: new Stack(
+                fit: StackFit.expand,
+                children: <Widget>[
+                  new Image.asset(
+                    'images/bg.jpg',
+                    fit: BoxFit.cover,
+                    height: _appBarHeight,
+                  ),
+                  const DecoratedBox(
+                    decoration: const BoxDecoration(
+                      gradient: const LinearGradient(
+                        begin: const Alignment(0.0, -1.0),
+                        end: const Alignment(0.0, -0.4),
+                        colors: const <Color>[const Color(0x60000000), const Color(0x00000000)],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsetsDirectional.only(top: 55.0),
-                      child: new Align(
-                        alignment: FractionalOffset.center,
-                        heightFactor: 1.4,
-                        child: new Column(
-                          children: <Widget>[
-                            new CircleAvatar(
-                              radius: 45.0,
-                              backgroundImage: NetworkImage("https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/11230099_10206835592669367_2911893136176495642_n.jpg?_nc_cat=0&oh=eb80db39d72968cc4a130d4d075ea24a&oe=5BE80A4C"),
-                            ),
-                            _buildFollowerInfo(),
-                            _buildActionButtons(Theme.of(context)),
-                          ],
-                        ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(top: 55.0),
+                    child: new Align(
+                      alignment: FractionalOffset.center,
+                      heightFactor: 1.4,
+                      child: new Column(
+                        children: <Widget>[
+                          new CircleAvatar(
+                            radius: 45.0,
+                            backgroundImage: NetworkImage("https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/11230099_10206835592669367_2911893136176495642_n.jpg?_nc_cat=0&oh=eb80db39d72968cc4a130d4d075ea24a&oe=5BE80A4C"),
+                          ),
+                          _buildFollowerInfo(),
+                          _buildActionButtons(Theme.of(context)),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-          ];},
-          body: Scaffold(
-            backgroundColor: Colors.black87.withOpacity(0.08),
-            body:Container(
-              //padding: const EdgeInsets.all(22.0),
-              child: new Column(
+          ),
+        ];},
+        body: Scaffold(
+          backgroundColor: Colors.blueGrey.shade100,
+          body: ListView(
+            children: <Widget>[
+             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 new Padding(
@@ -168,12 +162,11 @@ class ContactsDemoState extends State<ContactsDemo> {
                   ),
                 ),
               ],
-          ),
-            ),
+              ),
+            ],
           ),
         ),
-      ),
-    );
+      );
   }
   Widget _createPillButton(
       String text, {

@@ -1,4 +1,5 @@
 import 'package:Namaste/views/Contacts.dart';
+import 'package:Namaste/views/Namaste.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'CameraScreen.dart';
@@ -57,7 +58,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
       _myNumber = sp.getString("myNumber");
     });
     _scrollViewController = new ScrollController(keepScrollOffset: true);
-    _tabController = new TabController(vsync: this, initialIndex: 2, length: 4);
+    _tabController = new TabController(vsync: this, initialIndex: 1, length: 3);
     _tabController.addListener(_updateCurrentTab);
     _iconAnimationController = new AnimationController(
         vsync: this, duration: new Duration(seconds: 1));
@@ -91,9 +92,8 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
           controller: _tabController,
           tabs: <Widget>[
             new Tab(icon: new Icon(Icons.person,size: 22.0,)),
+            new Tab(icon: new CircleAvatar(backgroundColor: Colors.transparent,child: Text("🙏")),),
             new Tab(icon: new Icon(Icons.message,size: 22.0,)),
-            new Tab(icon: new Icon(Icons.camera_alt,size: 22.0,)),
-            new Tab(icon: new CircleAvatar(backgroundColor: Colors.grey,child: Text("🙏")),),
           ],
         ),
         body: Container(
@@ -112,16 +112,16 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
             controller: _scrollViewController,
             headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
-                _searchClicked?_searchAppBar(innerBoxIsScrolled):_normalAppBar(innerBoxIsScrolled),
+                //_searchClicked?_searchAppBar(innerBoxIsScrolled):_normalAppBar(innerBoxIsScrolled),
               ];
             },
             body: new TabBarView(
               controller: _tabController,
               children: <Widget>[
                 new ContactsDemo(),
+                new Namaste(),
                 new ChatScreen(),
-                new ContactsDemo(),
-                new CameraScreen(),
+
               ],
             ),
           ),
@@ -131,7 +131,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
     );
   }
 
-  SliverAppBar _searchAppBar(bool innerBoxIsScrolled){
+  /*SliverAppBar _searchAppBar(bool innerBoxIsScrolled){
     _iconAnimationController.forward();
     var searchTextField = new TextField(decoration: new InputDecoration(hintText: "         search here",suffixIcon: new Icon(Icons.search),border: InputBorder.none),);
     var searchTile = new ListTile(leading: new IconButton(icon: new Icon(Icons.arrow_back), onPressed: (){setState(() {
@@ -194,7 +194,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
         ),
       ],
     );
-  }
+  }*/
 
 
 

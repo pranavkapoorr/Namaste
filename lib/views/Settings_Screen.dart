@@ -14,46 +14,50 @@ class _SettingsScreenState extends State<SettingsScreen>{
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(title: new Text("Settings"),),
-      body: Container(
-        padding: const EdgeInsets.all(8.0),
-        decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                  blurRadius: .5,
-                  spreadRadius: 1.0,
-                  color: Colors.black.withOpacity(.12))
-            ],
-            borderRadius:  BorderRadius.all(Radius.circular(5.0))
-        ),
-        child: Container(
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.0),
-            color: Colors.white,),
-          child: new ListView(
-             children: <Widget>[ new Column(
-                children: <Widget>[
-
-                  new ListTile(title: new Text("Pranav Kapoor",style: new TextStyle(fontSize: 20.0,fontWeight: FontWeight.w400),),
-                      leading: new IconButton(
-                        icon:new CircleAvatar(
-                          backgroundImage: new NetworkImage("https://i.pinimg.com/736x/34/77/c3/3477c3b54457ef50c2e03bdaa7b3fdc5.jpg"),
-                          backgroundColor: Colors.grey,foregroundColor: Colors.transparent,
-                          radius: 50.0,),
-                        onPressed: null,iconSize: 50.0,),
-                      subtitle: new Text("    Hi there I am using Namaste..!"),
-                    onTap: null,
-                    isThreeLine: true,
-                  ),
-                  new Divider(height: 1.0,color: Colors.black,),
-                  new ListTile(title: new Text("Account"),leading: new Icon(Icons.vpn_key,color:Colors.black),onTap: _accountPage,),
-                  new ListTile(title: new Text("Notifications"),leading: new Icon(Icons.notifications,color:Colors.black),onTap: _notificationsPage,),
-                  new ListTile(title: new Text("Help"),leading: new Icon(Icons.help,color:Colors.black),onTap: _testDbPage,)
-
-                ],
-              ) ]),
+    return Container(
+      decoration: BoxDecoration(gradient: new LinearGradient(
+        begin: FractionalOffset.topCenter,
+        end: FractionalOffset.bottomCenter,
+        colors: [
+          const Color.fromARGB(255, 253, 72, 72),
+          const Color.fromARGB(255, 87, 97, 249),
+        ],
+        stops: [0.0, 1.0],
+      )),
+      child: new Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: new AppBar(title: new Text("Settings",style: TextStyle(color: Colors.white),),backgroundColor: Colors.transparent,),
+        body: Container(
+          padding: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                    blurRadius: .5,
+                    spreadRadius: 1.0,
+                    color: Colors.black.withOpacity(.12))
+              ],
+              borderRadius:  BorderRadius.all(Radius.circular(5.0))
           ),
-      )
+          child: Container(
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.0),
+              color: Colors.white,),
+            child: new ListView(
+               children: <Widget>[ new Column(
+                  children: <Widget>[
+
+                    new ListTile(leading:Icon(Icons.border_color,color: Colors.blue,),title: Text("Edit Profile"),trailing: Icon(Icons.navigate_next),),
+                    new Divider(height: 1.0,color: Colors.black,),
+                    new ListTile(leading: new Icon(Icons.vpn_key,color:Colors.green),title:Text("Account"),onTap: _accountPage,),
+                    new Divider(height: 1.0,color: Colors.black,),
+                    new ListTile(leading: new Icon(Icons.notifications,color:Colors.yellowAccent),title: new Text("Notifications"),onTap: _notificationsPage,),
+                    new Divider(height: 1.0,color: Colors.black,),
+                    new ListTile(leading: new Icon(Icons.help,color:Colors.redAccent),title: new Text("Help and FeedBack"),onTap: _testDbPage,)
+
+                  ],
+                ) ]),
+            ),
+        )
+      ),
     );
   }
   Future _accountPage(){
