@@ -48,26 +48,32 @@ class _AccountScreenState extends State<AccountScreen>{
                 ],
                 borderRadius:  BorderRadius.all(Radius.circular(5.0))
             ),
-            child: Container(
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.0),
-                color: Colors.white,),
-              child: new ListView(
-                  children: <Widget>[
-                        new ListTile(leading: new Icon(Icons.phone_android,color:Colors.green),title: new Text("Change Your Number"),
-                          onTap: (){
-                          setState(() {
-                            _loggedIn = false;
-                            persist(_loggedIn);
-                          });
-                            print("logged out");
-                            _rootPage();
+            child: ListView(
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.0),color: Colors.white,),
+                  child: new Column(
+                    mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                            new ListTile(leading: new Icon(Icons.phone_android,color:Colors.green),title: new Text("Change Your Number"),
+                              onTap: (){
+                              setState(() {
+                                _loggedIn = false;
+                                persist(_loggedIn);
+                              });
+                                print("logged out");
+                                _rootPage();
 
-                          },),
-                        new ListTile(leading: new Icon(Icons.delete_outline,color:Colors.redAccent),title: new Text("Delete Your Account"),),
-                        new ListTile(leading: new Icon(Icons.business_center,color:Colors.amber),title: new Text("Terms & Conditions"),)
-                      ]
-              ),
-                ),
+                              },trailing: Icon(Icons.navigate_next),),
+                            new Divider(height: 1.0,color: Colors.black,),
+                            new ListTile(leading: new Icon(Icons.delete_outline,color:Colors.redAccent),title: new Text("Delete Your Account"),trailing: Icon(Icons.navigate_next),),
+                            new Divider(height: 1.0,color: Colors.black,),
+                            new ListTile(leading: new Icon(Icons.business_center,color:Colors.amber),title: new Text("Terms & Conditions"),trailing: Icon(Icons.navigate_next),)
+                          ]
+                  ),
+                    ),
+              ],
+            ),
             ),
           )
     );
