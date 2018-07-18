@@ -31,12 +31,22 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
     for(int i =0; i < 33;i++){
       tiles.add(
           GridTile(
-            header: Container(margin: EdgeInsets.all(6.0),color:Colors.black.withOpacity(0.9),child: Text("Pranav Kapoor",style: TextStyle(color: Colors.white),),),
+            header:Container(
+              margin: EdgeInsets.all(6.0),
+              color:Colors.black.withOpacity(0.9),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text("Pranav Kapoor",style: TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
             child:Container(
                 margin: EdgeInsets.all(6.0),
                 child:Image(
                   width: 40.0,
-                  height: 50.0,
+                  height: 60.0,
                   image: NetworkImage("https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/11230099_10206835592669367_2911893136176495642_n.jpg?_nc_cat=0&oh=eb80db39d72968cc4a130d4d075ea24a&oe=5BE80A4C")
                 ),
             )
@@ -55,7 +65,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
           body: new Scaffold(
             backgroundColor: Colors.white.withOpacity(0.6),
             body: GridView(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1),
               children: tiles
             ),
           ),
