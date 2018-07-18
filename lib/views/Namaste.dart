@@ -62,13 +62,10 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
               _searchClicked?_searchAppBar(innerBoxIsScrolled):_normalAppBar(innerBoxIsScrolled),
             ];
           },
-          body: new Scaffold(
-            backgroundColor: Colors.white.withOpacity(0.6),
-            body: GridView(
+          body: GridView(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1),
               children: tiles
             ),
-          ),
       );
   }
   SliverAppBar _searchAppBar(bool innerBoxIsScrolled){
@@ -92,7 +89,8 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
       ),
       elevation: 0.7,
       backgroundColor: Colors.transparent,
-      pinned: false,
+      pinned: true,
+      snap: true,
       floating: true,
       forceElevated: innerBoxIsScrolled,
     );
@@ -104,7 +102,8 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
       title: new Text("Namaste",style: new TextStyle(fontSize: 25.0,fontWeight: FontWeight.bold,fontFamily: "BeautifulX")),
       elevation: 0.7,
       backgroundColor: Colors.transparent,
-      pinned: false,
+      pinned: true,
+      snap: true,
       floating: true,
       forceElevated: innerBoxIsScrolled,
       actions: <Widget>[

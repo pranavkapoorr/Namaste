@@ -81,18 +81,18 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
             ),
           ),
         ];},
-        body: Scaffold(
-          backgroundColor: Colors.blueGrey.shade100,
-          body: ListView(
+        body: ListView(
             children: <Widget>[
-             Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                new Container(
-                  padding: EdgeInsets.all(10.0),
-                  decoration: BoxDecoration(color: Colors.white70),
-                  child: Column(
-                    children: <Widget>[
+              //Scaffold(
+              //backgroundColor: Colors.blueGrey.shade100,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Container(
+                    padding: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(color: Colors.white70),
+                    child: Column(
+                      children: <Widget>[
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         //mainAxisSize: MainAxisSize.max,
@@ -172,7 +172,6 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
               ),
             ],
           ),
-        ),
       );
   }
   Widget _createPillButton(
