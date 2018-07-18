@@ -113,7 +113,7 @@ class _EditProfileState extends State<EditProfile>{
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: <Widget>[
-                                        Icon(Icons.receipt,color: Colors.green,size: 35.0,),
+                                        Icon(Icons.description,color: Colors.green,size: 35.0,),
                                         Container(
                                             constraints: BoxConstraints(maxWidth: 300.0,maxHeight: 150.0),
                                             child:TextField(
