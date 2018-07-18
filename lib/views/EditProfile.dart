@@ -23,11 +23,11 @@ class _EditProfileState extends State<EditProfile>{
                 ],
                 borderRadius:  BorderRadius.all(Radius.circular(5.0))
             ),
-            child: Container(
+            child:new ListView(
+                children: <Widget>[ Container(
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.0),
                 color: Colors.blueGrey.shade100,),
-              child: new ListView(
-                  children: <Widget>[
+              child:
                     new Column(
                       children: <Widget>[
                         Container(
@@ -104,7 +104,7 @@ class _EditProfileState extends State<EditProfile>{
                         Container(
                           color: Colors.white70,
                           padding: EdgeInsets.all(10.0),
-                          margin: EdgeInsetsDirectional.only(top: 8.0,bottom: 5.0),
+                          margin: EdgeInsetsDirectional.only(top: 8.0,bottom: 15.0),
                           child: Column(
                               children: <Widget>[
                                 Row(children: <Widget>[Text("About Me",style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.bold),)],),
@@ -115,15 +115,17 @@ class _EditProfileState extends State<EditProfile>{
                                       children: <Widget>[
                                         Icon(Icons.description,color: Colors.green,size: 35.0,),
                                         Container(
-                                            constraints: BoxConstraints(maxWidth: 300.0,maxHeight: 150.0),
+                                            constraints: BoxConstraints(maxWidth: 300.0,maxHeight: 90.0),
                                             child:TextField(
                                               decoration: InputDecoration(
                                                   hintText: "short bio",
                                                   border: InputBorder.none
                                               ),
                                               maxLines: 5,
-                                              maxLength: 80,
+                                              maxLength: 150,
                                               maxLengthEnforced: true,
+                                              enabled: true,
+                                              keyboardType: TextInputType.multiline,
                                             )
                                         ),
                                       ],
@@ -135,8 +137,10 @@ class _EditProfileState extends State<EditProfile>{
                         )
 
                     ],
-                  ) ]),
-            ),
+                  )
+                )]
+              ),
+
           )
       ),
     );

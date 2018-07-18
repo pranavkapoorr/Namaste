@@ -35,13 +35,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
             pinned: true,
             floating: true,
             actions: <Widget>[
-              new IconButton(
-                icon: const Icon(Icons.create,color: Colors.white,),
-                tooltip: 'Edit',
-                onPressed: () {
-                },
-              ),
-              new IconButton(icon: Icon(Icons.settings,color: Colors.white,), onPressed: (){
+              new IconButton(icon: Icon(Icons.settings,color:Colors.white,), onPressed: (){
                 Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new SettingsScreen()));
               })
             ],
@@ -104,7 +98,6 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
                         //mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
                           new Text("Location",style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.bold),),
-                          new Icon(Icons.navigate_next)
                         ],
                       ),
                       Row(

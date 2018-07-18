@@ -36,19 +36,16 @@ class _SettingsScreenState extends State<SettingsScreen>{
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.0),
               color: Colors.white,),
             child: new ListView(
-               children: <Widget>[ new Column(
-                  children: <Widget>[
-
+               children: <Widget>[
                     new ListTile(leading:Icon(Icons.border_color,color: Colors.blue,),title: Text("Edit Profile"),onTap: _editProfilePage,trailing: Icon(Icons.navigate_next),),
                     new Divider(height: 1.0,color: Colors.black,),
                     new ListTile(leading: new Icon(Icons.vpn_key,color:Colors.green),title:Text("Account"),onTap: _accountPage,trailing: Icon(Icons.navigate_next)),
                     new Divider(height: 1.0,color: Colors.black,),
-                    new ListTile(leading: new Icon(Icons.notifications,color:Colors.yellowAccent),title: new Text("Notifications"),onTap: _notificationsPage,trailing: Icon(Icons.navigate_next)),
+                    new ListTile(leading: new Icon(Icons.notifications,color:Colors.amberAccent),title: new Text("Notifications"),onTap: _notificationsPage,trailing: Icon(Icons.navigate_next)),
                     new Divider(height: 1.0,color: Colors.black,),
                     new ListTile(leading: new Icon(Icons.help,color:Colors.redAccent),title: new Text("Help and FeedBack"),onTap: _testDbPage,trailing: Icon(Icons.navigate_next))
-
-                  ],
-                ) ]),
+                  ]
+            ),
             ),
         )
       ),
