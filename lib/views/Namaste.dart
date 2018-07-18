@@ -10,7 +10,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
   Animation<double> _iconAnimation;
   AnimationController _iconAnimationController;
   bool _searchClicked = false;
-  List tiles = [];
+  List<Widget> tiles = [];
 
 
   @override
@@ -22,12 +22,27 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
       curve: Curves.easeIn,
     );
     _iconAnimation.addListener(() => this.setState(() {}));
+    _makeTiles();
     super.initState();
 
   }
 
   void _makeTiles(){
-
+    for(int i =0; i < 33;i++){
+      tiles.add(
+          GridTile(
+            header: Container(margin: EdgeInsets.all(6.0),color:Colors.black.withOpacity(0.9),child: Text("Pranav Kapoor",style: TextStyle(color: Colors.white),),),
+            child:Container(
+                margin: EdgeInsets.all(6.0),
+                child:Image(
+                  width: 40.0,
+                  height: 50.0,
+                  image: NetworkImage("https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/11230099_10206835592669367_2911893136176495642_n.jpg?_nc_cat=0&oh=eb80db39d72968cc4a130d4d075ea24a&oe=5BE80A4C")
+                ),
+            )
+          )
+      );
+    }
   }
   @override
   Widget build(BuildContext context){
@@ -40,14 +55,8 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
           body: new Scaffold(
             backgroundColor: Colors.white.withOpacity(0.6),
             body: GridView(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
-              children: <Widget>[GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),
-              GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),
-              GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),
-              GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),
-              GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),
-              GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),
-              GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),],
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+              children: tiles
             ),
           ),
       );
