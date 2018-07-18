@@ -10,6 +10,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
   Animation<double> _iconAnimation;
   AnimationController _iconAnimationController;
   bool _searchClicked = false;
+  List tiles = [];
 
 
   @override
@@ -22,8 +23,12 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
     );
     _iconAnimation.addListener(() => this.setState(() {}));
     super.initState();
+
   }
 
+  void _makeTiles(){
+
+  }
   @override
   Widget build(BuildContext context){
     return  NestedScrollView(
@@ -32,7 +37,19 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
               _searchClicked?_searchAppBar(innerBoxIsScrolled):_normalAppBar(innerBoxIsScrolled),
             ];
           },
-          body: new Scaffold(backgroundColor: Colors.white,),
+          body: new Scaffold(
+            backgroundColor: Colors.white.withOpacity(0.6),
+            body: GridView(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
+              children: <Widget>[GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),
+              GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),
+              GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),
+              GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),
+              GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),
+              GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),
+              GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),GridTile(child: Icon(Icons.person)),],
+            ),
+          ),
       );
   }
   SliverAppBar _searchAppBar(bool innerBoxIsScrolled){
@@ -75,27 +92,6 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
         new IconButton(icon:new Icon(Icons.search),onPressed: (){setState(() {
           _searchClicked = true;
         });},),
-        new Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5.0),
-        ),
-        new PopupMenuButton(
-          elevation: 10.0,
-          tooltip:"Settings",
-          icon: new Icon(Icons.more_vert) ,
-          onSelected: (dynamic value){
-            Navigator.push(context, new MaterialPageRoute(builder: (context)=>value));
-          },
-          itemBuilder: (BuildContext context) => <PopupMenuItem>[
-            new PopupMenuItem(
-                value: new SettingsScreen(),
-                child: new Text('Settings')
-            ),
-            new PopupMenuItem(
-                value: new LogoPage(),
-                child: new Text('About')
-            ),
-          ],
-        ),
       ],
     );
   }

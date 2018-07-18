@@ -47,9 +47,9 @@ class _SettingsScreenState extends State<SettingsScreen>{
                         new ListTile(leading: new Icon(Icons.notifications,color:Colors.amberAccent),title: new Text("Notifications"),onTap: _notificationsPage,trailing: Icon(Icons.navigate_next)),
                         new Divider(height: 1.0,color: Colors.black,),
                         new ListTile(leading: new Icon(Icons.help,color:Colors.redAccent),title: new Text("Help and FeedBack"),onTap: _testDbPage,trailing: Icon(Icons.navigate_next))
-                      ]
+                   ]
                 ),
-                ),
+              ),
             ],
           ),
         )

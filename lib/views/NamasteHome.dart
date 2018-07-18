@@ -68,7 +68,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
           controller: _tabController,
           tabs: <Widget>[
             new Tab(icon: new Icon(Icons.person,size: 22.0,)),
-            new Tab(icon: new CircleAvatar(backgroundColor: Colors.transparent,child: Text("🙏")),),
+            new Tab(icon: new CircleAvatar(radius: 30.0,backgroundColor: Colors.pinkAccent,child: Text("🙏")),),
             new Tab(icon: new Icon(Icons.message,size: 22.0,)),
           ],
         ),
