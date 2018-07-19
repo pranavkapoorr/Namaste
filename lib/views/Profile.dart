@@ -272,7 +272,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
     );
   }
   void onImageTap(Image img){
-    showDialog(context: this.context,child: AlertDialog(content: Container(child: img,),contentPadding: EdgeInsets.all(0.0),));
+    showDialog(context: this.context,builder:(BuildContext context)=>AlertDialog(content: Container(child: img,),contentPadding: EdgeInsets.all(0.0),));
   }
   @override
   void dispose() {

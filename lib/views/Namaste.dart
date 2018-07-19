@@ -1,6 +1,5 @@
-import 'package:Namaste/views/LogoPage.dart';
 import 'package:flutter/material.dart';
-import 'Settings_Screen.dart';
+
 
 class Namaste extends StatefulWidget{
   @override
@@ -30,30 +29,53 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
   void _makeTiles(){
     for(int i =0; i < 33;i++){
       tiles.add(
-          GridTile(
-            header:Container(
-              margin: EdgeInsets.all(6.0),
-              color:Colors.black.withOpacity(0.9),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text("Pranav Kapoor",style: TextStyle(color: Colors.white),
-                  ),
-                ],
-              ),
-            ),
-            child:Container(
-                margin: EdgeInsets.all(6.0),
-                child:Image(
-                  width: 40.0,
-                  height: 60.0,
-                  image: NetworkImage("https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/11230099_10206835592669367_2911893136176495642_n.jpg?_nc_cat=0&oh=eb80db39d72968cc4a130d4d075ea24a&oe=5BE80A4C")
-                ),
-            )
-          )
+          _cardBody()
       );
     }
   }
+  Widget _cardBody(){
+    return new Card(
+      child: new Stack(
+        children: <Widget>[
+          new SizedBox.expand(
+            child: new Material(
+              borderRadius: new BorderRadius.circular(12.0),
+              child: new Image(fit: BoxFit.cover,
+                  image: NetworkImage("https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/11230099_10206835592669367_2911893136176495642_n.jpg?_nc_cat=0&oh=eb80db39d72968cc4a130d4d075ea24a&oe=5BE80A4C")
+              ),
+            ),
+          ),
+          new SizedBox.expand(
+            child: new Container(
+              decoration: new BoxDecoration(
+                  gradient: new LinearGradient(
+                      colors: [ Colors.transparent, Colors.black54 ],
+                      begin: Alignment.center,
+                      end: Alignment.bottomCenter
+                  )
+              ),
+            ),
+          ),
+          new Align(
+            alignment: Alignment.bottomLeft,
+            child: new Container(
+                padding: new EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+                child: new Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    new Text('Card number 1', style: new TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.w700)),
+                    new Padding(padding: new EdgeInsets.only(bottom: 8.0)),
+                    new Text('A short description.', textAlign: TextAlign.start, style: new TextStyle(color: Colors.white)),
+                  ],
+                )
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context){
     return  NestedScrollView(

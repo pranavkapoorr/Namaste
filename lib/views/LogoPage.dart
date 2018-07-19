@@ -4,10 +4,10 @@ import 'StartUpLoader.dart';
 
 class LogoPage extends StatefulWidget{
   @override
-  _logoPageState createState()=>new _logoPageState();
+  _LogoPageState createState()=>new _LogoPageState();
 }
 
-class _logoPageState extends State<LogoPage> {
+class _LogoPageState extends State<LogoPage> {
 
   @override
   void initState() {
