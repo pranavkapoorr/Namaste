@@ -110,66 +110,45 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
                               "26",
                               style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
                             ),
-                            Text("My name is pranav, hHJHJHJHJHJHJHJHJJHJHJHJHJHJHJHJHJHJHJHGFGFHGHG",
+                            Text("My name is pranav, these are my profile details..all you need to know",
                             style: TextStyle(color: Colors.white),),
                           ],
                         ),
                     ),
-                    /* Positioned(
-                      bottom: 16.0,
-                      left: 16.0,
-                      right: 16.0,
-                      child: new FittedBox(
-                        fit: BoxFit.scaleDown,
-                        alignment: Alignment.bottomLeft,
-                        child: new Text("Pranav Kapoor",
-                          style: TextStyle(color: Colors.white,fontSize:30.0),
-                        ),
-                      ),
-                    ),*/
                   ],
                 ),
               ),
-              // description and share/explore buttons
-
-              // share, explore buttons
-          new Row
-            (
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>
-            [
-              new FloatingActionButton
-                (
-                mini: true,
-                onPressed: () {},
-                backgroundColor: Colors.white,
-                child: new Icon(Icons.loop, color: Colors.yellow),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  new FloatingActionButton(
+                    mini: true,
+                    onPressed: () {},
+                    backgroundColor: Colors.white,
+                    child: new Icon(Icons.loop, color: Colors.yellow),
+                  ),
+                  new Padding(padding: new EdgeInsets.only(right: 8.0)),
+                  new FloatingActionButton(
+                    onPressed: () {},
+                    backgroundColor: Colors.white,
+                    child: new Icon(Icons.close, color: Colors.red),
+                  ),
+                  new Padding(padding: new EdgeInsets.only(right: 8.0)),
+                  new FloatingActionButton(
+                    onPressed: () {},
+                    backgroundColor: Colors.white,
+                    child: new Icon(Icons.favorite, color: Colors.green),
+                  ),
+                  new Padding(padding: new EdgeInsets.only(right: 8.0)),
+                  new FloatingActionButton(
+                    mini: true,
+                    onPressed: () {},
+                    backgroundColor: Colors.white,
+                    child: new Icon(Icons.star, color: Colors.blue),
+                  ),
+                ],
               ),
-              new Padding(padding: new EdgeInsets.only(right: 8.0)),
-              new FloatingActionButton
-                (
-                onPressed: () {},
-                backgroundColor: Colors.white,
-                child: new Icon(Icons.close, color: Colors.red),
-              ),
-              new Padding(padding: new EdgeInsets.only(right: 8.0)),
-              new FloatingActionButton
-                (
-                onPressed: () {},
-                backgroundColor: Colors.white,
-                child: new Icon(Icons.favorite, color: Colors.green),
-              ),
-              new Padding(padding: new EdgeInsets.only(right: 8.0)),
-              new FloatingActionButton
-                (
-                mini: true,
-                onPressed: () {},
-                backgroundColor: Colors.white,
-                child: new Icon(Icons.star, color: Colors.blue),
-              ),
-            ],
-          ),
             ],
           ),
         ),

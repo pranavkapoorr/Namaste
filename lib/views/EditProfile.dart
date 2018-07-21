@@ -72,7 +72,7 @@ class _EditProfileState extends State<EditProfile>{
                         new Divider(height: 0.1,color: Colors.grey.shade400,),
                         new ListTile(leading: new Icon(Icons.person,color:Colors.green),title:TextField(decoration: InputDecoration.collapsed(hintText: "Full name"),)),
                         new Divider(height: 0.1,color: Colors.grey.shade400,),
-                        new ListTile(leading: new Icon(Icons.wc,color:Colors.yellowAccent),title: TextField(decoration: InputDecoration.collapsed(hintText: "Gender"),)),
+                        new ListTile(leading: new Icon(Icons.wc,color:Colors.amberAccent),title: TextField(decoration: InputDecoration.collapsed(hintText: "Gender"),)),
                         ]),
                       ),
                         Container(
