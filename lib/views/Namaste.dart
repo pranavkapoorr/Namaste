@@ -27,14 +27,14 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
   }
 
   void _makeTiles(){
-    for(int i =0; i < 10;i++){
+    for(int i =0; i < 2;i++){
       tiles.add(
           _cardBody()
       );
     }
   }
   Widget _cardBody(){
-    return new Card(
+    /*return new Card(
       child: new Stack(
         children: <Widget>[
           new SizedBox.expand(
@@ -72,6 +72,107 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
             ),
           )
         ],
+      ),
+    );*/
+    return new SafeArea(
+      top: false,
+      bottom: false,
+      child: new Container(
+        padding: const EdgeInsets.all(8.0),
+        height: 500.0,
+        child: new Card(
+          color: Colors.white.withOpacity(0.8),
+          child: new Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              // photo and title
+              new SizedBox(
+                height: 290.0,
+                child: new Stack(
+                  children: <Widget>[
+                    new Positioned.fill(
+                      child: new Image.network(
+                        "https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/11230099_10206835592669367_2911893136176495642_n.jpg?_nc_cat=0&oh=eb80db39d72968cc4a130d4d075ea24a&oe=5BE80A4C",
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 8.0,
+                      left: 8.0,
+                      right: 16.0,
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text("Pranav Kapoor",
+                              style: TextStyle(color: Colors.white,fontSize:30.0),
+                            ),
+                            Text(
+                              "26",
+                              style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
+                            ),
+                            Text("My name is pranav, hHJHJHJHJHJHJHJHJJHJHJHJHJHJHJHJHJHJHJHGFGFHGHG",
+                            style: TextStyle(color: Colors.white),),
+                          ],
+                        ),
+                    ),
+                    /* Positioned(
+                      bottom: 16.0,
+                      left: 16.0,
+                      right: 16.0,
+                      child: new FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.bottomLeft,
+                        child: new Text("Pranav Kapoor",
+                          style: TextStyle(color: Colors.white,fontSize:30.0),
+                        ),
+                      ),
+                    ),*/
+                  ],
+                ),
+              ),
+              // description and share/explore buttons
+
+              // share, explore buttons
+          new Row
+            (
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>
+            [
+              new FloatingActionButton
+                (
+                mini: true,
+                onPressed: () {},
+                backgroundColor: Colors.white,
+                child: new Icon(Icons.loop, color: Colors.yellow),
+              ),
+              new Padding(padding: new EdgeInsets.only(right: 8.0)),
+              new FloatingActionButton
+                (
+                onPressed: () {},
+                backgroundColor: Colors.white,
+                child: new Icon(Icons.close, color: Colors.red),
+              ),
+              new Padding(padding: new EdgeInsets.only(right: 8.0)),
+              new FloatingActionButton
+                (
+                onPressed: () {},
+                backgroundColor: Colors.white,
+                child: new Icon(Icons.favorite, color: Colors.green),
+              ),
+              new Padding(padding: new EdgeInsets.only(right: 8.0)),
+              new FloatingActionButton
+                (
+                mini: true,
+                onPressed: () {},
+                backgroundColor: Colors.white,
+                child: new Icon(Icons.star, color: Colors.blue),
+              ),
+            ],
+          ),
+            ],
+          ),
+        ),
       ),
     );
   }
