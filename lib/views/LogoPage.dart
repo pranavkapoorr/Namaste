@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:Namaste/resources/UiResources.dart';
 import 'package:flutter/material.dart';
 import 'StartUpLoader.dart';
 
@@ -20,8 +21,11 @@ class _LogoPageState extends State<LogoPage> {
     return new Scaffold(
         body: Container(
             decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [
-                  Colors.grey.shade300, Colors.grey.shade500, Colors.grey.shade300])),
+                gradient: myGradient
+              /*LinearGradient(
+                    colors: [Colors.grey.shade300, Colors.grey.shade500, Colors.grey.shade300]
+                )*/
+            ),
             child: Stack(
                 children: <Widget>[
                   Theme(
@@ -54,7 +58,7 @@ class _LogoPageState extends State<LogoPage> {
                                       new Container(
                                           height: 50.0,
                                           width: 170.0,
-                                          color: Colors.grey.shade400,
+                                          //color: Colors.grey.shade400,
                                           child: Image(image: new AssetImage("images/earth_loader.gif")),
                                       ),
                                     ])
