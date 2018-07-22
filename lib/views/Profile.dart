@@ -27,7 +27,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white.withOpacity(0.8),
+      backgroundColor: Colors.white.withOpacity(0.7),
       body: NestedScrollView(
               headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[

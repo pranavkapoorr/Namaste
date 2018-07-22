@@ -30,8 +30,8 @@
       <file leaf-file-name="NamasteHome.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/views/NamasteHome.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="65" column="36" lean-forward="false" selection-start-line="65" selection-start-column="36" selection-end-line="65" selection-end-column="36" />
+            <state relative-caret-position="959">
+              <caret line="63" column="38" lean-forward="true" selection-start-line="63" selection-start-column="38" selection-end-line="63" selection-end-column="38" />
               <folding>
                 <element signature="e#0#52#0" expanded="true" />
               </folding>
@@ -42,8 +42,8 @@
       <file leaf-file-name="Profile.dart" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/views/Profile.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="3" column="40" lean-forward="true" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
+            <state relative-caret-position="247">
+              <caret line="29" column="51" lean-forward="false" selection-start-line="29" selection-start-column="51" selection-end-line="29" selection-end-column="51" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -138,8 +138,8 @@
         <option value="$PROJECT_DIR$/lib/views/ChatScreen.dart" />
         <option value="$PROJECT_DIR$/lib/views/Namaste.dart" />
         <option value="$PROJECT_DIR$/lib/views/EditProfile.dart" />
-        <option value="$PROJECT_DIR$/lib/views/NamasteHome.dart" />
         <option value="$PROJECT_DIR$/lib/views/LogoPage.dart" />
+        <option value="$PROJECT_DIR$/lib/views/NamasteHome.dart" />
         <option value="$PROJECT_DIR$/lib/views/Profile.dart" />
       </list>
     </option>
@@ -438,13 +438,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1526910296971</updated>
-    </task>
-    <task id="LOCAL-00032" summary="fixed cam layout">
-      <created>1530571249657</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1530571249657</updated>
     </task>
     <task id="LOCAL-00033" summary="added push notifications">
       <created>1530625775892</created>
@@ -782,7 +775,14 @@
       <option name="project" value="LOCAL" />
       <updated>1532283165281</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="added edit option">
+      <created>1532283388336</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1532283388336</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TodoView">
@@ -835,7 +835,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="chat ui changed" />
     <MESSAGE value="fixed search in appbar" />
     <MESSAGE value="myprofile started" />
     <MESSAGE value="myprof header done" />
@@ -860,7 +859,8 @@
     <MESSAGE value="changed tabbar-color" />
     <MESSAGE value="changed startup background" />
     <MESSAGE value="added scaffold to profile" />
-    <option name="LAST_COMMIT_MESSAGE" value="added scaffold to profile" />
+    <MESSAGE value="added edit option" />
+    <option name="LAST_COMMIT_MESSAGE" value="added edit option" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1216,8 +1216,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/views/NamasteHome.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="65" column="36" lean-forward="false" selection-start-line="65" selection-start-column="36" selection-end-line="65" selection-end-column="36" />
+        <state relative-caret-position="959">
+          <caret line="63" column="38" lean-forward="true" selection-start-line="63" selection-start-column="38" selection-end-line="63" selection-end-column="38" />
           <folding>
             <element signature="e#0#52#0" expanded="true" />
           </folding>
@@ -1226,8 +1226,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/views/Profile.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="40" lean-forward="true" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
+        <state relative-caret-position="247">
+          <caret line="29" column="51" lean-forward="false" selection-start-line="29" selection-start-column="51" selection-end-line="29" selection-end-column="51" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
