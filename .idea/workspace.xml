@@ -42,11 +42,21 @@
       <file leaf-file-name="Profile.dart" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/views/Profile.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
-              <caret line="28" column="51" lean-forward="false" selection-start-line="28" selection-start-column="51" selection-end-line="28" selection-end-column="51" />
+            <state relative-caret-position="54">
+              <caret line="3" column="40" lean-forward="true" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
               <folding>
-                <element signature="e#0#52#0" expanded="true" />
+                <element signature="e#0#26#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Settings_Screen.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/views/Settings_Screen.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-32">
+              <caret line="33" column="12" lean-forward="false" selection-start-line="33" selection-start-column="12" selection-end-line="33" selection-end-column="12" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -429,13 +439,6 @@
       <option name="presentableId" value="Default" />
       <updated>1526910296971</updated>
     </task>
-    <task id="LOCAL-00031" summary="fixed appbar transition crash1">
-      <created>1530570504305</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1530570504305</updated>
-    </task>
     <task id="LOCAL-00032" summary="fixed cam layout">
       <created>1530571249657</created>
       <option name="number" value="00032" />
@@ -772,7 +775,14 @@
       <option name="project" value="LOCAL" />
       <updated>1532281226885</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="added scaffold to profile">
+      <created>1532283165281</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1532283165281</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TodoView">
@@ -825,7 +835,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="refactor" />
     <MESSAGE value="chat ui changed" />
     <MESSAGE value="fixed search in appbar" />
     <MESSAGE value="myprofile started" />
@@ -850,7 +859,8 @@
     <MESSAGE value="refactored" />
     <MESSAGE value="changed tabbar-color" />
     <MESSAGE value="changed startup background" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed startup background" />
+    <MESSAGE value="added scaffold to profile" />
+    <option name="LAST_COMMIT_MESSAGE" value="added scaffold to profile" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1168,16 +1178,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/views/Settings_Screen.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-59">
-          <caret line="33" column="12" lean-forward="false" selection-start-line="33" selection-start-column="12" selection-end-line="33" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#52#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/views/AccountScreen.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="370">
@@ -1198,6 +1198,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/views/LogoPage.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="71" column="3" lean-forward="true" selection-start-line="71" selection-start-column="3" selection-end-line="71" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/views/Settings_Screen.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-32">
+          <caret line="33" column="12" lean-forward="false" selection-start-line="33" selection-start-column="12" selection-end-line="33" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/views/NamasteHome.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1208,20 +1224,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/views/LogoPage.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="71" column="3" lean-forward="true" selection-start-line="71" selection-start-column="3" selection-end-line="71" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/views/Profile.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="28" column="51" lean-forward="false" selection-start-line="28" selection-start-column="51" selection-end-line="28" selection-end-column="51" />
+        <state relative-caret-position="54">
+          <caret line="3" column="40" lean-forward="true" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
           <folding>
-            <element signature="e#0#52#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>

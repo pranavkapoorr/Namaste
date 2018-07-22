@@ -1,4 +1,5 @@
-import 'package:Namaste/views/Settings_Screen.dart';
+import 'EditProfile.dart';
+import 'Settings_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel/carousel.dart';
 class Profile extends StatefulWidget {
@@ -32,7 +33,9 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
               return <Widget>[
             new SliverAppBar(
               backgroundColor: Colors.transparent,
-              leading: Text(""),
+              leading: IconButton(icon: Icon(Icons.mode_edit,color: Colors.white,), onPressed: (){
+                Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new EditProfile()));
+              }),
               expandedHeight: _appBarHeight,
               pinned: true,
               floating: true,
