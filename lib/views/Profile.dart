@@ -1,3 +1,5 @@
+import 'package:Namaste/views/AlbumEditor.dart';
+
 import 'EditProfile.dart';
 import 'Settings_Screen.dart';
 import 'package:flutter/material.dart';
@@ -124,7 +126,7 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                     GestureDetector(
-                      onTap: (){_goToEditPage();},
+                      onTap: _goToEditPage,
                     child: Container(
                       padding: EdgeInsets.all(10.0),
                       margin: EdgeInsetsDirectional.only(top: 5.0),
@@ -155,13 +157,16 @@ class _ProfileState extends State<Profile> {
                     decoration: BoxDecoration(color: Colors.white70),
                     child: Column(
                       children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          //mainAxisSize: MainAxisSize.max,
-                          children: <Widget>[
-                            new Text("Album",style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.bold),),
-                            new Icon(Icons.navigate_next)
-                          ],
+                        GestureDetector(
+                          onTap: _goToAlbumUploader,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            //mainAxisSize: MainAxisSize.max,
+                            children: <Widget>[
+                              new Text("Album",style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.bold),),
+                              new Icon(Icons.navigate_next)
+                            ],
+                          ),
                         ),
                         new Container(
                           height: 100.0,
@@ -189,6 +194,9 @@ class _ProfileState extends State<Profile> {
   }
   void _goToEditPage(){
     Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new EditProfile()));
+  }
+  void _goToAlbumUploader(){
+    Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new AlbumUploader()));
   }
   Widget _createPillButton(
       String text, {

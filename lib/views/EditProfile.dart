@@ -1,4 +1,5 @@
 import 'package:Namaste/resources/UiResources.dart';
+import 'package:Namaste/views/AlbumEditor.dart';
 import 'package:flutter/material.dart';
 class EditProfile extends StatefulWidget {
   @override
@@ -75,30 +76,33 @@ class _EditProfileState extends State<EditProfile>{
                         new ListTile(leading: new Icon(Icons.wc,color:Colors.amberAccent),title: TextField(decoration: InputDecoration.collapsed(hintText: "Gender"),)),
                         ]),
                       ),
-                        Container(
-                          color: Colors.white70,
-                          padding: EdgeInsets.all(10.0),
-                          margin: EdgeInsetsDirectional.only(top: 8.0,bottom: 5.0),
-                          child: Column(
-                              children: <Widget>[
-                                Row(children: <Widget>[Text("Album",style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.bold),)],),
-                                Column(
-                                  children: <Widget>[
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: <Widget>[
-                                        Icon(Icons.image,size: 35.0,color: Colors.redAccent,),
-                                        Container(
-                                          height: 50.0,
-                                          constraints: BoxConstraints(maxWidth: 260.0,maxHeight: 50.0),
-                                          child: _album(),
-                                        ),
-                                        Icon(Icons.navigate_next)
-                                      ],
-                                    ),
-                                  ],
-                                )
-                              ]
+                        GestureDetector(
+                          onTap: _goToAlbumUploader,
+                          child: Container(
+                            color: Colors.white70,
+                            padding: EdgeInsets.all(10.0),
+                            margin: EdgeInsetsDirectional.only(top: 8.0,bottom: 5.0),
+                            child: Column(
+                                children: <Widget>[
+                                  Row(children: <Widget>[Text("Album",style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.bold),)],),
+                                  Column(
+                                    children: <Widget>[
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          Icon(Icons.image,size: 35.0,color: Colors.redAccent,),
+                                          Container(
+                                            height: 50.0,
+                                            constraints: BoxConstraints(maxWidth: 260.0,maxHeight: 50.0),
+                                            child: _album(),
+                                          ),
+                                          Icon(Icons.navigate_next)
+                                        ],
+                                      ),
+                                    ],
+                                  )
+                                ]
+                            ),
                           ),
                         ),
                         Container(
@@ -164,5 +168,7 @@ class _EditProfileState extends State<EditProfile>{
       ),
     );
   }
-
+  void _goToAlbumUploader(){
+    Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new AlbumUploader()));
+  }
 }

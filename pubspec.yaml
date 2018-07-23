@@ -16,6 +16,7 @@ dependencies:
   sqflite: any
   path_provider: "^0.4.1"
   rxdart: ^0.16.1
+  image_picker: ^0.4.5
   #contacts_service: "^0.0.6"
   #contact_picker: "^0.0.2"
   #flutter_search_bar: "^2.0.4"
