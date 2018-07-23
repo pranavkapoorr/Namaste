@@ -34,72 +34,31 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
     }
   }
   Widget _cardBody(){
-    /*return new Card(
-      child: new Stack(
-        children: <Widget>[
-          new SizedBox.expand(
-            child: new Material(
-              borderRadius: new BorderRadius.circular(12.0),
-              child: new Image(fit: BoxFit.cover,
-                  image: NetworkImage("https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/11230099_10206835592669367_2911893136176495642_n.jpg?_nc_cat=0&oh=eb80db39d72968cc4a130d4d075ea24a&oe=5BE80A4C")
-              ),
-            ),
-          ),
-          new SizedBox.expand(
-            child: new Container(
-              decoration: new BoxDecoration(
-                  gradient: new LinearGradient(
-                      colors: [ Colors.transparent, Colors.black54 ],
-                      begin: Alignment.center,
-                      end: Alignment.bottomCenter
-                  )
-              ),
-            ),
-          ),
-          new Align(
-            alignment: Alignment.bottomLeft,
-            child: new Container(
-                padding: new EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
-                child: new Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    new Text('Card number 1', style: new TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.w700)),
-                    new Padding(padding: new EdgeInsets.only(bottom: 8.0)),
-                    new Text('A short description.', textAlign: TextAlign.start, style: new TextStyle(color: Colors.white)),
-                  ],
-                )
-            ),
-          )
-        ],
-      ),
-    );*/
-    return new SafeArea(
-      top: false,
-      bottom: false,
-      child: new Container(
-        padding: const EdgeInsets.all(8.0),
-        height: 500.0,
-        child: new Card(
-          color: Colors.white.withOpacity(0.8),
-          child: new Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              // photo and title
-              new SizedBox(
-                height: 290.0,
-                child: new Stack(
-                  children: <Widget>[
-                    new Positioned.fill(
-                      child: new Image.network(
-                        "https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/11230099_10206835592669367_2911893136176495642_n.jpg?_nc_cat=0&oh=eb80db39d72968cc4a130d4d075ea24a&oe=5BE80A4C",
-                        fit: BoxFit.cover,
-                      ),
+    return new Container(
+      padding: const EdgeInsets.all(6.0),
+      height: 550.0,
+      child: new Card(
+        color: Colors.white.withOpacity(0.8),
+        child: new Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            // photo and title
+            new SizedBox(
+              height: 300.0,
+              child: new Stack(
+                children: <Widget>[
+                  new Positioned.fill(
+                    child: new Image.network(
+                      "https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/11230099_10206835592669367_2911893136176495642_n.jpg?_nc_cat=0&oh=eb80db39d72968cc4a130d4d075ea24a&oe=5BE80A4C",
+                      fit: BoxFit.cover,
                     ),
-                    Positioned(
-                      bottom: 8.0,
-                      left: 8.0,
-                      right: 16.0,
+                  ),
+                  Positioned(
+                    bottom: 6.0,
+                    left: 8.0,
+                    right: 16.0,
+                    child: Container(
+                      color: Colors.black.withOpacity(0.5),
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
@@ -115,10 +74,12 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
                           ],
                         ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              Row(
+            ),
+            Expanded(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
@@ -149,57 +110,12 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
-  Widget buttonsRow()
-  {
-    return new Container
-      (
-      margin: new EdgeInsets.symmetric(vertical: 48.0),
-      child: new Row
-        (
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>
-        [
-          new FloatingActionButton
-            (
-            mini: true,
-            onPressed: () {},
-            backgroundColor: Colors.white,
-            child: new Icon(Icons.loop, color: Colors.yellow),
-          ),
-          new Padding(padding: new EdgeInsets.only(right: 8.0)),
-          new FloatingActionButton
-            (
-            onPressed: () {},
-            backgroundColor: Colors.white,
-            child: new Icon(Icons.close, color: Colors.red),
-          ),
-          new Padding(padding: new EdgeInsets.only(right: 8.0)),
-          new FloatingActionButton
-            (
-            onPressed: () {},
-            backgroundColor: Colors.white,
-            child: new Icon(Icons.favorite, color: Colors.green),
-          ),
-          new Padding(padding: new EdgeInsets.only(right: 8.0)),
-          new FloatingActionButton
-            (
-            mini: true,
-            onPressed: () {},
-            backgroundColor: Colors.white,
-            child: new Icon(Icons.star, color: Colors.blue),
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context){
     return  NestedScrollView(
