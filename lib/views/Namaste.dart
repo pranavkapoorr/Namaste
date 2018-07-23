@@ -42,7 +42,6 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
         child: new Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            // photo and title
             new SizedBox(
               height: 300.0,
               child: new Stack(

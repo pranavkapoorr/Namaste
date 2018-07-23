@@ -7,7 +7,7 @@ class Profile extends StatefulWidget {
   _ProfileState createState() => new _ProfileState();
 }
 
-class _ProfileState extends State<Profile> with TickerProviderStateMixin{
+class _ProfileState extends State<Profile> {
   final double _appBarHeight = 267.0;
   Carousel carouselX;
 
@@ -15,26 +15,26 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
   initState(){
     super.initState();
     carouselX = new Carousel(
-      animationDuration: Duration(seconds: 2),
       displayDuration: Duration(seconds: 5),
       children: [
         AssetImage("images/bg.jpg"),
         AssetImage("images/bg.jpg")
-      ].map((netImage) => new Image(image: netImage,fit: BoxFit.cover,)).toList(),
+      ].map((netImage) => new Image(image: netImage,fit: BoxFit.cover,height: _appBarHeight,)).toList(),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white.withOpacity(0.7),
-      body: NestedScrollView(
+    return Container(
+      padding: EdgeInsetsDirectional.only(top: 15.0,start: 10.0 ,end: 10.0),
+      color: Colors.white.withOpacity(0.2),
+      child: NestedScrollView(
               headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
-            new SliverAppBar(
+              SliverAppBar(
               backgroundColor: Colors.transparent,
               leading: IconButton(icon: Icon(Icons.mode_edit,color: Colors.white,), onPressed: (){
-                Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new EditProfile()));
+                _goToEditPage();
               }),
               expandedHeight: _appBarHeight,
               pinned: true,
@@ -49,7 +49,11 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
                 background: new Stack(
                   fit: StackFit.expand,
                   children: <Widget>[
-                    carouselX,
+                        Container(
+                          color: Colors.transparent.withOpacity(0.4),
+                            padding: EdgeInsetsDirectional.only(bottom: 1.0),
+                            child: carouselX
+                        ),
                     /*new Image.asset(
                       'images/bg.jpg',
                       fit: BoxFit.cover,
@@ -87,6 +91,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
             ),
           ];},
           body: ListView(
+            shrinkWrap: true,
               children: <Widget>[
                 //Scaffold(
                 //backgroundColor: Colors.blueGrey.shade100,
@@ -111,35 +116,37 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
                             new Text(
                               'Britain',
                               style:
-                              new TextStyle(color: Colors.grey, fontSize: 15.0),
+                              new TextStyle(color: Colors.black38, fontSize: 15.0),
                             ),
                           ],
                         ),
                       ],
                     ),
                   ),
-                  new Container(
-                    padding: EdgeInsets.all(10.0),
-                    margin: EdgeInsetsDirectional.only(top: 5.0),
-                    decoration: BoxDecoration(color: Colors.white70),
-                    child: Column(
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          //mainAxisSize: MainAxisSize.max,
-                          children: <Widget>[
-                            new Text("Personal Info",style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.bold),),
-                            new Icon(Icons.navigate_next)
-                          ],
-                        ),
-                        new Text(
-                          'Lorem Ipsum is simply dummy text of the printing and typesetting '
-                              'industry. Lorem Ipsum has been the industry\'s standard dummy '
-                              'text ever since the 1500s.',
-                          style:
-                          new TextStyle(color: Colors.grey, fontSize: 13.0),
-                        ),
-                      ],
+                    GestureDetector(
+                      onTap: (){_goToEditPage();},
+                    child: Container(
+                      padding: EdgeInsets.all(10.0),
+                      margin: EdgeInsetsDirectional.only(top: 5.0),
+                      decoration: BoxDecoration(color: Colors.white70),
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              new Text("Personal Info",style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.bold),),
+                              new Icon(Icons.navigate_next)
+                            ],
+                          ),
+                          new Text(
+                            'Lorem Ipsum is simply dummy text of the printing and typesetting '
+                                'industry. Lorem Ipsum has been the industry\'s standard dummy '
+                                'text ever since the 1500s.',
+                            style:
+                            new TextStyle(color: Colors.black38, fontSize: 13.0),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   new Container(
@@ -179,6 +186,9 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
             ),
         ),
     );
+  }
+  void _goToEditPage(){
+    Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new EditProfile()));
   }
   Widget _createPillButton(
       String text, {
