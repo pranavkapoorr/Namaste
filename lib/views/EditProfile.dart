@@ -119,7 +119,7 @@ class _EditProfileState extends State<EditProfile>{
                                       children: <Widget>[
                                         Icon(Icons.description,color: Colors.green,size: 35.0,),
                                         Container(
-                                            constraints: BoxConstraints(maxWidth: 300.0,maxHeight: 90.0),
+                                            constraints: BoxConstraints(maxWidth: 200.0,maxHeight: 90.0),
                                             child:TextField(
                                               decoration: InputDecoration(
                                                   hintText: "short bio",

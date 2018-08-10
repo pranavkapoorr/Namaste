@@ -62,20 +62,15 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
     return new WillPopScope(
       child: new Scaffold(
         backgroundColor: Colors.white,
-        bottomNavigationBar: Container(
-          decoration: BoxDecoration(
-            gradient: myGradient
-          ),
-          child: new TabBar(
-            indicator:UnderlineTabIndicator(),
-            unselectedLabelColor: Colors.grey,
-            controller: _tabController,
-            tabs: <Widget>[
-              new Tab(icon: new Icon(Icons.person,size: 22.0,)),
-              new Tab(icon: new CircleAvatar(radius: 30.0,backgroundColor: Colors.pinkAccent,child: Text("🙏")),),
-              new Tab(icon: new Icon(Icons.message,size: 22.0,)),
-            ],
-          ),
+        bottomNavigationBar: new TabBar(
+          indicator:UnderlineTabIndicator(),
+          unselectedLabelColor: Colors.grey,
+          controller: _tabController,
+          tabs: <Widget>[
+            new Tab(icon: new Icon(Icons.person,size: 22.0,)),
+            new Tab(icon: new CircleAvatar(radius: 30.0,backgroundColor: Colors.black38,child: Icon(Icons.pages,color: Colors.white,size: 35.0,)),),
+            new Tab(icon: new Icon(Icons.forum,size: 22.0,)),
+          ],
         ),
         body: Container(
           decoration: new BoxDecoration(

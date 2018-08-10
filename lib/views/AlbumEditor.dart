@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class AlbumUploader extends StatefulWidget{
   @override
-  _AlbumUploader createState()=> _AlbumUploader();
+  _AlbumUploader createState()=>_AlbumUploader();
 }
 class _AlbumUploader extends State<AlbumUploader> {
   List<Widget> _imageTiles = new List();
@@ -22,12 +22,9 @@ class _AlbumUploader extends State<AlbumUploader> {
   }
   Future getImage() async {
     var img = await ImagePicker.pickImage(source: ImageSource.gallery);
-
-
-
         setState(() {
           print("adding new image $img");
-          _imageTiles.insert(_imageTiles.length-1,_makeImageBox(Image.file(img)));
+          _imageTiles.insert(_imageTiles.length-1,_makeImageBox(Image.file(img, fit: BoxFit.cover,)));
         });
 
   }
