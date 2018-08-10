@@ -20,7 +20,7 @@ class _SettingsScreenState extends State<SettingsScreen>{
       decoration: BoxDecoration(gradient:myGradient,),
       child: new Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: new AppBar(title: new Text("Settings",style: TextStyle(color: Colors.white),),backgroundColor: Colors.transparent,),
+        appBar: new AppBar(leading: IconButton(icon: Icon(Icons.arrow_back,color: Colors.white,), onPressed:(){Navigator.pop(context);}),title: new Text("Settings",style: TextStyle(color: Colors.white),),backgroundColor: Colors.transparent,),
         body: Container(
           padding: const EdgeInsets.all(8.0),
           decoration: BoxDecoration(
