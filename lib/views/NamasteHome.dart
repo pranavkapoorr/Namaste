@@ -63,13 +63,14 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
       child: new Scaffold(
         backgroundColor: Colors.white,
         bottomNavigationBar: new TabBar(
+          labelColor: Colors.black38.withOpacity(0.7),
           indicator:UnderlineTabIndicator(),
           unselectedLabelColor: Colors.grey,
           controller: _tabController,
           tabs: <Widget>[
-            new Tab(icon: new Icon(Icons.person,size: 22.0,)),
-            new Tab(icon: new CircleAvatar(radius: 30.0,backgroundColor: Colors.black38,child: Icon(Icons.pages,color: Colors.white,size: 35.0,)),),
-            new Tab(icon: new Icon(Icons.forum,size: 22.0,)),
+            new Tab(icon: new Icon(_currentTab==0?Icons.person:Icons.person_outline,size: 22.0,)),
+            new Tab(icon: new CircleAvatar(radius: 30.0,backgroundColor: _currentTab==1?Colors.black38.withOpacity(0.7):Colors.black38,child: Icon(Icons.pages,color: Colors.white,size: 35.0,)),),
+            new Tab(icon: new Icon(_currentTab==2?Icons.chat:Icons.chat_bubble_outline,size: 22.0,)),
           ],
         ),
         body: Container(
