@@ -27,12 +27,14 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
   }
 
   void _makeTiles(){
-    for(int i =0; i < 2;i++){
+    for(int i =0; i < 1;i++){
       tiles.add(
           _cardBody()
       );
     }
   }
+
+
   Widget _cardBody(){
     return new Container(
       padding: const EdgeInsets.all(6.0),
@@ -158,7 +160,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
   }
   SliverAppBar _normalAppBar(bool innerBoxIsScrolled){
     return new SliverAppBar(
-      leading: Image(image: AssetImage("images/logo.png"),color:Colors.black,),
+      //leading: Image(image: AssetImage("images/logo.png"),color:Colors.black,),
       centerTitle: true,
       title: new Text("Namaste",style: new TextStyle(fontSize: 25.0,fontWeight: FontWeight.bold,fontFamily: "BeautifulX")),
       elevation: 3.0,

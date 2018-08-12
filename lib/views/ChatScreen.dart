@@ -228,7 +228,7 @@ class _ChatScreenState extends State<ChatScreen> {
     //messages.forEach((e)=>print("message -> ${e.message} from-> ${e.sender} to-> ${e.receiver}"));
     return Scaffold(
       backgroundColor: Colors.transparent,
-      appBar: AppBar(title: Text("Conversations",style: TextStyle(color: Colors.white),),backgroundColor: Colors.transparent,),
+      appBar: AppBar(leading:Text(""),title: Text("Conversations",style: TextStyle(color: Colors.white),),backgroundColor: Colors.transparent,),
       body: Container(
         padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
