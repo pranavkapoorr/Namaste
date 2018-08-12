@@ -62,29 +62,44 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
     return new WillPopScope(
       child: new Scaffold(
         backgroundColor: Colors.white,
-        bottomNavigationBar: new TabBar(
-          labelColor: Colors.black38.withOpacity(0.7),
-          indicator:UnderlineTabIndicator(),
-          unselectedLabelColor: Colors.grey,
-          controller: _tabController,
-          tabs: <Widget>[
-            new Tab(icon: new Icon(_currentTab==0?Icons.person:Icons.person_outline,size: 22.0,)),
-            new Tab(icon: new CircleAvatar(radius: 30.0,backgroundColor: _currentTab==1?Colors.black38.withOpacity(0.7):Colors.black38,child: Icon(Icons.pages,color: Colors.white,size: 35.0,)),),
-            new Tab(icon: new Icon(_currentTab==2?Icons.chat:Icons.chat_bubble_outline,size: 22.0,)),
-          ],
-        ),
         body: Container(
           decoration: new BoxDecoration(
               gradient: myGradient
           ),
-          child: new TabBarView(
-              controller: _tabController,
-              children: <Widget>[
-                new Profile(),
-                new Namaste(),
-                new ChatScreen(),
-              ],
-            ),
+          child: Stack(
+            children: <Widget>[
+              new TabBarView(
+                  controller: _tabController,
+                  children: <Widget>[
+                    new Profile(),
+                    new Namaste(),
+                    new ChatScreen(),
+                  ],
+                ),
+              new Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(25.0),
+                    child: new TabBar(
+                      labelColor: Colors.black38.withOpacity(0.7),
+                      indicator:UnderlineTabIndicator(),
+                      unselectedLabelColor: Colors.grey,
+                      controller: _tabController,
+                      tabs: <Widget>[
+                        new Tab(icon: new Icon(_currentTab==0?Icons.person:Icons.person_outline,size: 22.0,)),
+                        new Tab(icon: new CircleAvatar(radius: 30.0,backgroundColor: _currentTab==1?Colors.black38.withOpacity(0.7):Colors.black38,child: Icon(Icons.pages,color: Colors.white,size: 35.0,)),),
+                        new Tab(icon: new Icon(_currentTab==2?Icons.chat:Icons.chat_bubble_outline,size: 22.0,)),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+
+            ],
+          ),
         ),
       ),
       onWillPop: (){return new Future<bool>.value(false);},

@@ -9,7 +9,7 @@
   <component name="ChangeListManager">
     <list default="true" id="af31b5df-b2e0-4a65-9af3-7d12a46f2dad" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/lib/views/ChatScreen.dart" afterPath="$PROJECT_DIR$/lib/views/ChatScreen.dart" />
+      <change beforePath="$PROJECT_DIR$/lib/views/NamasteHome.dart" afterPath="$PROJECT_DIR$/lib/views/NamasteHome.dart" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -27,11 +27,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="ChatScreen.dart" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ChatScreen.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/views/ChatScreen.dart">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="202">
-              <caret line="232" column="43" lean-forward="true" selection-start-line="232" selection-start-column="43" selection-end-line="232" selection-end-column="43" />
+              <caret line="232" column="43" lean-forward="false" selection-start-line="232" selection-start-column="43" selection-end-line="232" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NamasteHome.dart" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/views/NamasteHome.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="83" column="26" lean-forward="true" selection-start-line="83" selection-start-column="26" selection-end-line="83" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -112,12 +122,12 @@
         <option value="$PROJECT_DIR$/ios/Runner/Info.plist" />
         <option value="$PROJECT_DIR$/lib/views/AlbumEditor.dart" />
         <option value="$PROJECT_DIR$/lib/views/Namaste.dart" />
-        <option value="$PROJECT_DIR$/lib/views/NamasteHome.dart" />
         <option value="$PROJECT_DIR$/lib/views/NotificationScreen.dart" />
         <option value="$PROJECT_DIR$/lib/views/Settings_Screen.dart" />
         <option value="$PROJECT_DIR$/lib/views/EditProfile.dart" />
         <option value="$PROJECT_DIR$/lib/views/AccountScreen.dart" />
         <option value="$PROJECT_DIR$/lib/views/ChatScreen.dart" />
+        <option value="$PROJECT_DIR$/lib/views/NamasteHome.dart" />
       </list>
     </option>
   </component>
@@ -195,10 +205,10 @@
         </subPane>
         <option name="show-excluded-files" value="false" />
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -410,13 +420,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1526910296971</updated>
-    </task>
-    <task id="LOCAL-00040" summary="changed chatthread ui">
-      <created>1530740426232</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1530740426233</updated>
     </task>
     <task id="LOCAL-00041" summary="fixed read-receipts">
       <created>1530742696484</created>
@@ -754,7 +757,14 @@
       <option name="project" value="LOCAL" />
       <updated>1533920695382</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="changed conversations color">
+      <created>1534024713743</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1534024713743</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TodoView">
@@ -807,7 +817,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="editprofile page" />
     <MESSAGE value="editprofile done" />
     <MESSAGE value="added tickerprovider" />
     <MESSAGE value="changed aboutme icon" />
@@ -832,7 +841,8 @@
     <MESSAGE value="changed bottm icon" />
     <MESSAGE value="fixed tab icons" />
     <MESSAGE value="fixed back button on pages" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed back button on pages" />
+    <MESSAGE value="changed conversations color" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed conversations color" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1133,7 +1143,7 @@
         <state relative-caret-position="226">
           <caret line="63" column="41" lean-forward="false" selection-start-line="63" selection-start-column="41" selection-end-line="63" selection-end-column="41" />
           <folding>
-            <element signature="e#0#20#0" expanded="true" />
+            <element signature="e#0#20#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1151,7 +1161,7 @@
         <state relative-caret-position="157">
           <caret line="18" column="26" lean-forward="true" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
           <folding>
-            <element signature="e#0#52#0" expanded="true" />
+            <element signature="e#0#52#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1168,14 +1178,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="298">
           <caret line="47" column="18" lean-forward="false" selection-start-line="47" selection-start-column="18" selection-end-line="47" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/views/NamasteHome.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="72" column="60" lean-forward="false" selection-start-line="72" selection-start-column="60" selection-end-line="72" selection-end-column="60" />
           <folding />
         </state>
       </provider>
@@ -1199,7 +1201,15 @@
     <entry file="file://$PROJECT_DIR$/lib/views/ChatScreen.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
-          <caret line="232" column="43" lean-forward="true" selection-start-line="232" selection-start-column="43" selection-end-line="232" selection-end-column="43" />
+          <caret line="232" column="43" lean-forward="false" selection-start-line="232" selection-start-column="43" selection-end-line="232" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/views/NamasteHome.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="83" column="26" lean-forward="true" selection-start-line="83" selection-start-column="26" selection-end-line="83" selection-end-column="26" />
           <folding />
         </state>
       </provider>
