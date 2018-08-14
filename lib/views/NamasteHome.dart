@@ -34,14 +34,13 @@ class NamasteHome extends StatefulWidget {
 }
 
 class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin{
-  TabController _tabController;
+  PageController _pageController;
   String _myNumber;
-  int _currentTab = 1;
+  int _page = 1;
 
-
-  void _updateCurrentTab(){
-    setState(() {
-      _currentTab = _tabController.index;
+  void onPageChanged(int page){
+    setState((){
+      this._page = page;
     });
   }
 
@@ -51,8 +50,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       _myNumber = sp.getString("myNumber");
     });
-    _tabController = new TabController(vsync: this, initialIndex: 1, length: 3);
-    _tabController.addListener(_updateCurrentTab);
+    _pageController = new PageController(initialPage: 1);
 
   }
 
@@ -68,14 +66,15 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
           ),
           child: Stack(
             children: <Widget>[
-              new TabBarView(
-                  controller: _tabController,
-                  children: <Widget>[
-                    new Profile(),
-                    new Namaste(),
-                    new ChatScreen(),
-                  ],
-                ),
+              new PageView(
+                children: <Widget>[
+                  new Profile(),
+                  new Namaste(),
+                  new ChatScreen()
+                ],
+                controller: _pageController,
+                onPageChanged: onPageChanged,
+              ),
               new Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
@@ -83,17 +82,14 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(25.0),
-                    child: new TabBar(
-                      labelColor: Colors.black38.withOpacity(0.7),
-                      indicator:UnderlineTabIndicator(),
-                      unselectedLabelColor: Colors.grey,
-                      controller: _tabController,
-                      tabs: <Widget>[
-                        new Tab(icon: new Icon(_currentTab==0?Icons.person:Icons.person_outline,size: 22.0,)),
-                        new Tab(icon: new CircleAvatar(radius: 30.0,backgroundColor: _currentTab==1?Colors.black38.withOpacity(0.7):Colors.black38,child: Image(image: AssetImage("images/logo.png"),color:Colors.white,)),),
-                        new Tab(icon: new Icon(_currentTab==2?Icons.chat:Icons.chat_bubble_outline,size: 22.0,)),
-                      ],
-                    ),
+                    child: new Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          new IconButton(icon: new Icon(_page==0?Icons.person:Icons.person_outline),iconSize: 30.0, onPressed: ()=>_navigationTapped(0)),
+                          new IconButton(icon: new CircleAvatar(radius: 30.0,backgroundColor: _page==1?Colors.black38.withOpacity(0.7):Colors.black38,child: Image(image: AssetImage("images/logo.png"),color:Colors.white,)),iconSize: 60.0, onPressed: ()=>_navigationTapped(1)),
+                          new IconButton(icon: new Icon(_page==2?Icons.chat:Icons.chat_bubble_outline),iconSize: 25.0,onPressed: ()=>_navigationTapped(2)),
+                        ],
+                    )
                   ),
                 ],
               ),
@@ -106,11 +102,17 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
     );
   }
 
+  void _navigationTapped(int page){
+    _pageController.animateToPage(
+        page,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.ease
+    );
+  }
   @override
   void dispose() {
     super.dispose();
-    _tabController.dispose();
-    _tabController.removeListener(_updateCurrentTab);
+    _pageController.dispose();
   }
 }
 
