@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 
@@ -10,6 +13,9 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
   AnimationController _iconAnimationController;
   bool _searchClicked = false;
   List<Widget> tiles = [];
+  final CollectionReference _reference2 = Firestore.instance.collection("App-Data");
+  StreamSubscription<QuerySnapshot> _subscriber2;
+  bool _loaded = false;
 
 
   @override
@@ -21,115 +27,155 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
       curve: Curves.easeIn,
     );
     _iconAnimation.addListener(() => this.setState(() {}));
-    _makeTiles();
+    _makeTilesX();
     super.initState();
 
   }
+  void _makeTilesX(){
+    _loaded = true;
+    _subscriber2 = _reference2.snapshots().listen((datasnapshot) {
+      datasnapshot.documents.forEach((d) {
+        print(d.data);
+        if (d.exists) {
+          setState(() {
+            if(d.data['number']!=null) {
+              if (d.data['dp'] != null) {
+                setState(() {
+                  _makeTiles(d.data['number'], d.data['dp']);
+                });
+              } else {
+                setState(() {
+                  _makeTiles(d.data['number'], d.data['dp']);
+                });
+              }
+            }
+          });
+        }
+      });
+      setState(() {
+        _loaded = false;
+      });
+    });
 
-  void _makeTiles(){
-    for(int i =0; i < 1;i++){
+  }
+  void _makeTiles(String name, String dp){
       tiles.add(
-          _cardBody()
+          personTile(name,dp)
       );
-    }
   }
 
 
-  Widget _cardBody(){
-    return new Container(
-      padding: const EdgeInsets.all(6.0),
-      height: 550.0,
-      child: new Card(
-        color: Colors.white.withOpacity(0.8),
-        child: new Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            new SizedBox(
-              height: 300.0,
-              child: new Stack(
-                children: <Widget>[
-                  new Positioned.fill(
-                    child: new Image.network(
-                      "https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/11230099_10206835592669367_2911893136176495642_n.jpg?_nc_cat=0&oh=eb80db39d72968cc4a130d4d075ea24a&oe=5BE80A4C",
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 6.0,
-                    left: 8.0,
-                    right: 16.0,
-                    child: Container(
-                      color: Colors.black.withOpacity(0.5),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text("Pranav Kapoor",
-                              style: TextStyle(color: Colors.white,fontSize:30.0),
-                            ),
-                            Text(
-                              "26",
-                              style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
-                            ),
-                            Text("My name is pranav, these are my profile details..all you need to know",
-                            style: TextStyle(color: Colors.white),),
-                          ],
-                        ),
-                    ),
-                  ),
-                ],
+
+  @override
+  Widget build(BuildContext context){
+    return  NestedScrollView(
+      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+        return <Widget>[
+          _searchClicked?_searchAppBar(innerBoxIsScrolled):_normalAppBar(innerBoxIsScrolled),
+        ];
+      },
+      body: _loaded?CircularProgressIndicator():new ListView(
+        children: tiles,
+      )
+    );
+  }
+  Widget personTile(String name, String imageUrl){
+    return new InkWell(
+      child: new Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        child: new Container(
+          height: 115.0,
+          child: new Stack(
+            children: <Widget>[
+              myCard(name),
+              new Positioned(top: 7.5, child:
+              personImage(imageUrl)
+
               ),
-            ),
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  new FloatingActionButton(
-                    mini: true,
-                    onPressed: () {},
-                    backgroundColor: Colors.white,
-                    child: new Icon(Icons.loop, color: Colors.yellow),
-                  ),
-                  new Padding(padding: new EdgeInsets.only(right: 8.0)),
-                  new FloatingActionButton(
-                    onPressed: () {},
-                    backgroundColor: Colors.white,
-                    child: new Icon(Icons.close, color: Colors.red),
-                  ),
-                  new Padding(padding: new EdgeInsets.only(right: 8.0)),
-                  new FloatingActionButton(
-                    onPressed: () {},
-                    backgroundColor: Colors.white,
-                    child: new Icon(Icons.favorite, color: Colors.green),
-                  ),
-                  new Padding(padding: new EdgeInsets.only(right: 8.0)),
-                  new FloatingActionButton(
-                    mini: true,
-                    onPressed: () {},
-                    backgroundColor: Colors.white,
-                    child: new Icon(Icons.star, color: Colors.blue),
-                  ),
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
-  @override
-  Widget build(BuildContext context){
-    return  NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
-              _searchClicked?_searchAppBar(innerBoxIsScrolled):_normalAppBar(innerBoxIsScrolled),
-            ];
-          },
-          body: GridView(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1),
-              children: tiles
+  Widget personImage(String imageUrl) {
+    var personAvatar = new Hero(
+      tag: Text("lol"),
+      child: new Container(
+        width: 100.0,
+        height: 100.0,
+        decoration: new BoxDecoration(
+          shape: BoxShape.circle,
+          image: new DecorationImage(
+            fit: BoxFit.cover,
+            image: new NetworkImage(imageUrl),
+          ),
+        ),
+      ),
+    );
+
+    var placeholder = new Container(
+        width: 100.0,
+        height: 100.0,
+        decoration: new BoxDecoration(
+          shape: BoxShape.circle,
+          gradient: new LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.black54, Colors.black, Colors.blueGrey[600]],
+          ),
+        ),
+        alignment: Alignment.center,
+        child: new Text(
+          'DOGGO',
+          textAlign: TextAlign.center,
+        ));
+
+    var crossFade = new AnimatedCrossFade(
+      firstChild: placeholder,
+      secondChild: personAvatar,
+      crossFadeState:CrossFadeState.showSecond,
+      duration: new Duration(milliseconds: 3000),
+    );
+
+    return crossFade;
+  }
+  Widget myCard(String name){
+    return new Positioned(
+      right: 0.0,
+      child: new Container(
+        width: 290.0,
+        height: 115.0,
+        child: new Card(
+          color: Colors.black87,
+          child: new Padding(
+            padding: const EdgeInsets.only(
+              top: 8.0,
+              bottom: 8.0,
+              left: 64.0,
             ),
-      );
+            child: new Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                new Text(name,
+                    style: TextStyle(color: Colors.white)),
+                new Text(name.substring(0,3).contains("+44")?"GB":name.substring(0,3).contains("+91")?"IN":"Location",
+                    style: TextStyle(color: Colors.white)),
+                new Row(
+                  children: <Widget>[
+                    new Icon(
+                      Icons.star,color: Colors.white,
+                    ),
+                    new Text(': X / 10',style: TextStyle(color: Colors.white),)
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
   SliverAppBar _searchAppBar(bool innerBoxIsScrolled){
     _iconAnimationController.forward();
@@ -179,7 +225,9 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
 
   @override
   void dispose() {
+    _subscriber2.cancel();
     _iconAnimationController.dispose();
+    tiles.clear();
     super.dispose();
   }
 }

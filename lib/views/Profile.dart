@@ -29,7 +29,7 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsetsDirectional.only(top: 15.0,start: 10.0 ,end: 10.0),
-      color: Colors.white.withOpacity(0.2),
+      color: Colors.transparent,
       child: NestedScrollView(
               headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
