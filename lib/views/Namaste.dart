@@ -1,5 +1,6 @@
 import 'dart:async';
-
+import 'package:Namaste/resources/UiResources.dart';
+import 'package:Namaste/views/NamasteHome.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,9 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
   final CollectionReference _reference2 = Firestore.instance.collection("App-Data");
   StreamSubscription<QuerySnapshot> _subscriber2;
   bool _loaded = false;
+  bool _openProfile = false;
+  String name, dp ;
+  double _opacity = 0.0;
 
 
   @override
@@ -74,13 +78,34 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
           _searchClicked?_searchAppBar(innerBoxIsScrolled):_normalAppBar(innerBoxIsScrolled),
         ];
       },
-      body: _loaded?CircularProgressIndicator():new ListView(
-        children: tiles,
+      body: _loaded?CircularProgressIndicator():Stack(
+        children: [
+          Container(
+            color: Colors.transparent.withOpacity(_opacity),
+            child: new ListView(
+              children: tiles,
+            ),
+          ),
+          _openProfile?Positioned(
+            child: new Container(
+              child: profilePanel(name, dp)
+            ),
+          ):Text("")
+        ]
       )
     );
   }
+
   Widget personTile(String name, String imageUrl){
     return new InkWell(
+      onTap: (){
+        setState(() {
+          this.name = name;
+          this.dp = imageUrl;
+          this._opacity = 0.7;
+          this._openProfile = true;
+        });
+        },
       child: new Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
         child: new Container(
@@ -221,6 +246,107 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
         });},),
       ],
     );
+  }
+  Widget profilePanel(String name, String dp){
+    return new Container(
+      margin: EdgeInsets.all(20.0),
+      decoration: new BoxDecoration(
+        gradient: myGradient, borderRadius:  BorderRadius.all(Radius.circular(10.0))
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: ListView(
+          padding: new EdgeInsets.symmetric(vertical: 15.0),
+          children: <Widget>[
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                IconButton(icon: Icon(Icons.clear),onPressed: (){
+                  setState(() {
+                      this._opacity = 0.0;
+                      this.name = "";
+                      this.dp = "";
+                      this._openProfile = false;
+                  });
+            },)],),
+            new Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                //image begin
+                new Hero(
+                  tag: "lol",
+                  child: new Container(
+                    height: 120.0,
+                    width: 120.0,
+                    constraints: new BoxConstraints(),
+                    decoration: new BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        const BoxShadow(
+                            offset: const Offset(1.0, 2.0),
+                            blurRadius: 2.0,
+                            spreadRadius: -1.0,
+                            color: const Color(0x33000000)),
+                        const BoxShadow(
+                            offset: const Offset(2.0, 1.0),
+                            blurRadius: 3.0,
+                            spreadRadius: 0.0,
+                            color: const Color(0x24000000)),
+                        const BoxShadow(
+                            offset: const Offset(3.0, 1.0),
+                            blurRadius: 4.0,
+                            spreadRadius: 2.0,
+                            color: const Color(0x1F000000)),
+                      ],
+                      image: new DecorationImage(
+                        fit: BoxFit.cover,
+                        image: new NetworkImage(dp),
+                      ),
+                    ),
+                  ),
+                ),
+                //image ends
+                new Text(
+                  name + '  🎾',
+                  style: new TextStyle(fontSize: 25.0,color: Colors.white),
+                ),
+                new Text(
+                  _findLocation(name),
+                  style: new TextStyle(fontSize: 18.0,color: Colors.white),
+                ),
+                new Padding(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
+                  child: new Text("hello how are you",
+                    style: new TextStyle(color: Colors.white),
+                  ),
+                ),
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new Icon(
+                      Icons.star,
+                      size: 40.0,
+                    ),
+                    new Text(' x / 10',
+                        style: TextStyle(color: Colors.white)),
+                  ],
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  String _findLocation(String name){
+    String location = "";
+    if(name.substring(0,3).contains("+44")){
+      location = "GB";
+    }else if(name.substring(0,3).contains("+91")){
+      location = "IN";
+    }
+    return location;
   }
 
   @override
