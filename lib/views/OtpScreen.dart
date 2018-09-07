@@ -47,76 +47,84 @@ class _OtpScreenState extends State<OtpScreen>{
          colorBlendMode: BlendMode.darken,
          color: Colors.black87,
        ),
-       new Theme(
-         data: new ThemeData(
-             brightness: Brightness.dark,
-             inputDecorationTheme: new InputDecorationTheme(
-               // hintStyle: new TextStyle(color: Colors.blue, fontSize: 20.0),
-               labelStyle:
-               new TextStyle(color: Colors.tealAccent, fontSize: 25.0),
-             )),
-         isMaterialAppTheme: true,
-         child: new Column(
-           mainAxisAlignment: MainAxisAlignment.center,
-           children: <Widget>[
-             new Container(
-               padding: const EdgeInsets.all(40.0),
-               child: new Form(
-                 autovalidate: true,
-                 child: new Column(
-                   mainAxisAlignment: MainAxisAlignment.start,
-                   children: <Widget>[
-                     new TextFormField(
-                       decoration: new InputDecoration(labelText: "Enter OTP", fillColor: Colors.white),
+       new Column(
+         mainAxisAlignment: MainAxisAlignment.center,
+         children: <Widget>[
+           new Container(
+             padding: const EdgeInsets.all(40.0),
+             child: new Form(
+               autovalidate: true,
+               child: new Column(
+                 mainAxisAlignment: MainAxisAlignment.start,
+                 children: <Widget>[
+                   Theme(
+                     data: ThemeData.dark(),
+                     child: new TextFormField(
+                       decoration: new InputDecoration(labelText: "Enter OTP",labelStyle: TextStyle(fontSize: 25.0,color: Colors.teal), fillColor: Colors.white),
                        keyboardType: TextInputType.number,
                        controller:  otp,
                      ),
-                     new Padding(
-                       padding: const EdgeInsets.only(top: 60.0),
-                     ),
-                     new Row(
-                       children: <Widget>[
-                         new MaterialButton(
-                           height: 50.0,
-                           minWidth: 150.0,
-                           color: Colors.green,
-                           splashColor: Colors.teal,
-                           textColor: Colors.white,
-                           child: new Icon(Icons.adjust),
-                           onPressed: () {
-                             if(otp.text == widget.generatedOtp){
-                               setState(() {
-                                 String myNum = widget.myNumber;
-                                 new FireBaseDB().addToDb(myNum);
-                                 print("mynumber $myNum");
-                                 sharedPreferences.setString("myNumber", myNum);
-                                 _loggedIn = true;
-                                 persist(_loggedIn);
-                               });
-                               _rootPage();
-                             }
-                           },
+                   ),
+                   new Padding(
+                     padding: const EdgeInsets.only(top: 60.0),
+                   ),
+                   new Column(
+                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                     mainAxisSize: MainAxisSize.max,
+                     children: <Widget>[
+                       new MaterialButton(
+                         height: 50.0,
+                         minWidth: 150.0,
+                         color: Colors.green,
+                         splashColor: Colors.teal,
+                         textColor: Colors.white,
+                         child: Row(
+                           children: <Widget>[
+                             new Text("Submit"),
+                             new Icon(Icons.play_arrow),
+                           ],
                          ),
-                         new MaterialButton(
+                         onPressed: () {
+                           if(otp.text == widget.generatedOtp){
+                             setState(() {
+                               String myNum = widget.myNumber;
+                               new FireBaseDB().addToDb(myNum);
+                               print("mynumber $myNum");
+                               sharedPreferences.setString("myNumber", myNum);
+                               _loggedIn = true;
+                               persist(_loggedIn);
+                             });
+                             _rootPage();
+                           }
+                         },
+                       ),
+                       Padding(
+                         padding: const EdgeInsets.only(top: 8.0),
+                         child: new MaterialButton(
                            height: 50.0,
-                           minWidth: 150.0,
+                           minWidth: 130.0,
                            color: Colors.green,
                            splashColor: Colors.teal,
                            textColor: Colors.white,
-                           child: new Icon(Icons.refresh),
+                           child: Row(
+                             children: <Widget>[
+                               new Text("Resend"),
+                               new Icon(Icons.refresh),
+                             ],
+                           ),
                            onPressed: ()
                             {
                             _rootPage();
                             },
-                          )
-                       ]
-                     )
-                   ]
-                 )
+                          ),
+                       )
+                     ]
+                   )
+                 ]
                )
              )
-           ]
-         )
+           )
+         ]
        )
      ]
      )

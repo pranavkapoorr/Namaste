@@ -17,6 +17,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
   AnimationController _iconAnimationController;
   TextEditingController number = new TextEditingController();
 
+
   String generateRandomAuthCode() {
     var rng = new Random();
     String authCode = rng.nextInt(10000).toString();
@@ -43,9 +44,26 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
       print("Response status: ${response.statusCode}");
       print("Response body: ${response.body}");
     }).whenComplete((){
-  print("sent OTP: $otp to $number ");
-  }).catchError((e)=>print(e));
+      print("sent OTP: $otp to $number ");
+    }).catchError((e)=>print(e));
     return otp;
+  }
+  void _checkIfAlreadyRegistered(String number, BuildContext context) async{
+    var temp;
+    await http.get("http://192.168.0.26:5000/users/uphone/"+number,
+    ).then((response) {
+      temp = response.body;
+      print(" bodyx: $temp");
+    }).whenComplete((){
+      print("checked db");
+      if(temp.toString().contains("exist")){
+        print('register first');
+        Scaffold.of(context).showSnackBar(SnackBar(content: Text("Register First")));
+      }else{
+        String generatedOtp = sendOTP(number);
+        _otpPage(generatedOtp,number);
+      }
+    }).catchError((e)=>print(e));
   }
 
 
@@ -53,7 +71,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
   void initState() {
     super.initState();
     _iconAnimationController = new AnimationController(
-        vsync: this, duration: new Duration(milliseconds: 500));
+        vsync: this, duration: new Duration(milliseconds: 2000));
     _iconAnimation = new CurvedAnimation(
       parent: _iconAnimationController,
       curve: Curves.bounceOut,
@@ -66,71 +84,106 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
+    var _screenSize = MediaQuery.of(context).size;
     return new WillPopScope(
         onWillPop: (){
           NamasteHome.exitApp(context);
         },
         child: new Scaffold(
           backgroundColor: Colors.white,
-          body: new Stack(fit: StackFit.expand, children: <Widget>[
-            new Image(
-              image: new AssetImage("images/bg.jpg"),
-              fit: BoxFit.cover,
-              colorBlendMode: BlendMode.darken,
-              color: Colors.black87,
-            ),
-            new Theme(
-              data: new ThemeData(
-                  brightness: Brightness.dark,
-                  inputDecorationTheme: new InputDecorationTheme(
-                    // hintStyle: new TextStyle(color: Colors.blue, fontSize: 20.0),
-                    labelStyle:
-                    new TextStyle(color: Colors.tealAccent, fontSize: 25.0),
-                  )),
-              isMaterialAppTheme: true,
-              child: new Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+          body: Builder(
+            builder: (context)=>new Stack(
+                fit: StackFit.expand,
                 children: <Widget>[
-                  new FlutterLogo(
-                    size: _iconAnimation.value * 140.0,
+                  new Image(
+                    image: new AssetImage("images/bg.jpg"),
+                    fit: BoxFit.cover,
+                    colorBlendMode: BlendMode.darken,
+                    color: Colors.black87,
                   ),
-                  new Container(
-                    padding: const EdgeInsets.all(40.0),
-                    child: new Form(
-                      autovalidate: true,
-                      child: new Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                  new Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Image.asset(
+                        "images/logo.png",
+                        color: Colors.white,
+                        height: _iconAnimation.value * 140.0,
+                      ),
+                      new Container(
+                        padding: const EdgeInsets.all(40.0),
+                        child: new Form(
+                          autovalidate: true,
+                          child: new Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Theme(
+                                data: ThemeData.dark(),
+                                child: new TextFormField(
+                                  decoration: new InputDecoration(labelText: "Enter Number",labelStyle: TextStyle(fontSize: 25.0,color: Colors.teal),fillColor: Colors.white),
+                                  keyboardType: TextInputType.phone,
+                                  controller:  number,
+                                ),
+                              ),
+                              new Padding(
+                                padding: const EdgeInsets.only(top: 60.0),
+                              ),
+                              new MaterialButton(
+                                height: 50.0,
+                                minWidth: 150.0,
+                                color: Colors.green,
+                                splashColor: Colors.teal,
+                                textColor: Colors.white,
+                                child: Row(
+                                  children: <Widget>[
+                                    Text("Login"),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: new Icon(Icons.forward),
+                                    )
+                                  ],
+                                ),
+                                onPressed: () {
+                                  if(number.text.length>11){
+                                    print("here");
+                                    _checkIfAlreadyRegistered(number.text,context);
+                                  }else{
+                                    print("snackbar");
+                                    Scaffold.of(context).showSnackBar(SnackBar(content: Text("type in valid phone number")));
+                                  }
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  Positioned(
+                    bottom: 30.0,
+                    left: _screenSize.width/2,
+                    child: MaterialButton(
+                      height: 50.0,
+                      minWidth: 150.0,
+                      color: Colors.green,
+                      splashColor: Colors.teal,
+                      textColor: Colors.white,
+                      child: Row(
                         children: <Widget>[
-                          new TextFormField(
-                            decoration: new InputDecoration(labelText: "Enter Number", fillColor: Colors.white),
-                            keyboardType: TextInputType.phone,
-                            controller:  number,
+                          new Icon(Icons.add_circle),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: new Text("Register"),
                           ),
-                          new Padding(
-                            padding: const EdgeInsets.only(top: 60.0),
-                          ),
-                          new MaterialButton(
-                            height: 50.0,
-                            minWidth: 150.0,
-                            color: Colors.green,
-                            splashColor: Colors.teal,
-                            textColor: Colors.white,
-                            child: new Icon(Icons.adjust),
-                            onPressed: () {
-                              if(number.text.length>11){
-                                String generatedOtp = sendOTP(number.text);
-                                _otpPage(generatedOtp,number.text);
-                              }
-                            },
-                          )
                         ],
                       ),
+                      onPressed: () {
+
+                      },
                     ),
                   )
-                ],
-              ),
+                ]
             ),
-          ]),
+          ),
         )
     );
   }
@@ -139,7 +192,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
   Future _otpPage(String generatedOtp,String myNumber){
     return Navigator.of(context).push(new MaterialPageRoute(
         builder: (context)=> new OtpScreen(generatedOtp:generatedOtp,myNumber: myNumber,)
-        )
+    )
     );
   }
 }

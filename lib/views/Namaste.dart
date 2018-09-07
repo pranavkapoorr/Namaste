@@ -1,7 +1,7 @@
-import 'dart:async';
+import 'dart:convert';
+import 'dart:math';
 import 'package:Namaste/resources/UiResources.dart';
-import 'package:Namaste/views/NamasteHome.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 
@@ -14,16 +14,18 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
   AnimationController _iconAnimationController;
   bool _searchClicked = false;
   List<Widget> tiles = [];
-  final CollectionReference _reference2 = Firestore.instance.collection("App-Data");
-  StreamSubscription<QuerySnapshot> _subscriber2;
   bool _loaded = false;
   bool _openProfile = false;
-  String name, dp ;
+  String name, dp ,location, about;
   double _opacity = 0.0;
+  Animation<double> _angleAnimation;
+  Animation<double> _scaleAnimation;
+  AnimationController _controller;
 
 
   @override
   void initState() {
+    _setupLoadingAnim();
     _iconAnimationController = new AnimationController(
         vsync: this, duration: new Duration(seconds: 1));
     _iconAnimation = new CurvedAnimation(
@@ -35,38 +37,51 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
     super.initState();
 
   }
-  void _makeTilesX(){
-    _loaded = true;
-    _subscriber2 = _reference2.snapshots().listen((datasnapshot) {
-      datasnapshot.documents.forEach((d) {
-        print(d.data);
-        if (d.exists) {
-          setState(() {
-            if(d.data['number']!=null) {
-              if (d.data['dp'] != null) {
-                setState(() {
-                  _makeTiles(d.data['number'], d.data['dp']);
-                });
-              } else {
-                setState(() {
-                  _makeTiles(d.data['number'], d.data['dp']);
-                });
-              }
-            }
-          });
-        }
+  void _setupLoadingAnim(){
+    _controller = new AnimationController(
+        duration: const Duration(milliseconds: 2000), vsync: this);
+    _angleAnimation = new Tween(begin: 0.0, end: 360.0).animate(_controller)
+      ..addListener(() {
+        setState(() {
+          // the state that has changed here is the animation object’s value
+        });
       });
-      setState(() {
-        _loaded = false;
+    _scaleAnimation = new Tween(begin: 1.0, end: 6.0).animate(_controller)
+      ..addListener(() {
+        setState(() {
+          // the state that has changed here is the animation object’s value
+        });
       });
-    });
 
+    _angleAnimation.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        if (!_loaded) {
+          _controller.reverse();
+        }
+      } else if (status == AnimationStatus.dismissed) {
+        if (!_loaded) {
+          _controller.forward();
+        }
+      }
+    });
+    _controller.forward();
   }
-  void _makeTiles(String name, String dp){
-      tiles.add(
-          personTile(name,dp)
-      );
-  }
+  void _makeTilesX() async{
+      List temp;
+      await http.get("http://192.168.0.26:5000/users/all",
+      ).then((response) {
+        print("Response status: ${response.statusCode}");
+        print("Response body: ${response.body}");
+        temp = json.decode(response.body);
+        print(" body: $temp");
+      }).whenComplete((){
+        print("got users");
+        tiles = temp.map((e)=>personTile(e['name'], e['dp'],e['location'],e['about'])).toList();
+        setState(() {
+          _loaded = true;
+        });
+      }).catchError((e)=>print(e));
+    }
 
 
 
@@ -78,7 +93,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
           _searchClicked?_searchAppBar(innerBoxIsScrolled):_normalAppBar(innerBoxIsScrolled),
         ];
       },
-      body: _loaded?CircularProgressIndicator():Stack(
+      body: _loaded?Stack(
         children: [
           Container(
             color: Colors.transparent.withOpacity(_opacity),
@@ -88,20 +103,22 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
           ),
           _openProfile?Positioned(
             child: new Container(
-              child: profilePanel(name, dp)
+              child: profilePanel(name, dp, location, about)
             ),
           ):Text("")
         ]
-      )
+      ):Center(child: _buildAnimation())
     );
   }
 
-  Widget personTile(String name, String imageUrl){
+  Widget personTile(String name, String imageUrl, String location, String about){
     return new InkWell(
       onTap: (){
         setState(() {
           this.name = name;
           this.dp = imageUrl;
+          this.location = location;
+          this.about = about;
           this._opacity = 0.7;
           this._openProfile = true;
         });
@@ -185,7 +202,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
               children: <Widget>[
                 new Text(name,
                     style: TextStyle(color: Colors.white)),
-                new Text(name.substring(0,3).contains("+44")?"GB":name.substring(0,3).contains("+91")?"IN":"Location",
+                new Text(location,
                     style: TextStyle(color: Colors.white)),
                 new Row(
                   children: <Widget>[
@@ -247,7 +264,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
       ],
     );
   }
-  Widget profilePanel(String name, String dp){
+  Widget profilePanel(String name, String dp, String location, String about){
     return new Container(
       margin: EdgeInsets.all(20.0),
       decoration: new BoxDecoration(
@@ -266,6 +283,8 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
                       this._opacity = 0.0;
                       this.name = "";
                       this.dp = "";
+                      this.location = "";
+                      this.about = "";
                       this._openProfile = false;
                   });
             },)],),
@@ -311,13 +330,13 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
                   style: new TextStyle(fontSize: 25.0,color: Colors.white),
                 ),
                 new Text(
-                  _findLocation(name),
+                  location,
                   style: new TextStyle(fontSize: 18.0,color: Colors.white),
                 ),
                 new Padding(
                   padding:
                   const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
-                  child: new Text("hello how are you",
+                  child: new Text(about,
                     style: new TextStyle(color: Colors.white),
                   ),
                 ),
@@ -339,19 +358,52 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
       ),
     );
   }
-  String _findLocation(String name){
-    String location = "";
-    if(name.substring(0,3).contains("+44")){
-      location = "GB";
-    }else if(name.substring(0,3).contains("+91")){
-      location = "IN";
-    }
-    return location;
+
+  Widget _buildAnimation() {
+    double circleWidth = 10.0 * _scaleAnimation.value;
+    Widget circles = new Container(
+      width: circleWidth * 2.0,
+      height: circleWidth * 2.0,
+      child: new Column(
+        children: <Widget>[
+          new Row (
+            children: <Widget>[
+              _buildCircle(circleWidth,Colors.blue),
+              _buildCircle(circleWidth,Colors.red),
+            ],
+          ),
+          new Row (
+            children: <Widget>[
+              _buildCircle(circleWidth,Colors.yellow),
+              _buildCircle(circleWidth,Colors.green),
+            ],
+          ),
+        ],
+      ),
+    );
+
+    double angleInDegrees = _angleAnimation.value;
+    return new Transform.rotate(
+      angle: angleInDegrees / 360 * 2 * pi,
+      child: new Container(
+        child: circles,
+      ),
+    );
   }
 
+  Widget _buildCircle(double circleWidth, Color color) {
+    return new Container(
+      width: circleWidth,
+      height: circleWidth,
+      decoration: new BoxDecoration(
+        color: color,
+        shape: BoxShape.circle,
+      ),
+    );
+  }
   @override
   void dispose() {
-    _subscriber2.cancel();
+    _controller.dispose();
     _iconAnimationController.dispose();
     tiles.clear();
     super.dispose();

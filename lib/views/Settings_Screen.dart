@@ -46,7 +46,7 @@ class _SettingsScreenState extends State<SettingsScreen>{
                         new Divider(height: 1.0,color: Colors.black,),
                         new ListTile(leading: new Icon(Icons.notifications,color:Colors.amberAccent),title: new Text("Notifications"),onTap: _notificationsPage,trailing: Icon(Icons.navigate_next)),
                         new Divider(height: 1.0,color: Colors.black,),
-                        new ListTile(leading: new Icon(Icons.help,color:Colors.redAccent),title: new Text("Help and FeedBack"),onTap: _testDbPage,trailing: Icon(Icons.navigate_next))
+                        new ListTile(leading: new Icon(Icons.help,color:Colors.redAccent),title: new Text("Help and FeedBack"),onTap: (){},trailing: Icon(Icons.navigate_next))
                    ]
                 ),
               ),
@@ -65,9 +65,7 @@ class _SettingsScreenState extends State<SettingsScreen>{
   Future _notificationsPage(){
     return Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new NotificationScreen()));
   }
-  Future _testDbPage(){
-    return Navigator.of(context).push(new MaterialPageRoute(builder: (context)=> new Profile()));
-  }
+
 
 }
 

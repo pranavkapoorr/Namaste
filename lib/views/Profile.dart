@@ -1,10 +1,16 @@
-import 'package:Namaste/views/AlbumEditor.dart';
+import 'dart:convert';
 
+import 'package:Namaste/views/AlbumEditor.dart';
+import 'package:http/http.dart' as http;
 import 'EditProfile.dart';
 import 'Settings_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel/carousel.dart';
 class Profile extends StatefulWidget {
+  final String myNumber;
+
+  Profile(this.myNumber);
+
   @override
   _ProfileState createState() => new _ProfileState();
 }
@@ -12,10 +18,13 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   final double _appBarHeight = 267.0;
   Carousel carouselX;
+  var _me;
+  bool _loaded = false;
 
   @override
   initState(){
     super.initState();
+    _getMyDetails();
     carouselX = new Carousel(
       displayDuration: Duration(seconds: 5),
       children: [
@@ -24,10 +33,27 @@ class _ProfileState extends State<Profile> {
       ].map((netImage) => new Image(image: netImage,fit: BoxFit.cover,height: _appBarHeight,)).toList(),
     );
   }
+  void _getMyDetails() async{
+    var temp;
+    print("my num is ${widget.myNumber}");
+    await http.get("http://192.168.0.26:5000/users/uphone/"+ widget.myNumber,
+    ).then((response) {
+      temp = json.decode(response.body);
+      print(" bodyx: $temp");
+      _me = temp;
+    }).whenComplete(() {
+      print("checked db");
+      setState(() {
+        _loaded = true;
+      });
+
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return _loaded?Container(
       padding: EdgeInsetsDirectional.only(top: 15.0,start: 10.0 ,end: 10.0),
       color: Colors.transparent,
       child: NestedScrollView(
@@ -47,7 +73,7 @@ class _ProfileState extends State<Profile> {
                 })
               ],
               flexibleSpace: new FlexibleSpaceBar(
-                title: const Text('Pranav Kapoor',style: TextStyle(color: Colors.white),),
+                title:  Text(_me['name'],style: TextStyle(color: Colors.white),),
                 background: new Stack(
                   fit: StackFit.expand,
                   children: <Widget>[
@@ -56,11 +82,6 @@ class _ProfileState extends State<Profile> {
                             padding: EdgeInsetsDirectional.only(bottom: 1.0),
                             child: carouselX
                         ),
-                    /*new Image.asset(
-                      'images/bg.jpg',
-                      fit: BoxFit.cover,
-                      height: _appBarHeight,
-                    ),*/
                     const DecoratedBox(
                       decoration: const BoxDecoration(
                         gradient: const LinearGradient(
@@ -79,7 +100,7 @@ class _ProfileState extends State<Profile> {
                           children: <Widget>[
                             new CircleAvatar(
                               radius: 45.0,
-                              backgroundImage: NetworkImage("https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/11230099_10206835592669367_2911893136176495642_n.jpg?_nc_cat=0&oh=eb80db39d72968cc4a130d4d075ea24a&oe=5BE80A4C"),
+                              backgroundImage: NetworkImage(_me['dp']),
                             ),
                             _buildFollowerInfo(),
                             _buildActionButtons(Theme.of(context)),
@@ -116,7 +137,7 @@ class _ProfileState extends State<Profile> {
                           children: <Widget>[
                             Icon(Icons.place,color: Colors.red,),
                             new Text(
-                              'Britain',
+                              _me['location'],
                               style:
                               new TextStyle(color: Colors.black38, fontSize: 15.0),
                             ),
@@ -141,9 +162,7 @@ class _ProfileState extends State<Profile> {
                             ],
                           ),
                           new Text(
-                            'Lorem Ipsum is simply dummy text of the printing and typesetting '
-                                'industry. Lorem Ipsum has been the industry\'s standard dummy '
-                                'text ever since the 1500s.',
+                            _me['about'],
                             style:
                             new TextStyle(color: Colors.black38, fontSize: 13.0),
                           ),
@@ -190,7 +209,7 @@ class _ProfileState extends State<Profile> {
               ],
             ),
         ),
-    );
+    ):Center(child: CircularProgressIndicator(),);
   }
   void _goToEditPage(){
     Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new EditProfile()));
@@ -300,6 +319,8 @@ class _ProfileState extends State<Profile> {
   }
   @override
   void dispose() {
+    _loaded = false;
+    _me = null;
     carouselX = null;
     super.dispose();
   }
