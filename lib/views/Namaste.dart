@@ -16,7 +16,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
   List<Widget> tiles = [];
   bool _loaded = false;
   bool _openProfile = false;
-  String name, dp ,location, about;
+  String name, dp ,location , about;
   double _opacity = 0.0;
   Animation<double> _angleAnimation;
   Animation<double> _scaleAnimation;
@@ -76,7 +76,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
         print(" body: $temp");
       }).whenComplete((){
         print("got users");
-        tiles = temp.map((e)=>personTile(e['name'], e['dp'],e['location'],e['about'])).toList();
+        tiles = temp.map((e)=>personTile(e['name'], e['dp'], e['location'],e['about'])).toList();
         setState(() {
           _loaded = true;
         });
@@ -103,7 +103,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
           ),
           _openProfile?Positioned(
             child: new Container(
-              child: profilePanel(name, dp, location, about)
+              child: profilePanel(name, dp, location,about)
             ),
           ):Text("")
         ]
@@ -129,7 +129,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
           height: 115.0,
           child: new Stack(
             children: <Widget>[
-              myCard(name),
+              myCard(name,location),
               new Positioned(top: 7.5, child:
               personImage(imageUrl)
 
@@ -182,7 +182,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
 
     return crossFade;
   }
-  Widget myCard(String name){
+  Widget myCard(String name, String location){
     return new Positioned(
       right: 0.0,
       child: new Container(
