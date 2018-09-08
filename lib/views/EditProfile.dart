@@ -2,10 +2,45 @@ import 'package:Namaste/resources/UiResources.dart';
 import 'package:Namaste/views/AlbumEditor.dart';
 import 'package:flutter/material.dart';
 class EditProfile extends StatefulWidget {
+  final Map user;
+
+  EditProfile({this.user});
+
   @override
   _EditProfileState createState() => new _EditProfileState();
 }
 class _EditProfileState extends State<EditProfile>{
+  TextEditingController name,username,about,location;
+  String _gender;
+
+  @override
+  void initState() {
+    name = new TextEditingController();
+    username = new TextEditingController();
+    about = new TextEditingController();
+    location = new TextEditingController();
+    name.text = widget.user['name'];
+    username.text = widget.user['username'];
+    about.text = widget.user['about'];
+    location.text = widget.user['location'];
+
+    super.initState();
+  }
+
+  void _handleGenderChange(String value){
+    setState(() {
+
+      switch (value) {
+        case "Male":
+          _gender = "Male";
+          break;
+          case "Female":
+          _gender = "Female";
+          break;
+    }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -38,7 +73,7 @@ class _EditProfileState extends State<EditProfile>{
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                CircleAvatar(backgroundImage: NetworkImage("https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/11230099_10206835592669367_2911893136176495642_n.jpg?_nc_cat=0&oh=eb80db39d72968cc4a130d4d075ea24a&oe=5BE80A4C"),
+                                CircleAvatar(backgroundImage: NetworkImage(widget.user['dp']),
                                   radius: 45.0,)
                             ],
                           ),
@@ -69,11 +104,19 @@ class _EditProfileState extends State<EditProfile>{
                           children: <Widget>[
                             Row(children: <Widget>[Text("General",style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.bold),)],),
 
-                        new ListTile(leading:Icon(Icons.contact_mail,color: Colors.redAccent,),title: TextField(decoration: InputDecoration.collapsed(hintText: "username"),)),
+                        new ListTile(leading:Icon(Icons.contact_mail,color: Colors.redAccent,),title: TextField(decoration: InputDecoration.collapsed(hintText: "username"),controller: username,)),
                         new Divider(height: 0.1,color: Colors.grey.shade400,),
-                        new ListTile(leading: new Icon(Icons.person,color:Colors.green),title:TextField(decoration: InputDecoration.collapsed(hintText: "Full name"),)),
+                        new ListTile(leading: new Icon(Icons.person,color:Colors.green),title:TextField(decoration: InputDecoration.collapsed(hintText: "Full name"),controller: name,)),
+                            new ListTile(leading: new Icon(Icons.location_on,color:Colors.red),title:TextField(decoration: InputDecoration.collapsed(hintText: "Location"),controller: location,)),
                         new Divider(height: 0.1,color: Colors.grey.shade400,),
-                        new ListTile(leading: new Icon(Icons.wc,color:Colors.amberAccent),title: TextField(decoration: InputDecoration.collapsed(hintText: "Gender"),)),
+                        new ListTile(leading: new Icon(Icons.wc,color:Colors.amberAccent),title:Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Radio(value: "Male",groupValue: _gender,onChanged: _handleGenderChange,),Text("Male"),
+                            Radio(value: "Female",groupValue: _gender,onChanged: _handleGenderChange,),Text("Female")
+                          ],
+                        )),
                         ]),
                       ),
                         GestureDetector(
@@ -121,6 +164,7 @@ class _EditProfileState extends State<EditProfile>{
                                         Container(
                                             constraints: BoxConstraints(maxWidth: 200.0,maxHeight: 90.0),
                                             child:TextField(
+                                              controller: about,
                                               decoration: InputDecoration(
                                                   hintText: "short bio",
                                                   border: InputBorder.none
@@ -170,5 +214,13 @@ class _EditProfileState extends State<EditProfile>{
   }
   void _goToAlbumUploader(){
     Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new AlbumUploader()));
+  }
+
+  @override
+  void dispose() {
+    name.dispose();
+    username.dispose();
+    about.dispose();
+    super.dispose();
   }
 }

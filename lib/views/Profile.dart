@@ -1,11 +1,11 @@
 import 'dart:convert';
-
 import 'package:Namaste/views/AlbumEditor.dart';
 import 'package:http/http.dart' as http;
 import 'EditProfile.dart';
 import 'Settings_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel/carousel.dart';
+
 class Profile extends StatefulWidget {
   final String myNumber;
 
@@ -212,7 +212,7 @@ class _ProfileState extends State<Profile> {
     ):Center(child: CircularProgressIndicator(),);
   }
   void _goToEditPage(){
-    Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new EditProfile()));
+    Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new EditProfile(user: _me,)));
   }
   void _goToAlbumUploader(){
     Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new AlbumUploader()));
