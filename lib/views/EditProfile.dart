@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:Namaste/resources/UiResources.dart';
 import 'package:Namaste/views/AlbumEditor.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 class EditProfile extends StatefulWidget {
   final Map user;
 
@@ -11,7 +14,7 @@ class EditProfile extends StatefulWidget {
 }
 class _EditProfileState extends State<EditProfile>{
   TextEditingController name,username,about,location;
-  String _gender;
+  String _gender,_radioValue;
 
   @override
   void initState() {
@@ -23,14 +26,15 @@ class _EditProfileState extends State<EditProfile>{
     username.text = widget.user['username'];
     about.text = widget.user['about'];
     location.text = widget.user['location'];
+    _radioValue = widget.user['gender'];
 
     super.initState();
   }
 
   void _handleGenderChange(String value){
     setState(() {
-
-      switch (value) {
+      _radioValue = value;
+      switch (_radioValue) {
         case "Male":
           _gender = "Male";
           break;
@@ -113,8 +117,8 @@ class _EditProfileState extends State<EditProfile>{
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            Radio(value: "Male",groupValue: _gender,onChanged: _handleGenderChange,),Text("Male"),
-                            Radio(value: "Female",groupValue: _gender,onChanged: _handleGenderChange,),Text("Female")
+                            Radio(value: "Male",groupValue: _radioValue,onChanged: _handleGenderChange,),Text("Male"),
+                            Radio(value: "Female",groupValue: _radioValue,onChanged: _handleGenderChange,),Text("Female")
                           ],
                         )),
                         ]),
@@ -216,11 +220,42 @@ class _EditProfileState extends State<EditProfile>{
     Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new AlbumUploader()));
   }
 
+  void _updateMyDetails() async{
+    String _updateUrl = "http://192.168.0.26:5000/users/" + widget.user['_id'];
+    Map _data = {
+      "name": name.text,
+      "email": widget.user['email'],
+      "phone": widget.user['phone'],
+      "gender": _radioValue,
+      "dob": widget.user['dob'],
+      "dp": widget.user['dp'],
+      "location": location.text,
+      "about": about.text,
+      "username": username.text,
+      "password": widget.user['password']
+    };
+    if(widget.user['name']!=_data['name']||widget.user['gender']!=_data['gender']||widget.user['location']!=_data['location']||
+        widget.user['about']!=_data['about']||widget.user['username']!=_data['username']) {
+      await http.put(_updateUrl,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlNTg5OGFhNy1mOTc4LTQ4NGUtYTQyYy1mZGVmMDEwMmFjY2UiLCJpc3MiOiJodHRwczovL2FwaS5jb21hcGkuY29tL2FjY2Vzc3Rva2VucyIsImF1ZCI6Imh0dHBzOi8vYXBpLmNvbWFwaS5jb20iLCJhY2NvdW50SWQiOjM3MTQ0LCJhcGlTcGFjZUlkIjoiYTE4YWY3OTYtMDNiNy00MTg5LTk1OWItMTkzZjA2MjJlOTA1IiwicGVybWlzc2lvbnMiOlsiY29udGVudDp3IiwiY2hhbjpyIiwibXNnOmFueTpzIiwibXNnOnIiLCJwcm9mOnJhIiwiYXBpczpybyJdLCJzdWIiOiJlNTg5OGFhNy1mOTc4LTQ4NGUtYTQyYy1mZGVmMDEwMmFjY2UiLCJwcm9maWxlSWQiOiJOYW1hc3RlLUF1dGgiLCJuYW1lIjoiTmFtYXN0ZUF1dGhYIiwiaWF0IjoxNTI5NDAyMjY3fQ.M7XHQH23dw4qze4UQRZsjGZSNAVs2touYqeyrHz8a8E",
+          "Accept": "application/json"
+        },
+        body: json.encode(_data),
+      ).then((response) {
+        print('response -> ${response.statusCode}');
+      }).whenComplete(() {
+        print("details updated");
+      });
+    }
+  }
   @override
   void dispose() {
     name.dispose();
     username.dispose();
     about.dispose();
+    _updateMyDetails();
     super.dispose();
   }
 }

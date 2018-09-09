@@ -315,7 +315,10 @@ class _ProfileState extends State<Profile> {
     );
   }
   void onImageTap(Image img){
-    showDialog(context: this.context,builder:(BuildContext context)=>AlertDialog(content: Container(child: img,),contentPadding: EdgeInsets.all(0.0),));
+    showDialog(context: this.context,builder:(BuildContext context)=>AlertDialog(content: Container(
+      child: img,
+      ),contentPadding: EdgeInsets.all(0.5),)
+    );
   }
   @override
   void dispose() {
