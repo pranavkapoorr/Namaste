@@ -16,7 +16,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
   List<Widget> tiles = [];
   bool _loaded = false;
   bool _openProfile = false;
-  String name, dp ,location , about;
+  String name, dp ,gender,location , about;
   double _opacity = 0.0;
   Animation<double> _angleAnimation;
   Animation<double> _scaleAnimation;
@@ -76,7 +76,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
         print(" body: $temp");
       }).whenComplete((){
         print("got users");
-        tiles = temp.map((e)=>personTile(e['name'], e['dp'], e['location'],e['about'])).toList();
+        tiles = temp.map((e)=>personTile(e['name'], e['dp'], e['gender'],e['location'],e['about'])).toList();
         setState(() {
           _loaded = true;
         });
@@ -103,7 +103,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
           ),
           _openProfile?Positioned(
             child: new Container(
-              child: profilePanel(name, dp, location,about)
+              child: profilePanel(name, dp, gender,location,about)
             ),
           ):Text("")
         ]
@@ -111,12 +111,13 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
     );
   }
 
-  Widget personTile(String name, String imageUrl, String location, String about){
+  Widget personTile(String name, String imageUrl, String gender,String location, String about){
     return new InkWell(
       onTap: (){
         setState(() {
           this.name = name;
           this.dp = imageUrl;
+          this.gender = gender;
           this.location = location;
           this.about = about;
           this._opacity = 0.7;
@@ -264,9 +265,10 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
       ],
     );
   }
-  Widget profilePanel(String name, String dp, String location, String about){
+  Widget profilePanel(String name, String dp, String gender,String location, String about){
     return new Container(
-      margin: EdgeInsets.all(20.0),
+      height: MediaQuery.of(context).size.height/1.5,
+      margin: EdgeInsets.all(12.0),
       decoration: new BoxDecoration(
         gradient: myGradient, borderRadius:  BorderRadius.all(Radius.circular(10.0))
       ),
@@ -283,6 +285,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
                       this._opacity = 0.0;
                       this.name = "";
                       this.dp = "";
+                      this.gender = "";
                       this.location = "";
                       this.about = "";
                       this._openProfile = false;
@@ -325,19 +328,49 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
                   ),
                 ),
                 //image ends
-                new Text(
-                  name + '  🎾',
-                  style: new TextStyle(fontSize: 25.0,color: Colors.white),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    new Text(
+                      name ,
+                      style: new TextStyle(fontSize: 25.0,color: Colors.white),
+                    ),
+                    new CircleAvatar(
+                        foregroundColor: gender=="Male"?Colors.blueAccent:Colors.pinkAccent,
+                        backgroundColor: Colors.transparent.withOpacity(0.2),
+                        child: new Text(gender=="Male"?"M":"F",
+                        style: TextStyle(fontWeight: FontWeight.w700,fontStyle: FontStyle.italic),)
+                    ),
+                  ],
                 ),
                 new Text(
                   location,
                   style: new TextStyle(fontSize: 18.0,color: Colors.white),
                 ),
-                new Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
-                  child: new Text(about,
-                    style: new TextStyle(color: Colors.white),
+                Container(
+                  margin: EdgeInsets.all(5.0),
+                  height: MediaQuery.of(context).size.height/4.8,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(5.0)
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(32.0,16.0,0.0,0.0),
+                        child: new Text("About",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 17.0),),
+                      ),
+                      new Padding(
+                        padding:
+                        const EdgeInsets.fromLTRB(32.0,5.0,32.0,10.0),
+                        child: new Text(about,
+                          style: new TextStyle(color: Colors.black),
+                        ),
+                      ),
+
+                    ],
                   ),
                 ),
                 new Row(
@@ -346,6 +379,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
                     new Icon(
                       Icons.star,
                       size: 40.0,
+                      color: Colors.yellow.shade700,
                     ),
                     new Text(' x / 10',
                         style: TextStyle(color: Colors.white)),

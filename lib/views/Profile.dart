@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import 'EditProfile.dart';
 import 'Settings_Screen.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel/carousel.dart';
 
 class Profile extends StatefulWidget {
   final String myNumber;
@@ -17,7 +16,6 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   final double _appBarHeight = 267.0;
-  Carousel carouselX;
   var _me;
   bool _loaded = false;
 
@@ -25,13 +23,7 @@ class _ProfileState extends State<Profile> {
   initState(){
     super.initState();
     _getMyDetails();
-    carouselX = new Carousel(
-      displayDuration: Duration(seconds: 5),
-      children: [
-        AssetImage("images/bg.jpg"),
-        AssetImage("images/bg.jpg")
-      ].map((netImage) => new Image(image: netImage,fit: BoxFit.cover,height: _appBarHeight,)).toList(),
-    );
+
   }
   void _getMyDetails() async{
     var temp;
@@ -54,7 +46,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return _loaded?Container(
-      padding: EdgeInsetsDirectional.only(top: 15.0,start: 10.0 ,end: 10.0),
+      padding: EdgeInsetsDirectional.only(top: 22.0,start: 10.0 ,end: 10.0),
       color: Colors.transparent,
       child: NestedScrollView(
               headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -78,14 +70,14 @@ class _ProfileState extends State<Profile> {
                   fit: StackFit.expand,
                   children: <Widget>[
                         Container(
-                          color: Colors.transparent.withOpacity(0.4),
+                          color: Colors.transparent.withOpacity(0.2),
                             padding: EdgeInsetsDirectional.only(bottom: 1.0),
-                            child: carouselX
+                            child: Text("")
                         ),
                     const DecoratedBox(
                       decoration: const BoxDecoration(
                         gradient: const LinearGradient(
-                          begin: const Alignment(0.0, -1.0),
+                          begin: const Alignment(0.0, 1.0),
                           end: const Alignment(0.0, -0.4),
                           colors: const <Color>[const Color(0x60000000), const Color(0x00000000)],
                         ),
@@ -324,7 +316,6 @@ class _ProfileState extends State<Profile> {
   void dispose() {
     _loaded = false;
     _me = null;
-    carouselX = null;
     super.dispose();
   }
 }
