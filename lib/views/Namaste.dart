@@ -21,11 +21,28 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
   Animation<double> _angleAnimation;
   Animation<double> _scaleAnimation;
   AnimationController _controller;
+  AnimationController _avatarAnimController;
+  Animation _avatarSize;
 
 
   @override
   void initState() {
     _setupLoadingAnim();
+    _avatarAnimController = new AnimationController(
+      duration: const Duration(milliseconds: 2200),
+      vsync: this,
+    );
+    _avatarSize  = new Tween(begin: 0.0, end: 1.0).animate(
+        new CurvedAnimation(
+          parent: _avatarAnimController,
+          curve: new Interval(
+            0.100,
+            0.400,
+            curve: Curves.elasticOut,
+          ),
+        ));
+    _avatarSize.addListener(() => this.setState(() {}));
+    _controller.forward();
     _iconAnimationController = new AnimationController(
         vsync: this, duration: new Duration(seconds: 1));
     _iconAnimation = new CurvedAnimation(
@@ -114,6 +131,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
   Widget personTile(String name, String imageUrl, String gender,String location, String about){
     return new InkWell(
       onTap: (){
+        _avatarAnimController.forward();
         setState(() {
           this.name = name;
           this.dp = imageUrl;
@@ -275,77 +293,103 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: ListView(
-          padding: new EdgeInsets.symmetric(vertical: 15.0),
+          padding: new EdgeInsets.symmetric(vertical: 5.0),
           children: <Widget>[
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                IconButton(icon: Icon(Icons.clear),onPressed: (){
-                  setState(() {
-                      this._opacity = 0.0;
-                      this.name = "";
-                      this.dp = "";
-                      this.gender = "";
-                      this.location = "";
-                      this.about = "";
-                      this._openProfile = false;
-                  });
-            },)],),
             new Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    IconButton(icon: Icon(Icons.clear),onPressed: (){
+                      _avatarAnimController.reset();
+                      setState(() {
+                        this._opacity = 0.0;
+                        this.name = "";
+                        this.dp = "";
+                        this.gender = "";
+                        this.location = "";
+                        this.about = "";
+                        this._openProfile = false;
+                      });
+                    },)],),
                 //image begin
                 new Hero(
                   tag: "lol",
-                  child: new Container(
-                    height: 120.0,
-                    width: 120.0,
-                    constraints: new BoxConstraints(),
-                    decoration: new BoxDecoration(
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        const BoxShadow(
-                            offset: const Offset(1.0, 2.0),
-                            blurRadius: 2.0,
-                            spreadRadius: -1.0,
-                            color: const Color(0x33000000)),
-                        const BoxShadow(
-                            offset: const Offset(2.0, 1.0),
-                            blurRadius: 3.0,
-                            spreadRadius: 0.0,
-                            color: const Color(0x24000000)),
-                        const BoxShadow(
-                            offset: const Offset(3.0, 1.0),
-                            blurRadius: 4.0,
-                            spreadRadius: 2.0,
-                            color: const Color(0x1F000000)),
-                      ],
-                      image: new DecorationImage(
-                        fit: BoxFit.cover,
-                        image: new NetworkImage(dp),
+                  child: Transform(
+                    transform: new Matrix4.diagonal3Values(
+                      _avatarSize.value,
+                      _avatarSize.value,
+                      1.0,
+                    ),
+                    child: new Container(
+                      height: 120.0,
+                      width: 120.0,
+                      constraints: new BoxConstraints(),
+                      decoration: new BoxDecoration(
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          const BoxShadow(
+                              offset: const Offset(1.0, 2.0),
+                              blurRadius: 2.0,
+                              spreadRadius: -1.0,
+                              color: const Color(0x33000000)),
+                          const BoxShadow(
+                              offset: const Offset(2.0, 1.0),
+                              blurRadius: 3.0,
+                              spreadRadius: 0.0,
+                              color: const Color(0x24000000)),
+                          const BoxShadow(
+                              offset: const Offset(3.0, 1.0),
+                              blurRadius: 4.0,
+                              spreadRadius: 2.0,
+                              color: const Color(0x1F000000)),
+                        ],
+                        image: new DecorationImage(
+                          fit: BoxFit.cover,
+                          image: new NetworkImage(dp),
+                        ),
                       ),
                     ),
                   ),
                 ),
                 //image ends
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    new Text(
-                      name ,
-                      style: new TextStyle(fontSize: 25.0,color: Colors.white),
-                    ),
-                    new CircleAvatar(
-                        foregroundColor: gender=="Male"?Colors.blueAccent:Colors.pinkAccent,
-                        backgroundColor: Colors.transparent.withOpacity(0.2),
-                        child: new Text(gender=="Male"?"M":"F",
-                        style: TextStyle(fontWeight: FontWeight.w700,fontStyle: FontStyle.italic),)
-                    ),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: new Text(
+                          name ,
+                          style: new TextStyle(fontSize: 25.0,color: Colors.white),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: new CircleAvatar(
+                            foregroundColor: gender=="Male"?Colors.blueAccent:Colors.pinkAccent,
+                            backgroundColor: Colors.transparent.withOpacity(0.2),
+                            child: new Text(gender=="Male"?"M":"F",
+                            style: TextStyle(fontWeight: FontWeight.w700,fontStyle: FontStyle.italic),)
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                new Text(
-                  location,
-                  style: new TextStyle(fontSize: 18.0,color: Colors.white),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Icon(Icons.location_on,color: Colors.red,),
+                      new Text(
+                        location,
+                        style: new TextStyle(fontSize: 18.0,color: Colors.white),
+                      ),
+                    ],
+                  ),
                 ),
                 Container(
                   margin: EdgeInsets.all(5.0),
@@ -369,7 +413,6 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
                           style: new TextStyle(color: Colors.black),
                         ),
                       ),
-
                     ],
                   ),
                 ),
@@ -438,6 +481,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
   @override
   void dispose() {
     _controller.dispose();
+    _avatarAnimController.dispose();
     _iconAnimationController.dispose();
     tiles.clear();
     super.dispose();

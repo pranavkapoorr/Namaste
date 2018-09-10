@@ -14,15 +14,33 @@ class Profile extends StatefulWidget {
   _ProfileState createState() => new _ProfileState();
 }
 
-class _ProfileState extends State<Profile> {
+class _ProfileState extends State<Profile> with TickerProviderStateMixin{
   final double _appBarHeight = 267.0;
   var _me;
   bool _loaded = false;
+  AnimationController _avatarAnimController;
+  Animation _avatarSize;
 
   @override
   initState(){
     super.initState();
     _getMyDetails();
+    _avatarAnimController = new AnimationController(
+      duration: const Duration(milliseconds: 3000),
+      vsync: this,
+    );
+    _avatarSize  = new Tween(begin: 0.0, end: 1.0).animate(
+        new CurvedAnimation(
+          parent: _avatarAnimController,
+          curve: new Interval(
+            0.100,
+            0.900,
+            curve: Curves.elasticOut,
+          ),
+        ));
+    _avatarSize.addListener(() => this.setState(() {}));
+
+    _avatarAnimController.forward();
 
   }
   void _getMyDetails() async{
@@ -90,9 +108,16 @@ class _ProfileState extends State<Profile> {
                         heightFactor: 1.4,
                         child: new Column(
                           children: <Widget>[
-                            new CircleAvatar(
-                              radius: 45.0,
-                              backgroundImage: NetworkImage(_me['dp']),
+                            Transform(
+                              transform: new Matrix4.diagonal3Values(
+                                _avatarSize.value,
+                                _avatarSize.value,
+                                1.0,
+                              ),
+                              child: new CircleAvatar(
+                                radius: 45.0,
+                                backgroundImage: NetworkImage(_me['dp']),
+                              ),
                             ),
                             _buildFollowerInfo(),
                             _buildActionButtons(Theme.of(context)),
@@ -314,6 +339,7 @@ class _ProfileState extends State<Profile> {
   }
   @override
   void dispose() {
+    _avatarAnimController.dispose();
     _loaded = false;
     _me = null;
     super.dispose();

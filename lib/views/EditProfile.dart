@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:Namaste/resources/UiResources.dart';
 import 'package:Namaste/views/AlbumEditor.dart';
-import 'package:Namaste/views/Profile.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 class EditProfile extends StatefulWidget {
