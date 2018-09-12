@@ -24,6 +24,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
   @override
   initState(){
     super.initState();
+    print('my num is ${widget.myNumber}');
     _getMyDetails();
     _avatarAnimController = new AnimationController(
       duration: const Duration(milliseconds: 3000),

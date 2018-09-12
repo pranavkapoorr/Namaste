@@ -148,7 +148,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
           height: 115.0,
           child: new Stack(
             children: <Widget>[
-              myCard(name,location),
+              myCard(name,location,gender),
               new Positioned(top: 7.5, child:
               personImage(imageUrl)
 
@@ -161,7 +161,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
   }
   Widget personImage(String imageUrl) {
     var personAvatar = new Hero(
-      tag: Text("lol"),
+      tag: "lol",
       child: new Container(
         width: 100.0,
         height: 100.0,
@@ -201,7 +201,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
 
     return crossFade;
   }
-  Widget myCard(String name, String location){
+  Widget myCard(String name, String location, String gender){
     return new Positioned(
       right: 0.0,
       child: new Container(
@@ -220,17 +220,21 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 new Text(name,
-                    style: TextStyle(color: Colors.white)),
-                new Text(location,
-                    style: TextStyle(color: Colors.white)),
-                new Row(
+                    style: TextStyle(color: Colors.white,fontSize: 17.0)),
+                Row(
                   children: <Widget>[
-                    new Icon(
-                      Icons.star,color: Colors.white,
-                    ),
-                    new Text(': X / 10',style: TextStyle(color: Colors.white),)
+                    new Icon(Icons.location_on,color: Colors.red,size: 15.0,),
+                    new Text(location,
+                        style: TextStyle(color: Colors.white)),
                   ],
-                )
+                ),
+                new CircleAvatar(
+                    maxRadius: 10.0,
+                    foregroundColor: gender=="Male"?Colors.blueAccent:Colors.pinkAccent,
+                    backgroundColor: Colors.white.withOpacity(0.4),
+                    child: new Text(gender=="Male"?"M":"F",
+                      style: TextStyle(fontWeight: FontWeight.w700,fontStyle: FontStyle.italic),)
+                ),
               ],
             ),
           ),
@@ -393,7 +397,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
                 ),
                 Container(
                   margin: EdgeInsets.all(5.0),
-                  height: MediaQuery.of(context).size.height/4.8,
+                  height: MediaQuery.of(context).size.height/6,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(5.0)
@@ -416,18 +420,18 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
                     ],
                   ),
                 ),
-                new Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    new Icon(
-                      Icons.star,
-                      size: 40.0,
-                      color: Colors.yellow.shade700,
-                    ),
-                    new Text(' x / 10',
-                        style: TextStyle(color: Colors.white)),
-                  ],
-                )
+
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8.0, 20.0, 8.0, 5.0),
+                  child: new Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      new FloatingActionButton(elevation: 10.0,highlightElevation: 10.0,mini: true,backgroundColor: Colors.white,onPressed: (){},child: Icon(Icons.thumb_down,color: Colors.red,),),
+                      new FloatingActionButton(elevation: 10.0,highlightElevation: 10.0,backgroundColor: Colors.white,onPressed: (){},child: Icon(Icons.thumb_up,color: Colors.green,size: 30.0,),),
+                      new FloatingActionButton(elevation: 10.0,highlightElevation: 10.0,mini: true,backgroundColor: Colors.white,onPressed: (){},child: Icon(Icons.star,color: Colors.yellow.shade700,),),
+                    ],
+                  ),
+                ),
               ],
             ),
           ],
