@@ -124,7 +124,7 @@ class _ChatScreenState extends State<ChatScreen> {
       _myNumber = sharedPreferences.getString("myNumber");
     });
   }
-  
+
   void _loadDbAndStartStream(){
     db = NamasteDatabase();
     db.initDB();
@@ -146,9 +146,9 @@ class _ChatScreenState extends State<ChatScreen> {
         hasLoaded = true;
       });
     });
-    
+
   }
-  
+
   void _resetMessages() {
     setState(() => messages.clear());
   }
@@ -195,30 +195,18 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     if(!_loadedChats && !_loadedNumbers) {
-    return new Stack(
-      children: <Widget>[
-        new Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new CircularProgressIndicator(
-              strokeWidth: 2.0, backgroundColor: Theme
-                .of(context)
-                .accentColor,)
-          ],
-        ),
-      ],
-    );
-  }else{
+      return new Stack(
+        children: <Widget>[
+          Center(child: new CircularProgressIndicator()),
+        ],
+      );
+    }else{
       return _chatters.length==0?new Center(
-            child: new Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                new FlatButton(
-                  onPressed:(){ Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new ContactsUsingScreen(myNumber:_myNumber,)));},
-                  color: Colors.grey,child: new Text("Start New Conversation"),
-                  splashColor: Colors.amber,)
-              ],)
-        ):chats();
+          child: new FlatButton(
+            onPressed:(){ Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new ContactsUsingScreen(myNumber:_myNumber,)));},
+            color: Colors.grey,child: new Text("Start New Conversation"),
+            splashColor: Colors.amber,)
+      ):chats();
     }
   }
 
@@ -232,13 +220,13 @@ class _ChatScreenState extends State<ChatScreen> {
       body: Container(
         padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-                blurRadius: .5,
-                spreadRadius: 1.0,
-                color: Colors.black.withOpacity(.12))
-          ],
-          borderRadius:  BorderRadius.all(Radius.circular(5.0))
+            boxShadow: [
+              BoxShadow(
+                  blurRadius: .5,
+                  spreadRadius: 1.0,
+                  color: Colors.black.withOpacity(.12))
+            ],
+            borderRadius:  BorderRadius.all(Radius.circular(5.0))
         ),
         child: Container(
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.0),

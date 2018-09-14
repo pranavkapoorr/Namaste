@@ -109,16 +109,13 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
       children: <Widget>[
         new Padding(
             padding: const EdgeInsets.all(2.0),
-            child: Container(
-              color: Colors.black.withOpacity(0.3),
-              child: new Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  new IconButton(icon: new Icon(_page==0?Icons.person:Icons.person_outline,color: Colors.black),iconSize: 30.0, onPressed: ()=>_navigationTapped(0)),
-                  new IconButton(icon: new CircleAvatar(radius: 30.0,backgroundColor: _page==1?Colors.black38.withOpacity(0.7):Colors.black38,child: Image(image: AssetImage("images/logo.png"),color:Colors.white,)),iconSize: 60.0, onPressed: ()=>_navigationTapped(1)),
-                  new IconButton(icon: new Icon(_page==2?Icons.chat:Icons.chat_bubble_outline,color: Colors.black,),iconSize: 25.0,onPressed: ()=>_navigationTapped(2)),
-                ],
-              ),
+            child: new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                new IconButton(icon: new Icon(_page==0?Icons.person:Icons.person_outline,color: _page==1||_page==0?Colors.white:Colors.black),iconSize: 30.0, onPressed: ()=>_navigationTapped(0)),
+                new IconButton(icon: new CircleAvatar(radius: 30.0,backgroundColor: _page==1?Colors.black38.withOpacity(0.7):Colors.black38,child: Image(image: AssetImage("images/logo.png"),color:Colors.white,)),iconSize: 60.0, onPressed: ()=>_navigationTapped(1)),
+                new IconButton(icon: new Icon(_page==2?Icons.chat:Icons.chat_bubble_outline,color: _page==1||_page==0?Colors.white:Colors.black,),iconSize: 25.0,onPressed: ()=>_navigationTapped(2)),
+              ],
             )
         ),
       ],
