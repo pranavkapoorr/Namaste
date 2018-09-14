@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
   }
   void _checkIfAlreadyRegistered(String number, BuildContext context) async{
     var temp;
-    await http.get("http://192.168.0.26:5000/users/uphone/"+number,
+    await http.get("https://namaste-backend.herokuapp.com/users/uphone/"+number,
     ).then((response) {
       temp = response.body;
       print(" bodyx: $temp");

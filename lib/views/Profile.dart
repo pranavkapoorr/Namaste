@@ -47,7 +47,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
   void _getMyDetails() async{
     var temp;
     print("my num is ${widget.myNumber}");
-    await http.get("http://192.168.0.26:5000/users/uphone/"+ widget.myNumber,
+    await http.get("https://namaste-backend.herokuapp.com/users/uphone/"+ widget.myNumber,
     ).then((response) {
       temp = json.decode(response.body);
       print(" bodyx: $temp");

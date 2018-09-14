@@ -228,7 +228,7 @@ class _EditProfileState extends State<EditProfile>{
   }
 
   Future<bool> _updateMyDetails() async{
-    String _updateUrl = "http://192.168.0.26:5000/users/" + widget.user['_id'];
+    String _updateUrl = "https://namaste-backend.herokuapp.com/users/" + widget.user['_id'];
     Map _data = {
       "name": name.text,
       "email": widget.user['email'],

@@ -85,7 +85,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
   }
   void _makeTilesX() async{
       List temp;
-      await http.get("http://192.168.0.26:5000/users/all",
+      await http.get("https://namaste-backend.herokuapp.com/users/all",
       ).then((response) {
         print("Response status: ${response.statusCode}");
         print("Response body: ${response.body}");

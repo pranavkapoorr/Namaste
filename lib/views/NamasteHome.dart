@@ -35,6 +35,7 @@ class NamasteHome extends StatefulWidget {
 
 class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin{
   PageController _pageController;
+  bool _loaded = false;
   String _myNumber;
   int _page = 1;
 
@@ -44,12 +45,20 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
     });
   }
 
+  void _loadUser() async{
+    await SharedPreferences.getInstance().then((SharedPreferences sp) {
+      _myNumber = sp.getString("myNumber");
+    }).whenComplete((){
+      setState(() {
+        _loaded = true;
+      });
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    SharedPreferences.getInstance().then((SharedPreferences sp) {
-      _myNumber = sp.getString("myNumber");
-    });
+    _loadUser();
     _pageController = new PageController(initialPage: 1);
 
   }
@@ -64,7 +73,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
           decoration: new BoxDecoration(
               gradient: myGradient
           ),
-          child: Stack(
+          child: _loaded?Stack(
             children: <Widget>[
               new PageView(
                 children: <Widget>[
@@ -78,7 +87,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
               customNavigationBar()
 
             ],
-          ),
+          ):Center(child: CircularProgressIndicator(),),
         ),
       ),
       onWillPop: (){return new Future<bool>.value(false);},
@@ -119,6 +128,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
   @override
   void dispose() {
     super.dispose();
+    _loaded = false;
     _pageController.dispose();
   }
 }
