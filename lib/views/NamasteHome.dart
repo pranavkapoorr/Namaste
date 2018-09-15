@@ -112,9 +112,9 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
             child: new Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                new IconButton(icon: new Icon(_page==0?Icons.person:Icons.person_outline,color: _page==1||_page==0?Colors.white:Colors.black),iconSize: 30.0, onPressed: ()=>_navigationTapped(0)),
-                new IconButton(icon: new CircleAvatar(radius: 30.0,backgroundColor: _page==1?Colors.black38.withOpacity(0.7):Colors.black38,child: Image(image: AssetImage("images/logo.png"),color:Colors.white,)),iconSize: 60.0, onPressed: ()=>_navigationTapped(1)),
-                new IconButton(icon: new Icon(_page==2?Icons.chat:Icons.chat_bubble_outline,color: _page==1||_page==0?Colors.white:Colors.black,),iconSize: 25.0,onPressed: ()=>_navigationTapped(2)),
+                new IconButton(icon: new Icon(_page==0?Icons.person:Icons.person_outline,color: _page==1||_page==0?Colors.white:Colors.black26),iconSize: 30.0, onPressed: ()=>_navigationTapped(0)),
+                new FloatingActionButton(onPressed: ()=>_navigationTapped(1),child: Image(image: AssetImage("images/logo.png"),color:_page==1?Colors.black:Colors.white,),backgroundColor: _page==1?Colors.white.withOpacity(0.7):Colors.transparent,shape: CircleBorder(side: BorderSide(color: _page==0?Colors.white:Colors.black26,width: 2.5,))),
+                new IconButton(icon: new Icon(_page==2?Icons.chat:Icons.chat_bubble_outline,color: _page==1||_page==0?Colors.white:Colors.black45,),iconSize: 25.0,onPressed: ()=>_navigationTapped(2)),
               ],
             )
         ),

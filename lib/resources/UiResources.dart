@@ -12,7 +12,7 @@ var newGradient = new LinearGradient(
 var myGradient = new LinearGradient(
   begin: Alignment.topRight,
   end: Alignment.bottomLeft,
-  stops: [0.1, 0.5, 0.7, 0.8,0.9],
+  stops: [0.01, 0.5, 0.7, 0.8,0.9],
   colors: [
     Color.fromARGB(255, 253, 72, 72),
     Colors.indigo[800],
