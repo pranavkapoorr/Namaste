@@ -216,74 +216,74 @@ class _ChatScreenState extends State<ChatScreen> {
     //messages.forEach((e)=>print("message -> ${e.message} from-> ${e.sender} to-> ${e.receiver}"));
     return Scaffold(
       backgroundColor: Colors.transparent,
-      appBar: AppBar(leading:Text(""),title: Text("Conversations",style: TextStyle(color: Colors.white),),backgroundColor: Colors.transparent,),
-      body: Container(
-        padding: const EdgeInsets.all(8.0),
-        decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                  blurRadius: .5,
-                  spreadRadius: 1.0,
-                  color: Colors.black.withOpacity(.12))
-            ],
-            borderRadius:  BorderRadius.all(Radius.circular(5.0))
+      appBar: AppBar(
+        centerTitle: true,
+        elevation: 0.0,
+        leading:Text(""),
+        title: Row(
+          children: <Widget>[
+            Icon(Icons.message,color:Colors.white),
+            SizedBox(width: 20.0,),
+            Text("Conversations",style: TextStyle(color: Colors.white),),
+          ],
         ),
-        child: Container(
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.0),
-            color: Colors.white,),
-          child: ListView.builder(
-            itemCount: _chatters.length,
-            itemBuilder: (context, i) =>
-            new Column(
-              children: <Widget>[
-                new Divider(
-                  height: 0.5,
+        backgroundColor: Colors.transparent,
+      ),
+      body: Container(
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0),
+          color: Colors.white,),
+        child: ListView.builder(
+          itemCount: _chatters.length,
+          itemBuilder: (context, i) =>
+          new Column(
+            children: <Widget>[
+              new Divider(
+                height: 0.5,
+              ),
+              new ListTile(
+                leading: new CircleAvatar(
+                  foregroundColor: Theme
+                      .of(context)
+                      .primaryColor,
+                  backgroundColor: Colors.grey,
+                  backgroundImage: new NetworkImage(
+                      userMap[_chatters[i]]==null?"https://i.pinimg.com/736x/34/77/c3/3477c3b54457ef50c2e03bdaa7b3fdc5.jpg":userMap[_chatters[i]]),
                 ),
-                new ListTile(
-                  leading: new CircleAvatar(
-                    foregroundColor: Theme
-                        .of(context)
-                        .primaryColor,
-                    backgroundColor: Colors.grey,
-                    backgroundImage: new NetworkImage(
-                        userMap[_chatters[i]]==null?"https://i.pinimg.com/736x/34/77/c3/3477c3b54457ef50c2e03bdaa7b3fdc5.jpg":userMap[_chatters[i]]),
-                  ),
-                  title: new Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      new Text(
-                        _chatters[i],
-                        style: new TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      new Text(
-                        _chatHeadDate(_lastMessage[_chatters[i]].keys.toList()[0]),
-                        style: new TextStyle(color: Colors.grey, fontSize: 14.0),
-                      ),
-                    ],
-                  ),
-                  subtitle: new Container(
-                    padding: const EdgeInsets.only(top: 5.0),
-                    child: new Text(
-                      _lastMessage[_chatters[i]].values.toList()[0],
-                      style: new TextStyle(color: Colors.grey, fontSize: 15.0),
+                title: new Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    new Text(
+                      _chatters[i],
+                      style: new TextStyle(fontWeight: FontWeight.bold),
                     ),
+                    new Text(
+                      _chatHeadDate(_lastMessage[_chatters[i]].keys.toList()[0]),
+                      style: new TextStyle(color: Colors.grey, fontSize: 14.0),
+                    ),
+                  ],
+                ),
+                subtitle: new Container(
+                  padding: const EdgeInsets.only(top: 5.0),
+                  child: new Text(
+                    _lastMessage[_chatters[i]].values.toList()[0],
+                    style: new TextStyle(color: Colors.grey, fontSize: 15.0),
                   ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      new MaterialPageRoute(
-                        builder: (context) => new ChatThreadScreen(
-                          chatThread: new ChatThread(
-                              name: _chatters[i],
-                              image: userMap[_chatters[i]]),
-                          myNumber: _myNumber,
-                        ),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                      builder: (context) => new ChatThreadScreen(
+                        chatThread: new ChatThread(
+                            name: _chatters[i],
+                            image: userMap[_chatters[i]]),
+                        myNumber: _myNumber,
                       ),
-                    );
-                  },
-                )
-              ],
-            ),
+                    ),
+                  );
+                },
+              )
+            ],
           ),
         ),
       ),

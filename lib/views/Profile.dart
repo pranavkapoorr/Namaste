@@ -24,7 +24,6 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
   @override
   initState(){
     super.initState();
-    print('my num is ${widget.myNumber}');
     _getMyDetails();
     _avatarAnimController = new AnimationController(
       duration: const Duration(milliseconds: 3000),
@@ -61,75 +60,77 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
     });
   }
 
+  Widget _sliverAppBar(BuildContext context)=>SliverAppBar(
+
+    backgroundColor: Colors.transparent,
+    leading: IconButton(icon: Icon(Icons.mode_edit,color: Colors.white,),
+        onPressed: (){
+          _goToEditPage();
+        }),
+    expandedHeight: _appBarHeight,
+    pinned: true,
+    floating: true,
+    actions: <Widget>[
+      new IconButton(icon: Icon(Icons.settings,color:Colors.white,), onPressed: (){
+        Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new SettingsScreen()));
+      })
+    ],
+    flexibleSpace: new FlexibleSpaceBar(
+      title:  Text(_me['name'],style: TextStyle(color: Colors.white),),
+      background: new Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          Container(
+              color: Colors.transparent.withOpacity(0.2),
+              padding: EdgeInsetsDirectional.only(bottom: 1.0),
+              child: Text("")
+          ),
+          const DecoratedBox(
+            decoration: const BoxDecoration(
+              gradient: const LinearGradient(
+                begin: const Alignment(0.0, 1.0),
+                end: const Alignment(0.0, -0.4),
+                colors: const <Color>[const Color(0x60000000), const Color(0x00000000)],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsetsDirectional.only(top: 55.0),
+            child: new Align(
+              alignment: FractionalOffset.center,
+              heightFactor: 1.4,
+              child: new Column(
+                children: <Widget>[
+                  Transform(
+                    transform: new Matrix4.diagonal3Values(
+                      _avatarSize.value,
+                      _avatarSize.value,
+                      1.0,
+                    ),
+                    child: new CircleAvatar(
+                      radius: 65.0,
+                      backgroundImage: NetworkImage(_me['dp']),
+                    ),
+                  ),
+                  _followerInfo(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
     return _loaded?Container(
-      padding: EdgeInsetsDirectional.only(top: 22.0,start: 10.0 ,end: 10.0),
+      padding: EdgeInsetsDirectional.only(top: 0.0,start: 10.0 ,end: 10.0),
       color: Colors.transparent,
       child: NestedScrollView(
               headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
-              SliverAppBar(
-              backgroundColor: Colors.transparent,
-              leading: IconButton(icon: Icon(Icons.mode_edit,color: Colors.white,), onPressed: (){
-                _goToEditPage();
-              }),
-              expandedHeight: _appBarHeight,
-              pinned: true,
-              floating: true,
-              actions: <Widget>[
-                new IconButton(icon: Icon(Icons.settings,color:Colors.white,), onPressed: (){
-                  Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new SettingsScreen()));
-                })
-              ],
-              flexibleSpace: new FlexibleSpaceBar(
-                title:  Text(_me['name'],style: TextStyle(color: Colors.white),),
-                background: new Stack(
-                  fit: StackFit.expand,
-                  children: <Widget>[
-                        Container(
-                          color: Colors.transparent.withOpacity(0.2),
-                            padding: EdgeInsetsDirectional.only(bottom: 1.0),
-                            child: Text("")
-                        ),
-                    const DecoratedBox(
-                      decoration: const BoxDecoration(
-                        gradient: const LinearGradient(
-                          begin: const Alignment(0.0, 1.0),
-                          end: const Alignment(0.0, -0.4),
-                          colors: const <Color>[const Color(0x60000000), const Color(0x00000000)],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsetsDirectional.only(top: 55.0),
-                      child: new Align(
-                        alignment: FractionalOffset.center,
-                        heightFactor: 1.4,
-                        child: new Column(
-                          children: <Widget>[
-                            Transform(
-                              transform: new Matrix4.diagonal3Values(
-                                _avatarSize.value,
-                                _avatarSize.value,
-                                1.0,
-                              ),
-                              child: new CircleAvatar(
-                                radius: 45.0,
-                                backgroundImage: NetworkImage(_me['dp']),
-                              ),
-                            ),
-                            _buildFollowerInfo(),
-                            _buildActionButtons(Theme.of(context)),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+                _sliverAppBar(context)
           ];},
           body: ListView(
             shrinkWrap: true,
@@ -212,16 +213,6 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
                       ],
                     ),
                   ),
-                  new Padding(
-                    padding: const EdgeInsets.only(top: 16.0),
-                    child: new Row(
-                      children: <Widget>[
-                        _createCircleBadge(Icons.beach_access, Colors.black12),
-                        _createCircleBadge(Icons.cloud, Colors.black12),
-                        _createCircleBadge(Icons.shop, Colors.black12),
-                      ],
-                    ),
-                  ),
                 ],
                 ),
               ],
@@ -235,57 +226,9 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
   void _goToAlbumUploader(){
     Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new AlbumUploader()));
   }
-  Widget _createPillButton(
-      String text, {
-        Color backgroundColor = Colors.transparent,
-        Color textColor = Colors.white70,
-      }) {
-    return new ClipRRect(
-      borderRadius: new BorderRadius.circular(30.0),
-      child: new MaterialButton(
-        minWidth: 120.0,
-        color: backgroundColor,
-        textColor: textColor,
-        onPressed: () {},
-        child: new Text(text),
-      ),
-    );
-  }
-  Widget _buildActionButtons(ThemeData theme) {
-    return new Padding(
-      padding: const EdgeInsets.only(
-        top: 16.0,
-        left: 16.0,
-        right: 16.0,
-      ),
-      child: new Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          new DecoratedBox(
-            decoration: new BoxDecoration(
-            border: new Border.all(color: Colors.white30),
-            borderRadius: new BorderRadius.circular(30.0),
-            ),
-          child:_createPillButton(
-            'HIRE ME',
-            backgroundColor: Colors.transparent,
-          ),
-          ),
-          new DecoratedBox(
-            decoration: new BoxDecoration(
-              border: new Border.all(color: Colors.white30),
-              borderRadius: new BorderRadius.circular(30.0),
-            ),
-            child: _createPillButton(
-              'FOLLOW',
-              textColor: Colors.white70,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-  Widget _buildFollowerInfo() {
+
+
+  Widget _followerInfo() {
     return new Padding(
       padding: const EdgeInsets.only(top: 16.0),
       child: new Row(
@@ -300,20 +243,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
   }
 
 
-  Widget _createCircleBadge(IconData iconData, Color color) {
-    return new Padding(
-      padding: const EdgeInsets.only(left: 8.0),
-      child: new CircleAvatar(
-        backgroundColor: color,
-        child: new Icon(
-          iconData,
-          color: Colors.black,
-          size: 16.0,
-        ),
-        radius: 16.0,
-      ),
-    );
-  }
+
   Widget _albumImage(Image image){
     return  GestureDetector(onTap:(){onImageTap(image);},child: Container(margin: EdgeInsets.all(1.0),child:image));
   }

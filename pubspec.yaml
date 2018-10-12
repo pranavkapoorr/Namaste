@@ -9,7 +9,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.0
   camera:
-  carousel: ^0.0.1
+  #carousel:
   cloud_firestore:
   firebase_messaging:
   shared_preferences: "^0.4.2"

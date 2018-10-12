@@ -10,9 +10,7 @@ class Namaste extends StatefulWidget{
   _NamasteState createState()=> new _NamasteState();
 }
 class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
-  Animation<double> _iconAnimation;
-  AnimationController _iconAnimationController;
-  bool _searchClicked = false;
+
   List<Widget> tiles = [];
   bool _loaded = false;
   bool _openProfile = false;
@@ -43,13 +41,6 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
         ));
     _avatarSize.addListener(() => this.setState(() {}));
     _controller.forward();
-    _iconAnimationController = new AnimationController(
-        vsync: this, duration: new Duration(seconds: 1));
-    _iconAnimation = new CurvedAnimation(
-      parent: _iconAnimationController,
-      curve: Curves.easeIn,
-    );
-    _iconAnimation.addListener(() => this.setState(() {}));
     _makeTilesX();
     super.initState();
 
@@ -107,7 +98,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
     return  NestedScrollView(
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
         return <Widget>[
-          _searchClicked?_searchAppBar(innerBoxIsScrolled):_normalAppBar(innerBoxIsScrolled),
+          _normalAppBar(innerBoxIsScrolled),
         ];
       },
       body: _loaded?Stack(
@@ -196,7 +187,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
       firstChild: placeholder,
       secondChild: personAvatar,
       crossFadeState:CrossFadeState.showSecond,
-      duration: new Duration(milliseconds: 3000),
+      duration: new Duration(milliseconds: 9000),
     );
 
     return crossFade;
@@ -205,7 +196,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
     return new Positioned(
       right: 0.0,
       child: new Container(
-        width: 290.0,
+        width: MediaQuery.of(context).size.width/1.2,//290.0,
         height: 115.0,
         child: new Card(
           color: Colors.black87,
@@ -213,7 +204,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
             padding: const EdgeInsets.only(
               top: 8.0,
               bottom: 8.0,
-              left: 64.0,
+              left: 80.0,
             ),
             child: new Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -242,33 +233,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
       ),
     );
   }
-  SliverAppBar _searchAppBar(bool innerBoxIsScrolled){
-    _iconAnimationController.forward();
-    var searchTextField = new TextField(decoration: new InputDecoration(hintText: "         search here",suffixIcon: new Icon(Icons.search),border: InputBorder.none),);
-    var searchTile = new ListTile(leading: new IconButton(icon: new Icon(Icons.arrow_back), onPressed: (){setState(() {
-      _searchClicked = false;
-      _iconAnimationController.reset();
-    });}),title: searchTextField);
-    return new SliverAppBar(
-      title:  new Container(
-        margin: EdgeInsets.all(5.0),
-        width: _iconAnimation.value * 1400.0,
-        decoration: BoxDecoration(boxShadow: [
-          BoxShadow(
-              blurRadius: .5,
-              spreadRadius: 0.0,
-              color: Colors.black.withOpacity(.12))
-        ],),
-        child: searchTile,
-      ),
-      elevation: 3.0,
-      backgroundColor: Colors.transparent,
-      pinned: true,
-      snap: true,
-      floating: true,
-      forceElevated: innerBoxIsScrolled,
-    );
-  }
+
   SliverAppBar _normalAppBar(bool innerBoxIsScrolled){
     return new SliverAppBar(
       //leading: Image(image: AssetImage("images/logo.png"),color:Colors.black,),
@@ -280,11 +245,6 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
       snap: true,
       floating: true,
       forceElevated: innerBoxIsScrolled,
-      actions: <Widget>[
-        new IconButton(icon:new Icon(Icons.search),onPressed: (){setState(() {
-          _searchClicked = true;
-        });},),
-      ],
     );
   }
   Widget profilePanel(String name, String dp, String gender,String location, String about){
@@ -302,21 +262,28 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
             new Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                new Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    IconButton(icon: Icon(Icons.clear),onPressed: (){
-                      _avatarAnimController.reset();
-                      setState(() {
-                        this._opacity = 0.0;
-                        this.name = "";
-                        this.dp = "";
-                        this.gender = "";
-                        this.location = "";
-                        this.about = "";
-                        this._openProfile = false;
-                      });
-                    },)],),
+                Align(
+                    alignment:Alignment.topRight,
+                    child: FloatingActionButton(
+                        heroTag: "nul",
+                        backgroundColor: Colors.white,
+                        mini: true,
+                        onPressed: (){
+                          print("pressed");
+                          setState(() {
+                            _avatarAnimController.reset();
+                            this._opacity = 0.0;
+                            this.name = "";
+                            this.dp = "";
+                            this.gender = "";
+                            this.location = "";
+                            this.about = "";
+                            this._openProfile = false;
+                          });
+                        },
+                        child: Icon(Icons.clear)
+                    )
+                ),
                 //image begin
                 new Hero(
                   tag: "lol",
@@ -397,7 +364,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
                 ),
                 Container(
                   margin: EdgeInsets.all(5.0),
-                  height: MediaQuery.of(context).size.height/6,
+                  height: MediaQuery.of(context).size.height/5,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(5.0)
@@ -486,7 +453,6 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
   void dispose() {
     _controller.dispose();
     _avatarAnimController.dispose();
-    _iconAnimationController.dispose();
     tiles.clear();
     super.dispose();
   }
