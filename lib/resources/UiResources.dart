@@ -9,7 +9,7 @@ var newGradient = new LinearGradient(
   ],
   stops: [0.0, 1.0],
 );
-var myGradient = new LinearGradient(
+var xradient = new LinearGradient(
   begin: Alignment.topRight,
   end: Alignment.bottomLeft,
   stops: [0.01, 0.5, 0.7, 0.8,0.9],
@@ -19,5 +19,17 @@ var myGradient = new LinearGradient(
     Colors.indigo[700],
     Colors.indigo[600],
     Colors.indigo[400],
+  ],
+);
+var myGradient = new LinearGradient(
+  begin: Alignment.topRight,
+  end: Alignment.bottomLeft,
+  stops: [0.01, 0.5, 0.7, 0.8,0.9],
+  colors: [
+    Colors.deepOrange,
+    Colors.deepOrange.shade600,
+    Colors.deepOrange.shade500,
+    Colors.deepOrange.shade300,
+    Colors.deepOrange.shade200,
   ],
 );

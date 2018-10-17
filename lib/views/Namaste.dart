@@ -249,157 +249,162 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
   }
   Widget profilePanel(String name, String dp, String gender,String location, String about){
     return new Container(
-      height: MediaQuery.of(context).size.height/1.5,
+      height: MediaQuery.of(context).size.height/1.6,
       margin: EdgeInsets.all(12.0),
       decoration: new BoxDecoration(
-        gradient: myGradient, borderRadius:  BorderRadius.all(Radius.circular(10.0))
+        color: Colors.white,
+          borderRadius:  BorderRadius.all(Radius.circular(10.0))
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: ListView(
-          padding: new EdgeInsets.symmetric(vertical: 5.0),
+        body: new Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            new Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Align(
-                    alignment:Alignment.topRight,
-                    child: FloatingActionButton(
-                        heroTag: "nul",
-                        backgroundColor: Colors.white,
-                        mini: true,
-                        onPressed: (){
-                          print("pressed");
-                          setState(() {
-                            _avatarAnimController.reset();
-                            this._opacity = 0.0;
-                            this.name = "";
-                            this.dp = "";
-                            this.gender = "";
-                            this.location = "";
-                            this.about = "";
-                            this._openProfile = false;
-                          });
-                        },
-                        child: Icon(Icons.clear)
-                    )
+            ClipPath(
+              clipper: MyClipper(),
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.deepOrange.shade500,
+                    borderRadius:  BorderRadius.only(topLeft: Radius.circular(10.0),topRight: Radius.circular(10.0))
                 ),
-                //image begin
-                new Hero(
-                  tag: "lol",
-                  child: Transform(
-                    transform: new Matrix4.diagonal3Values(
-                      _avatarSize.value,
-                      _avatarSize.value,
-                      1.0,
+                child: Column(
+                  children: <Widget>[
+                    Align(
+                        alignment:Alignment.topRight,
+                        child: FloatingActionButton(
+                            heroTag: "nul",
+                            backgroundColor: Colors.white,
+                            mini: true,
+                            onPressed: (){
+                              print("pressed");
+                              setState(() {
+                                _avatarAnimController.reset();
+                                this._opacity = 0.0;
+                                this.name = "";
+                                this.dp = "";
+                                this.gender = "";
+                                this.location = "";
+                                this.about = "";
+                                this._openProfile = false;
+                              });
+                            },
+                            child: Icon(Icons.clear)
+                        )
                     ),
-                    child: new Container(
-                      height: 120.0,
-                      width: 120.0,
-                      constraints: new BoxConstraints(),
-                      decoration: new BoxDecoration(
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          const BoxShadow(
-                              offset: const Offset(1.0, 2.0),
-                              blurRadius: 2.0,
-                              spreadRadius: -1.0,
-                              color: const Color(0x33000000)),
-                          const BoxShadow(
-                              offset: const Offset(2.0, 1.0),
-                              blurRadius: 3.0,
-                              spreadRadius: 0.0,
-                              color: const Color(0x24000000)),
-                          const BoxShadow(
-                              offset: const Offset(3.0, 1.0),
-                              blurRadius: 4.0,
-                              spreadRadius: 2.0,
-                              color: const Color(0x1F000000)),
+                    new Hero(
+                      tag: "lol",
+                      child: Transform(
+                        transform: new Matrix4.diagonal3Values(
+                          _avatarSize.value,
+                          _avatarSize.value,
+                          1.0,
+                        ),
+                        child: new Container(
+                          height: 120.0,
+                          width: 120.0,
+                          constraints: new BoxConstraints(),
+                          decoration: new BoxDecoration(
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              const BoxShadow(
+                                  offset: const Offset(1.0, 2.0),
+                                  blurRadius: 2.0,
+                                  spreadRadius: -1.0,
+                                  color: const Color(0x33000000)),
+                              const BoxShadow(
+                                  offset: const Offset(2.0, 1.0),
+                                  blurRadius: 3.0,
+                                  spreadRadius: 0.0,
+                                  color: const Color(0x24000000)),
+                              const BoxShadow(
+                                  offset: const Offset(3.0, 1.0),
+                                  blurRadius: 4.0,
+                                  spreadRadius: 2.0,
+                                  color: const Color(0x1F000000)),
+                            ],
+                            image: new DecorationImage(
+                              fit: BoxFit.cover,
+                              image: new NetworkImage(dp),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10.0),
+                            child: new Text(
+                              name ,
+                              style: new TextStyle(fontSize: 25.0,color: Colors.black),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10.0),
+                            child: new CircleAvatar(
+                                foregroundColor: gender=="Male"?Colors.blueAccent:Colors.pinkAccent,
+                                backgroundColor: Colors.transparent.withOpacity(0.2),
+                                child: new Text(gender=="Male"?"M":"F",
+                                  style: TextStyle(fontWeight: FontWeight.w700,fontStyle: FontStyle.italic),)
+                            ),
+                          ),
                         ],
-                        image: new DecorationImage(
-                          fit: BoxFit.cover,
-                          image: new NetworkImage(dp),
-                        ),
                       ),
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          new Icon(Icons.location_on,color: Colors.red,),
+                          new Text(
+                            location,
+                            style: new TextStyle(fontSize: 18.0,color: Colors.black),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                //image ends
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10.0),
-                        child: new Text(
-                          name ,
-                          style: new TextStyle(fontSize: 25.0,color: Colors.white),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10.0),
-                        child: new CircleAvatar(
-                            foregroundColor: gender=="Male"?Colors.blueAccent:Colors.pinkAccent,
-                            backgroundColor: Colors.transparent.withOpacity(0.2),
-                            child: new Text(gender=="Male"?"M":"F",
-                            style: TextStyle(fontWeight: FontWeight.w700,fontStyle: FontStyle.italic),)
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      new Icon(Icons.location_on,color: Colors.red,),
-                      new Text(
-                        location,
-                        style: new TextStyle(fontSize: 18.0,color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.all(5.0),
-                  height: MediaQuery.of(context).size.height/5,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(5.0)
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(32.0,16.0,0.0,0.0),
-                        child: new Text("About",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 17.0),),
-                      ),
-                      new Padding(
-                        padding:
-                        const EdgeInsets.fromLTRB(32.0,5.0,32.0,10.0),
-                        child: new Text(about,
-                          style: new TextStyle(color: Colors.black),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+              ),
+            ),
+            //image ends
 
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(8.0, 20.0, 8.0, 5.0),
-                  child: new Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      new FloatingActionButton(elevation: 10.0,highlightElevation: 10.0,mini: true,backgroundColor: Colors.white,onPressed: (){},child: Icon(Icons.thumb_down,color: Colors.red,),),
-                      new FloatingActionButton(elevation: 10.0,highlightElevation: 10.0,backgroundColor: Colors.white,onPressed: (){},child: Icon(Icons.thumb_up,color: Colors.green,size: 30.0,),),
-                      new FloatingActionButton(elevation: 10.0,highlightElevation: 10.0,mini: true,backgroundColor: Colors.white,onPressed: (){},child: Icon(Icons.star,color: Colors.yellow.shade700,),),
-                    ],
+            new Container(
+              margin: EdgeInsets.all(5.0),
+              height: MediaQuery.of(context).size.height/5,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(32.0,16.0,0.0,0.0),
+                    child: new Text("About",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 17.0),),
                   ),
-                ),
-              ],
+                  new Padding(
+                    padding:
+                    const EdgeInsets.fromLTRB(32.0,5.0,32.0,10.0),
+                    child: new Text(about,
+                      style: new TextStyle(color: Colors.black),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8.0, 20.0, 8.0, 5.0),
+              child: new Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  new FloatingActionButton(elevation: 10.0,highlightElevation: 10.0,mini: true,backgroundColor: Colors.white,onPressed: (){},child: Icon(Icons.thumb_down,color: Colors.red,),),
+                  new FloatingActionButton(elevation: 10.0,highlightElevation: 10.0,backgroundColor: Colors.white,onPressed: (){},child: Icon(Icons.thumb_up,color: Colors.green,size: 30.0,),),
+                  new FloatingActionButton(elevation: 10.0,highlightElevation: 10.0,mini: true,backgroundColor: Colors.white,onPressed: (){},child: Icon(Icons.star,color: Colors.yellow.shade700,),),
+                ],
+              ),
             ),
           ],
         ),
@@ -455,5 +460,26 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
     _avatarAnimController.dispose();
     tiles.clear();
     super.dispose();
+  }
+}
+class MyClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    Path p = new Path();
+    p.lineTo(size.width, 0.0);
+    p.lineTo(size.width, size.height * 0.85);
+    p.arcToPoint(
+      Offset(0.0, size.height * 0.85),
+      radius: const Radius.elliptical(50.0, 10.0),
+      rotation: 0.0,
+    );
+    p.lineTo(0.0, 0.0);
+    p.close();
+    return p;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper oldClipper) {
+    return true;
   }
 }
