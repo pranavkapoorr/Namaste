@@ -24,12 +24,11 @@ var xradient = new LinearGradient(
 var myGradient = new LinearGradient(
   begin: Alignment.topRight,
   end: Alignment.bottomLeft,
-  stops: [0.01, 0.5, 0.7, 0.8,0.9],
   colors: [
-    Colors.deepOrange,
-    Colors.deepOrange.shade600,
-    Colors.deepOrange.shade500,
-    Colors.deepOrange.shade300,
-    Colors.deepOrange.shade200,
+    Colors.white,
+    Colors.deepOrange.shade50,
+    Colors.deepOrange.shade100,
+    Colors.deepOrange.shade50,
+    Colors.deepOrange.shade50,
   ],
 );

@@ -222,9 +222,9 @@ class _ChatScreenState extends State<ChatScreen> {
         leading:Text(""),
         title: Row(
           children: <Widget>[
-            Icon(Icons.message,color:Colors.white),
+            Icon(Icons.message,color:Colors.black),
             SizedBox(width: 20.0,),
-            Text("Conversations",style: TextStyle(color: Colors.white),),
+            Text("Conversations",style: TextStyle(color: Colors.black),),
           ],
         ),
         backgroundColor: Colors.transparent,
