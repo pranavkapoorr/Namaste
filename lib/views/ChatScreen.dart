@@ -9,7 +9,7 @@ import 'ChatThreadScreen.dart';
 import 'ContactsUsingScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-//import 'package:rxdart/rxdart.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 
 class ChatScreen extends StatefulWidget {
@@ -222,7 +222,7 @@ class _ChatScreenState extends State<ChatScreen> {
         leading:Text(""),
         title: Row(
           children: <Widget>[
-            Icon(Icons.message,color:Colors.black),
+            Icon(FontAwesomeIcons.leanpub,color:Colors.black),
             SizedBox(width: 20.0,),
             Text("Conversations",style: TextStyle(color: Colors.black),),
           ],

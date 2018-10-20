@@ -1,4 +1,5 @@
 import 'package:Namaste/resources/UiResources.dart';
+import 'package:Namaste/resources/mynetworkres.dart';
 import 'package:Namaste/views/Profile.dart';
 import 'package:Namaste/views/Namaste.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,6 @@ class NamasteHome extends StatefulWidget {
 class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin{
   PageController _pageController;
   bool _loaded = false;
-  String _myNumber;
   int _page = 1;
 
   void onPageChanged(int page){
@@ -45,20 +45,18 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
     });
   }
 
-  void _loadUser() async{
-    await SharedPreferences.getInstance().then((SharedPreferences sp) {
-      _myNumber = sp.getString("myNumber");
-    }).whenComplete((){
-      setState(() {
-        _loaded = true;
-      });
-    });
-  }
+
 
   @override
   void initState() {
     super.initState();
-    _loadUser();
+    //loads user token from local db and further triggeres request to fetch data
+    myProfile.loadUser().whenComplete((){
+      setState(() {
+        _loaded = true;
+      });
+    });
+
     _pageController = new PageController(initialPage: 1);
 
   }
@@ -77,7 +75,7 @@ class _NamasteHomeState extends State<NamasteHome> with TickerProviderStateMixin
             children: <Widget>[
               new PageView(
                 children: <Widget>[
-                  new Profile(_myNumber),
+                  new Profile(),
                   new Namaste(),
                   new ChatScreen()
                 ],

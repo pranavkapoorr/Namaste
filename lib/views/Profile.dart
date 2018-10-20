@@ -1,14 +1,12 @@
-import 'dart:convert';
+import 'package:Namaste/resources/mynetworkres.dart';
 import 'package:Namaste/views/AlbumEditor.dart';
-import 'package:http/http.dart' as http;
 import 'EditProfile.dart';
 import 'Settings_Screen.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Profile extends StatefulWidget {
-  final String myNumber;
 
-  Profile(this.myNumber);
 
   @override
   _ProfileState createState() => new _ProfileState();
@@ -24,7 +22,19 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
   @override
   initState(){
     super.initState();
-    _getMyDetails();
+    if(myProfile.me!=null){
+      setState(() {
+        _me = myProfile.me;
+        _loaded = true;
+      });
+    }else{
+      myProfile.getMyDetails().whenComplete(() {
+        setState(() {
+          _me = myProfile.me;
+          _loaded = true;
+        });
+      });
+    }
     _avatarAnimController = new AnimationController(
       duration: const Duration(milliseconds: 3000),
       vsync: this,
@@ -43,27 +53,11 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
     _avatarAnimController.forward();
 
   }
-  void _getMyDetails() async{
-    var temp;
-    print("my num is ${widget.myNumber}");
-    await http.get("https://namaste-backend.herokuapp.com/users/uphone/"+ widget.myNumber,
-    ).then((response) {
-      temp = json.decode(response.body);
-      print(" bodyx: $temp");
-      _me = temp;
-    }).whenComplete(() {
-      print("checked db");
-      setState(() {
-        _loaded = true;
-      });
-
-    });
-  }
 
   Widget _sliverAppBar(BuildContext context)=>SliverAppBar(
 
     backgroundColor: Colors.transparent,
-    leading: IconButton(icon: Icon(Icons.mode_edit,color: Colors.white,),
+    leading: IconButton(icon: Icon(FontAwesomeIcons.userEdit,color: Colors.white,),
         onPressed: (){
           _goToEditPage();
         }),
@@ -71,7 +65,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
     pinned: true,
     floating: true,
     actions: <Widget>[
-      new IconButton(icon: Icon(Icons.settings,color:Colors.white,), onPressed: (){
+      new IconButton(icon: Icon(FontAwesomeIcons.cogs,color:Colors.white,), onPressed: (){
         Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new SettingsScreen()));
       })
     ],
@@ -81,7 +75,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
         fit: StackFit.expand,
         children: <Widget>[
           Container(
-              color: Colors.transparent.withOpacity(0.2),
+              color: Colors.transparent.withOpacity(0.4),
               padding: EdgeInsetsDirectional.only(bottom: 1.0),
               child: Text("")
           ),
@@ -149,18 +143,21 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           //mainAxisSize: MainAxisSize.max,
                           children: <Widget>[
-                            new Text("Location",style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.bold),),
+                            new Text("Location",style: new TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold),),
                           ],
                         ),
-                        Row(
-                          children: <Widget>[
-                            Icon(Icons.place,color: Colors.red,),
-                            new Text(
-                              _me['location'],
-                              style:
-                              new TextStyle(color: Colors.black38, fontSize: 15.0),
-                            ),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.only(top:5.0),
+                          child: Row(
+                            children: <Widget>[
+                              Icon(Icons.place,color: Colors.red,),
+                              new Text(
+                                _me['location'],
+                                style:
+                                new TextStyle(color: Colors.black45, fontSize: 15.0),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -176,14 +173,17 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              new Text("Personal Info",style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.bold),),
+                              new Text("Personal Info",style: new TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold),),
                               new Icon(Icons.navigate_next)
                             ],
                           ),
-                          new Text(
-                            _me['about'],
-                            style:
-                            new TextStyle(color: Colors.black38, fontSize: 13.0),
+                          Padding(
+                            padding: const EdgeInsets.only(top:5.0),
+                            child: new Text(
+                              _me['about'],
+                              style:
+                              new TextStyle(color: Colors.black45, fontSize: 14.0),
+                            ),
                           ),
                         ],
                       ),
@@ -201,14 +201,17 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             //mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
-                              new Text("Album",style: new TextStyle(fontSize: 15.0,fontWeight: FontWeight.bold),),
+                              new Text("Album",style: new TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold),),
                               new Icon(Icons.navigate_next)
                             ],
                           ),
                         ),
-                        new Container(
-                          height: 100.0,
-                          child: _album(),
+                        Padding(
+                          padding: const EdgeInsets.only(top:5.0),
+                          child: new Container(
+                            height: 100.0,
+                            child: _album(),
+                          ),
                         )
                       ],
                     ),
@@ -221,7 +224,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
     ):Center(child: CircularProgressIndicator(),);
   }
   void _goToEditPage(){
-    Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new EditProfile(user: _me,)));
+    Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new EditProfile()));
   }
   void _goToAlbumUploader(){
     Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new AlbumUploader()));

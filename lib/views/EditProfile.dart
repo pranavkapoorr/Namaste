@@ -2,14 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:Namaste/resources/UiResources.dart';
+import 'package:Namaste/resources/mynetworkres.dart';
 import 'package:Namaste/views/AlbumEditor.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 class EditProfile extends StatefulWidget {
-  final Map user;
-
-  EditProfile({this.user});
-
   @override
   _EditProfileState createState() => new _EditProfileState();
 }
@@ -23,11 +20,11 @@ class _EditProfileState extends State<EditProfile>{
     username = new TextEditingController();
     about = new TextEditingController();
     location = new TextEditingController();
-    name.text = widget.user['name'];
-    username.text = widget.user['username'];
-    about.text = widget.user['about'];
-    location.text = widget.user['location'];
-    _radioValue = widget.user['gender'];
+    name.text = myProfile.me['name'];//myProfile.me['name'];
+    username.text = myProfile.me['username'];//myProfile.me['username'];
+    about.text = myProfile.me['about'];//myProfile.me['about'];
+    location.text = myProfile.me['location'];//myProfile.me['location'];
+    _radioValue = myProfile.me['gender'];//myProfile.me['gender'];
 
     super.initState();
   }
@@ -83,7 +80,7 @@ class _EditProfileState extends State<EditProfile>{
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
-                                  CircleAvatar(backgroundImage: NetworkImage(widget.user['dp']),
+                                  CircleAvatar(backgroundImage: NetworkImage(myProfile.me['dp']),
                                     radius: 45.0,)
                               ],
                             ),
@@ -227,22 +224,22 @@ class _EditProfileState extends State<EditProfile>{
     Navigator.of(context).push(new MaterialPageRoute(builder: (context)=>new AlbumUploader()));
   }
 
-  Future<bool> _updateMyDetails() async{
-    String _updateUrl = "https://namaste-backend.herokuapp.com/users/" + widget.user['_id'];
+   Future<bool> _updateMyDetails() async{
+    String _updateUrl = "https://namaste-backend.herokuapp.com/users/" + myProfile.me['_id'];
     Map _data = {
       "name": name.text,
-      "email": widget.user['email'],
-      "phone": widget.user['phone'],
+      "email": myProfile.me['email'],
+      "phone": myProfile.me['phone'],
       "gender": _radioValue,
-      "dob": widget.user['dob'],
-      "dp": widget.user['dp'],
+      "dob": myProfile.me['dob'],
+      "dp": myProfile.me['dp'],
       "location": location.text,
       "about": about.text,
       "username": username.text,
-      "password": widget.user['password']
+      "password": myProfile.me['password']
     };
-    if(widget.user['name']!=_data['name']||widget.user['gender']!=_data['gender']||widget.user['location']!=_data['location']||
-        widget.user['about']!=_data['about']||widget.user['username']!=_data['username']) {
+    if(myProfile.me['name']!=_data['name']||myProfile.me['gender']!=_data['gender']||myProfile.me['location']!=_data['location']||
+        myProfile.me['about']!=_data['about']||myProfile.me['username']!=_data['username']) {
       await http.put(_updateUrl,
         headers: {
           "Content-Type": "application/json",
@@ -253,11 +250,16 @@ class _EditProfileState extends State<EditProfile>{
       ).then((response) {
         print('response -> ${response.statusCode}');
         if(response.statusCode == 200){
-          return Future.value(true);
+          myProfile.getMyDetails().whenComplete((){
+            Timer(const Duration(milliseconds: 4000), ()
+            {
+              print("exiting");
+              return Future.value(true);
+            });
+          });
         }else{
           return Future.value(false);
         }
-
       }).whenComplete(() {
         print("details updated");
       });
