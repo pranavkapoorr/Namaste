@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-
+import 'package:image_picker/image_picker.dart';
 import 'package:Namaste/resources/UiResources.dart';
 import 'package:Namaste/resources/mynetworkres.dart';
 import 'package:Namaste/views/AlbumEditor.dart';
@@ -51,19 +51,14 @@ class _EditProfileState extends State<EditProfile>{
         decoration: BoxDecoration(gradient:myGradient,),
         child: new Scaffold(
             backgroundColor: Colors.transparent,
-            appBar: new AppBar(leading: IconButton(icon: Icon(Icons.arrow_back,color: Colors.white,), onPressed:(){
+            appBar: new AppBar(elevation: 0.0,leading: IconButton(icon: Icon(Icons.arrow_back,color: Colors.black,), onPressed:(){
               _updateMyDetails();
               Navigator.pop(context);
-            }),title: new Text("Edit Profile",style: TextStyle(color: Colors.white),),backgroundColor: Colors.transparent,),
+            }),title: new Text("Edit Profile",style: TextStyle(color: Colors.black),),backgroundColor: Colors.transparent,),
             body: Container(
               padding: const EdgeInsets.all(8.0),
               decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                        blurRadius: .5,
-                        spreadRadius: 1.0,
-                        color: Colors.black.withOpacity(.12))
-                  ],
+
                   borderRadius:  BorderRadius.all(Radius.circular(5.0))
               ),
               child:new ListView(
@@ -95,7 +90,7 @@ class _EditProfileState extends State<EditProfile>{
                                   border: new Border.all(color: Colors.redAccent),
                                   borderRadius: new BorderRadius.circular(20.0),
                                   ),
-                                  child:  MaterialButton(onPressed: (){},child: Text("Change Picture"),elevation: 2.0,color: Colors.redAccent,)
+                                  child:  MaterialButton(onPressed: getImage,child: Text("Change Picture"),elevation: 2.0,color: Colors.redAccent,)
                               )
                                 ],
                               ),
@@ -267,6 +262,16 @@ class _EditProfileState extends State<EditProfile>{
     }
     return Future.value(false);
   }
+
+  Future getImage() async {
+    var img = await ImagePicker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      print("adding new image $img");
+      //_imageTiles.insert(_imageTiles.length-1,_makeImageBox(Image.file(img, fit: BoxFit.cover,)));
+    });
+
+  }
+
   @override
   void dispose() {
     name.dispose();

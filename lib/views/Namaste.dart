@@ -17,7 +17,12 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
   Animation<double> _scaleAnimation;
   AnimationController _controller;
 
-
+  void callback() {
+    tiles.removeLast();
+    setState(() {
+      print(tiles.length);
+    });
+  }
 
   @override
   void initState() {
@@ -74,7 +79,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
               print('new length ${tiles.length}');
             });
           },
-          child: new ProfilePanel(e['name'], e['dp'], e['gender'],e['location'],e['about']))).toList();
+          child: new ProfilePanel(e['name'], e['dp'], e['gender'],e['location'],e['about'],callback))).toList();
       setState(() {
         _loaded = true;
       });
@@ -178,8 +183,10 @@ class MyClipper extends CustomClipper<Path> {
 }
 class ProfilePanel extends StatefulWidget {
   final String name, dp, gender, location, about;
+  Function callback;
 
-  ProfilePanel(this.name, this.dp, this.gender, this.location, this.about);
+
+  ProfilePanel(this.name, this.dp, this.gender, this.location, this.about,this.callback);
 
   _ProfilePanelState createState()=> new _ProfilePanelState();
 }
@@ -203,7 +210,14 @@ class _ProfilePanelState extends State<ProfilePanel> with TickerProviderStateMix
           ),
         );
     _stampSize.addListener(() => this.setState(() {}));
+    _stampAnimController.addStatusListener(statusListener);
     super.initState();
+  }
+
+  void statusListener(status){
+    if(status==AnimationStatus.completed){
+      widget.callback();
+    }
   }
   @override
   Widget build(BuildContext context){
@@ -403,6 +417,7 @@ class _ProfilePanelState extends State<ProfilePanel> with TickerProviderStateMix
   @override
   void dispose() {
     buttonValue = null;
+    _stampAnimController.removeStatusListener(statusListener);
     _stampAnimController.dispose();
     super.dispose();
   }
