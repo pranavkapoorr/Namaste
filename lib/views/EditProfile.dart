@@ -51,10 +51,10 @@ class _EditProfileState extends State<EditProfile>{
         decoration: BoxDecoration(gradient:myGradient,),
         child: new Scaffold(
             backgroundColor: Colors.transparent,
-            appBar: new AppBar(elevation: 0.0,leading: IconButton(icon: Icon(Icons.arrow_back,color: Colors.black,), onPressed:(){
+            appBar: new AppBar(elevation: 0.0,leading: IconButton(icon: Icon(Icons.arrow_back,color: Colors.white,), onPressed:(){
               _updateMyDetails();
               Navigator.pop(context);
-            }),title: new Text("Edit Profile",style: TextStyle(color: Colors.black),),backgroundColor: Colors.transparent,),
+            }),title: new Text("Edit Profile",style: TextStyle(color: Colors.white),),backgroundColor: Colors.transparent,),
             body: Container(
               padding: const EdgeInsets.all(8.0),
               decoration: BoxDecoration(
@@ -169,7 +169,8 @@ class _EditProfileState extends State<EditProfile>{
                                                 controller: about,
                                                 decoration: InputDecoration(
                                                     hintText: "short bio",
-                                                    border: InputBorder.none
+                                                    border: InputBorder.none,
+                                                    counterText: "",
                                                 ),
                                                 maxLines: 5,
                                                 maxLength: 150,

@@ -29,7 +29,7 @@ var myGradient = new LinearGradient(
     Colors.deepOrange.shade50,
     Colors.deepOrange.shade100,
     Colors.deepOrange.shade50,
-    Colors.deepOrange.shade50,
+    Colors.deepOrange.shade400,
   ],
 );
 var ppGradient = new LinearGradient(

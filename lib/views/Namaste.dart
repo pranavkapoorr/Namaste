@@ -75,11 +75,11 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
           key:Key(e['username']),
           onDismissed: (direction) {
             setState(() {
-              tiles.remove(e);
+              tiles.removeLast();
               print('new length ${tiles.length}');
             });
           },
-          child: new ProfilePanel(e['name'], e['dp'], e['gender'],e['location'],e['about'],callback))).toList();
+          child: new ProfilePanel(e['name'], e['dp'], e['gender'],e['location'],e['about'],e['username'],callback))).toList();
       setState(() {
         _loaded = true;
       });
@@ -93,12 +93,34 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
         backgroundColor: Colors.transparent,
         appBar:_normalAppBar(),
         body: _loaded?new Stack(
-          children: tiles,
+          children: tiles.length==0?[reloadPanel()]:tiles,
         ):Center(child: _buildAnimation())
     );
   }
 
 
+  Widget reloadPanel()=>new Container(
+    decoration: BoxDecoration(
+      gradient: ppGradient,
+        color: Colors.white,
+        border: Border.all(color: Colors.black26),
+        boxShadow: [new BoxShadow(
+            color: Colors.black12,
+            offset: new Offset(2.0, 5.0),
+            blurRadius: 1.0,
+            spreadRadius: 1.0
+        )],
+        borderRadius:  BorderRadius.all(Radius.circular(10.0))
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        IconButton(onPressed: _makeTilesX, icon: Icon(Icons.refresh),),
+        Text('load more?')
+      ],
+    ),
+  );
 
   AppBar _normalAppBar(){
     return new AppBar(
@@ -183,18 +205,21 @@ class MyClipper extends CustomClipper<Path> {
   }
 }
 class ProfilePanel extends StatefulWidget {
-  final String name, dp, gender, location, about;
+  final String name, dp, gender, location, about,username;
   Function callback;
 
+  ProfilePanel(this.name, this.dp, this.gender, this.location, this.about,this.username,this.callback);
 
-  ProfilePanel(this.name, this.dp, this.gender, this.location, this.about,this.callback);
-
+  get id => username;
+  
   _ProfilePanelState createState()=> new _ProfilePanelState();
+
 }
 class _ProfilePanelState extends State<ProfilePanel> with TickerProviderStateMixin{
   AnimationController _stampAnimController;
   Animation _stampSize;
   var buttonValue = "";
+  
 
   @override
   void initState() {
@@ -203,13 +228,13 @@ class _ProfilePanelState extends State<ProfilePanel> with TickerProviderStateMix
       vsync: this,
     );
     _stampSize  = new CurvedAnimation(
-          parent: _stampAnimController,
-          curve: new Interval(
-            0.100,
-            0.400,
-            curve: Curves.elasticOut,
-          ),
-        );
+      parent: _stampAnimController,
+      curve: new Interval(
+        0.100,
+        0.400,
+        curve: Curves.elasticOut,
+      ),
+    );
     _stampSize.addListener(() => this.setState(() {}));
     _stampAnimController.addStatusListener(statusListener);
     super.initState();
@@ -224,28 +249,28 @@ class _ProfilePanelState extends State<ProfilePanel> with TickerProviderStateMix
   Widget build(BuildContext context){
     var size = MediaQuery.of(context).size;
     return Stack(
-    children: <Widget>[
-      new Container(
-        height: size.height/1.27,
-        margin: EdgeInsets.all(12.0),
-        decoration: new BoxDecoration(
-            color: Colors.white,
-            border: Border.all(color: Colors.black26),
-            boxShadow: [new BoxShadow(
-                color: Colors.black12,
-                offset: new Offset(2.0, 5.0),
-                blurRadius: 1.0,
-                spreadRadius: 1.0
-            )],
-            borderRadius:  BorderRadius.all(Radius.circular(10.0))
-        ),
-        child: new Column(
+      children: <Widget>[
+        new Container(
+          height: size.height/1.27,
+          margin: EdgeInsets.all(12.0),
+          decoration: new BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: Colors.black26),
+              boxShadow: [new BoxShadow(
+                  color: Colors.black12,
+                  offset: new Offset(2.0, 5.0),
+                  blurRadius: 1.0,
+                  spreadRadius: 1.0
+              )],
+              borderRadius:  BorderRadius.all(Radius.circular(10.0))
+          ),
+          child: new Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               ClipPath(
                 clipper: MyClipper(),
                 child: Container(
-                  height: size.height/1.58,
+                  height: size.height/2,
                   decoration: BoxDecoration(
                       gradient: ppGradient,
                       borderRadius:  BorderRadius.only(topLeft: Radius.circular(10.0),topRight: Radius.circular(10.0))
@@ -320,44 +345,32 @@ class _ProfilePanelState extends State<ProfilePanel> with TickerProviderStateMix
                           ],
                         ),
                       ),
-
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(8.0,25.0,8.0,8.0),
-                        child: new Container(
-                          margin: EdgeInsets.all(5.0),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(5.0),
-                            boxShadow: [BoxShadow(color: Colors.black45,blurRadius: 0.5,spreadRadius: 1.0,offset:Offset(0.7, 0.7))]
-
-                          ),
-                          //height: MediaQuery.of(context).size.height/5,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(10.0,10.0,0.0,0.0),
-                                child: new Text("About",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 18.0),),
-                              ),
-                              new Padding(
-                                padding:
-                                const EdgeInsets.fromLTRB(10.0,10.0,10.0,15.0),
-                                child: new Text(widget.about,
-                                  style: new TextStyle(color: Colors.black,fontSize: 15.0),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ),
               ),
               //image ends
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8.0,10.0,8.0,8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10.0,10.0,0.0,0.0),
+                      child: new Text("About",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 18.0),),
+                    ),
+                    new Padding(
+                      padding:
+                      const EdgeInsets.fromLTRB(10.0,10.0,10.0,15.0),
+                      child: new Text(widget.about,
+                        style: new TextStyle(color: Colors.black,fontSize: 15.0),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
 
-              Text("------------------------"),
 
               Padding(
                 padding: const EdgeInsets.fromLTRB(8.0, 20.0, 8.0, 5.0),
@@ -377,7 +390,7 @@ class _ProfilePanelState extends State<ProfilePanel> with TickerProviderStateMix
                       highlightElevation: 10.0,
                       backgroundColor: Colors.white,
                       onPressed: ()=>_applyStamp("like"),
-                      child: Icon(FontAwesomeIcons.prayingHands,color: Colors.green,size: 30.0,),
+                      child: Icon(FontAwesomeIcons.heartbeat,color: Colors.green,size: 30.0,),
                     ),
                     new FloatingActionButton(
                       elevation: 10.0,
@@ -393,31 +406,31 @@ class _ProfilePanelState extends State<ProfilePanel> with TickerProviderStateMix
               ),
             ],
           ),
-      ),
-      buttonValue=="like"?stamp(" NAMASTE ", Colors.green,size)
-          :buttonValue=="dislike"?stamp(" DISLIKE ", Colors.red,size)
-          :buttonValue=="star"?stamp(" SUPERLIKE ", Colors.blue,size):Text('')
-    ],
-  );
-}
+        ),
+        buttonValue=="like"?stamp(" NAMASTE ", Colors.green,size)
+            :buttonValue=="dislike"?stamp(" DISLIKE ", Colors.red,size)
+            :buttonValue=="star"?stamp(" SUPERLIKE ", Colors.blue,size):Text('')
+      ],
+    );
+  }
 
   Widget stamp(String text,Color color,Size size)=>Positioned(
     bottom: size.height/3,
     left: size.width/3,
-      child: Transform.rotate(
-        angle: 250.8,
-        child: new Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: color,width: 2.0),
-          ),
-          transform: new Matrix4.diagonal3Values(
-            _stampSize.value,
-            _stampSize.value,
-            1.0,
-          ),
-          child: Text(text,style: TextStyle(color: color,fontSize: 40.0,fontWeight: FontWeight.bold,),),
+    child: Transform.rotate(
+      angle: 250.8,
+      child: new Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: color,width: 2.0),
         ),
+        transform: new Matrix4.diagonal3Values(
+          _stampSize.value,
+          _stampSize.value,
+          1.0,
+        ),
+        child: Text(text,style: TextStyle(color: color,fontSize: 40.0,fontWeight: FontWeight.bold,),),
       ),
+    ),
   );
 
   _applyStamp(String stamp){
