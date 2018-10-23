@@ -22,6 +22,17 @@ var xradient = new LinearGradient(
   ],
 );
 var myGradient = new LinearGradient(
+  begin: Alignment.topCenter,
+  end: Alignment.bottomLeft,
+  colors: [
+    Colors.deepOrange,
+    Colors.deepOrange.shade50,
+    Colors.deepOrange.shade100,
+    Colors.deepOrange.shade50,
+    Colors.deepOrange.shade50,
+  ],
+);
+var ppGradient = new LinearGradient(
   begin: Alignment.topRight,
   end: Alignment.bottomLeft,
   colors: [

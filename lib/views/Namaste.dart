@@ -103,6 +103,7 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
   AppBar _normalAppBar(){
     return new AppBar(
       centerTitle: true,
+      leading: Text(""),
       title: new Text("Namaste",style: new TextStyle(fontSize: 25.0,fontWeight: FontWeight.bold,fontFamily: "BeautifulX")),
       elevation: 0.0,
       backgroundColor: Colors.transparent,
@@ -244,9 +245,9 @@ class _ProfilePanelState extends State<ProfilePanel> with TickerProviderStateMix
               ClipPath(
                 clipper: MyClipper(),
                 child: Container(
-                  height: size.height/2.27,
+                  height: size.height/1.58,
                   decoration: BoxDecoration(
-                      gradient: myGradient,
+                      gradient: ppGradient,
                       borderRadius:  BorderRadius.only(topLeft: Radius.circular(10.0),topRight: Radius.circular(10.0))
                   ),
                   child: Column(
@@ -319,33 +320,44 @@ class _ProfilePanelState extends State<ProfilePanel> with TickerProviderStateMix
                           ],
                         ),
                       ),
+
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8.0,25.0,8.0,8.0),
+                        child: new Container(
+                          margin: EdgeInsets.all(5.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(5.0),
+                            boxShadow: [BoxShadow(color: Colors.black45,blurRadius: 0.5,spreadRadius: 1.0,offset:Offset(0.7, 0.7))]
+
+                          ),
+                          //height: MediaQuery.of(context).size.height/5,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(10.0,10.0,0.0,0.0),
+                                child: new Text("About",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 18.0),),
+                              ),
+                              new Padding(
+                                padding:
+                                const EdgeInsets.fromLTRB(10.0,10.0,10.0,15.0),
+                                child: new Text(widget.about,
+                                  style: new TextStyle(color: Colors.black,fontSize: 15.0),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ),
               //image ends
 
-              new Container(
-                margin: EdgeInsets.all(5.0),
-                height: MediaQuery.of(context).size.height/5,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(32.0,20.0,0.0,0.0),
-                      child: new Text("About",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 18.0),),
-                    ),
-                    new Padding(
-                      padding:
-                      const EdgeInsets.fromLTRB(32.0,10.0,32.0,10.0),
-                      child: new Text(widget.about,
-                        style: new TextStyle(color: Colors.black,fontSize: 15.0),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              Text("------------------------"),
 
               Padding(
                 padding: const EdgeInsets.fromLTRB(8.0, 20.0, 8.0, 5.0),

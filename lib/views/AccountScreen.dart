@@ -51,9 +51,9 @@ class _AccountScreenState extends State<AccountScreen>{
                           _rootPage();
 
                         },trailing: Icon(Icons.navigate_next),),
-                      new Divider(height: 1.0,color: Colors.black,),
+
                       new ListTile(leading: new Icon(Icons.delete_outline,color:Colors.redAccent),title: new Text("Delete Your Account"),trailing: Icon(Icons.navigate_next),),
-                      new Divider(height: 1.0,color: Colors.black,),
+
                       new ListTile(leading: new Icon(Icons.business_center,color:Colors.amber),title: new Text("Terms & Conditions"),trailing: Icon(Icons.navigate_next),)
                     ]
             ),
