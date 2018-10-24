@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:Namaste/resources/UiResources.dart';
+import 'package:Namaste/resources/mynetworkres.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -62,28 +63,85 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
     _controller.forward();
   }
   void _makeTilesX() async{
-    List temp;
-    await http.get("https://namaste-backend.herokuapp.com/users/all",
-    ).then((response) {
-      print("Response status: ${response.statusCode}");
-      print("Response body: ${response.body}");
-      temp = json.decode(response.body);
-      print(" body: $temp");
-    }).whenComplete((){
-      print("got users");
-      tiles = temp.map((e)=>Dismissible(
-          key:Key(e['username']),
-          onDismissed: (direction) {
-            setState(() {
-              tiles.removeLast();
-              print('new length ${tiles.length}');
-            });
+    if(myProfile.loaded) {
+      List temp;
+      List likes = myProfile.me['likes'];
+      List dislikes = myProfile.me['dislikes'];
+      List usernames = [likes, dislikes].expand((x) => x).toList();
+      usernames.add(myProfile.me['username']);
+      print(usernames);
+      await http.post("https://namaste-backend.herokuapp.com/users/all",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlNTg5OGFhNy1mOTc4LTQ4NGUtYTQyYy1mZGVmMDEwMmFjY2UiLCJpc3MiOiJodHRwczovL2FwaS5jb21hcGkuY29tL2FjY2Vzc3Rva2VucyIsImF1ZCI6Imh0dHBzOi8vYXBpLmNvbWFwaS5jb20iLCJhY2NvdW50SWQiOjM3MTQ0LCJhcGlTcGFjZUlkIjoiYTE4YWY3OTYtMDNiNy00MTg5LTk1OWItMTkzZjA2MjJlOTA1IiwicGVybWlzc2lvbnMiOlsiY29udGVudDp3IiwiY2hhbjpyIiwibXNnOmFueTpzIiwibXNnOnIiLCJwcm9mOnJhIiwiYXBpczpybyJdLCJzdWIiOiJlNTg5OGFhNy1mOTc4LTQ4NGUtYTQyYy1mZGVmMDEwMmFjY2UiLCJwcm9maWxlSWQiOiJOYW1hc3RlLUF1dGgiLCJuYW1lIjoiTmFtYXN0ZUF1dGhYIiwiaWF0IjoxNTI5NDAyMjY3fQ.M7XHQH23dw4qze4UQRZsjGZSNAVs2touYqeyrHz8a8E",
+            "Accept": "application/json"
           },
-          child: new ProfilePanel(e['name'], e['dp'], e['gender'],e['location'],e['about'],e['username'],callback))).toList();
-      setState(() {
-        _loaded = true;
-      });
-    }).catchError((e)=>print(e));
+          body: json.encode({"usernames": usernames})
+      ).then((response) {
+        print("Response status: ${response.statusCode}");
+        print("Response body: ${response.body}");
+        temp = json.decode(response.body);
+        print(" body: $temp");
+      }).whenComplete(() {
+        print("got users");
+        tiles = temp.map((e) =>
+            Dismissible(
+                key: Key(e['username']),
+                onDismissed: (direction) {
+                  if (direction == DismissDirection.endToStart) {
+                    dislikes.add(e['username']);
+                    Map _data = {
+                      "name": myProfile.me['name'],
+                      "email": myProfile.me['email'],
+                      "phone": myProfile.me['phone'],
+                      "gender": myProfile.me['gender'],
+                      "dob": myProfile.me['dob'],
+                      "dp": myProfile.me['dp'],
+                      "location": myProfile.me['location'],
+                      "about": myProfile.me['about'],
+                      "username": myProfile.me['username'],
+                      "password": myProfile.me['password'],
+                      "likes": likes,
+                      "dislikes": dislikes
+                    };
+                    myProfile.updateMyDetails(_data);
+                  } else if (direction == DismissDirection.startToEnd) {
+                    likes.add(e['username']);
+                    Map _data = {
+                      "name": myProfile.me['name'],
+                      "email": myProfile.me['email'],
+                      "phone": myProfile.me['phone'],
+                      "gender": myProfile.me['gender'],
+                      "dob": myProfile.me['dob'],
+                      "dp": myProfile.me['dp'],
+                      "location": myProfile.me['location'],
+                      "about": myProfile.me['about'],
+                      "username": myProfile.me['username'],
+                      "password": myProfile.me['password'],
+                      "likes": likes,
+                      "dislikes": dislikes
+                    };
+                    myProfile.updateMyDetails(_data);
+                  }
+                  setState(() {
+                    tiles.removeLast();
+                    print('new length ${tiles.length}');
+                  });
+                },
+                child: new ProfilePanel(
+                    e['name'],
+                    e['dp'],
+                    e['gender'],
+                    e['location'],
+                    e['about'],
+                    e['username'],
+                    callback))).toList();
+        setState(() {
+          _loaded = true;
+        });
+      }).catchError((e) => print(e));
+    }
+    //reloadPanel();
   }
 
 
@@ -99,26 +157,30 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
   }
 
 
-  Widget reloadPanel()=>new Container(
-    decoration: BoxDecoration(
-      gradient: ppGradient,
-        color: Colors.white,
-        border: Border.all(color: Colors.black26),
-        boxShadow: [new BoxShadow(
-            color: Colors.black12,
-            offset: new Offset(2.0, 5.0),
-            blurRadius: 1.0,
-            spreadRadius: 1.0
-        )],
-        borderRadius:  BorderRadius.all(Radius.circular(10.0))
-    ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        IconButton(onPressed: _makeTilesX, icon: Icon(Icons.refresh),),
-        Text('load more?')
-      ],
+  Widget reloadPanel()=>Center(
+    child: new Container(
+      padding: EdgeInsets.all(20.0),
+      decoration: BoxDecoration(
+        gradient: ppGradient,
+          color: Colors.white,
+          border: Border.all(color: Colors.black26),
+          boxShadow: [new BoxShadow(
+              color: Colors.black12,
+              offset: new Offset(2.0, 5.0),
+              blurRadius: 1.0,
+              spreadRadius: 1.0
+          )],
+          borderRadius:  BorderRadius.all(Radius.circular(10.0))
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          IconButton(onPressed: _makeTilesX, icon: Icon(Icons.refresh),iconSize: 80.0,),
+          Text('Reload..?',style: TextStyle(fontSize:20.0,fontWeight: FontWeight.w500),)
+        ],
+      ),
     ),
   );
 

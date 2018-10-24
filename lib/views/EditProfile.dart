@@ -232,7 +232,9 @@ class _EditProfileState extends State<EditProfile>{
       "location": location.text,
       "about": about.text,
       "username": username.text,
-      "password": myProfile.me['password']
+      "password": myProfile.me['password'],
+      "likes": myProfile.me['likes'],
+      "dislikes": myProfile.me['dislikes']
     };
     if(myProfile.me['name']!=_data['name']||myProfile.me['gender']!=_data['gender']||myProfile.me['location']!=_data['location']||
         myProfile.me['about']!=_data['about']||myProfile.me['username']!=_data['username']) {
@@ -247,11 +249,9 @@ class _EditProfileState extends State<EditProfile>{
         print('response -> ${response.statusCode}');
         if(response.statusCode == 200){
           myProfile.getMyDetails().whenComplete((){
-            Timer(const Duration(milliseconds: 4000), ()
-            {
+
               print("exiting");
               return Future.value(true);
-            });
           });
         }else{
           return Future.value(false);
