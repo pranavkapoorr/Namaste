@@ -13,7 +13,6 @@ class Namaste extends StatefulWidget{
 }
 class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
   List<StatefulWidget> tiles = [];
-  bool _loaded = false;
   Animation<double> _angleAnimation;
   Animation<double> _scaleAnimation;
   AnimationController _controller;
@@ -27,69 +26,19 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
 
   @override
   void initState() {
-    _setupLoadingAnim();
-
     _makeTilesX();
     super.initState();
 
   }
-  void _setupLoadingAnim(){
-    _controller = new AnimationController(
-        duration: const Duration(milliseconds: 2000), vsync: this);
-    _angleAnimation = new Tween(begin: 0.0, end: 360.0).animate(_controller)
-      ..addListener(() {
-        setState(() {
-          // the state that has changed here is the animation object’s value
-        });
-      });
-    _scaleAnimation = new Tween(begin: 1.0, end: 6.0).animate(_controller)
-      ..addListener(() {
-        setState(() {
-          // the state that has changed here is the animation object’s value
-        });
-      });
 
-    _angleAnimation.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        if (!_loaded) {
-          _controller.reverse();
-        }
-      } else if (status == AnimationStatus.dismissed) {
-        if (!_loaded) {
-          _controller.forward();
-        }
-      }
-    });
-    _controller.forward();
-  }
   void _makeTilesX() async{
-    if(myProfile.loaded) {
-      List temp;
-      List likes = myProfile.me['likes'];
-      List dislikes = myProfile.me['dislikes'];
-      List usernames = [likes, dislikes].expand((x) => x).toList();
-      usernames.add(myProfile.me['username']);
-      print(usernames);
-      await http.post("https://namaste-backend.herokuapp.com/users/all",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlNTg5OGFhNy1mOTc4LTQ4NGUtYTQyYy1mZGVmMDEwMmFjY2UiLCJpc3MiOiJodHRwczovL2FwaS5jb21hcGkuY29tL2FjY2Vzc3Rva2VucyIsImF1ZCI6Imh0dHBzOi8vYXBpLmNvbWFwaS5jb20iLCJhY2NvdW50SWQiOjM3MTQ0LCJhcGlTcGFjZUlkIjoiYTE4YWY3OTYtMDNiNy00MTg5LTk1OWItMTkzZjA2MjJlOTA1IiwicGVybWlzc2lvbnMiOlsiY29udGVudDp3IiwiY2hhbjpyIiwibXNnOmFueTpzIiwibXNnOnIiLCJwcm9mOnJhIiwiYXBpczpybyJdLCJzdWIiOiJlNTg5OGFhNy1mOTc4LTQ4NGUtYTQyYy1mZGVmMDEwMmFjY2UiLCJwcm9maWxlSWQiOiJOYW1hc3RlLUF1dGgiLCJuYW1lIjoiTmFtYXN0ZUF1dGhYIiwiaWF0IjoxNTI5NDAyMjY3fQ.M7XHQH23dw4qze4UQRZsjGZSNAVs2touYqeyrHz8a8E",
-            "Accept": "application/json"
-          },
-          body: json.encode({"usernames": usernames})
-      ).then((response) {
-        print("Response status: ${response.statusCode}");
-        print("Response body: ${response.body}");
-        temp = json.decode(response.body);
-        print(" body: $temp");
-      }).whenComplete(() {
-        print("got users");
-        tiles = temp.map((e) =>
+        tiles = myProfile.tiles.map((e) =>
             Dismissible(
                 key: Key(e['username']),
                 onDismissed: (direction) {
                   if (direction == DismissDirection.endToStart) {
-                    dislikes.add(e['username']);
+                    List tempDislikes = myProfile.dislikes;
+                    tempDislikes.add(e['username']);
                     Map _data = {
                       "name": myProfile.me['name'],
                       "email": myProfile.me['email'],
@@ -101,12 +50,13 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
                       "about": myProfile.me['about'],
                       "username": myProfile.me['username'],
                       "password": myProfile.me['password'],
-                      "likes": likes,
-                      "dislikes": dislikes
+                      "likes": myProfile.likes,
+                      "dislikes": tempDislikes
                     };
                     myProfile.updateMyDetails(_data);
                   } else if (direction == DismissDirection.startToEnd) {
-                    likes.add(e['username']);
+                    List templikes = myProfile.likes;
+                    templikes.add(e['username']);
                     Map _data = {
                       "name": myProfile.me['name'],
                       "email": myProfile.me['email'],
@@ -118,8 +68,8 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
                       "about": myProfile.me['about'],
                       "username": myProfile.me['username'],
                       "password": myProfile.me['password'],
-                      "likes": likes,
-                      "dislikes": dislikes
+                      "likes": templikes,
+                      "dislikes": myProfile.dislikes
                     };
                     myProfile.updateMyDetails(_data);
                   }
@@ -137,11 +87,8 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
                     e['username'],
                     callback))).toList();
         setState(() {
-          _loaded = true;
         });
-      }).catchError((e) => print(e));
-    }
-    //reloadPanel();
+
   }
 
 
@@ -150,9 +97,9 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
     return  Scaffold(
         backgroundColor: Colors.transparent,
         appBar:_normalAppBar(),
-        body: _loaded?new Stack(
+        body: myProfile.loadedTiles?new Stack(
           children: tiles.length==0?[reloadPanel()]:tiles,
-        ):Center(child: _buildAnimation())
+        ):Center(child: CircularProgressIndicator())
     );
   }
 
@@ -177,7 +124,9 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          IconButton(onPressed: _makeTilesX, icon: Icon(Icons.refresh),iconSize: 80.0,),
+          IconButton(onPressed:()=> myProfile.getTiles().whenComplete((){
+            _makeTilesX();
+          }), icon: Icon(Icons.refresh),iconSize: 80.0,),
           Text('Reload..?',style: TextStyle(fontSize:20.0,fontWeight: FontWeight.w500),)
         ],
       ),
@@ -194,53 +143,13 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
     );
   }
 
-  Widget _buildAnimation() {
-    double circleWidth = 10.0 * _scaleAnimation.value;
-    Widget circles = new Container(
-      width: circleWidth * 2.0,
-      height: circleWidth * 2.0,
-      child: new Column(
-        children: <Widget>[
-          new Row (
-            children: <Widget>[
-              _buildCircle(circleWidth,Colors.blue),
-              _buildCircle(circleWidth,Colors.red),
-            ],
-          ),
-          new Row (
-            children: <Widget>[
-              _buildCircle(circleWidth,Colors.yellow),
-              _buildCircle(circleWidth,Colors.green),
-            ],
-          ),
-        ],
-      ),
-    );
 
-    double angleInDegrees = _angleAnimation.value;
-    return new Transform.rotate(
-      angle: angleInDegrees / 360 * 2 * pi,
-      child: new Container(
-        child: circles,
-      ),
-    );
-  }
 
-  Widget _buildCircle(double circleWidth, Color color) {
-    return new Container(
-      width: circleWidth,
-      height: circleWidth,
-      decoration: new BoxDecoration(
-        color: color,
-        shape: BoxShape.circle,
-      ),
-    );
-  }
+
 
 
   @override
   void dispose() {
-    _controller.dispose();
     tiles.clear();
     super.dispose();
   }
@@ -314,19 +223,20 @@ class _ProfilePanelState extends State<ProfilePanel> with TickerProviderStateMix
       children: <Widget>[
         new Container(
           height: size.height/1.27,
-          margin: EdgeInsets.all(12.0),
+          margin: EdgeInsets.fromLTRB(12.0,5.0,12.0,0.0),
           decoration: new BoxDecoration(
               color: Colors.white,
               border: Border.all(color: Colors.black26),
               boxShadow: [new BoxShadow(
                   color: Colors.black12,
                   offset: new Offset(2.0, 5.0),
-                  blurRadius: 1.0,
-                  spreadRadius: 1.0
+                  blurRadius: 0.2,
+                  spreadRadius: 0.2
               )],
               borderRadius:  BorderRadius.all(Radius.circular(10.0))
           ),
           child: new Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               ClipPath(
@@ -341,8 +251,8 @@ class _ProfilePanelState extends State<ProfilePanel> with TickerProviderStateMix
                     children: <Widget>[
                       SizedBox(height: 50.0,),
                       new Container(
-                        height: 170.0,
-                        width: 170.0,
+                        height: 150.0,
+                        width: 150.0,
                         constraints: new BoxConstraints(),
                         decoration: new BoxDecoration(
                           shape: BoxShape.circle,
@@ -379,7 +289,7 @@ class _ProfilePanelState extends State<ProfilePanel> with TickerProviderStateMix
                               padding: const EdgeInsets.only(left: 10.0),
                               child: new Text(
                                 widget.name ,
-                                style: new TextStyle(fontSize: 30.0,color: Colors.black,fontWeight: FontWeight.w400),
+                                style: new TextStyle(fontSize: 25.0,color: Colors.black,fontWeight: FontWeight.w400),
                               ),
                             ),
                             Padding(
@@ -413,20 +323,20 @@ class _ProfilePanelState extends State<ProfilePanel> with TickerProviderStateMix
               ),
               //image ends
               Padding(
-                padding: const EdgeInsets.fromLTRB(8.0,10.0,8.0,8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.fromLTRB(10.0,10.0,0.0,0.0),
-                      child: new Text("About",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 18.0),),
+                      child: new Text("About",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 17.0),),
                     ),
                     new Padding(
                       padding:
                       const EdgeInsets.fromLTRB(10.0,10.0,10.0,15.0),
                       child: new Text(widget.about,
-                        style: new TextStyle(color: Colors.black,fontSize: 15.0),
+                        style: new TextStyle(color: Colors.black,fontSize: 14.0),
                       ),
                     ),
                   ],
@@ -434,37 +344,34 @@ class _ProfilePanelState extends State<ProfilePanel> with TickerProviderStateMix
               ),
 
 
-              Padding(
-                padding: const EdgeInsets.fromLTRB(8.0, 20.0, 8.0, 5.0),
-                child: new Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    new FloatingActionButton(
-                      elevation: 10.0,
-                      highlightElevation: 10.0,
-                      mini: true,
-                      backgroundColor: Colors.white,
-                      onPressed: ()=>_applyStamp("dislike"),
-                      child: Icon(Icons.clear,color: Colors.red,),
-                    ),
-                    new FloatingActionButton(
-                      elevation: 10.0,
-                      highlightElevation: 10.0,
-                      backgroundColor: Colors.white,
-                      onPressed: ()=>_applyStamp("like"),
-                      child: Icon(FontAwesomeIcons.heartbeat,color: Colors.green,size: 30.0,),
-                    ),
-                    new FloatingActionButton(
-                      elevation: 10.0,
-                      highlightElevation: 10.0,
-                      mini: true,
-                      backgroundColor: Colors.white,
-                      onPressed: ()=>_applyStamp("star"),
-                      child: Icon(Icons.star,
-                        color: Colors.yellow.shade700,),
-                    ),
-                  ],
-                ),
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  new FloatingActionButton(
+                    elevation: 10.0,
+                    highlightElevation: 10.0,
+                    mini: true,
+                    backgroundColor: Colors.white,
+                    onPressed: ()=>_applyStamp("dislike"),
+                    child: Icon(Icons.clear,color: Colors.red,),
+                  ),
+                  new FloatingActionButton(
+                    elevation: 10.0,
+                    highlightElevation: 10.0,
+                    backgroundColor: Colors.white,
+                    onPressed: ()=>_applyStamp("like"),
+                    child: Icon(FontAwesomeIcons.heartbeat,color: Colors.green,size: 30.0,),
+                  ),
+                  new FloatingActionButton(
+                    elevation: 10.0,
+                    highlightElevation: 10.0,
+                    mini: true,
+                    backgroundColor: Colors.white,
+                    onPressed: ()=>_applyStamp("star"),
+                    child: Icon(Icons.star,
+                      color: Colors.yellow.shade700,),
+                  ),
+                ],
               ),
             ],
           ),

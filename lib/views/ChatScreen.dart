@@ -230,16 +230,13 @@ class _ChatScreenState extends State<ChatScreen> {
         backgroundColor: Colors.transparent,
       ),
       body: Container(
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0),
+        decoration: BoxDecoration(borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
           color: Colors.white,),
         child: ListView.builder(
           itemCount: _chatters.length,
           itemBuilder: (context, i) =>
           new Column(
             children: <Widget>[
-              new Divider(
-                height: 0.5,
-              ),
               new ListTile(
                 leading: new CircleAvatar(
                   foregroundColor: Theme
