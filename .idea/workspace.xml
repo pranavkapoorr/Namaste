@@ -13,10 +13,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af31b5df-b2e0-4a65-9af3-7d12a46f2dad" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/lib/views/Register.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/resources/mynetworkres.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/resources/mynetworkres.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/ChatScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/ChatScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/Namaste.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/Namaste.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/LoginScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/LoginScreen.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -54,22 +53,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AccountScreen.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/views/AccountScreen.dart">
+      <file leaf-file-name="LoginScreen.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/views/LoginScreen.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
-              <caret line="55" selection-start-line="55" selection-end-line="55" />
+            <state relative-caret-position="-732">
+              <caret line="138" column="62" selection-start-line="138" selection-start-column="62" selection-end-line="138" selection-end-column="62" />
+              <folding>
+                <element signature="e#0#52#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoginScreen.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/views/LoginScreen.dart">
+      <file leaf-file-name="Register.dart" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/views/Register.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2175">
-              <caret line="152" column="22" selection-start-line="152" selection-start-column="22" selection-end-line="152" selection-end-column="22" />
+            <state relative-caret-position="267">
+              <caret line="156" column="49" selection-start-line="156" selection-start-column="49" selection-end-line="156" selection-end-column="49" />
               <folding>
-                <element signature="e#0#52#0" expanded="true" />
+                <element signature="e#0#22#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -78,13 +80,13 @@
       <file leaf-file-name="OtpScreen.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/views/OtpScreen.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1680">
-              <caret line="117" column="90" selection-start-line="117" selection-start-column="90" selection-end-line="117" selection-end-column="90" />
+            <state relative-caret-position="225">
+              <caret line="52" column="21" selection-start-line="52" selection-start-column="21" selection-end-line="52" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Namaste.dart" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Namaste.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/views/Namaste.dart">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="288">
@@ -99,8 +101,8 @@
       <file leaf-file-name="mynetworkres.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/resources/mynetworkres.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="863">
-              <caret line="65" column="40" lean-forward="true" selection-start-line="65" selection-start-column="40" selection-end-line="65" selection-end-column="40" />
+            <state relative-caret-position="328">
+              <caret line="97" column="31" selection-start-line="86" selection-start-column="5" selection-end-line="97" selection-end-column="31" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
@@ -129,7 +131,7 @@
       <file leaf-file-name="EditProfile.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/views/EditProfile.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3735">
+            <state relative-caret-position="3840">
               <caret line="256" column="37" selection-start-line="256" selection-start-column="37" selection-end-line="256" selection-end-column="37" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
@@ -141,7 +143,7 @@
       <file leaf-file-name="ChatScreen.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/views/ChatScreen.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
+            <state relative-caret-position="3570">
               <caret line="238" column="31" selection-start-line="238" selection-start-column="31" selection-end-line="238" selection-end-column="31" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
@@ -228,13 +230,14 @@
         <option value="$PROJECT_DIR$/pubspec.yaml" />
         <option value="$PROJECT_DIR$/lib/views/Settings_Screen.dart" />
         <option value="$PROJECT_DIR$/lib/views/AccountScreen.dart" />
-        <option value="$PROJECT_DIR$/lib/views/LoginScreen.dart" />
         <option value="$PROJECT_DIR$/lib/views/OtpScreen.dart" />
         <option value="$PROJECT_DIR$/lib/resources/UiResources.dart" />
         <option value="$PROJECT_DIR$/lib/views/EditProfile.dart" />
         <option value="$PROJECT_DIR$/lib/views/ChatScreen.dart" />
         <option value="$PROJECT_DIR$/lib/resources/mynetworkres.dart" />
         <option value="$PROJECT_DIR$/lib/views/Namaste.dart" />
+        <option value="$PROJECT_DIR$/lib/views/LoginScreen.dart" />
+        <option value="$PROJECT_DIR$/lib/views/Register.dart" />
       </list>
     </option>
   </component>
@@ -252,6 +255,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -309,7 +313,6 @@
         </subPane>
         <option name="show-excluded-files" value="false" />
       </pane>
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -484,13 +487,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1526910296971</updated>
-    </task>
-    <task id="LOCAL-00065" summary="editprofile done">
-      <created>1531842055944</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1531842055944</updated>
     </task>
     <task id="LOCAL-00066" summary="added tickerprovider">
       <created>1531842938818</created>
@@ -828,7 +824,14 @@
       <option name="project" value="LOCAL" />
       <updated>1540351657603</updated>
     </task>
-    <option name="localTasksCounter" value="114" />
+    <task id="LOCAL-00114" summary="likedislike issue">
+      <created>1540435736920</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1540435736920</updated>
+    </task>
+    <option name="localTasksCounter" value="115" />
     <servers />
   </component>
   <component name="TodoView">
@@ -852,8 +855,8 @@
       <window_info anchor="right" id="Capture Analysis" order="5" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5118644" side_tool="true" weight="0.2682927" />
       <window_info anchor="bottom" id="Dart Analysis" order="9" weight="0.32794118" />
-      <window_info anchor="bottom" id="Version Control" order="10" weight="0.32352942" />
       <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4881356" visible="true" weight="0.275" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.32352942" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32844242" />
       <window_info anchor="right" id="Flutter Outline" order="3" weight="0.3296328" />
       <window_info anchor="bottom" id="Logcat" order="14" weight="0.32729468" />
@@ -864,8 +867,8 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Device File Explorer" order="4" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="6" />
-      <window_info id="Favorites" order="6" sideWeight="0.5084388" side_tool="true" weight="0.20859376" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3995037" />
+      <window_info id="Favorites" order="6" sideWeight="0.5084388" side_tool="true" weight="0.20859376" />
       <window_info anchor="right" id="Flutter Inspector" order="7" visible="true" weight="0.0033444816" />
       <window_info anchor="bottom" id="Messages" order="13" sideWeight="0.495" weight="0.3632353" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -882,7 +885,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed conversations color" />
     <MESSAGE value="made tabbar transparent" />
     <MESSAGE value="icon in navbar" />
     <MESSAGE value="changed tabview 2 pageview" />
@@ -907,7 +909,8 @@
     <MESSAGE value="added reload" />
     <MESSAGE value="added like dislike req" />
     <MESSAGE value="likedislike req" />
-    <option name="LAST_COMMIT_MESSAGE" value="likedislike req" />
+    <MESSAGE value="likedislike issue" />
+    <option name="LAST_COMMIT_MESSAGE" value="likedislike issue" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -915,13 +918,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../Flutter/flutter/packages/flutter/lib/src/animation/animations.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="339" column="14" selection-start-line="339" selection-start-column="14" selection-end-line="339" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore-0.7.3/lib/src/document_reference.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
@@ -1180,23 +1176,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/views/LoginScreen.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2175">
-          <caret line="152" column="22" selection-start-line="152" selection-start-column="22" selection-end-line="152" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/views/OtpScreen.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1680">
-          <caret line="117" column="90" selection-start-line="117" selection-start-column="90" selection-end-line="117" selection-end-column="90" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/resources/UiResources.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
@@ -1206,7 +1185,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/views/EditProfile.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3735">
+        <state relative-caret-position="3840">
           <caret line="256" column="37" selection-start-line="256" selection-start-column="37" selection-end-line="256" selection-end-column="37" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
@@ -1230,20 +1209,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/views/ChatScreen.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
+        <state relative-caret-position="3570">
           <caret line="238" column="31" selection-start-line="238" selection-start-column="31" selection-end-line="238" selection-end-column="31" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/resources/mynetworkres.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="863">
-          <caret line="65" column="40" lean-forward="true" selection-start-line="65" selection-start-column="40" selection-end-line="65" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1252,6 +1221,43 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
           <caret line="127" column="26" selection-start-line="127" selection-start-column="26" selection-end-line="127" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/views/OtpScreen.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="52" column="21" selection-start-line="52" selection-start-column="21" selection-end-line="52" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/resources/mynetworkres.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="97" column="31" selection-start-line="86" selection-start-column="5" selection-end-line="97" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/views/LoginScreen.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-732">
+          <caret line="138" column="62" selection-start-line="138" selection-start-column="62" selection-end-line="138" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/views/Register.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="156" column="49" selection-start-line="156" selection-start-column="49" selection-end-line="156" selection-end-column="49" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
           </folding>
