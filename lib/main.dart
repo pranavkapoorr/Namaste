@@ -19,7 +19,7 @@ void initFirebaseConfig()async{
   ).catchError((e)=>print(e.toString()));
 }
 void main(){
-  initFirebaseConfig();
+  //initFirebaseConfig();
   runApp(new MyApp());
 }
 

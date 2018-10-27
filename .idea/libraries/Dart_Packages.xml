@@ -114,6 +114,13 @@
             </list>
           </value>
         </entry>
+        <entry key="flutter_native_image">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../Flutter/flutter/.pub-cache/git/flutter_native_image-d6ef3cfb831cfdd3d2cea9e7e8771da983efca25/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="flutter_test">
           <value>
             <list>
@@ -474,6 +481,7 @@
       </option>
     </properties>
     <CLASSES>
+      <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/git/flutter_native_image-d6ef3cfb831cfdd3d2cea9e7e8771da983efca25/lib" />
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/analyzer-0.32.4/lib" />
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/args-1.5.0/lib" />
       <root url="file://$PROJECT_DIR$/../Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.0.8/lib" />

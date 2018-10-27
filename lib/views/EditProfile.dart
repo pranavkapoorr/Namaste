@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:Namaste/main.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:Namaste/resources/UiResources.dart';
 import 'package:Namaste/resources/mynetworkres.dart';
@@ -10,6 +8,8 @@ import 'package:Namaste/views/AlbumEditor.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_native_image/flutter_native_image.dart';
+
 class EditProfile extends StatefulWidget {
   @override
   _EditProfileState createState() => new _EditProfileState();
@@ -18,18 +18,17 @@ class _EditProfileState extends State<EditProfile>{
   var _scaffoldKey = new GlobalKey();
   TextEditingController name,username,about,location;
   String _gender,_radioValue;
-  FirebaseStorage storage;
   File imageFile;
 
   String imageUrl;
 
   @override
   void initState() {
-    storage = new FirebaseStorage(app:app,storageBucket: "gs://testfirebase-d40b1.appspot.com");
     name = new TextEditingController();
     username = new TextEditingController();
     about = new TextEditingController();
     location = new TextEditingController();
+    imageUrl = myProfile.me['dp'];
     name.text = myProfile.me['name'];//myProfile.me['name'];
     username.text = myProfile.me['username'];//myProfile.me['username'];
     about.text = myProfile.me['about'];//myProfile.me['about'];
@@ -81,36 +80,19 @@ class _EditProfileState extends State<EditProfile>{
                 child:
                       new Column(
                         children: <Widget>[
-                          Container(
-                            margin: EdgeInsetsDirectional.only(top: 5.0),
-                            child: Column(
-                            children: <Widget>[
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  CircleAvatar(backgroundImage: NetworkImage(myProfile.me['dp']),
-                                    radius: 45.0,)
-                              ],
+                          InkWell(
+                            onTap: getImage,
+                            child: Container(
+                              margin: EdgeInsetsDirectional.only(top: 5.0),
+                              child: Stack(
+                              children: <Widget>[
+                                CircleAvatar(backgroundColor: Colors.black45,backgroundImage: NetworkImage(imageUrl),
+                                  radius: 60.0,),
+                                Positioned(right: 0.0,bottom:0.0,child: Icon(Icons.add_a_photo,color: Colors.black,))
+                            ],
                             ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.only(top: 2.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                DecoratedBox(
-                                  decoration: new BoxDecoration(
-                                  border: new Border.all(color: Colors.redAccent),
-                                  borderRadius: new BorderRadius.circular(20.0),
-                                  ),
-                                  child:  MaterialButton(onPressed: getImage,child: Text("Change Picture"),elevation: 2.0,color: Colors.redAccent,)
-                              )
-                                ],
-                              ),
-                            )
-                          ],
-                          ),
                         ),
+                          ),
                         Container(
                           color: Colors.white70,
                           padding: EdgeInsets.all(10.0),
@@ -262,7 +244,6 @@ class _EditProfileState extends State<EditProfile>{
         print('response -> ${response.statusCode}');
         if(response.statusCode == 200){
           myProfile.getMyDetails().whenComplete((){
-
               print("exiting");
               return Future.value(true);
           });
@@ -270,6 +251,7 @@ class _EditProfileState extends State<EditProfile>{
           return Future.value(false);
         }
       }).whenComplete(() {
+
         print("details updated");
       });
 
@@ -287,24 +269,39 @@ class _EditProfileState extends State<EditProfile>{
       });
     }
     uploadFile();
-    /*StorageReference ref =
-    storage.ref().child("image.jpg");
-    StorageUploadTask uploadTask = ref.putFile(img);
-    setState(() {
-      print("adding new image $img");
-    });*/
-
   }
 
   Future uploadFile() async {
-    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    StorageReference reference = new FirebaseStorage(app:app,storageBucket: "gs://testfirebase-d40b1.appspot.com").ref();
-    reference.putFile(imageFile);
-    reference.getDownloadURL().then((dynamic value) {
-      imageUrl = value.toString();
+    String fileName = myProfile.me['username']+".jpg";
+    StorageReference reference = FirebaseStorage.instance.ref().child(fileName);
+    StorageUploadTask upload = await reference.putFile(imageFile);
+
+    await upload.onComplete.whenComplete(() {
+      setState(() {
+        imageUrl = "https://firebasestorage.googleapis.com/v0/b/testfirebase-d40b1.appspot.com/o/"+fileName+"?alt=media&token=eddfcbce-47df-4c7d-a6a9-45e59a337f5e";
+      });
+      Map data = {
+        "name": name.text,
+        "email": myProfile.me['email'],
+        "phone": myProfile.me['phone'],
+        "gender": _radioValue,
+        "dob": myProfile.me['dob'],
+        "dp": imageUrl,
+        "location": location.text,
+        "about": about.text,
+        "username": username.text,
+        "password": myProfile.me['password'],
+        "likes": myProfile.me['likes'],
+        "dislikes": myProfile.me['dislikes']
+      };
+      myProfile.updateMyDetails(data);
     });
   }
-
+   _compressImage(File file) async{
+    File _compressed =  await FlutterNativeImage.compressImage(file.path,
+        quality: 50, percentage: 90);
+    return _compressed;
+  }
   @override
   void dispose() {
     name.dispose();

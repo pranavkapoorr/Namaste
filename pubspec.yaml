@@ -17,6 +17,8 @@ dependencies:
   image_picker: ^0.4.5
   font_awesome_flutter:
   firebase_storage: ^1.0.4
+  flutter_native_image:
+    git: https://github.com/btastic/flutter_native_image.git
 
 dev_dependencies:
   flutter_test:
