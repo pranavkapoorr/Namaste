@@ -1,8 +1,5 @@
-import 'dart:convert';
-import 'dart:math';
 import 'package:Namaste/resources/UiResources.dart';
 import 'package:Namaste/resources/mynetworkres.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -11,13 +8,16 @@ class Namaste extends StatefulWidget{
   @override
   _NamasteState createState()=> new _NamasteState();
 }
-class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
+class _NamasteState extends State<Namaste> {
   List<StatefulWidget> tiles = [];
-  Animation<double> _angleAnimation;
-  Animation<double> _scaleAnimation;
-  AnimationController _controller;
 
-  void callback() {
+
+  void callback(String buttonValue,String username) {
+    if(buttonValue=="like"){
+        _dislikeReq("like", username);
+    }else if(buttonValue=="dislike"){
+        _dislikeReq("dislike", username);
+    }
     tiles.removeLast();
     setState(() {
       print(tiles.length);
@@ -31,13 +31,33 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
 
   }
 
+  void _dislikeReq(String likeOrDislike,String username){
+    List tempVal = likeOrDislike=="dislike"?myProfile.dislikes:myProfile.likes;
+    tempVal.add(username);
+    Map _data = {
+      "name": myProfile.me['name'],
+      "email": myProfile.me['email'],
+      "phone": myProfile.me['phone'],
+      "gender": myProfile.me['gender'],
+      "dob": myProfile.me['dob'],
+      "dp": myProfile.me['dp'],
+      "location": myProfile.me['location'],
+      "about": myProfile.me['about'],
+      "username": myProfile.me['username'],
+      "password": myProfile.me['password'],
+      "likes": likeOrDislike=="like"?tempVal:myProfile.likes,
+      "dislikes": likeOrDislike=="dislike"?tempVal:myProfile.dislikes
+    };
+    myProfile.updateMyDetails(_data);
+  }
+
   void _makeTilesX() async{
         tiles = myProfile.tiles.map((e) =>
             Dismissible(
                 key: Key(e['username']),
                 onDismissed: (direction) {
                   if (direction == DismissDirection.endToStart) {
-                    List tempDislikes = myProfile.dislikes;
+                    /*List tempDislikes = myProfile.dislikes;
                     tempDislikes.add(e['username']);
                     Map _data = {
                       "name": myProfile.me['name'],
@@ -53,9 +73,10 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
                       "likes": myProfile.likes,
                       "dislikes": tempDislikes
                     };
-                    myProfile.updateMyDetails(_data);
+                    myProfile.updateMyDetails(_data);*/
+                    _dislikeReq("dislike", e['username']);
                   } else if (direction == DismissDirection.startToEnd) {
-                    List templikes = myProfile.likes;
+                    /*List templikes = myProfile.likes;
                     templikes.add(e['username']);
                     Map _data = {
                       "name": myProfile.me['name'],
@@ -71,7 +92,8 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
                       "likes": templikes,
                       "dislikes": myProfile.dislikes
                     };
-                    myProfile.updateMyDetails(_data);
+                    myProfile.updateMyDetails(_data);*/
+                    _dislikeReq("like", e['username']);
                   }
                   setState(() {
                     tiles.removeLast();
@@ -124,8 +146,12 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          IconButton(onPressed:()=> myProfile.getTiles().whenComplete((){
-            _makeTilesX();
+          IconButton(
+            //load my details first to update me.likes and dislikes,then load tiles data then make tiles
+            onPressed:()=> myProfile.getMyDetails().whenComplete((){
+            myProfile.getTiles().whenComplete((){
+              _makeTilesX();
+            });
           }), icon: Icon(Icons.refresh),iconSize: 80.0,),
           Text('Reload..?',style: TextStyle(fontSize:20.0,fontWeight: FontWeight.w500),)
         ],
@@ -142,9 +168,6 @@ class _NamasteState extends State<Namaste> with TickerProviderStateMixin{
       backgroundColor: Colors.transparent,
     );
   }
-
-
-
 
 
 
@@ -213,7 +236,7 @@ class _ProfilePanelState extends State<ProfilePanel> with TickerProviderStateMix
 
   void statusListener(status){
     if(status==AnimationStatus.completed){
-      widget.callback();
+      widget.callback(buttonValue,widget.username);
     }
   }
   @override
@@ -229,7 +252,7 @@ class _ProfilePanelState extends State<ProfilePanel> with TickerProviderStateMix
               border: Border.all(color: Colors.black26),
               boxShadow: [new BoxShadow(
                   color: Colors.black12,
-                  offset: new Offset(2.0, 5.0),
+                  offset: new Offset(1.0, 2.0),
                   blurRadius: 0.2,
                   spreadRadius: 0.2
               )],

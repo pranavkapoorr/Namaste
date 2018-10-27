@@ -42,6 +42,7 @@ class _OtpScreenState extends State<OtpScreen> with TickerProviderStateMixin{
   Widget build(BuildContext context) {
    return new Scaffold(
      key: _scaffoldKey,
+     resizeToAvoidBottomPadding: true,
      backgroundColor: Colors.white,
      body: Container(
        decoration: BoxDecoration(
@@ -50,29 +51,20 @@ class _OtpScreenState extends State<OtpScreen> with TickerProviderStateMixin{
        child: new Stack(
            fit: StackFit.expand,
            children: <Widget>[
-         /*new Image(
-           image: new AssetImage("images/bg.jpg"),
-           fit: BoxFit.cover,
-           colorBlendMode: BlendMode.darken,
-           color: Colors.black87,
-         ),*/
-         new Column(
-           mainAxisAlignment: MainAxisAlignment.center,
-           children: <Widget>[
-             Text("Namaste",style: new TextStyle(fontSize: 100.0,fontWeight: FontWeight.bold,fontFamily: "BeautifulX")),
-             new Container(
-               padding: const EdgeInsets.all(40.0),
-               child: new Form(
-                 autovalidate: true,
-                 child: new Column(
-                   mainAxisAlignment: MainAxisAlignment.start,
-                   children: <Widget>[
-                     Text("Enter the 4 digit OTP received by sms"),
-                     _buildInputBox(),
-                     new Padding(
-                       padding: const EdgeInsets.only(top: 60.0),
-                     ),
-                     _actionButtons()
+             new Column(
+               mainAxisAlignment: MainAxisAlignment.center,
+               children: <Widget>[
+                 Text("Namaste",style: new TextStyle(fontSize: 100.0,fontWeight: FontWeight.bold,fontFamily: "BeautifulX")),
+                 new Container(
+                   padding: const EdgeInsets.all(40.0),
+                   child: new Form(
+                     autovalidate: true,
+                     child: new Column(
+                       mainAxisAlignment: MainAxisAlignment.start,
+                       children: <Widget>[
+                         Text("Enter the 4 digit OTP received by sms"),
+                         _buildInputBox(),
+                         _actionButtons()
                    ]
                  )
                )

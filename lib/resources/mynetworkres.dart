@@ -41,13 +41,11 @@ class MyProfileHelper{
   }
  Future getMyDetails() async {
     loaded = false;
-   var temp;
    return http.get(
      "https://namaste-backend.herokuapp.com/users/uphone/" + _myNumber,
    ).then((response) {
-     temp = json.decode(response.body);
-     print(" bodyx: $temp");
-     me = temp;
+     me = json.decode(response.body);
+     print(" bodyx: $me");
    }).whenComplete(() {
      likes = me['likes'];
      dislikes = me['dislikes'];
@@ -55,6 +53,7 @@ class MyProfileHelper{
      print("checked db");
    });
  }
+
  Future getTiles() async{
     loadedTiles = false;
    List temp;

@@ -1,21 +1,31 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
+import 'package:Namaste/main.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:Namaste/resources/UiResources.dart';
 import 'package:Namaste/resources/mynetworkres.dart';
 import 'package:Namaste/views/AlbumEditor.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:http/http.dart' as http;
 class EditProfile extends StatefulWidget {
   @override
   _EditProfileState createState() => new _EditProfileState();
 }
 class _EditProfileState extends State<EditProfile>{
+  var _scaffoldKey = new GlobalKey();
   TextEditingController name,username,about,location;
   String _gender,_radioValue;
+  FirebaseStorage storage;
+  File imageFile;
+
+  String imageUrl;
 
   @override
   void initState() {
+    storage = new FirebaseStorage(app:app,storageBucket: "gs://testfirebase-d40b1.appspot.com");
     name = new TextEditingController();
     username = new TextEditingController();
     about = new TextEditingController();
@@ -28,6 +38,8 @@ class _EditProfileState extends State<EditProfile>{
 
     super.initState();
   }
+
+
 
   void _handleGenderChange(String value){
     setState(() {
@@ -50,6 +62,7 @@ class _EditProfileState extends State<EditProfile>{
       child: Container(
         decoration: BoxDecoration(gradient:myGradient,),
         child: new Scaffold(
+            key: _scaffoldKey,
             backgroundColor: Colors.transparent,
             appBar: new AppBar(elevation: 0.0,leading: IconButton(icon: Icon(Icons.arrow_back,color: Colors.white,), onPressed:(){
               _updateMyDetails();
@@ -265,12 +278,31 @@ class _EditProfileState extends State<EditProfile>{
   }
 
   Future getImage() async {
-    var img = await ImagePicker.pickImage(source: ImageSource.gallery);
+    File image = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      setState(() {
+        print("Image is: $image");
+        imageFile = image;
+      });
+    }
+    uploadFile();
+    /*StorageReference ref =
+    storage.ref().child("image.jpg");
+    StorageUploadTask uploadTask = ref.putFile(img);
     setState(() {
       print("adding new image $img");
-      //_imageTiles.insert(_imageTiles.length-1,_makeImageBox(Image.file(img, fit: BoxFit.cover,)));
-    });
+    });*/
 
+  }
+
+  Future uploadFile() async {
+    String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+    StorageReference reference = new FirebaseStorage(app:app,storageBucket: "gs://testfirebase-d40b1.appspot.com").ref();
+    reference.putFile(imageFile);
+    reference.getDownloadURL().then((dynamic value) {
+      imageUrl = value.toString();
+    });
   }
 
   @override
