@@ -263,9 +263,10 @@ class _EditProfileState extends State<EditProfile>{
     File image = await ImagePicker.pickImage(source: ImageSource.gallery);
 
     if (image != null) {
+      imageFile = await FlutterNativeImage.compressImage(image.path,
+          quality: 50, percentage: 90);
       setState(() {
         print("Image is: $image");
-        imageFile = image;
       });
     }
     uploadFile();
@@ -297,11 +298,7 @@ class _EditProfileState extends State<EditProfile>{
       myProfile.updateMyDetails(data);
     });
   }
-   _compressImage(File file) async{
-    File _compressed =  await FlutterNativeImage.compressImage(file.path,
-        quality: 50, percentage: 90);
-    return _compressed;
-  }
+
   @override
   void dispose() {
     name.dispose();
