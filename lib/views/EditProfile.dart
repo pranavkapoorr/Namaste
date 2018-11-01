@@ -279,9 +279,9 @@ class _EditProfileState extends State<EditProfile>{
 
     await upload.onComplete.whenComplete(() {
       setState(() {
-        imageUrl = "https://firebasestorage.googleapis.com/v0/b/testfirebase-d40b1.appspot.com/o/"+fileName+"?alt=media&token=eddfcbce-47df-4c7d-a6a9-45e59a337f5e";
+        //imageUrl = "https://firebasestorage.googleapis.com/v0/b/testfirebase-d40b1.appspot.com/o/"+fileName+"?alt=media&token=eddfcbce-47df-4c7d-a6a9-45e59a337f5e";
       });
-      Map data = {
+   /*   Map data = {
         "name": name.text,
         "email": myProfile.me['email'],
         "phone": myProfile.me['phone'],
@@ -295,7 +295,7 @@ class _EditProfileState extends State<EditProfile>{
         "likes": myProfile.me['likes'],
         "dislikes": myProfile.me['dislikes']
       };
-      myProfile.updateMyDetails(data);
+      myProfile.updateMyDetails(data);*/
     });
   }
 

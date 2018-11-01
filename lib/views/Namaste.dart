@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:Namaste/resources/UiResources.dart';
 import 'package:Namaste/resources/mynetworkres.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +28,13 @@ class _NamasteState extends State<Namaste> {
 
   @override
   void initState() {
-    _makeTilesX();
+    //jugaad to load
+    new Timer(const Duration(milliseconds: 2000), () {
+      setState(() {
+        print("done");
+        _makeTilesX();
+      });
+    });
     super.initState();
 
   }
