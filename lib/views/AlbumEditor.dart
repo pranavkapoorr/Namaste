@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:Namaste/resources/mynetworkres.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:Namaste/resources/UiResources.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,7 @@ class _AlbumUploader extends State<AlbumUploader> {
       decoration: BoxDecoration(color: Colors.white),
       child: IconButton(
           icon: Icon(Icons.add), onPressed:getImage),);
-    var image = _makeImageBox(Image.asset("images/bg.jpg",fit: BoxFit.cover,));
+    var image = _makeImageBox(Image.network(myProfile.me['dp'],fit: BoxFit.cover,));
     for(int i = 0; i < count; i++){
       _imageTiles.add(i==0?addImageTile:image);
     }
@@ -53,7 +54,8 @@ class _AlbumUploader extends State<AlbumUploader> {
         decoration: BoxDecoration(gradient: myGradient,),
         child: new Scaffold(
             backgroundColor: Colors.transparent,
-            appBar: new AppBar(title: new Text(
+            appBar: new AppBar(
+              leading: IconButton(icon: Icon(Icons.arrow_back,color: Colors.white,), onPressed: ()=>Navigator.pop(context)),title: new Text(
               "Manage Album", style: TextStyle(color: Colors.white),),
               backgroundColor: Colors.transparent,),
             body: Container(

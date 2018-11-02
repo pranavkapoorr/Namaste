@@ -1,5 +1,6 @@
 import 'package:Namaste/resources/mynetworkres.dart';
 import 'package:Namaste/views/AlbumEditor.dart';
+import 'package:Namaste/views/Namaste.dart';
 import 'EditProfile.dart';
 import 'Settings_Screen.dart';
 import 'package:flutter/material.dart';
@@ -74,12 +75,15 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
       background: new Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          Container(
-              color: Colors.transparent.withOpacity(0.4),
-              padding: EdgeInsetsDirectional.only(bottom: 1.0),
-              child: Text("")
+          ClipPath(
+            clipper: MyClipper(),
+            child: Container(
+                color: Colors.transparent.withOpacity(0.4),
+                padding: EdgeInsetsDirectional.only(bottom: 1.0),
+                child: Text("")
+            ),
           ),
-          const DecoratedBox(
+          /*const DecoratedBox(
             decoration: const BoxDecoration(
               gradient: const LinearGradient(
                 begin: const Alignment(0.0, 1.0),
@@ -87,7 +91,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
                 colors: const <Color>[const Color(0x60000000), const Color(0x00000000)],
               ),
             ),
-          ),
+          ),*/
           Padding(
             padding: const EdgeInsetsDirectional.only(top: 55.0),
             child: new Align(
@@ -252,10 +256,10 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin{
   }
   Widget _album() {
     List<Widget> images = [
-      _albumImage(new Image(image: AssetImage("images/bg.jpg"))),
-      _albumImage(new Image(image: AssetImage("images/bg.jpg"))),
-      _albumImage(new Image(image: AssetImage("images/bg.jpg"))),
-      _albumImage(new Image(image: AssetImage("images/bg.jpg")))
+      _albumImage(new Image(fit: BoxFit.cover,image: NetworkImage(_me['dp']))),
+      _albumImage(new Image(fit: BoxFit.cover,image: NetworkImage(_me['dp']))),
+      _albumImage(new Image(fit: BoxFit.cover,image: NetworkImage(_me['dp']))),
+      _albumImage(new Image(fit: BoxFit.cover,image: NetworkImage(_me['dp']))),
     ];
     return Container(
       color: Colors.black.withOpacity(0.1),
