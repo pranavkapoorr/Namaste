@@ -14,8 +14,7 @@
   <component name="ChangeListManager">
     <list default="true" id="af31b5df-b2e0-4a65-9af3-7d12a46f2dad" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/AlbumEditor.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/AlbumEditor.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/Profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/Profile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/EditProfile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/EditProfile.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -44,11 +43,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="Namaste.dart" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Namaste.dart" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/views/Namaste.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3194">
-              <caret line="44" column="17" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
+            <state relative-caret-position="113">
+              <caret line="63" column="24" selection-start-line="63" selection-start-column="24" selection-end-line="63" selection-end-column="24" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -59,7 +58,7 @@
       <file leaf-file-name="Register.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/views/Register.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="438">
+            <state relative-caret-position="2265">
               <caret line="156" column="49" selection-start-line="156" selection-start-column="49" selection-end-line="156" selection-end-column="49" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
@@ -68,11 +67,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Profile.dart" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Profile.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/views/Profile.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="261" column="45" selection-start-line="261" selection-start-column="45" selection-end-line="261" selection-end-column="45" />
+            <state relative-caret-position="870">
+              <caret line="64" selection-start-line="64" selection-end-line="64" />
             </state>
           </provider>
         </entry>
@@ -92,8 +91,8 @@
       <file leaf-file-name="EditProfile.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/views/EditProfile.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="286" column="39" selection-start-line="286" selection-start-column="39" selection-end-line="286" selection-end-column="39" />
+            <state relative-caret-position="4230">
+              <caret line="282" column="9" selection-start-line="282" selection-start-column="9" selection-end-line="282" selection-end-column="9" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -104,7 +103,7 @@
       <file leaf-file-name="AlbumEditor.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/views/AlbumEditor.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
+            <state relative-caret-position="585">
               <caret line="44" column="60" selection-start-line="44" selection-start-column="60" selection-end-line="44" selection-end-column="60" />
             </state>
           </provider>
@@ -226,10 +225,10 @@
         <option value="$PROJECT_DIR$/lib/resources/mynetworkres.dart" />
         <option value="$PROJECT_DIR$/pubspec.yaml" />
         <option value="$PROJECT_DIR$/lib/main.dart" />
-        <option value="$PROJECT_DIR$/lib/views/Namaste.dart" />
-        <option value="$PROJECT_DIR$/lib/views/EditProfile.dart" />
         <option value="$PROJECT_DIR$/lib/views/AlbumEditor.dart" />
         <option value="$PROJECT_DIR$/lib/views/Profile.dart" />
+        <option value="$PROJECT_DIR$/lib/views/EditProfile.dart" />
+        <option value="$PROJECT_DIR$/lib/views/Namaste.dart" />
       </list>
     </option>
   </component>
@@ -246,6 +245,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
       <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
@@ -304,7 +304,6 @@
         </subPane>
         <option name="show-excluded-files" value="false" />
       </pane>
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -479,13 +478,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1526910296971</updated>
-    </task>
-    <task id="LOCAL-00071" summary="namaste tiles">
-      <created>1531940525139</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1531940525139</updated>
     </task>
     <task id="LOCAL-00072" summary="namaste single tile">
       <created>1531940937335</created>
@@ -823,7 +815,14 @@
       <option name="project" value="LOCAL" />
       <updated>1541109758592</updated>
     </task>
-    <option name="localTasksCounter" value="120" />
+    <task id="LOCAL-00120" summary="album">
+      <created>1541174046506</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1541174046507</updated>
+    </task>
+    <option name="localTasksCounter" value="121" />
     <servers />
   </component>
   <component name="TodoView">
@@ -845,9 +844,9 @@
       <window_info id="Image Layers" order="7" />
       <window_info id="Build Variants" order="2" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5118644" side_tool="true" weight="0.2682927" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5139353" side_tool="true" weight="0.275" />
       <window_info anchor="bottom" id="Dart Analysis" order="9" weight="0.32794118" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4881356" visible="true" weight="0.275" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48606467" weight="0.275" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32352942" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32844242" />
       <window_info anchor="right" id="Flutter Outline" order="3" weight="0.3296328" />
@@ -855,7 +854,7 @@
       <window_info id="Captures" order="5" side_tool="true" />
       <window_info id="Capture Tool" order="3" />
       <window_info id="Designer" order="4" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49156117" visible="true" weight="0.22073579" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49156117" visible="true" weight="0.22073579" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Device File Explorer" order="4" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="6" />
@@ -877,7 +876,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed backend" />
     <MESSAGE value="fixed crash" />
     <MESSAGE value="editprofile req" />
     <MESSAGE value="edit profile" />
@@ -902,7 +900,8 @@
     <MESSAGE value="upload dp" />
     <MESSAGE value="compress image b4 upload" />
     <MESSAGE value="fixed loading issue" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed loading issue" />
+    <MESSAGE value="album" />
+    <option name="LAST_COMMIT_MESSAGE" value="album" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1151,9 +1150,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2685">
           <caret line="187" selection-start-line="187" selection-end-line="187" />
-          <folding>
-            <element signature="e#0#52#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1207,19 +1203,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/views/EditProfile.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="286" column="39" selection-start-line="286" selection-start-column="39" selection-end-line="286" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/views/Register.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="438">
+        <state relative-caret-position="2265">
           <caret line="156" column="49" selection-start-line="156" selection-start-column="49" selection-end-line="156" selection-end-column="49" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
@@ -1227,27 +1213,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/views/Namaste.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3194">
-          <caret line="44" column="17" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/views/AlbumEditor.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
+        <state relative-caret-position="585">
           <caret line="44" column="60" selection-start-line="44" selection-start-column="60" selection-end-line="44" selection-end-column="60" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/views/Profile.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="261" column="45" selection-start-line="261" selection-start-column="45" selection-end-line="261" selection-end-column="45" />
+        <state relative-caret-position="870">
+          <caret line="64" selection-start-line="64" selection-end-line="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/views/EditProfile.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4230">
+          <caret line="282" column="9" selection-start-line="282" selection-start-column="9" selection-end-line="282" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/views/Namaste.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="63" column="24" selection-start-line="63" selection-start-column="24" selection-end-line="63" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

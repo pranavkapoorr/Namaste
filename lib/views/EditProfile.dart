@@ -88,7 +88,7 @@ class _EditProfileState extends State<EditProfile>{
                               children: <Widget>[
                                 CircleAvatar(backgroundColor: Colors.black45,backgroundImage: NetworkImage(imageUrl),
                                   radius: 60.0,),
-                                Positioned(right: 0.0,bottom:0.0,child: Icon(Icons.add_a_photo,color: Colors.black,))
+                                Positioned(right: 5.0,bottom:5.0,child: Icon(Icons.add_circle,color: Colors.deepOrange,))
                             ],
                             ),
                         ),
@@ -279,9 +279,9 @@ class _EditProfileState extends State<EditProfile>{
 
     await upload.onComplete.whenComplete(() {
       setState(() {
-        //imageUrl = "https://firebasestorage.googleapis.com/v0/b/testfirebase-d40b1.appspot.com/o/"+fileName+"?alt=media&token=eddfcbce-47df-4c7d-a6a9-45e59a337f5e";
+        imageUrl = "https://firebasestorage.googleapis.com/v0/b/testfirebase-d40b1.appspot.com/o/"+fileName+"?alt=media&token=eddfcbce-47df-4c7d-a6a9-45e59a337f5e";
       });
-   /*   Map data = {
+      Map data = {
         "name": name.text,
         "email": myProfile.me['email'],
         "phone": myProfile.me['phone'],
@@ -295,7 +295,7 @@ class _EditProfileState extends State<EditProfile>{
         "likes": myProfile.me['likes'],
         "dislikes": myProfile.me['dislikes']
       };
-      myProfile.updateMyDetails(data);*/
+      myProfile.updateMyDetails(data);
     });
   }
 
